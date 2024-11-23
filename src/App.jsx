@@ -13,17 +13,17 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path="/" element={<TrackerPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route
-          path="/home"
-          element={<PrivateRoute component={<HomePage />} />}
+          path="/tracker"
+          element={<PrivateRoute component={<TrackerPage />} />}
         />
         <Route
-          path="/login"
+          path="/signin"
           element={<RestrictedRoute component={<SignInPage />} />}
         />
         <Route
-          path="/register"
+          path="/signup"
           element={<RestrictedRoute component={<SignUpPage />} />}
         />
       </Routes>
