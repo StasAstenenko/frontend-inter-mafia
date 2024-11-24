@@ -1,1 +1,15 @@
-/*style*/
+.container {
+  border-radius: 30px;
+  color: #9be1a0;
+  /* width: 343px;
+height: 415px; */
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-align: center;
+}
