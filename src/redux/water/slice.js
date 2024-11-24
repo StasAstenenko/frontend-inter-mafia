@@ -6,7 +6,7 @@ const waterSlice = createSlice({
   name: "water",
   initialState: INITIAL_STATE,
   reducers: {},
-  extraReducers: {},
+  // extraReducers: {},
 });
 
 export const waterReducer = waterSlice.reducer;
