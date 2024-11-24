@@ -6,7 +6,7 @@ const waterSlice = createSlice({
   name: "water",
   initialState: INITIAL_STATE,
   reducers: {},
-  // extraReducers: {},
+  // extraReducers: {}, // II777: deprecated syntax was breaking the build
 });
 
 export const waterReducer = waterSlice.reducer;

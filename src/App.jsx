@@ -1,8 +1,8 @@
-// import { lazy, Suspense } from "react";
-// // import { Loader } from "./components/Loader/Loader";
-// // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-// // import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
-// import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import Loader from "./components/Loader/Loader";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import { Route, Routes } from "react-router-dom";
 
 // const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 // const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
