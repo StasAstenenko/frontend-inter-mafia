@@ -1,1 +1,131 @@
-/*style*/
+.signInSection {
+  padding: 16px;
+  margin: 0 auto;
+  max-width: 320px;
+  background-color: #ffffff;
+}
+
+.container {
+  padding-top: 24px;
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-bottom: 216px;
+  border-radius: 30px;
+  background-color: #f0eff4;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 172px;
+}
+
+.signInTitle {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+}
+
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.inputForm {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  max-width: 311px;
+}
+
+.inputFormError {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.inputForm:focus {
+  outline: none;
+  border-color: rgba(47, 47, 47, 0.4);
+}
+
+.passwordContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.submitBtn {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #9be1a0;
+  border: none;
+  border-radius: 30px;
+  margin-bottom: 16px;
+  max-width: 311px;
+  transition: color 250ms linear, background-color 250ms linear;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  cursor: pointer;
+  color: #323f47;
+  background-color: #87d28d;
+}
+
+.error {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+}
+
+.desc {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: rgba(47, 47, 47, 0.5);
+}
+
+.signup {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #2f2f2f;
+}
