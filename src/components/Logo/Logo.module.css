@@ -1,1 +1,10 @@
-/*style*/
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--background-primary-dark);
+  text-transform: uppercase;
+  position: absolute;
+  top: 32px;
+  left: 32px;
+}

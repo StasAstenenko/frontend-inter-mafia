@@ -1,5 +1,13 @@
+/* Color Variables */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --accent: #9BE1A0;
+  --text-primary-dark: #2F2F2F;
+  --text-primary-light: #FFFFFF;
+  --background-primary-dark: #323F47;
+  --background-primary-light: #FFFFFF;
+  --background-secondary-light: #F0EFF4;
+
+  margin: 0;
   font-weight: 400;
+  font-family: Popplin, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
