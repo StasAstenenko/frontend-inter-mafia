@@ -1,28 +1,31 @@
 import css from "./WaterMainInfo.module.css";
 
+import bottleDesktop from "../../img/water-main-info/bottle-desktop.png";
+import bottleDesktop2x from "../../img/water-main-info/bottle-desktop@2x.png";
+import bottleTablet from "../../img/water-main-info/bottle-tablet.png";
+import bottleTablet2x from "../../img/water-main-info/bottle-tablet@2x.png";
+import bottleMob from "../../img/water-main-info/bottle-mob.png";
+import bottleMob2x from "../../img/water-main-info/bottle-mob@2x.png";
+import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma.jsx";
+import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
+
 const WaterMainInfo = () => {
   return (
     <>
+      {/* <AddWaterBtn /> */}
       <div className={css.container}>
         <h2 className={css.title}>aquatrack</h2>
-        <picture>
-          <source
-            srcSet="
-                    ./img/projects/project-1-desc.png    1x,
-                    ./img/projects/project-1-desc@2x.png 2x
-                  "
-            media="(min-width: 768px)"
+        <WaterDailyNorma />
+        <WaterProgressBar />
+        <div className={css.bottleContainer}>
+          <img
+            className={css.bottle}
+            srcSet={`${bottleDesktop} 1x, ${bottleDesktop2x} 2x, ${bottleTablet} 1x, ${bottleTablet2x} 2x, ${bottleMob} 1x, ${bottleMob2x} 2x`}
+            src={bottleMob}
+            alt="Bottle with water"
+            sizes="(min-width: 1440px) 1440px, (min-width: 768px) 768px, 100vw"
           />
-
-          <source
-            srcSet="
-                    ./img/projects/project-1-mob.png    1x,
-                    ./img/projects/project-1-mob@2x.png 2x
-                  "
-            media="(max-width: 767px)"
-          />
-          <img src="./img/projects/project-1-mob.png" alt="First project" />
-        </picture>
+        </div>
       </div>
     </>
   );

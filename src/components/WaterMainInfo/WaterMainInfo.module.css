@@ -1,8 +1,7 @@
 .container {
+  position: relative;
   border-radius: 30px;
-  color: #9be1a0;
-  /* width: 343px;
-height: 415px; */
+  background-color: #9be1a0;
 }
 
 .title {
@@ -12,4 +11,39 @@ height: 415px; */
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-align: center;
+  padding-left: 16px;
+  padding-top: 24px;
+  width: 114px;
+  margin: 0;
+}
+
+.bottleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.bottle {
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    width: 155px;
+    font-size: 24px;
+    line-height: 100%;
+    padding-left: 32px;
+    padding-top: 32px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 672px;
+    height: 736px;
+  }
+
+  .bottleContainer {
+    padding: 0;
+  }
 }
