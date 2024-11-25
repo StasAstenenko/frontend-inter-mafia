@@ -1,1 +1,44 @@
-/*style*/
+.addBtn {
+  position: absolute;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  background-color: #323f47;
+  min-width: 140px;
+  border-radius: 30px;
+  padding: 14px 20px;
+  right: 16px;
+  bottom: 32px;
+  color: #ffffff;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.addBtn:hover {
+  color: #9be1a0;
+}
+
+.icon {
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.addBtn:hover .icon {
+  fill: #9be1a0;
+  stroke: #9be1a0;
+}
+
+@media only screen and (min-width: 768px) {
+  .addBtn {
+    min-width: 178px;
+    padding: 18px 30px;
+    right: 32px;
+    bottom: 64px;
+  }
+}

@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  margin-top: 225px;
+  margin-top: 235px;
   left: 50%;
   transform: translateX(-50%);
   min-width: 198px;
@@ -11,10 +11,10 @@
 }
 
 .today {
-  margin: 0;
   font-weight: 700;
   font-size: 14px;
   line-height: 100%;
+  margin-bottom: 8px;
 }
 
 .percents {
@@ -27,8 +27,23 @@
   align-items: center;
 }
 
-.percent {
-  margin: 0;
+.progressBarContainer {
+  position: relative;
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.progressBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #4ade80;
+  border-radius: 9999px;
+  transition: width 0.3s ease-out;
 }
 
 @media only screen and (min-width: 768px) {
@@ -51,6 +66,6 @@
 
 @media only screen and (min-width: 1440px) {
   .container {
-    margin-top: 450px;
+    margin-top: 358px;
   }
 }

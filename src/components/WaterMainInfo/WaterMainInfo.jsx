@@ -8,11 +8,11 @@ import bottleMob from "../../img/water-main-info/bottle-mob.png";
 import bottleMob2x from "../../img/water-main-info/bottle-mob@2x.png";
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
+import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 const WaterMainInfo = () => {
   return (
     <>
-      {/* <AddWaterBtn /> */}
       <div className={css.container}>
         <h2 className={css.title}>aquatrack</h2>
         <WaterDailyNorma />
@@ -26,6 +26,7 @@ const WaterMainInfo = () => {
             sizes="(min-width: 1440px) 1440px, (min-width: 768px) 768px, 100vw"
           />
         </div>
+        <AddWaterBtn />
       </div>
     </>
   );
