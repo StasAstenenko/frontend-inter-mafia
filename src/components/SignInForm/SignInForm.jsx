@@ -3,6 +3,8 @@ import * as Yup from "yup";
 import css from "./SignInForm.module.css";
 import clsx from "clsx";
 import { NavLink } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 
 const LoginValidationSchema = Yup.object({
   email: Yup.string().email("Incorrect email").required("Email is required"),
@@ -13,10 +15,17 @@ const LoginValidationSchema = Yup.object({
 });
 
 const SignInForm = () => {
+  const isTabletAndDesktop = useMediaQuery({ minWidth: 768 });
+  const [openEye, setOpenEye] = useState(false);
+
   const initialValue = {
     email: "",
     password: "",
   };
+
+  function handleOpenEye() {
+    return setOpenEye(!openEye);
+  }
 
   function handleSubmit(name, password) {
     console.log(name, password);
@@ -59,7 +68,7 @@ const SignInForm = () => {
                   Password
                 </label>
                 <Field
-                  type="password"
+                  type={!openEye ? "password" : "text"}
                   name="password"
                   id="password"
                   placeholder="Enter your password"
@@ -67,21 +76,40 @@ const SignInForm = () => {
                     [css.inputFormError]: touched.password && errors.password,
                   })}
                 />
+                {isTabletAndDesktop && (
+                  <button
+                    type="button"
+                    className={css.closeEyeBtn}
+                    onClick={handleOpenEye}
+                  >
+                    {!openEye ? (
+                      <svg width="20" height="20" className={css.closeEye}>
+                        <use href="/src/icons/sprite.svg#eye-close"></use>
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" className={css.closeEye}>
+                        <use href="/src/icons/sprite.svg#eye"></use>
+                      </svg>
+                    )}
+                  </button>
+                )}
                 <ErrorMessage
                   name="password"
                   component="label"
-                  className={css.error}
+                  className={`${css.error} ${css.errorPass}`}
                 />
               </div>
-              <button type="submit" className={css.submitBtn}>
-                Sign In
-              </button>
-              <p className={css.desc}>
-                Don&#039;t have an account?{" "}
-                <NavLink to="/signup" className={css.signup}>
-                  Sign Up
-                </NavLink>
-              </p>
+              <div className={css.btnDescContainer}>
+                <button type="submit" className={css.submitBtn}>
+                  Sign In
+                </button>
+                <p className={css.desc}>
+                  Don&#039;t have an account?{" "}
+                  <NavLink to="/signup" className={css.signup}>
+                    Sign Up
+                  </NavLink>
+                </p>
+              </div>
             </Form>
           )}
         </Formik>
