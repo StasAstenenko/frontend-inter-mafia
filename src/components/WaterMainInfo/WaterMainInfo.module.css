@@ -1,1 +1,53 @@
-/*style*/
+.container {
+  position: relative;
+  border-radius: 30px;
+  background-color: #9be1a0;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-left: 16px;
+  padding-top: 24px;
+  max-width: 114px;
+  margin-bottom: 6px;
+}
+
+.bottleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.bottle {
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    width: 155px;
+    font-size: 24px;
+    line-height: 100%;
+    padding-left: 32px;
+    padding-top: 32px;
+    margin-bottom: 13px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 672px;
+    /* height: 736px; */
+  }
+  .title {
+    margin-bottom: 36px;
+  }
+
+  .bottleContainer {
+    padding-bottom: 40px;
+  }
+}

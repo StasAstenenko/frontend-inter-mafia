@@ -1,1 +1,24 @@
-/*style*/
+.container {
+  padding: 10px;
+  text-align: center;
+}
+
+.confirmBtn,
+.cancelBtn {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.confirmBtn {
+  background-color: #d9534f;
+  color: white;
+  margin-right: 10px;
+}
+
+.cancelBtn {
+  background-color: rgb(38, 148, 38);
+  color: white;
+}

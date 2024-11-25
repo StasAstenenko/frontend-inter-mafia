@@ -1,12 +1,5 @@
-import DailyInfo from "../../components/DailyInfo/DailyInfo.jsx"; // Тимчасово для розробки
-
 const HomePage = () => {
-  return (
-    <>
-      <DailyInfo />
-      {/* Тимчасово для розробки */}
-    </>
-  );
+  return <> </>;
 };
 
 export default HomePage;
