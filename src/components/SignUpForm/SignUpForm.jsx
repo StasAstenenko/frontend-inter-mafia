@@ -5,8 +5,11 @@ import clsx from "clsx";
 import { useState } from "react";
 
 const SignUpForm = () => {
-const [isVisiblePassword, setIsVisiblePassword]=useState(false);
-const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
+const [passwordVisibility, setPasswordVisibility]=useState({password:false, repeatPassword:false});
+const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
+  ...prev,
+  [btnName]: !prev[btnName],
+}));};
 
   const SignUpValidationSchema = Yup.object().shape({
     emailSignUp: Yup.string()
@@ -70,7 +73,7 @@ const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
                 id="passwordSignUp"
                 name="passwordSignUp"
                 placeholder="Enter your password"
-                type={isVisiblePassword ? "text" : "password"}
+                type={passwordVisibility.password ? "text" : "password"}
                 className={clsx(css.input, {
                   [css.inputError]:
                     errors.passwordSignUp && touched.passwordSignUp,
@@ -82,9 +85,9 @@ const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
                 component="span"
                 className={css.errorMsg}
               />
-              <button type="button" className={css.toggleViewBtn} onClick={togglePasswordView}>
+              <button type="button" className={css.toggleViewBtn} onClick={()=>togglePasswordView('password')}>
                {
-                !isVisiblePassword ? (
+                !passwordVisibility.password ? (
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye-close"></use>
                   </svg>
@@ -105,7 +108,7 @@ const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
                 id="repeatPassword"
                 name="repeatPassword"
                 placeholder="Repeat password"
-                type="password"
+                type={passwordVisibility.repeatPassword ? "text" : "password"}
                 className={clsx(css.input, {
                   [css.inputError]:
                     errors.repeatPassword && touched.repeatPassword,
@@ -117,9 +120,9 @@ const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
                 component="span"
                 className={css.errorMsg}
               />
-              <button type="button" className={css.toggleViewBtn} onClick={togglePasswordView}>
+              <button type="button" className={css.toggleViewBtn} onClick={()=>togglePasswordView('repeatPassword')}>
                {
-                !isVisiblePassword ? (
+                !passwordVisibility ? (
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye-close"></use>
                   </svg>
