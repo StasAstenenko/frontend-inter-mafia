@@ -1,4 +1,4 @@
-.title {
+/* .title {
   text-align: center;
   margin-bottom: 32px;
   font-weight: 700;
@@ -6,10 +6,9 @@
   line-height: 1;
   letter-spacing: -0.01em;
   color: #323f47;
-}
+} */
 .form {
   max-width: 311px;
-  /* width: 311px; */
   margin: 0 auto;
 }
 .fieldWrap {
@@ -29,7 +28,6 @@
   color: #2f2f2f;
 }
 .input {
-  /* margin-bottom: 16px; */
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
   padding: 16px;
@@ -39,8 +37,6 @@
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: #2f2f2f;
-
-  /* height: 50px; */
 }
 .input:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
@@ -65,6 +61,8 @@
   letter-spacing: -0.01em;
   color: #ef5050;
 }
+
+
 .btn {
   border-radius: 30px;
   border: none;
@@ -84,3 +82,67 @@
 .btn:focus {
   background-color: #87d28d;
 }
+
+.toggleViewBtn{display:none}
+
+
+@media only screen and (min-width: 768px) {
+  /* .title {
+    font-size: 36px;
+    line-height: 1.05556;
+    
+    } */
+  .form {
+    max-width: 436px;
+  }
+
+  .fieldWrap {
+    position:relative;
+    margin-bottom: 20px;
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .input {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .input::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .errorMsg {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .btn {
+    font-size: 16px;
+    line-height: 1.5;
+    width: 436px;
+    padding: 18px;
+  }
+  .toggleViewBtn{
+    display:block;
+    position:absolute;
+    top:50px;
+    right:18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .icon{
+    fill: none;
+    stroke: #2f2f2f;
+  }
+}
+
+
+
+
+
+
+

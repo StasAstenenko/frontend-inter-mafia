@@ -2,14 +2,19 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./SignUpForm.module.css";
 import * as Yup from "yup";
 import clsx from "clsx";
+import { useState } from "react";
 
 const SignUpForm = () => {
+const [isVisiblePassword, setIsVisiblePassword]=useState(false);
+const togglePasswordView=()=>{setIsVisiblePassword((prev) => !prev)};
+
   const SignUpValidationSchema = Yup.object().shape({
     emailSignUp: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
     passwordSignUp: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      .min(8, "Password must be at least 8 characters")
+      .max(50, "Password must be less than 50 characters")
       .required("Password is required"),
     repeatPassword: Yup.string()
       .oneOf([Yup.ref("passwordSignUp")], "Passwords must match")
@@ -25,9 +30,11 @@ const SignUpForm = () => {
     console.log(values);
     actions.resetForm();
   };
+
+  
   return (
     <>
-      <h1 className={css.title}>SignUp</h1>
+      {/* <h1 className={css.title}>SignUp</h1> */}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -63,7 +70,7 @@ const SignUpForm = () => {
                 id="passwordSignUp"
                 name="passwordSignUp"
                 placeholder="Enter your password"
-                type="password"
+                type={isVisiblePassword ? "text" : "password"}
                 className={clsx(css.input, {
                   [css.inputError]:
                     errors.passwordSignUp && touched.passwordSignUp,
@@ -75,6 +82,19 @@ const SignUpForm = () => {
                 component="span"
                 className={css.errorMsg}
               />
+              <button type="button" className={css.toggleViewBtn} onClick={togglePasswordView}>
+               {
+                !isVisiblePassword ? (
+                  <svg width="20" height="20" className={css.icon}>
+                    <use href="/src/icons/sprite.svg#eye-close"></use>
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" className={css.icon}>
+                    <use href="/src/icons/sprite.svg#eye"></use>
+                  </svg>
+                )
+               }
+              </button>
             </div>
 
             <div className={css.fieldWrap}>
@@ -97,6 +117,19 @@ const SignUpForm = () => {
                 component="span"
                 className={css.errorMsg}
               />
+              <button type="button" className={css.toggleViewBtn} onClick={togglePasswordView}>
+               {
+                !isVisiblePassword ? (
+                  <svg width="20" height="20" className={css.icon}>
+                    <use href="/src/icons/sprite.svg#eye-close"></use>
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" className={css.icon}>
+                    <use href="/src/icons/sprite.svg#eye"></use>
+                  </svg>
+                )
+               }
+              </button>
             </div>
 
             <button type="submit" className={css.btn}>
