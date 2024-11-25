@@ -122,7 +122,7 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
               />
               <button type="button" className={css.toggleViewBtn} onClick={()=>togglePasswordView('repeatPassword')}>
                {
-                !passwordVisibility ? (
+                !passwordVisibility.repeatPassword ? (
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye-close"></use>
                   </svg>
