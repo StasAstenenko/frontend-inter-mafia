@@ -11,23 +11,25 @@ const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
 
 function App() {
   return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/tracker"
-          element={<PrivateRoute component={<TrackerPage />} />}
-        />
-        <Route
-          path="/signin"
-          element={<RestrictedRoute component={<SignInPage />} />}
-        />
-        <Route
-          path="/signup"
-          element={<RestrictedRoute component={<SignUpPage />} />}
-        />
-      </Routes>
-    </Suspense>
+    <main>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/tracker"
+            element={<PrivateRoute component={<TrackerPage />} />}
+          />
+          <Route
+            path="/signin"
+            element={<RestrictedRoute component={<SignInPage />} />}
+          />
+          <Route
+            path="/signup"
+            element={<RestrictedRoute component={<SignUpPage />} />}
+          />
+        </Routes>
+      </Suspense>
+    </main>
   );
 }
 
