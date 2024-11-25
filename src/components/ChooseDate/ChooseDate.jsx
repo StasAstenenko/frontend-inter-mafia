@@ -1,16 +1,26 @@
 import css from "./ChooseDate.module.css";
 import PropTypes from "prop-types";
 
-const ChooseDate = ({ date = new Date() }) => {
+const ChooseDate = ({ date = Date.now() }) => {
+  const chooseDate = new Date(date); // Створюємо об'єкт Date
+
+  // Форматуємо дату в потрібний формат
+  const year = chooseDate.getFullYear();
+  const month = String(chooseDate.getMonth() + 1).padStart(2, "0"); // Місяці з 0
+  const day = String(chooseDate.getDate()).padStart(2, "0");
+  const hours = String(chooseDate.getHours()).padStart(2, "0");
+  const minutes = String(chooseDate.getMinutes()).padStart(2, "0");
+  const seconds = String(chooseDate.getSeconds()).padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  console.log(formattedDate); // Наприклад: 2024-11-25T05:47:28
   return (
     <>
       <h3 className={css["day-text"]}>{text(date)}</h3>
     </>
   );
 };
-ChooseDate.propTypes = {
-  date: PropTypes.instanceOf(Date), // Перевірка на об'єкт Date
-};
+
 export default ChooseDate;
 
 const dayParse = (chooseDay) => {
