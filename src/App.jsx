@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import Loader from "./components/Loader/Loader";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Route, Routes } from "react-router-dom";
+import Modal from "./modals/Modal/Modal";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
@@ -10,6 +11,10 @@ const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -27,6 +32,15 @@ function App() {
           element={<RestrictedRoute component={<SignUpPage />} />}
         />
       </Routes>
+      <div>
+        {" "}
+        <button onClick={openModal}>Open Modal</button>{" "}
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {" "}
+          <h2>Modal Content</h2>
+          <p>This is the content inside the modal.</p>{" "}
+        </Modal>{" "}
+      </div>
     </Suspense>
   );
 }
