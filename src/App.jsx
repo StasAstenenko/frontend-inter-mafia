@@ -34,14 +34,12 @@ function App() {
           element={<RestrictedRoute component={<SignUpPage />} />}
         />
       </Routes>
-      <div className="modals">
-        <div>
-          <button onClick={openModal}>Open Modal</button>
-          <Modal isOpen={isModalOpen} onClose={closeModal}>
-            <LogOutModal />
-            {/* <DeleteWaterModal /> */}
-          </Modal>
-        </div>
+      <div>
+        <button onClick={openModal}>Open Modal</button>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <LogOutModal />
+          {/* <DeleteWaterModal /> */}
+        </Modal>
       </div>
     </Suspense>
   );
