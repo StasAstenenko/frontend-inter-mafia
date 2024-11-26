@@ -1,17 +1,14 @@
 .container {
-  display: inline-block;
-  margin-bottom: 89px;
-  margin-left: 16px;
+  margin-top: 4px;
+  margin-bottom: 52px;
   border-radius: 15px;
   padding: 12px;
-  max-width: 78px;
-  min-height: 30px;
+  max-width: 102px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
 
 .litres {
-  margin: 0;
   margin-bottom: 6px;
   font-weight: 700;
   font-size: 14px;
@@ -19,7 +16,6 @@
 }
 
 .text {
-  margin: 0;
   font-weight: 400;
   font-size: 10px;
   line-height: 100%;
@@ -28,8 +24,7 @@
 
 @media only screen and (min-width: 768px) {
   .container {
-    margin-left: 32px;
-
+    margin-top: 51px;
     padding: 14px 18px;
     max-width: 129px;
   }
@@ -37,7 +32,6 @@
   .litres {
     font-size: 15px;
     line-height: 149%;
-    margin-bottom: 6px;
   }
 
   .text {

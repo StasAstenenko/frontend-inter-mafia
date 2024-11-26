@@ -11,6 +11,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
 
   return (
     <>
+      <div className={css.btnContainer}></div>
       <button
         type="button"
         className={clsx(
@@ -20,12 +21,9 @@ const AddWaterBtn = ({ variant = "default" }) => {
         onClick={openModal}
       >
         <svg
-          className={clsx(
-            css.icon,
-            variant === "alt" ? css.iconAlt : css.defaultIcon
-          )}
-          width="16"
-          height="16"
+          className={clsx(css.icon, variant === "alt" && css.iconAlt)}
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
