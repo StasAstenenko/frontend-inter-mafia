@@ -71,7 +71,6 @@
   .defaultBtn {
     min-width: 178px;
     padding: 18px 30px;
-    /* right: 32px;
-    bottom: 64px; */
+    margin-left: 494px;
   }
 }
