@@ -1,8 +1,8 @@
 import styles from './Logo.module.css';
 
-const Logo = ({ text = 'aquatrack', className = '' }) => {
+const Logo = ({ className = '' }) => {
   return (
-    <div className={`${styles.logo} ${className}`}>{text}</div>
+    <div className={`${styles.logo} ${className}`}>aquatrack</div>
   );
 };
 
