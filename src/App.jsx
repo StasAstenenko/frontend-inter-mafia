@@ -4,6 +4,8 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Route, Routes } from "react-router-dom";
 import Modal from "./modals/Modal/Modal";
+import LogOutModal from "./modals/LogOutModal/LogOutModal";
+// import DeleteWaterModal from "./modals/DeleteWaterModal/DeleteWaterModal";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
@@ -32,14 +34,14 @@ function App() {
           element={<RestrictedRoute component={<SignUpPage />} />}
         />
       </Routes>
-      <div>
-        {" "}
-        <button onClick={openModal}>Open Modal</button>{" "}
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {" "}
-          <h2>Modal Content</h2>
-          <p>This is the content inside the modal.</p>{" "}
-        </Modal>{" "}
+      <div className="modals">
+        <div>
+          <button onClick={openModal}>Open Modal</button>
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <LogOutModal />
+            {/* <DeleteWaterModal /> */}
+          </Modal>
+        </div>
       </div>
     </Suspense>
   );

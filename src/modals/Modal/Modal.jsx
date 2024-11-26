@@ -1,11 +1,10 @@
-import ReactDOM from "react-dom";
 import { useEffect } from "react";
-import PropTypes from "prop-types";
-import "./Modal.module.css";
+import css from "./Modal.module.css";
+
 const Modal = ({ isOpen, onClose, children }) => {
   useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
         onClose();
       }
     };
@@ -19,23 +18,21 @@ const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) {
     return null;
   }
-  return ReactDOM.createPortal(
-    <div className="modal-backdrop" onClick={onClose}>
-      {" "}
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {" "}
-        <button className="modal-close" onClick={onClose}>
+  return (
+    <div className={css.backdrop} onClick={onClose}>
+      <div className={css.modalWindow}>
+        <button
+          type="button"
+          aria-label="Close modal button"
+          className={css.closeBtn}
+          onClick={onClose}
+        >
           ×
-        </button>{" "}
-        {children}{" "}
-      </div>{" "}
-    </div>,
-    document.getElementById("modal-root")
+        </button>
+        {children}
+      </div>
+    </div>
   );
 };
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-};
+
 export default Modal;
