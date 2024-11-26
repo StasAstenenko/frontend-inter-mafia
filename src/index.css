@@ -6,10 +6,24 @@
   --background-primary-dark: #323f47;
   --background-primary-light: #ffffff;
   --background-secondary-light: #f0eff4;
+}
 
+/* Reset Default Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
   margin: 0;
-  font-weight: 400;
-  font-family: Popplin, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 h1,
