@@ -23,7 +23,7 @@ const SignInForm = () => {
   };
 
   function handleOpenEye() {
-    return setOpenEye(!openEye);
+    setOpenEye(!openEye);
   }
 
   function handleSubmit(name, password) {
