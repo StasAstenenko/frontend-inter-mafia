@@ -1,7 +1,13 @@
 .container {
-  position: relative;
+  /* height: 100vh; */
   border-radius: 30px;
   background-color: #9be1a0;
+  background-image: url("/src/img/water-main-info/bottle-mob.png");
+  background-repeat: no-repeat;
+  background-position: center 50px;
+  background-size: contain;
+  padding-top: 149px;
+  padding-bottom: 30px;
 }
 
 .title {
@@ -17,17 +23,17 @@
   margin-bottom: 6px;
 }
 
-.bottleContainer {
-  display: flex;
-  justify-content: center;
-}
-
 .bottle {
   max-width: 100%;
   height: auto;
 }
 
 @media only screen and (min-width: 768px) {
+  .container {
+    max-width: 704px;
+    max-height: 578px;
+    background-image: url("/src/img/water-main-info/bottle-tablet.png");
+  }
   .title {
     width: 155px;
     font-size: 24px;
@@ -41,7 +47,7 @@
 @media only screen and (min-width: 1440px) {
   .container {
     max-width: 672px;
-    /* height: 736px; */
+    background-image: url("/src/img/water-main-info/bottle-desktop.png");
   }
   .title {
     margin-bottom: 36px;
@@ -49,5 +55,25 @@
 
   .bottleContainer {
     padding-bottom: 40px;
+  }
+}
+
+/* ============ retina =========== */
+
+@media only screen and (min-resolution: 192dpi) and (max-width: 767px) {
+  .container {
+    background-image: url("/src/img/water-main-info/bottle-mob@2x.png");
+  }
+}
+
+@media only screen and (min-width: 768px) and (min-resolution: 192dpi) {
+  .container {
+    background-image: url("/src/img/water-main-info/bottle-tablet@2x.png");
+  }
+}
+
+@media only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
+  .container {
+    background-image: url("/src/img/water-main-info/bottle-desktop@2x.png");
   }
 }

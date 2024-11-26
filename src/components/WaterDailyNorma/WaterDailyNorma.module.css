@@ -1,10 +1,11 @@
 .container {
-  position: absolute;
+  display: inline-block;
+  margin-bottom: 89px;
   margin-left: 16px;
-  margin-top: 122px;
   border-radius: 15px;
   padding: 12px;
-  max-width: 102px;
+  max-width: 78px;
+  min-height: 30px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }

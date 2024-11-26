@@ -2,19 +2,20 @@
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
-  // const { currentAmount, dailyGoal, history } = useSelector(selectWater);
+  // const { currentAmount, dailyNorma, history } = useSelector(selectWater);
 
   // export const formatVolume = (ml) => {
   //   return `${(ml / 1000).toFixed(1)} L`;
   // };
-  // const waterPercentage = Math.round((currentAmount / dailyGoal) * 100);
+  // const waterPercentage = Math.round((currentAmount / dailyNorma) * 100);
 
   return (
     <>
       <div className={css.container}>
         <p className={css.today}>Today</p>
         <span className={css.volumeInfo}>
-          {/* {formatVolume(currentAmount)} / {formatVolume(dailyGoal)} */}
+          {/* {formatVolume(currentAmount)} / {formatVolume(dailyGoal) * 100} */}
+          <p>80</p>
         </span>
         <div className={css.progressBarContainer}>
           <div
