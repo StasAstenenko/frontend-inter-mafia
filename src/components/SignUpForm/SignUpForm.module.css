@@ -37,6 +37,7 @@
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  background-color: transparent;
 }
 .input:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);

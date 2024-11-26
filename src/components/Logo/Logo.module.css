@@ -1,10 +1,25 @@
 .logo {
-  font-family: 'Poppins', sans-serif;
+  color: var(--background-primary-dark);
   font-size: 18px;
   font-weight: 700;
-  color: var(--background-primary-dark);
+  position: relative;
   text-transform: uppercase;
-  position: absolute;
-  top: 32px;
-  left: 32px;
+  margin-bottom: 74px;
+}
+
+/* BREAKPOINTS (Mobile First) */
+/* md */
+@media (min-width: 768px) {
+  .logo {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+}
+
+/* lg */
+@media (min-width: 1440px) {
+  .logo {
+    font-size: 24px;
+    margin-bottom: 132px;
+  }
 }
