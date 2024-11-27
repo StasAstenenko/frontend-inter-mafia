@@ -35,6 +35,7 @@
         <symbol id="close" viewBox="0 0 32 32">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.429" d="M24 8 8 24M8 8l16 16"/>
         </symbol>
+     
 
         <symbol id="upload" viewBox="0 0 32 32">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.88" d="M28 20v5.333A2.668 2.668 0 0 1 25.333 28H6.666a2.668 2.668 0 0 1-2.667-2.667V20M22.666 10.667 15.999 4l-6.667 6.667M16 4v16"/>
