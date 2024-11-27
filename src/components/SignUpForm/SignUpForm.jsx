@@ -3,8 +3,11 @@ import css from "./SignUpForm.module.css";
 import * as Yup from "yup";
 import clsx from "clsx";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { apiRegister } from "../../redux/auth/operations";
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
     repeatPassword: false,
@@ -35,7 +38,12 @@ const SignUpForm = () => {
     repeatPassword: "",
   };
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    const email = values.emailSignUp;
+    const password = values.passwordSignUp;
+    const registerObj = { email, password };
+    console.log(registerObj);
+    dispatch(apiRegister(registerObj));
+
     actions.resetForm();
   };
 
