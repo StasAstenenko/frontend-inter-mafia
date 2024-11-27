@@ -24,8 +24,10 @@ const DailyInfo = ({ date }) => {
 
   return (
     <div className={css["daily-info-container"]}>
-      <ChooseDate date={effectiveDate} />
-      <AddWaterBtn />
+      <div className={css["date-and-button-container"]}>
+        <ChooseDate date={effectiveDate} />
+        <AddWaterBtn variant="alt" />
+      </div>
       <WaterList />
     </div>
   );
