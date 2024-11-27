@@ -10,7 +10,7 @@
   background-attachment: local;
   padding: 24px 16px 120px 16px;
   position: relative;
-  background-size: contain;
+  /* background-size: contain; */
 }
 
 .log {
