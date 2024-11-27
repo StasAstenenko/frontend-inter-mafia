@@ -1,1 +1,5 @@
-/*style*/
+.settingModalButton {
+  border: none;
+  background-color: transparent;
+  stroke: #2f2f2f;
+}
