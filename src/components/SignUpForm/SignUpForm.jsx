@@ -8,7 +8,6 @@ import { apiRegister } from "../../redux/auth/operations";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
     repeatPassword: false,
@@ -105,11 +104,11 @@ const SignUpForm = () => {
               >
                 {!passwordVisibility.password ? (
                   <svg width="20" height="20" className={css.icon}>
-                    <use href="/src/icons/sprite.svg#eye-close"></use>
+                    <use href="/icons/sprite.svg#eye-close"></use>
                   </svg>
                 ) : (
                   <svg width="20" height="20" className={css.icon}>
-                    <use href="/src/icons/sprite.svg#eye"></use>
+                    <use href="/icons/sprite.svg#eye"></use>
                   </svg>
                 )}
               </button>
@@ -142,11 +141,11 @@ const SignUpForm = () => {
               >
                 {!passwordVisibility.repeatPassword ? (
                   <svg width="20" height="20" className={css.icon}>
-                    <use href="/src/icons/sprite.svg#eye-close"></use>
+                    <use href="/icons/sprite.svg#eye-close"></use>
                   </svg>
                 ) : (
                   <svg width="20" height="20" className={css.icon}>
-                    <use href="/src/icons/sprite.svg#eye"></use>
+                    <use href="/icons/sprite.svg#eye"></use>
                   </svg>
                 )}
               </button>
