@@ -3,6 +3,7 @@ import Loader from "./components/Loader/Loader";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Route, Routes } from "react-router-dom";
+
 import Modal from "./modals/Modal/Modal";
 import LogOutModal from "./modals/LogOutModal/LogOutModal";
 // import DeleteWaterModal from "./modals/DeleteWaterModal/DeleteWaterModal";

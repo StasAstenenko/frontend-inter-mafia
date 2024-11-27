@@ -8,8 +8,22 @@ const DeleteWaterModal = () => {
         <p className={css.text}>Are you sure you want to delete the entry?</p>
       </div>
       <div className={css.buttonContainer}>
-        <button className={css.deleteBtn}>Delete</button>
-        <button className={css.cancelBtn}>Cancel</button>
+        <button
+          className={css.deleteBtn}
+          type="button"
+          aria-label="Delete button"
+          // onClick={handleDelete}
+        >
+          Delete
+        </button>
+        <button
+          className={css.cancelBtn}
+          type="button"
+          aria-label="Cancel button"
+          // onClick={closeModal}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );
