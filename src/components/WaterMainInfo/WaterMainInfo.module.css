@@ -7,11 +7,13 @@
   background-image: url("/src/img/water-main-info/bottle-mob.png");
   background-repeat: no-repeat;
   background-position: center 50px;
+  background-attachment: local;
   padding: 24px 16px 120px 16px;
   position: relative;
+  background-size: contain;
 }
 
-.logo {
+.log {
   margin-bottom: 78px;
 }
 
@@ -23,7 +25,7 @@
     background-position: center 69px;
   }
 
-  .logo {
+  .log {
     margin-bottom: 101px;
   }
 }
@@ -33,9 +35,12 @@
     max-width: 672px;
     margin-right: auto;
     margin-left: 0;
-
     background-image: url("/src/img/water-main-info/bottle-desktop.png");
     background-position: center 92px;
+  }
+
+  .log {
+    margin-bottom: 215px;
   }
 }
 
@@ -44,17 +49,20 @@
 @media only screen and (min-resolution: 192dpi) and (max-width: 767px) {
   .container {
     background-image: url("/src/img/water-main-info/bottle-mob@2x.png");
+    background-size: contain;
   }
 }
 
 @media only screen and (min-width: 768px) and (min-resolution: 192dpi) {
   .container {
     background-image: url("/src/img/water-main-info/bottle-tablet@2x.png");
+    background-size: contain;
   }
 }
 
 @media only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
   .container {
     background-image: url("/src/img/water-main-info/bottle-desktop@2x.png");
+    background-size: contain;
   }
 }

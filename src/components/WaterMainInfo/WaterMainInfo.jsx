@@ -8,7 +8,7 @@ const WaterMainInfo = () => {
   return (
     <>
       <div className={css.container}>
-        <Logo className={css.logo} />
+        <Logo className={css.log} />
         <WaterDailyNorma />
         <WaterProgressBar />
         <AddWaterBtn />
