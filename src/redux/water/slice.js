@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-  dailyNorm: 1500,
+  dailyNorma: 1500,
   loading: false,
   error: null,
 };
