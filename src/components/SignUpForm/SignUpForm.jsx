@@ -3,13 +3,22 @@ import css from "./SignUpForm.module.css";
 import * as Yup from "yup";
 import clsx from "clsx";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { apiRegister } from "../../redux/auth/operations";
 
 const SignUpForm = () => {
-const [passwordVisibility, setPasswordVisibility]=useState({password:false, repeatPassword:false});
-const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
-  ...prev,
-  [btnName]: !prev[btnName],
-}));};
+  const dispatch = useDispatch();
+
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+    repeatPassword: false,
+  });
+  const togglePasswordView = (btnName) => {
+    setPasswordVisibility((prev) => ({
+      ...prev,
+      [btnName]: !prev[btnName],
+    }));
+  };
 
   const SignUpValidationSchema = Yup.object().shape({
     emailSignUp: Yup.string()
@@ -30,11 +39,15 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
     repeatPassword: "",
   };
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    const email = values.emailSignUp;
+    const password = values.passwordSignUp;
+    const registerObj = { email, password };
+    console.log(registerObj);
+    dispatch(apiRegister(registerObj));
+
     actions.resetForm();
   };
 
-  
   return (
     <>
       {/* <h1 className={css.title}>SignUp</h1> */}
@@ -85,9 +98,12 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
                 component="span"
                 className={css.errorMsg}
               />
-              <button type="button" className={css.toggleViewBtn} onClick={()=>togglePasswordView('password')}>
-               {
-                !passwordVisibility.password ? (
+              <button
+                type="button"
+                className={css.toggleViewBtn}
+                onClick={() => togglePasswordView("password")}
+              >
+                {!passwordVisibility.password ? (
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye-close"></use>
                   </svg>
@@ -95,8 +111,7 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye"></use>
                   </svg>
-                )
-               }
+                )}
               </button>
             </div>
 
@@ -120,9 +135,12 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
                 component="span"
                 className={css.errorMsg}
               />
-              <button type="button" className={css.toggleViewBtn} onClick={()=>togglePasswordView('repeatPassword')}>
-               {
-                !passwordVisibility.repeatPassword ? (
+              <button
+                type="button"
+                className={css.toggleViewBtn}
+                onClick={() => togglePasswordView("repeatPassword")}
+              >
+                {!passwordVisibility.repeatPassword ? (
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye-close"></use>
                   </svg>
@@ -130,8 +148,7 @@ const togglePasswordView=(btnName)=>{setPasswordVisibility((prev) => ({
                   <svg width="20" height="20" className={css.icon}>
                     <use href="/src/icons/sprite.svg#eye"></use>
                   </svg>
-                )
-               }
+                )}
               </button>
             </div>
 
