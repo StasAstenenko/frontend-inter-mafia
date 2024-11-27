@@ -42,6 +42,10 @@
   }
 }
 
+.settingModalIcon {
+  stroke: #2f2f2f;
+}
+
 .settingModalButton {
   border: none;
   background-color: transparent;

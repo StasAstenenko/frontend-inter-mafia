@@ -4,6 +4,9 @@ import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 import css from "./WaterMainInfo.module.css";
 import Logo from "../Logo/Logo.jsx";
+import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.jsx";
+import { useState } from "react";
+
 const WaterMainInfo = () => {
   return (
     <>

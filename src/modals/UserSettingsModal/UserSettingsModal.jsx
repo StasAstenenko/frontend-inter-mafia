@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom";
-import Icon from "../../components/Icon/Icon";
 import UsersSettingsForm from "../../components/UsersSettingsForm/UsersSettingsForm";
 import css from "./UserSettingsModal.module.css";
 
@@ -12,12 +11,9 @@ const UserSettingsModal = ({ isOpen, onClose }) => {
         <div className={css.settingModalHeader}>
           <h2 className={css.settingModalTitle}>Setting</h2>
           <button className={css.settingModalButton} onClick={onClose}>
-            <Icon
-              iconName="close"
-              width="26"
-              height="26"
-              className="css.settingModalIconClose"
-            />
+            <svg width="24" height="24" className={css.settingModalIcon}>
+              <use href="/icons/sprite.svg#close"></use>
+            </svg>
           </button>
         </div>
 
