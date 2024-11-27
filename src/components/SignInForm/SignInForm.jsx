@@ -81,11 +81,11 @@ const SignInForm = () => {
                 >
                   {!openEye ? (
                     <svg width="20" height="20" className={css.closeEye}>
-                      <use href="../..//icons/sprite.svg#eye-close"></use>
+                      <use href="/icons/sprite.svg#eye-close"></use>
                     </svg>
                   ) : (
                     <svg width="20" height="20" className={css.closeEye}>
-                      <use href="../../icons/sprite.svg#eye"></use>
+                      <use href="/icons/sprite.svg#eye"></use>
                     </svg>
                   )}
                 </button>
