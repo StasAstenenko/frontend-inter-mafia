@@ -35,6 +35,7 @@
     max-width: 672px;
     margin-right: auto;
     margin-left: 0;
+    padding-bottom: 180px;
     background-image: url("/src/img/water-main-info/bottle-desktop.png");
   }
 }

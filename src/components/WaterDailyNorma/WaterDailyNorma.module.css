@@ -1,5 +1,5 @@
 .container {
-  margin-top: 4px;
+  /* margin-top: 4px; */
   margin-bottom: 52px;
   border-radius: 15px;
   padding: 12px;
@@ -24,7 +24,7 @@
 
 @media only screen and (min-width: 768px) {
   .container {
-    margin-top: 51px;
+    /* margin-top: 51px; */
     padding: 14px 18px;
     max-width: 129px;
   }
@@ -41,4 +41,7 @@
 }
 
 @media only screen and (min-width: 1440px) {
+  .container {
+    margin-bottom: 215px;
+  }
 }
