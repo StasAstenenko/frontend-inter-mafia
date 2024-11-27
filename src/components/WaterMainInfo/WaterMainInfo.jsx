@@ -9,13 +9,8 @@ import bottleMob2x from "../../img/water-main-info/bottle-mob@2x.png";
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
-import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.jsx";
-import { useState } from "react";
 
 const WaterMainInfo = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <div className={css.container}>
@@ -32,13 +27,7 @@ const WaterMainInfo = () => {
           />
         </div>
         <AddWaterBtn />
-
-        <button className={css.settingsButton} onClick={openModal}>
-          Open Settings
-        </button>
       </div>
-
-      <UserSettingsModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };
