@@ -11,6 +11,11 @@
   line-height: 1;
 }
 
+/* Logo Component */
+.logo {
+  margin-bottom: 74px;
+}
+
 /* Headers Styles */
 .headersWrapper {
   display: flex;
