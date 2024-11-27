@@ -14,8 +14,8 @@ const UserSettingsModal = ({ isOpen, onClose }) => {
           <button className={css.settingModalButton} onClick={onClose}>
             <Icon
               iconName="close"
-              width="24"
-              height="24"
+              width="26"
+              height="26"
               className="css.settingModalIconClose"
             />
           </button>

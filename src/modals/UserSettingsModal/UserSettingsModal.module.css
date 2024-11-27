@@ -21,6 +21,15 @@
   background-color: #fff;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 40px;
+    width: 648px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 920px;
+  }
 }
 
 .settingModalHeader {
@@ -28,16 +37,24 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  position: relative;
+  @media (max-width: 767px) {
+    position: relative;
+  }
 }
 
 .settingModalButton {
-  position: absolute;
-  top: -20px;
-  right: 0;
   border: none;
   background-color: transparent;
   stroke: #2f2f2f;
+  @media (max-width: 767px) {
+    position: absolute;
+    top: -20px;
+    right: 0;
+  }
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .settingModalContent {
@@ -52,4 +69,8 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: #323f47;
+  @media (min-width: 768px) {
+    font-size: 28px;
+    line-height: 1.14;
+  }
 }
