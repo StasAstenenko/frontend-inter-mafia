@@ -29,7 +29,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
         </svg>
         Add water
       </button>
-      {isModalOpen && <WaterModal type={"add"} />}
+      {/* {isModalOpen && <WaterModal type={"add"} />} */}
     </>
   );
 };

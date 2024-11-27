@@ -1,15 +1,14 @@
 .addBtn {
-  position: absolute;
   cursor: pointer;
   font-weight: 700;
   letter-spacing: 0.01em;
-  text-align: center;
   border: none;
-  right: 16px;
-  bottom: 32px;
 }
 
 .defaultBtn {
+  position: absolute;
+  right: 16px;
+  bottom: 32px;
   font-size: 14px;
   line-height: 129%;
   background-color: #323f47;
@@ -34,19 +33,35 @@
   text-align: center;
   color: #323f47;
   background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
   vertical-align: middle;
   margin-right: 10px;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon:hover {
   transform: scale(1.1);
 }
+.addBtnAlt .iconAlt {
+  border-radius: 30px;
+  background-color: #9be1a0;
+  stroke: #323f47;
+  padding: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.addBtnAlt:hover .iconAlt {
+  background-color: #323f47;
+  stroke: #ffffff;
+}
+
+/* 
 .iconAlt {
   border-radius: 30px;
   background-color: #9be1a0;
@@ -58,7 +73,7 @@
 .iconAlt:hover {
   background-color: #323f47;
   stroke: #ffffff;
-}
+} */
 
 @media only screen and (min-width: 768px) {
   .addBtn {
