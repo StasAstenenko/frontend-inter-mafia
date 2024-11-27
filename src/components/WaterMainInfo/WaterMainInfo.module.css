@@ -12,7 +12,6 @@
 }
 
 .logo {
-  line-height: 111%;
   margin-bottom: 78px;
 }
 
@@ -25,7 +24,6 @@
   }
 
   .logo {
-    line-height: 100%;
     margin-bottom: 101px;
   }
 }
@@ -35,7 +33,9 @@
     max-width: 672px;
     margin-right: auto;
     margin-left: 0;
+
     background-image: url("/src/img/water-main-info/bottle-desktop.png");
+    background-position: center 92px;
   }
 }
 

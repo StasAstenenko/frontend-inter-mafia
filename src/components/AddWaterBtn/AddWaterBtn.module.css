@@ -62,8 +62,8 @@
 
 @media only screen and (min-width: 768px) {
   .addBtn {
-    right: 16px;
-    bottom: 32px;
+    right: 32px;
+    bottom: 64px;
   }
 
   .defaultBtn {
