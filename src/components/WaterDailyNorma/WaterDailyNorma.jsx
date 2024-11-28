@@ -1,14 +1,14 @@
-import { selectDailyNorma } from "../../redux/water/selectors.js";
+import { useSelector } from "react-redux";
+import { selectDailyNorm } from "../../redux/auth/selectors.js";
+import { formatVolume } from "../WaterProgressBar/WaterProgressBar.jsx";
 import css from "./WaterDailyNorma.module.css";
 
 const WaterDailyNorma = () => {
-  const dailyNorma = useSelector(selectDailyNorma);
-  // const volumeToShow = dailyNorma === 0 ? "1.5 L" : `${dailyNorma} L`;
+  const dailyNorm = useSelector(selectDailyNorm);
   return (
     <>
       <div className={css.container}>
-        <p className={css.litres}>1.5 L</p>
-        {formatVolume(dailyNorma)}
+        <p className={css.litres}> {formatVolume(dailyNorm)}</p>
         <p className={css.text}>My daily norma</p>
       </div>
     </>

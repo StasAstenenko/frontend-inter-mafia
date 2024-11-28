@@ -1,12 +1,11 @@
 // import { useSelector } from "react-redux";
 import css from "./WaterProgressBar.module.css";
 
+export const formatVolume = (ml) => {
+  return `${(ml / 1000).toFixed(1)} L`;
+};
 const WaterProgressBar = () => {
   // const { currentAmount, dailyNorma, history } = useSelector(selectWater);
-
-  // export const formatVolume = (ml) => {
-  //   return `${(ml / 1000).toFixed(1)} L`;
-  // };
   // const waterPercentage = Math.round((currentAmount / dailyNorma) * 100);
 
   return (

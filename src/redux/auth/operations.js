@@ -19,3 +19,15 @@ export const apiRegister = createAsyncThunk(
     }
   }
 );
+
+export const getDailyNorm = createAsyncThunk(
+  "users/getDailyNorm",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await instance.get("users");
+      return data.dailyNorm;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
