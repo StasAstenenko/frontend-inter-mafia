@@ -54,7 +54,6 @@
   .container {
     min-width: 295px;
     padding: 20px;
-    /* margin-bottom: 150px; */
   }
 
   .today {
@@ -67,9 +66,8 @@
     line-height: 187%;
   }
 }
-
+/* 
 @media only screen and (min-width: 1440px) {
   .container {
-    margin-top: 358px;
   }
-}
+} */
