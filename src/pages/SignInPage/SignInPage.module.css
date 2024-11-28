@@ -1,9 +1,8 @@
 /*style*/
 .signInSection {
-  font-family: Poppins;
   padding: 16px;
   margin: 0 auto;
-  max-width: 320px;
+  max-width: 343px;
   background-color: #ffffff;
 }
 
@@ -49,7 +48,14 @@
 @media only screen and (min-width: 768px) {
   .signInSection {
     padding: 32px;
-    max-width: 768px;
+    max-width: 704px;
+  }
+
+  .signInContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .container {
@@ -68,5 +74,31 @@
   .desc {
     font-size: 16px;
     line-height: 150%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .signInSection {
+    min-width: 672px;
+    margin-right: 0;
+  }
+
+  .container {
+    padding-bottom: 169px;
+  }
+
+  .title {
+    margin-bottom: 113px;
+  }
+
+  .descContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .advContainer {
+    max-width: 672px;
+    margin-left: 0;
+    margin-right: auto;
   }
 }
