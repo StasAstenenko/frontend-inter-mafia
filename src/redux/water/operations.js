@@ -16,3 +16,19 @@ export const fetchDaysDrinking = createAsyncThunk(
     }
   }
 );
+
+export const fetchDayDetails = createAsyncThunk(
+  "water/fetchDayDetails",
+  async ({ year, month, day }, thunkAPI) => {
+    try {
+      const response = await axios.get(`/day`, {
+        params: {
+          date: `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
