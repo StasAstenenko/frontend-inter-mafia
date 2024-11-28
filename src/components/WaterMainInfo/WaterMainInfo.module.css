@@ -11,7 +11,12 @@
   position: relative;
 }
 
-.logo {
+.title {
+  font-family: "Poppins", sans-serif;
+  color: #323f47;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
   line-height: 111%;
   margin-bottom: 78px;
 }
@@ -24,7 +29,7 @@
     background-position: center 69px;
   }
 
-  .logo {
+  .title {
     line-height: 100%;
     margin-bottom: 101px;
   }
@@ -43,18 +48,20 @@
 
 @media only screen and (min-resolution: 192dpi) and (max-width: 767px) {
   .container {
-    background-image: url("/src/img/water-main-info/bottle-mob@2x.png");
+    background-size: auto 80%;
   }
 }
 
 @media only screen and (min-width: 768px) and (min-resolution: 192dpi) {
   .container {
     background-image: url("/src/img/water-main-info/bottle-tablet@2x.png");
+    background-size: auto 84%;
   }
 }
 
 @media only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
   .container {
     background-image: url("/src/img/water-main-info/bottle-desktop@2x.png");
+    background-size: auto 87%;
   }
 }

@@ -24,25 +24,12 @@ const AddWaterBtn = ({ variant = "default" }) => {
           className={clsx(css.icon, variant === "alt" && css.iconAlt)}
           width="24"
           height="24"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M12 5V19"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M5 12H19"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <use href="../../../public/icons/sprite.svg#plus-add-water" />
         </svg>
         Add water
       </button>
-      {isModalOpen && <WaterModal type={"add"} />}
+      {/* {isModalOpen && <WaterModal type={"add"} />} */}
     </>
   );
 };
