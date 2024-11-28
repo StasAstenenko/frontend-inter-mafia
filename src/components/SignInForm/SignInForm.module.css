@@ -21,16 +21,9 @@
 }
 
 .emailContainer {
-  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
-}
-
-.errorMail {
-  position: absolute;
-  bottom: -30px;
-  left: 0;
 }
 
 .inputForm {
@@ -107,11 +100,13 @@
   .signInTitle {
     font-size: 36px;
     line-height: 106%;
-    margin-left: 102px;
   }
 
-  .form {
-    margin-left: 102px;
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
   }
 
   .label {

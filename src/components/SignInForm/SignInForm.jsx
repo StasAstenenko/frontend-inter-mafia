@@ -4,6 +4,9 @@ import css from "./SignInForm.module.css";
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthError } from "../../redux/auth/selectors";
+import { apiLogin } from "../../redux/auth/operations";
 
 const LoginValidationSchema = Yup.object({
   email: Yup.string().email("Incorrect email").required("Email is required"),
@@ -14,6 +17,8 @@ const LoginValidationSchema = Yup.object({
 });
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+  const error = useSelector(selectAuthError);
   const isTabletAndDesktop = useMediaQuery({ minWidth: 768 });
   const [openEye, setOpenEye] = useState(false);
 
@@ -26,12 +31,12 @@ const SignInForm = () => {
     setOpenEye(!openEye);
   }
 
-  function handleSubmit(name, password) {
-    console.log(name, password);
+  function handleSubmit(values) {
+    dispatch(apiLogin(values));
   }
 
   return (
-    <>
+    <div className={css.container}>
       <h3 className={css.signInTitle}>Sign In</h3>
       <Formik
         initialValues={initialValue}
@@ -102,7 +107,7 @@ const SignInForm = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 

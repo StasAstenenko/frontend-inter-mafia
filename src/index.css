@@ -21,7 +21,9 @@
   line-height: 1;
 }
 
-html, body {
+html,
+body {
+  font-family: Poppins;
   margin: 0;
   padding: 0;
 }
