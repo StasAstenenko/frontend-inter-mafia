@@ -1,1 +1,21 @@
-/*style*/
+.arrow {
+  border: transparent;
+  background-color: transparent;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.chosenDate {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.arrow:hover,
+.chosenDate:hover {
+  color: aqua;
+}

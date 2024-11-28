@@ -1,12 +1,19 @@
 /*style*/
 .day-text {
   font-family: Poppins;
-  font-size: 28px;
+  font-size: 20px;
+  line-height: 24px;
   font-weight: 700;
-  line-height: 32px;
   letter-spacing: -0.01em;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: var(--background-primary-dark);
+}
+
+@media only screen and (min-width: 768px) {
+  .day-text {
+    font-size: 28px;
+    line-height: 32px;
+  }
 }
