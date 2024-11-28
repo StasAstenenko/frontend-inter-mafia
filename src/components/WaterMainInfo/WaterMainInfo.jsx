@@ -3,6 +3,7 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 import css from "./WaterMainInfo.module.css";
+
 const WaterMainInfo = () => {
   return (
     <>

@@ -44,20 +44,19 @@
 
 .settingModalIcon {
   stroke: #2f2f2f;
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .settingModalButton {
   border: none;
   background-color: transparent;
-  stroke: #2f2f2f;
   @media (max-width: 767px) {
     position: absolute;
     top: -20px;
     right: 0;
-  }
-  @media (min-width: 768px) {
-    width: 28px;
-    height: 28px;
   }
 }
 
