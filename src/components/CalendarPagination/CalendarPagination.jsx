@@ -12,11 +12,11 @@ const CalendarPagination = () => {
     const newMonth = parseInt(month) + shift;
     let newDate;
     if (newMonth === 0) {
-      newDate = parseInt(year) - 1 + "-12-01";
+      newDate = parseInt(year) - 1 + "-12";
     } else if (newMonth === 13) {
-      newDate = parseInt(year) + 1 + "-01-01";
+      newDate = parseInt(year) + 1 + "-01";
     } else {
-      newDate = year + "-" + newMonth.toString().padStart(2, "0") + "-01";
+      newDate = year + "-" + newMonth.toString().padStart(2, "0");
     }
 
     dispatch(setChosenMonth(newDate)); // Відправляємо нову дату

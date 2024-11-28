@@ -10,7 +10,6 @@ import CalendarItem from "../CalendarItem/CalendarItem";
 
 const Calendar = () => {
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
-  console.log(useSelector(selectDaysNotAsInWeek));
   const isLoading = useSelector(selectIsLoading);
   const daysDrinking = useSelector(selectDaysDrinking);
 
