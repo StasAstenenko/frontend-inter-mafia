@@ -13,10 +13,6 @@
 }
 
 /* Section Styles */
-.welcomeSection {
-  padding: 24px 16px 16px 16px;
-}
-
 .welcomeSection,
 .advantagesSection {
   border-radius: 30px;
@@ -36,9 +32,12 @@
 .advantagesSection {
   background-color: var(--background-secondary-light);
   border: solid 1px var(--background-secondary-light);
-  min-height: 353px;
+  width: 100%;
   text-align: center;
-  height: 353px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 /* BREAKPOINTS (Mobile First) */
