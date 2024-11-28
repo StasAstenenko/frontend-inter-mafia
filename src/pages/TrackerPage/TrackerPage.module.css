@@ -1,1 +1,11 @@
-/*style*/
+.container {
+  padding: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 32px;
+  }
+}

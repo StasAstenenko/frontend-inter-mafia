@@ -1,9 +1,12 @@
 import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo.jsx";
+import css from "./TrackerPage.module.css";
 
 const TrackerPage = () => {
   return (
     <>
-      <WaterMainInfo />
+      <section className={css.container}>
+        <WaterMainInfo />
+      </section>
     </>
   );
 };

@@ -3,13 +3,12 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 import css from "./WaterMainInfo.module.css";
-import Logo from "../Logo/Logo.jsx";
 
 const WaterMainInfo = () => {
   return (
     <>
       <div className={css.container}>
-        <Logo className={css.logo} />
+        <h2 className={css.title}>aquatrack</h2>
         <WaterDailyNorma />
         <WaterProgressBar />
         <AddWaterBtn />
