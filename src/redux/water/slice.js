@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchDaysDrinking } from "./operations";
 
+const today = new Date().toISOString();
+
 const INITIAL_STATE = {
   daysDrinking: [],
-  chosenDate: Date.now(),
+  chosenDate: today.slice(0, 19),
+  chosenMonth: today.slice(0, 7),
   loading: false,
   error: null,
 };
@@ -12,8 +15,8 @@ const waterSlice = createSlice({
   name: "water",
   initialState: INITIAL_STATE,
   reducers: {
-    setChosenDate(state, action) {
-      state.chosenDate = action.payload;
+    setChosenMonth(state, action) {
+      state.chosenMonth = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -33,5 +36,5 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setChosenDate } = waterSlice.actions;
+export const { setChosenMonth } = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;

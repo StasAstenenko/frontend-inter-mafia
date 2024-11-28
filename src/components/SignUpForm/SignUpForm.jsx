@@ -41,7 +41,7 @@ const SignUpForm = () => {
     const email = values.emailSignUp;
     const password = values.passwordSignUp;
     const registerObj = { email, password };
-    console.log(registerObj);
+    // console.log(registerObj);
     dispatch(apiRegister(registerObj));
 
     actions.resetForm();

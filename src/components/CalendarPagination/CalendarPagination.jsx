@@ -1,25 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarPagination.module.css";
-import { selectChosenDate } from "../../redux/water/selectors";
-import { setChosenDate } from "../../redux/water/slice";
+import { selectChosenMonth } from "../../redux/water/selectors";
+import { setChosenMonth } from "../../redux/water/slice";
 
 const CalendarPagination = () => {
   const dispatch = useDispatch();
-  const chosenDate = new Date(useSelector(selectChosenDate));
+  const dateFromState = useSelector(selectChosenMonth);
 
   const handleMonthChange = (shift) => {
-    const updatedDate = new Date(chosenDate);
-    updatedDate.setMonth(updatedDate.getMonth() + shift);
-    dispatch(setChosenDate(updatedDate.toISOString()));
+    const [year, month] = dateFromState.split("-");
+    const newMonth = parseInt(month) + shift;
+    let newDate;
+    if (newMonth === 0) {
+      newDate = parseInt(year) - 1 + "-12-01";
+    } else if (newMonth === 13) {
+      newDate = parseInt(year) + 1 + "-01-01";
+    } else {
+      newDate = year + "-" + newMonth.toString().padStart(2, "0") + "-01";
+    }
+
+    dispatch(setChosenMonth(newDate)); // Відправляємо нову дату
   };
 
   const formatDate = (date) =>
-    `${date.toLocaleString("default", {
+    `${new Date(date).toLocaleString("default", {
       month: "long",
-    })}, ${date.getFullYear()}`;
+    })}, ${date.slice(0, 4)}`;
 
   return (
-    <div>
+    <div className={css.MonthNaw}>
       <button
         className={css.arrow}
         type="button"
@@ -27,7 +36,7 @@ const CalendarPagination = () => {
       >
         &lt;
       </button>
-      <span className={css.chosenDate}>{formatDate(chosenDate)}</span>
+      <span className={css.chosenMonth}>{formatDate(dateFromState)}</span>
       <button
         className={css.arrow}
         type="button"

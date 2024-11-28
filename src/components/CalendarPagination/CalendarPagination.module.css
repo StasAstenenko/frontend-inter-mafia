@@ -1,21 +1,38 @@
-.arrow {
-  border: transparent;
-  background-color: transparent;
-  font-weight: 800;
-  font-size: 14px;
+.MonthNaw {
+  display: flex;
+  align-items: stretch;
 }
 
-.chosenDate {
+.arrow {
+  padding: 3px 10px;
+  border: transparent;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 0.8;
+  font-family: "Poppins", sans-serif;
+}
+
+.chosenMonth {
+  display: inline-flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
   color: #323f47;
   font-weight: 700;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
-  line-height: 1.28571;
   letter-spacing: -0.01em;
-  text-align: center;
 }
 
 .arrow:hover,
-.chosenDate:hover {
-  color: aqua;
+.chosenMonth:hover {
+  color: #9be1a0;
+}
+
+@media only screen and (min-width: 768px) {
+  .arrow {
+    font-size: 26px;
+  }
 }

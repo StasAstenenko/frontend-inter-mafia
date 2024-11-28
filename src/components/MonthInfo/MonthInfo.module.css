@@ -1,3 +1,12 @@
+.sectionCalendar {
+  max-width: 303px;
+  margin: 0 auto;
+}
+
+.box {
+  min-height: 300px;
+}
+
 .MonthInfo {
   margin-bottom: 24px;
 }
@@ -11,11 +20,20 @@
   color: #323f47;
   font-weight: 700;
   font-size: 20px;
+  font-family: "Poppins", sans-serif;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
+.toggleViewBtn {
+  margin-left: 16px;
+}
+
 @media only screen and (min-width: 768px) {
+  .sectionCalendar {
+    max-width: 640px;
+  }
+
   .title {
     font-size: 28px;
     line-height: 1.14;
