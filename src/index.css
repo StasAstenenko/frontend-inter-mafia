@@ -1,5 +1,50 @@
+/* Color Variables */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --accent: #9be1a0;
+  --text-primary-dark: #2f2f2f;
+  --text-primary-light: #ffffff;
+  --background-primary-dark: #323f47;
+  --background-primary-light: #ffffff;
+  --background-secondary-light: #f0eff4;
+}
+
+/* Reset Default Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: none;
 }

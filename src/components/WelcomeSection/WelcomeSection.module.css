@@ -1,1 +1,139 @@
-/*style*/
+/* Reset Default Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Logo Component */
+.logo {
+  margin-bottom: 74px;
+}
+
+/* Headers Styles */
+.headersWrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: left;
+}
+
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1em;
+  margin-bottom: 16px;
+  color: var(--text-primary-dark); 
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  margin-bottom: 32px;
+  line-height: 1em;
+  color: var(--background-primary-dark); 
+}
+
+/* Buttons Styles */
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 30px;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btnPrimary {
+  color: var(--text-primary-dark);
+  background-color: var(--accent);
+  padding: 14px 19px;
+}
+
+.btnSecondary {
+  color: var(--text-primary-dark);
+  border: 1px solid var(--text-primary-dark);
+  padding: 14px 28px;
+}
+
+.btnPrimary:hover {
+  filter: brightness(90%);
+}
+
+.btnSecondary:hover {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+/* BREAKPOINTS (Mobile First) */
+/* md */
+@media (min-width: 768px) {
+  .logo {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+
+  .contentWrapper {
+    padding: 32px;
+    margin-bottom: 50px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 64px;
+    line-height: 1em;
+    margin-bottom: 32px;
+  }
+
+  .btnPrimary {
+    padding: 18px 40px;
+  }
+  
+  .btnSecondary {
+    padding: 18px 40px;
+  }
+}
+
+/* lg */
+@media (min-width: 1440px) {
+  .contentWrapper {
+    padding: 32px;
+    margin-bottom: 188px;
+  }
+
+  .logo {
+    font-size: 24px;
+    margin-bottom: 132px;
+  }
+
+  .title {
+    font-size: 80px;
+  }
+
+  .btnPrimary {
+    padding: 18px 40px;
+  }
+  
+  .btnSecondary {
+    padding: 18px 40px;
+  }
+}

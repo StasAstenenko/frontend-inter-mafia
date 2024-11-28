@@ -1,1 +1,28 @@
-/*style*/
+.MonthInfo {
+  margin-bottom: 24px;
+}
+
+.toRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+}
+
+/* @media only screen and (min-width: 1440px) {
+  .title {
+  }
+} */

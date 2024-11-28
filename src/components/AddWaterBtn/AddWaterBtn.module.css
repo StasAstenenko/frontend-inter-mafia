@@ -1,1 +1,74 @@
-/*style*/
+.addBtn {
+  position: absolute;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  border: none;
+  right: 16px;
+  bottom: 32px;
+}
+
+.defaultBtn {
+  font-size: 14px;
+  line-height: 129%;
+  background-color: #323f47;
+  min-width: 140px;
+  border-radius: 30px;
+  padding: 14px 20px;
+  color: #ffffff;
+  stroke: #ffffff;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.defaultBtn:hover {
+  color: #9be1a0;
+  stroke: #9be1a0;
+}
+
+.addBtnAlt {
+  min-width: 124px;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #323f47;
+  background-color: transparent;
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.iconAlt {
+  border-radius: 30px;
+  background-color: #9be1a0;
+  stroke: #323f47;
+  padding: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.iconAlt:hover {
+  background-color: #323f47;
+  stroke: #ffffff;
+}
+
+@media only screen and (min-width: 768px) {
+  .addBtn {
+    right: 16px;
+    bottom: 32px;
+  }
+
+  .defaultBtn {
+    min-width: 178px;
+    padding: 18px 30px;
+    font-size: 16px;
+  }
+}
