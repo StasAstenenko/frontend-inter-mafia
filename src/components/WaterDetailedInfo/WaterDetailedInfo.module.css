@@ -1,1 +1,10 @@
-/*style*/
+.container {
+  background-color: #f0eff4;
+  border-radius: 20px;
+  padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
