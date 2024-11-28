@@ -11,16 +11,23 @@ const MonthInfo = () => {
   };
 
   return (
-    <>
+    <div className={css.sectionCalendar}>
       <div className={`${css.MonthInfo} ${css.toRow}`}>
         <h2 className={css.title}>Month</h2>
         <div className={css.toRow}>
           <CalendarPagination />
-          <button onClick={toggleView}>Графік/Календар</button>
+          <button className={css.toggleViewBtn} onClick={toggleView}>
+            Г/К
+          </button>
         </div>
       </div>
-      {isCalendarVisible ? <Calendar /> : "Тут буде графік"}
-    </>
+
+      {isCalendarVisible ? (
+        <Calendar />
+      ) : (
+        <div className={css.box}>"Тут буде графік"</div>
+      )}
+    </div>
   );
 };
 

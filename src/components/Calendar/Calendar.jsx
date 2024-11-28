@@ -1,33 +1,42 @@
 import { useSelector } from "react-redux";
+import css from "./Calendar.module.css";
 import {
-  selectChosenDate,
+  selectChosenMonth,
   selectDaysDrinking,
   selectIsLoading,
 } from "../../redux/water/selectors";
+import { selectDaysNotAsInWeek } from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
-import css from "./Calendar.module.css";
 
 const Calendar = () => {
-  const chosenDate = new Date(useSelector(selectChosenDate));
-  const daysDrinking = useSelector(selectDaysDrinking);
+  const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
+  console.log(useSelector(selectDaysNotAsInWeek));
   const isLoading = useSelector(selectIsLoading);
+  const daysDrinking = useSelector(selectDaysDrinking);
+
+  const today = new Date();
+  const dateFromState = useSelector(selectChosenMonth);
+  const [year, month] = dateFromState.split("-");
+  const yearInt = parseInt(year);
+  const monthInt = parseInt(month) - 1; // Місяці в Date починаються з 0
 
   const generateCalendarDays = () => {
-    const year = chosenDate.getFullYear();
-    const month = chosenDate.getMonth();
-
-    const firstDayOfMonth = new Date(year, month, 0).getDay(); // 0 - euro (Monday first)
-    const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-
+    const totalDaysInMonth = new Date(yearInt, monthInt + 1, 0).getDate();
     const daysArray = Array.from({ length: totalDaysInMonth }, (_, i) => ({
       day: i + 1,
       percent: "--",
     }));
 
     daysDrinking.forEach((dayData) => {
-      daysArray[dayData.number].percent = dayData.percent;
+      if (dayData.number >= 1 && dayData.number <= totalDaysInMonth) {
+        daysArray[dayData.number - 1].percent = dayData.percent;
+      }
     });
 
+    if (daysNotAsInWeek) return daysArray;
+
+    // Порожні дні перед початком місяця
+    const firstDayOfMonth = new Date(yearInt, monthInt, 0).getDay(); // set 1 for Sunday-start week
     const emptyDaysBefore = Array.from({ length: firstDayOfMonth }, () => ({
       day: null,
       percent: null,
@@ -35,6 +44,12 @@ const Calendar = () => {
 
     return [...emptyDaysBefore, ...daysArray];
   };
+
+  const isActiveDay = (day) =>
+    day &&
+    today.getDate() === day &&
+    today.getMonth() === monthInt &&
+    today.getFullYear() === yearInt;
 
   const calendarDays = generateCalendarDays();
 
@@ -49,12 +64,7 @@ const Calendar = () => {
               key={`${index}${percent}`}
               day={day}
               percent={percent}
-              isActive={
-                day &&
-                chosenDate.getDate() === day &&
-                chosenDate.getMonth() === new Date().getMonth() &&
-                chosenDate.getFullYear() === new Date().getFullYear()
-              }
+              isActive={isActiveDay(day)}
             />
           ))}
         </div>
