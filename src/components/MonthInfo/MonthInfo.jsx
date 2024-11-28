@@ -13,11 +13,15 @@ const MonthInfo = () => {
   return (
     <div className={css.sectionCalendar}>
       <div className={`${css.MonthInfo} ${css.toRow}`}>
-        <h2 className={css.title}>Month</h2>
+        <h2 className={css.title}>
+          {isCalendarVisible ? "Month" : "Statistics"}
+        </h2>
         <div className={css.toRow}>
           <CalendarPagination />
           <button className={css.toggleViewBtn} onClick={toggleView}>
-            Г/К
+            <svg className={css.toggleViewBtnImg}>
+              <use href="/icons/sprite.svg#pie-chart"></use>
+            </svg>
           </button>
         </div>
       </div>
