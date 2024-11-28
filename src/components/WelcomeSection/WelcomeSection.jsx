@@ -1,4 +1,5 @@
 import Logo from '../Logo/Logo';
+import { NavLink } from 'react-router-dom'; 
 import styles from './WelcomeSection.module.css';
 
 const WelcomeSection = ({ className = '' }) => {
@@ -13,12 +14,12 @@ const WelcomeSection = ({ className = '' }) => {
           </h2>
         </div>
         <div className={styles.buttonsWrapper}>
-          <a href="/sign-up" className={`${styles.btn} ${styles.btnPrimary}`}>
+          <NavLink to="/signup" className={`${styles.btn} ${styles.btnPrimary}`}>
             Try&nbsp;tracker
-          </a>
-          <a href="/sign-in" className={`${styles.btn} ${styles.btnSecondary}`}>
+          </NavLink>
+          <NavLink to="/signin" className={`${styles.btn} ${styles.btnSecondary}`}>
             Sign&nbsp;In
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>
