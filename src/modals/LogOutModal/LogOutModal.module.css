@@ -1,4 +1,4 @@
-.modalWindow {
+.modal_content {
   background-color: var(--background-primary-light);
   border-radius: 15px;
   padding: 40px 14px;
@@ -69,7 +69,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .modalWindow {
+  .modal_content {
     padding: 40px 78.5px;
     width: 516px;
     max-width: 516px;
