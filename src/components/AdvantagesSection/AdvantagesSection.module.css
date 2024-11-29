@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.girl {
+  width: 100%;
+}
+
 .customers {
   display: flex;
   gap: 72px;
@@ -104,6 +108,18 @@
   color: var(--text-primary-light);
 }
 
+@media (max-width: 374px) {
+  .customers {
+    left: 8px;
+    top: 172px;
+  }
+
+  .benefits {
+    top: 224px;
+    left: 110px;
+  }
+}
+
 @media (min-width: 768px) {
   .customers {
     padding: 10px 20px;
@@ -147,13 +163,16 @@
 }
 
 @media only screen and (min-width: 1440px) {
+  .girl {
+    height: 736px;
+  }
   .customers {
-    left: 48px;
-    top: 534px;
+    left: 32px;
+    top: 537px;
   }
 
   .benefits {
-    top: 591px;
-    left: 414px;
+    top: 594px;
+    left: 366px;
   }
 }
