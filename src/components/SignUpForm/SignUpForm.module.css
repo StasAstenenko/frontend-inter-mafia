@@ -57,7 +57,9 @@
   color: rgba(47, 47, 47, 0.6);
 }
 .errorMsg {
-  /* position: absolute; */
+  position: absolute;
+  top: 88px;
+  left: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.28571;
