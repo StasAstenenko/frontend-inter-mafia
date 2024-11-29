@@ -1,11 +1,12 @@
 import css from "./LogOutModal.module.css";
 import Modal from "../Modal/Modal";
 
-// import { useDispatch } from "react-redux";
-// import { logOut } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { apiLogout } from "../../redux/auth/operations";
+// import toast from "react-hot-toast";
 
 const LogOutModal = ({ isOpen, onClose }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -20,9 +21,10 @@ const LogOutModal = ({ isOpen, onClose }) => {
             type="button"
             aria-label="Logout button"
             onClick={() => {
-              // dispatch(logOut()) - логика выхода юзера;
+              dispatch(apiLogout());
               onClose();
-              // оповещение с помощью Toast
+              // вставить оповещение с помощью Toast, типа:
+              // toast.success('toast.logOut')
             }}
           >
             Log Out
