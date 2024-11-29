@@ -25,7 +25,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
           width="24"
           height="24"
         >
-          <use href="../../../public/icons/sprite.svg#plus-add-water" />
+          <use href="/icons/sprite.svg#plus-add-water" />
         </svg>
         Add water
       </button>
