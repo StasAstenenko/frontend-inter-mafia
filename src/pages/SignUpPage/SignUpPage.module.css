@@ -1,7 +1,7 @@
 .section {
   padding: 16px;
 }
-.container {
+.formWrapper {
   margin: 0 auto;
   border-radius: 30px;
   max-width: 343px;
@@ -39,7 +39,7 @@
   .section {
     padding: 32px;
   }
-  .container {
+  .formWrapper {
     max-width: 704px;
     padding: 32px 32px 227px;
   }
@@ -59,18 +59,21 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1440px) {
   .section {
     margin: 0 auto;
     max-width: 1440px;
     display: flex;
     gap: 32px;
   }
-  .container {
-    width: 50%;
+  .formWrapper {
     padding-bottom: 100px;
+    width: 50%;
   }
   .logo {
-    margin-bottom: 74px;
+    margin-bottom: 68px;
+  }
+  .title {
+    padding-left: 86px;
   }
 }

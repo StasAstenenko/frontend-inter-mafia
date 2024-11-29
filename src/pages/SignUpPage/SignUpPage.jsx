@@ -9,7 +9,7 @@ const SignUpPage = () => {
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   return (
     <section className={css.section}>
-      <div className={css.container}>
+      <div className={css.formWrapper}>
         <Logo className={css.logo} />
         <h1 className={css.title}>Sign Up</h1>
         <SignUpForm />

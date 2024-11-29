@@ -1,34 +1,25 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  padding: 16px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1440px;
-  min-width: 320px;
-  padding: 16px 16px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  max-width: 375px;
 }
 
-/* BREAKPOINTS (Mobile First) */
-/* sm */
-@media (min-width: 375px) {
+@media only screen and (min-width: 768px) {
   .container {
-    width: 375px;
+    max-width: 768px;
+    padding: 32px;
   }
 }
 
-/* md */
-@media (min-width: 768px) {
-  .container {
-    width: 768px;
-    padding: 32px 32px;
-  }
-}
-
-@media (min-width: 1440px) {
+@media only screen and (min-width: 1440px) {
   .container {
     flex-direction: row;
-    width: 1440px;
+    flex-wrap: nowrap;
     gap: 32px;
+    max-width: 1440px;
   }
 }

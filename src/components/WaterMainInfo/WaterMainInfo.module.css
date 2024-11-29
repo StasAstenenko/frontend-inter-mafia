@@ -1,7 +1,4 @@
 .container {
-  max-width: 343px;
-  margin-left: auto;
-  margin-right: auto;
   border-radius: 30px;
   background-color: #9be1a0;
   background-image: url("/src/img/water-main-info/bottle-mob.png");
@@ -23,7 +20,6 @@
 
 @media only screen and (min-width: 768px) {
   .container {
-    max-width: 704px;
     padding: 32px 32px 150px;
     background-image: url("/src/img/water-main-info/bottle-tablet.png");
     background-position: center 69px;
@@ -37,9 +33,8 @@
 
 @media only screen and (min-width: 1440px) {
   .container {
-    max-width: 672px;
-    margin-right: auto;
-    margin-left: 0;
+    width: calc((100% - 32px) / 2);
+    box-sizing: border-box;
     background-image: url("/src/img/water-main-info/bottle-desktop.png");
   }
 }
