@@ -1,10 +1,22 @@
 .container {
   background-color: #f0eff4;
   border-radius: 20px;
-  padding-top: 32px;
-  padding-left: 32px;
-  padding-right: 32px;
+  border: 1px solid #000;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 32px;
+    border: none;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    width: calc((100% - 32px) / 2);
+  }
 }
