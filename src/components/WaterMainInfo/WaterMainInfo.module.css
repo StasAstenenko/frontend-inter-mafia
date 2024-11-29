@@ -33,8 +33,7 @@
 
 @media only screen and (min-width: 1440px) {
   .container {
-    flex: 1;
-    width: 50%;
+    width: calc((100% - 32px) / 2);
     box-sizing: border-box;
     background-image: url("/src/img/water-main-info/bottle-desktop.png");
   }
