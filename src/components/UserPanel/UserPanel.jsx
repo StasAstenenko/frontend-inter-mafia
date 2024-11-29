@@ -1,10 +1,11 @@
 import  { useState } from "react";
-import UserBar from "../UserBar/UserBar.jsx";
-import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
-import LogOutModal from "../LogOutModal/LogOutModal.jsx";
+import UserBar from "../../components/UserBar/UserBar.jsx";
+// import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.jsx";
+// import LogOutModal from "../../modals/LogOutModal/LogOutModal.jsx";
 import css from "./UserPanel.module.css"
 
 const UserPanel = ({ userName, avatarUrl }) => {
+  const defaultUserName = userName || "Nadia"; 
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
 
@@ -23,19 +24,19 @@ const handleOpenLogOut = () => {
 
   return (
     <div className={css.userpanel}> 
-      <h2 className={css.greeting}>Hello, <strong>{userName}!</strong></h2>
+      <h2 className={css.greeting}>Hello, <span className={css.name}>{defaultUserName}!</span></h2>
       <UserBar
         userName={userName}
         avatarUrl={avatarUrl}
         onSettingsClick={handleOpenSettings}
         onLogOutClick={handleOpenLogOut}
       />
-      {isSettingsModalOpen && (
+      {/* {isSettingsModalOpen && (
         <UserSettingsModal onClose={handleCloseModals} />
       )}
       {isLogOutModalOpen && (
         <LogOutModal onClose={handleCloseModals} />
-      )}
+      )} */}
     </div>
   );
 };
