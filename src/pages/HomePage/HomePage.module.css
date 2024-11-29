@@ -84,7 +84,6 @@
   .welcomeSection,
   .advantagesSection {
     width: 50%;
-    flex: 1;
   }
 
   .welcomeSection {
