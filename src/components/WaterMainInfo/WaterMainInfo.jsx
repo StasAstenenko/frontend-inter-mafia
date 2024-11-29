@@ -1,6 +1,6 @@
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
-import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
+пш;
 
 import css from "./WaterMainInfo.module.css";
 
