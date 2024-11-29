@@ -12,6 +12,7 @@
   margin: 0 auto;
 }
 .fieldWrap {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
@@ -56,13 +57,13 @@
   color: rgba(47, 47, 47, 0.6);
 }
 .errorMsg {
+  /* position: absolute; */
   font-weight: 400;
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: #ef5050;
 }
-
 
 .btn {
   border-radius: 30px;
@@ -76,7 +77,8 @@
   background-color: #9be1a0;
   transition: background-color 250ms linear;
   cursor: pointer;
-  width: 311px;
+  width: 100%;
+  max-width: 311px;
 }
 
 .btn:hover,
@@ -84,8 +86,9 @@
   background-color: #87d28d;
 }
 
-.toggleViewBtn{display:none}
-
+.toggleViewBtn {
+  display: none;
+}
 
 @media only screen and (min-width: 768px) {
   /* .title {
@@ -98,7 +101,7 @@
   }
 
   .fieldWrap {
-    position:relative;
+    /* position: relative; */
     margin-bottom: 20px;
   }
 
@@ -123,27 +126,20 @@
   .btn {
     font-size: 16px;
     line-height: 1.5;
-    width: 436px;
+    max-width: 436px;
     padding: 18px;
   }
-  .toggleViewBtn{
-    display:block;
-    position:absolute;
-    top:50px;
-    right:18px;
+  .toggleViewBtn {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 18px;
     background: none;
     border: none;
     cursor: pointer;
   }
-  .icon{
+  .icon {
     fill: none;
     stroke: #2f2f2f;
   }
 }
-
-
-
-
-
-
-
