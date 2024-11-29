@@ -9,25 +9,23 @@ const SignInPage = () => {
   const isDesktop = useMediaQuery({ minWidth: 1440 });
 
   return (
-    <div className={css.descContainer}>
-      <section className={css.signInSection}>
-        <div className={css.container}>
-          <Logo className={css.title} />
-          <div className={css.signInContainer}>
-            <SignInForm />
-          </div>
-          <div className={css.descContainer}>
-            <p className={css.desc}>
-              Don&#039;t have an account?{" "}
-              <NavLink to="/signup" className={css.signup}>
-                Sign Up
-              </NavLink>{" "}
-            </p>
-          </div>
+    <section className={css.signInSection}>
+      <div className={css.container}>
+        <Logo className={css.title} />
+        <div className={css.signInContainer}>
+          <SignInForm />
         </div>
-      </section>
+        <div className={css.descContainer}>
+          <p className={css.desc}>
+            Don&#039;t have an account?{" "}
+            <NavLink to="/signup" className={css.signup}>
+              Sign Up
+            </NavLink>{" "}
+          </p>
+        </div>
+      </div>
       {isDesktop && <AdvantagesSection className={css.advContainer} />}
-    </div>
+    </section>
   );
 };
 

@@ -79,21 +79,19 @@
 
 @media only screen and (min-width: 1440px) {
   .signInSection {
-    min-width: 672px;
-    margin-right: 0;
+    display: flex;
+    gap: 32px;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
   .container {
+    min-width: 672px;
     padding-bottom: 169px;
   }
 
   .title {
     margin-bottom: 113px;
-  }
-
-  .descContainer {
-    display: flex;
-    flex-direction: row;
   }
 
   .advContainer {
