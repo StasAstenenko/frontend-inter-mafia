@@ -1,13 +1,13 @@
-import { useState } from "react";
+// import { useState } from "react";
 import css from "./AddWaterBtn.module.css";
 import clsx from "clsx";
 
 const AddWaterBtn = ({ variant = "default" }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
   return (
     <>
@@ -18,7 +18,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
           css.addBtn,
           variant === "alt" ? css.addBtnAlt : css.defaultBtn
         )}
-        onClick={openModal}
+        // onClick={openModal}
       >
         <svg
           className={clsx(css.icon, variant === "alt" && css.iconAlt)}
