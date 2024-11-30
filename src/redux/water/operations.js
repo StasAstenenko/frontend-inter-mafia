@@ -1,23 +1,26 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const BASE_URL = "https://back-inter-mafia.onrender.com/api/water";
+axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/api/water";
 
-export const fetchWaterData = async (type, date) => {
-  try {
-    const endpoint = type === "month" ? "/month" : "/day";
-    const url = `${BASE_URL}${endpoint}`;
+export const fetchWaterData = createAsyncThunk(
+  "water/fetchWaterData",
+  async ({ type, date }, thunkAPI) => {
+    try {
+      const endpoint = type === "month" ? "/month" : "/day";
+      // console.log(endpoint);
 
-    const response = await axios.get(url, {
-      params: { date },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      `Не вдалося отримати дані по ${type}. Помилка: ${error.message}`
-    );
+      const response = await axios.get(endpoint, {
+        params: { date },
+      });
+
+      // console.dir(response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   }
-};
+);
 
 export const getWaterAmount = createAsyncThunk(
   "water/waterAmount",
