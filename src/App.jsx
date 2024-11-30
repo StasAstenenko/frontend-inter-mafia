@@ -4,43 +4,31 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Route, Routes } from "react-router-dom";
 
-// const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-// const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
-// const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
-// const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
+const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
 
-// function App() {
-//   return (
-//     <Suspense fallback={<Loader />}>
-//       <Routes>
-//         <Route path="/" element={<HomePage />} />
-//         <Route
-//           path="/tracker"
-//           element={<PrivateRoute component={<TrackerPage />} />}
-//         />
-//         <Route
-//           path="/signin"
-//           element={<RestrictedRoute component={<SignInPage />} />}
-//         />
-//         <Route
-//           path="/signup"
-//           element={<RestrictedRoute component={<SignUpPage />} />}
-//         />
-//       </Routes>
-//     </Suspense>
-//   );
-// }
-
-// export default App;
-
-import WaterForm from "./components/WaterForm/WaterForm.jsx";
-
-const App = () => {
+function App() {
   return (
-    <div>
-      <WaterForm />
-    </div>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/tracker"
+          element={<PrivateRoute component={<TrackerPage />} />}
+        />
+        <Route
+          path="/signin"
+          element={<RestrictedRoute component={<SignInPage />} />}
+        />
+        <Route
+          path="/signup"
+          element={<RestrictedRoute component={<SignUpPage />} />}
+        />
+      </Routes>
+    </Suspense>
   );
-};
+}
 
 export default App;

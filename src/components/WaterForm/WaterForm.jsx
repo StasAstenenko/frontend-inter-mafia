@@ -15,13 +15,8 @@ const entriesValidationSchema = Yup.object().shape({
   recordingTime: Yup.date().required("Required"),
 });
 
-const WaterForm = () => {
-  const [amount, setAmount] = useState(50);
-
-  const initialValues = {
-    amountOfWater: 50,
-    recordingTime: new Date(),
-  };
+const WaterForm = ({ title, paragraph, initialValues }) => {
+  const [amount, setAmount] = useState(initialValues.amountOfWater);
 
   const handleSubmit = (values) => {
     const formattedTime = values.recordingTime.toISOString().slice(11, 16);
@@ -62,8 +57,8 @@ const WaterForm = () => {
 
           return (
             <Form className={css.form}>
-              <p className={css.addWater}>Add water</p>
-              <p className={css.chooseAValue}>Choose a value:</p>
+              <p className={css.addWater}>{title}</p>
+              <p className={css.chooseAValue}>{paragraph}:</p>
               <div className={css.customInput}>
                 <p className={css.amountParagraph}>Amount of water:</p>
                 <div className={css.inputWrapper}>
