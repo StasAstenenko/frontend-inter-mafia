@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import css from "./Calendar.module.css";
 import {
@@ -7,15 +8,26 @@ import {
 } from "../../redux/water/selectors";
 import { selectDaysNotAsInWeek } from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
+import { fetchWaterData } from "../../redux/water/operations";
 
 const Calendar = () => {
+  const dateToShow = useSelector(selectChosenMonth);
+  console.log(dateToShow);
+  const daysDrinking = useSelector(selectDaysDrinking);
+  console.log(daysDrinking);
+
+  useEffect(() => {
+    console.log("fetching days drinking");
+    fetchWaterData(dateToShow);
+  }, [dateToShow]);
+
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
   const isLoading = useSelector(selectIsLoading);
-  const daysDrinking = useSelector(selectDaysDrinking);
 
-  const today = new Date();
-  const dateFromState = useSelector(selectChosenMonth);
-  const [year, month] = dateFromState.split("-");
+  const today = new Date().toLocaleString();
+  const [today_day, today_month, today_year_time] = today.split(".");
+  const today_year = today_year_time.slice(0, 4);
+  const [year, month] = dateToShow.split("-");
   const yearInt = parseInt(year);
   const monthInt = parseInt(month) - 1; // Місяці в Date починаються з 0
 
@@ -26,11 +38,12 @@ const Calendar = () => {
       percent: "--",
     }));
 
-    daysDrinking.forEach((dayData) => {
-      if (dayData.number >= 1 && dayData.number <= totalDaysInMonth) {
-        daysArray[dayData.number - 1].percent = dayData.percent;
-      }
-    });
+    console.dir(daysDrinking);
+    // daysDrinking.forEach((dayData) => {
+    //   if (dayData.number >= 1 && dayData.number <= totalDaysInMonth) {
+    //     daysArray[dayData.number - 1].percent = dayData.percent;
+    //   }
+    // });
 
     if (daysNotAsInWeek) return daysArray;
 
@@ -45,10 +58,7 @@ const Calendar = () => {
   };
 
   const isActiveDay = (day) =>
-    day &&
-    today.getDate() === day &&
-    today.getMonth() === monthInt &&
-    today.getFullYear() === yearInt;
+    today_day == day && today_month == month && today_year == year;
 
   const calendarDays = generateCalendarDays();
 
@@ -62,6 +72,7 @@ const Calendar = () => {
             <CalendarItem
               key={`${index}${percent}`}
               day={day}
+              month={dateToShow}
               percent={percent}
               isActive={isActiveDay(day)}
             />

@@ -2,20 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarPagination.module.css";
 import { selectChosenMonth } from "../../redux/water/selectors";
 import { setChosenMonth } from "../../redux/water/slice";
-import { fetchDaysDrinking } from "../../redux/water/operations";
-import { useEffect } from "react";
 
 const CalendarPagination = () => {
   const dispatch = useDispatch();
-  const dateFromState = useSelector(selectChosenMonth);
-
-  // Викликаємо fetchDaysDrinking лише при зміні dateFromState
-  useEffect(() => {
-    dispatch(fetchDaysDrinking(dateFromState));
-  }, [dispatch, dateFromState]);
+  const monthFromState = useSelector(selectChosenMonth);
 
   const handleMonthChange = (shift) => {
-    const [year, month] = dateFromState.split("-");
+    const [year, month] = monthFromState.split("-");
     const newMonth = parseInt(month) + shift;
     let newDate;
     if (newMonth === 0) {
@@ -43,7 +36,7 @@ const CalendarPagination = () => {
       >
         &lt;
       </button>
-      <span className={css.chosenMonth}>{formatDate(dateFromState)}</span>
+      <span className={css.chosenMonth}>{formatDate(monthFromState)}</span>
       <button
         className={css.arrow}
         type="button"

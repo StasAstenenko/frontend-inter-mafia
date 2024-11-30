@@ -1,4 +1,5 @@
 import WaterForm from "../../components/WaterForm/WaterForm.jsx";
+import Modal from "../Modal/Modal.jsx";
 
 const WaterModal = ({ operationType, data }) => {
   const messages = {
@@ -24,6 +25,7 @@ const WaterModal = ({ operationType, data }) => {
 
   return (
     <>
+      <Modal />
       <WaterForm
         title={title}
         paragraph={paragraph}
