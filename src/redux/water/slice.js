@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchDaysDrinking, fetchDayDetails } from "./operations";
+import {
+  fetchDaysDrinking,
+  fetchDayDetails,
+  getWaterAmount,
+} from "./operations";
 
 const today = new Date().toISOString();
 
@@ -8,6 +12,7 @@ const INITIAL_STATE = {
   dayDetails: [],
   chosenDate: today.slice(0, 19),
   chosenMonth: today.slice(0, 7),
+  waterAmount: [],
   loading: false,
   error: null,
 };
@@ -49,6 +54,18 @@ const waterSlice = createSlice({
       .addCase(fetchDayDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(getWaterAmount.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.waterAmount = payload;
+      })
+      .addCase(getWaterAmount.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/";
+axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/api/water";
 
 export const fetchDaysDrinking = createAsyncThunk(
   "water/fetchDaysDrinking",
@@ -29,6 +29,18 @@ export const fetchDayDetails = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getWaterAmount = createAsyncThunk(
+  "water/waterAmount",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axios.get("/");
+      return data.amount;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
