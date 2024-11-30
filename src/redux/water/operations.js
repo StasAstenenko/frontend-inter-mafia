@@ -33,8 +33,8 @@ export const fetchDayDetails = createAsyncThunk(
   }
 );
 
-export const getCurrentAmountWater = createAsyncThunk(
-  "water/totalAmountWater",
+export const getWaterAmount = createAsyncThunk(
+  "water/waterAmount",
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get("/");

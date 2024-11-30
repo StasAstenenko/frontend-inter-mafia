@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   dayDetails: [],
   chosenDate: today.slice(0, 19),
   chosenMonth: today.slice(0, 7),
-  currentAmountWater: [],
+  waterAmount: [],
   loading: false,
   error: null,
 };
@@ -55,15 +55,15 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(getCurrentAmountWater.pending, (state) => {
+      .addCase(getWaterAmount.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getCurrentAmountWater.fulfilled, (state, { payload }) => {
+      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.currentAmountWater = payload;
       })
-      .addCase(getCurrentAmountWater.rejected, (state, { payload }) => {
+      .addCase(getWaterAmount.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
