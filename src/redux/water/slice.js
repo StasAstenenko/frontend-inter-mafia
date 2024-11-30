@@ -10,7 +10,7 @@ const today = new Date().toISOString();
 const INITIAL_STATE = {
   daysDrinking: [],
   dayDetails: [],
-  chosenDate: today.slice(0, 19),
+  chosenDate: today.slice(0, 10),
   chosenMonth: today.slice(0, 7),
   waterAmount: [],
   loading: false,
