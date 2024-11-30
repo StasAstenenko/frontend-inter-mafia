@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchDaysDrinking,
   fetchDayDetails,
-  getCurrentAmountWater,
+  getWaterAmount,
 } from "./operations";
 
 const today = new Date().toISOString();
@@ -61,7 +61,7 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.currentAmountWater = payload;
+        state.waterAmount = payload;
       })
       .addCase(getWaterAmount.rejected, (state, { payload }) => {
         state.loading = false;
