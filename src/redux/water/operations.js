@@ -33,7 +33,7 @@ export const fetchDayDetails = createAsyncThunk(
   }
 );
 
-export const getWaterAmount = createAsyncThunk(
+export const getWaterAmountPerDay = createAsyncThunk(
   "water/waterAmount",
   async (_, thunkApi) => {
     try {

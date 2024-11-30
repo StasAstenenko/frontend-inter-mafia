@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchDaysDrinking,
   fetchDayDetails,
-  getWaterAmount,
+  getWaterAmountPerDay,
 } from "./operations";
 
 const today = new Date().toISOString();
@@ -55,15 +55,15 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(getWaterAmount.pending, (state) => {
+      .addCase(getWaterAmountPerDay.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
+      .addCase(getWaterAmountPerDay.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.waterAmount = payload;
       })
-      .addCase(getWaterAmount.rejected, (state, { payload }) => {
+      .addCase(getWaterAmountPerDay.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
