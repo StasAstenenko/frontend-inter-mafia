@@ -3,12 +3,8 @@ p {
 }
 
 .wrapper {
-  margin: auto;
-  margin-top: 100px;
   border-radius: 15px;
   padding: 40px 20px;
-  width: 343px;
-  height: 490px;
   background-color: lightblue;
 }
 

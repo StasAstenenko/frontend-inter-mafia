@@ -6,6 +6,7 @@ import css from "./WaterForm.module.css";
 import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
+import { postWaterData } from "../../redux/water/operations.js";
 
 const entriesValidationSchema = Yup.object().shape({
   amountOfWater: Yup.number()
@@ -19,14 +20,15 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
   const [amount, setAmount] = useState(initialValues.amountOfWater);
 
   const handleSubmit = (values) => {
-    const formattedTime = values.recordingTime.toISOString().slice(11, 16);
+    const formattedTime = values.recordingTime.toISOString().split(".")[0];
+
     const entries = {
       amount: values.amountOfWater,
-      time: formattedTime,
+      date: formattedTime,
+      currentDailyNorm: 1.5,
     };
-
+    postWaterData(entries);
     console.log("Values:", entries);
-    // dispatch(addEntries(entries));
   };
 
   return (

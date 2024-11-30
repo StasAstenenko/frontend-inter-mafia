@@ -30,3 +30,21 @@ export const getWaterAmount = createAsyncThunk(
     }
   }
 );
+
+export const postWaterData = async (entries) => {
+  try {
+    const response = await axios.post(`${BASE_URL}`, entries);
+    return response.data;
+  } catch (e) {
+    throw new Error(e.response?.status || "Post water error");
+  }
+};
+
+export const editWaterData = async (entries) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}`, entries);
+    return response.data;
+  } catch (e) {
+    throw new Error(e.response?.status || "Post water error");
+  }
+};
