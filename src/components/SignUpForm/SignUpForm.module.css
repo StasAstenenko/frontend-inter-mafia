@@ -1,1 +1,148 @@
-/*style*/
+/* .title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #323f47;
+} */
+.form {
+  max-width: 311px;
+  margin: 0 auto;
+}
+.fieldWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.fieldWrap:last-of-type {
+  margin-bottom: 32px;
+}
+.label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+.input {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding: 16px;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  background-color: transparent;
+}
+.input:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+
+.inputError {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+.errorMsg {
+  position: absolute;
+  top: 76px;
+  left: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+}
+
+.btn {
+  border-radius: 30px;
+  border: none;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  background-color: #9be1a0;
+  transition: background-color 250ms linear;
+  cursor: pointer;
+  width: 100%;
+  max-width: 311px;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #87d28d;
+}
+
+.toggleViewBtn {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  /* .title {
+    font-size: 36px;
+    line-height: 1.05556;
+    
+    } */
+  .form {
+    max-width: 436px;
+  }
+
+  .fieldWrap {
+    /* position: relative; */
+    margin-bottom: 20px;
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .input {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .input::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .errorMsg {
+    font-size: 16px;
+    line-height: 1.5;
+    top: 88px;
+  }
+
+  .btn {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 436px;
+    padding: 18px;
+  }
+  .toggleViewBtn {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .icon {
+    fill: none;
+    stroke: #2f2f2f;
+  }
+}

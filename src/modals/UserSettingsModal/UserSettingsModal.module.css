@@ -1,1 +1,79 @@
-/*style*/
+.settingModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.settingModal {
+  border-radius: 15px;
+  padding: 40px 20px;
+  /* max-height: 1302px; */
+  width: 343px;
+  margin-top: 80px;
+  background-color: #fff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 40px;
+    width: 648px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 920px;
+  }
+}
+
+.settingModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  @media (max-width: 767px) {
+    position: relative;
+  }
+}
+
+.settingModalIcon {
+  stroke: #2f2f2f;
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.settingModalButton {
+  border: none;
+  background-color: transparent;
+  @media (max-width: 767px) {
+    position: absolute;
+    top: -20px;
+    right: 0;
+  }
+}
+
+.settingModalContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.settingModalTitle {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  @media (min-width: 768px) {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+}

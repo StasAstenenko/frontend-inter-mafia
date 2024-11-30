@@ -1,1 +1,9 @@
 /*style*/
+.daily-info-container {
+  /* border: 1px solid red; */
+}
+.date-and-button-container {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}

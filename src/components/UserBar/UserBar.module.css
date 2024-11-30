@@ -1,1 +1,55 @@
-/*style*/
+.container {
+  position: relative;
+}
+
+.userbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 30px;
+  height: 50px;
+  background-color: #323f47;
+}
+
+.name {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  /* line-height: 150%;
+  letter-spacing: -0.01em; */
+  text-align: center;
+  color: white;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}
+
+.icon {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .userbar {
+    gap: 10px;
+    height: 56px;
+  }
+}

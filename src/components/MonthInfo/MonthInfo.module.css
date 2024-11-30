@@ -1,1 +1,61 @@
-/*style*/
+.sectionCalendar {
+  max-width: 303px;
+  margin: 0 auto;
+}
+
+.box {
+  min-height: 300px;
+}
+
+.MonthInfo {
+  margin-bottom: 24px;
+}
+
+.toRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  /* line-height: 1.2; */
+  letter-spacing: -0.01em;
+}
+
+.toggleViewBtn {
+  margin-left: 6px;
+  border: transparent;
+  background-color: transparent;
+}
+.toggleViewBtnImg {
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .sectionCalendar {
+    max-width: 640px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .toggleViewBtn {
+    margin-left: 10px;
+  }
+
+  .toggleViewBtnImg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* @media only screen and (min-width: 1440px) {
+  .title {
+  }
+} */

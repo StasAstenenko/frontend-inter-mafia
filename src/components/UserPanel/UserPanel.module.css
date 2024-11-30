@@ -1,1 +1,39 @@
-/*style*/
+.userpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* justify-content: space-between; */
+}
+
+.greeting {
+  font-family: "Gilroy", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  /* line-height: 106%;
+  letter-spacing: -0.01em; */
+}
+
+.name {
+  font-family: "Gilroy", sans-serif;
+  font-size: 32px;
+  /* line-height: 106%;
+  letter-spacing: -0.01em; */
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .userpanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .greeting {
+    font-size: 36px;
+  }
+
+  .name {
+    font-size: 36px;
+  }
+}
