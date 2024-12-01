@@ -4,8 +4,7 @@ import css from "./SignInForm.module.css";
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAuthError } from "../../redux/auth/selectors";
+import { useDispatch } from "react-redux";
 import { apiLogin } from "../../redux/auth/operations";
 
 const LoginValidationSchema = Yup.object({
@@ -18,7 +17,6 @@ const LoginValidationSchema = Yup.object({
 
 const SignInForm = () => {
   const dispatch = useDispatch();
-  const error = useSelector(selectAuthError);
   const isTabletAndDesktop = useMediaQuery({ minWidth: 768 });
   const [openEye, setOpenEye] = useState(false);
 
@@ -31,8 +29,9 @@ const SignInForm = () => {
     setOpenEye(!openEye);
   }
 
-  function handleSubmit(values) {
+  function handleSubmit(values, actions) {
     dispatch(apiLogin(values));
+    actions.resetForm();
   }
 
   return (

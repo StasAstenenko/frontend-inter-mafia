@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./Calendar.module.css";
 import {
   selectChosenMonth,
@@ -11,14 +11,14 @@ import CalendarItem from "../CalendarItem/CalendarItem";
 import { fetchWaterData } from "../../redux/water/operations";
 
 const Calendar = () => {
+  const dispatch = useDispatch();
   const dateToShow = useSelector(selectChosenMonth);
   console.log(dateToShow);
   const daysDrinking = useSelector(selectDaysDrinking);
   console.log(daysDrinking);
 
   useEffect(() => {
-    console.log("fetching days drinking");
-    fetchWaterData(dateToShow);
+    dispatch(fetchWaterData({ type: "month", date: dateToShow }));
   }, [dateToShow]);
 
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
@@ -38,12 +38,12 @@ const Calendar = () => {
       percent: "--",
     }));
 
-    console.dir(daysDrinking);
-    // daysDrinking.forEach((dayData) => {
-    //   if (dayData.number >= 1 && dayData.number <= totalDaysInMonth) {
-    //     daysArray[dayData.number - 1].percent = dayData.percent;
-    //   }
-    // });
+    console.dir(daysDrinking.data);
+    daysDrinking.date?.forEach((dayData) => {
+      if (dayData.number >= 1 && dayData.number <= totalDaysInMonth) {
+        daysArray[dayData.number - 1].percent = dayData.percent;
+      }
+    });
 
     if (daysNotAsInWeek) return daysArray;
 
@@ -71,8 +71,8 @@ const Calendar = () => {
           {calendarDays.map(({ day, percent }, index) => (
             <CalendarItem
               key={`${index}${percent}`}
-              day={day}
               month={dateToShow}
+              day={day}
               percent={percent}
               isActive={isActiveDay(day)}
             />

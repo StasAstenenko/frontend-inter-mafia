@@ -21,9 +21,16 @@
 }
 
 .emailContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+}
+
+.errorMail {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
 }
 
 .inputForm {
@@ -83,6 +90,7 @@
 
 .submitBtn:hover,
 .submitBtn:focus {
+  outline: none;
   cursor: pointer;
   color: #323f47;
   background-color: #87d28d;
@@ -123,6 +131,12 @@
   .emailContainer {
     max-width: 436px;
     margin-bottom: 20px;
+  }
+
+  .errorMail {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
   }
 
   .passwordContainer {
