@@ -29,9 +29,8 @@ const SignInForm = () => {
     setOpenEye(!openEye);
   }
 
-  function handleSubmit(values, actions) {
+  function handleSubmit(values) {
     dispatch(apiLogin(values));
-    actions.resetForm();
   }
 
   return (
