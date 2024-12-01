@@ -5,6 +5,15 @@ import { useEffect } from "react";
 
 const UserSettingsModal = ({ onClose }) => {
   useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         onClose();
@@ -34,9 +43,10 @@ const UserSettingsModal = ({ onClose }) => {
             </svg>
           </button>
         </div>
-
-        <div className={css.settingModalContent}>
-          <UsersSettingsForm onClose={onClose} />
+        <div className={css.settingModalScrollable}>
+          <div className={css.settingModalContent}>
+            <UsersSettingsForm onClose={onClose} />
+          </div>
         </div>
       </div>
     </div>,
