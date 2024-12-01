@@ -4,7 +4,10 @@ import avatar1 from "./../../img/advantages/Avatar1.png";
 import avatar2 from "./../../img/advantages/Avatar2.png";
 import avatar3 from "./../../img/advantages/Avatar3.png";
 
+import { useLanguage } from "../../locales/LangContext";
+
 const AdvantagesSection = () => {
+  const { t } = useLanguage();
   return (
     <div className={css.bgimage}>
       <div className={css.advantages_section}>
@@ -24,10 +27,7 @@ const AdvantagesSection = () => {
           </div>
 
           <div>
-            <p className={css.customers_text}>
-              Our <span className={css.span}>happy </span>
-              customers
-            </p>
+            <p className={css.customers_text}>{t("OurHappyCustomers")}</p>
           </div>
         </div>
 
@@ -36,14 +36,14 @@ const AdvantagesSection = () => {
             <li className={css.benefits_item}>
               <div className={css.flex}>
                 <div className={css.ellipse13}></div>
-                <p className={css.text}>Habit drive</p>
+                <p className={css.text}>{t("HabitDrive")}</p>
               </div>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>View statistics</p>
+              <p className={css.text}>{t("ViewStatistics")}</p>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>Personal rate setting</p>
+              <p className={css.text}>{t("PersonalSettings")}</p>
             </li>
           </ul>
         </div>

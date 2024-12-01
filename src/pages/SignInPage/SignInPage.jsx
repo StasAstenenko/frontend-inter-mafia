@@ -10,8 +10,10 @@ import { selectAuthError } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const SignInPage = () => {
+  const { t } = useLanguage();
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   const error = useSelector(selectAuthError);
 
@@ -24,9 +26,9 @@ const SignInPage = () => {
         </div>
         <div className={css.descContainer}>
           <p className={css.desc}>
-            Don&#039;t have an account?{" "}
+            {t("DontHaveAcc")}{" "}
             <NavLink to="/signup" className={css.signup}>
-              Sign Up
+              {t("SignUp")}
             </NavLink>{" "}
           </p>
         </div>

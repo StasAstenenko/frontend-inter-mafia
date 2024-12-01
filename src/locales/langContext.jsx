@@ -3,11 +3,10 @@ import { useTranslation } from "react-i18next";
 
 const LanguageContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const LanguageProvider = ({ children }) => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(
-    localStorage.getItem("language") || "en"
+    localStorage.getItem("language") || "ua"
   );
 
   useEffect(() => {

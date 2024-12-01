@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { apiLogin } from "../../redux/auth/operations";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const LoginValidationSchema = Yup.object({
   email: Yup.string().email("Incorrect email").required("Email is required"),
@@ -16,6 +17,7 @@ const LoginValidationSchema = Yup.object({
 });
 
 const SignInForm = () => {
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const isTabletAndDesktop = useMediaQuery({ minWidth: 768 });
   const [openEye, setOpenEye] = useState(false);
@@ -35,7 +37,7 @@ const SignInForm = () => {
 
   return (
     <div className={css.container}>
-      <h3 className={css.signInTitle}>Sign In</h3>
+      <h3 className={css.signInTitle}>{t("SignIn")}</h3>
       <Formik
         initialValues={initialValue}
         onSubmit={handleSubmit}
@@ -45,13 +47,13 @@ const SignInForm = () => {
           <Form className={css.form}>
             <div className={css.emailContainer}>
               <label htmlFor="email" className={css.label}>
-                Email
+                {t("Email")}
               </label>
               <Field
                 type="text"
                 name="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder={t("EmailPlaceholder")}
                 className={clsx(css.inputForm, {
                   [css.inputFormError]: touched.email && errors.email,
                 })}
@@ -65,13 +67,13 @@ const SignInForm = () => {
 
             <div className={css.passwordContainer}>
               <label htmlFor="password" className={css.label}>
-                Password
+                {t("Password")}
               </label>
               <Field
                 type={!openEye ? "password" : "text"}
                 name="password"
                 id="password"
-                placeholder="Enter your password"
+                placeholder={t("PasswordPlaceholder")}
                 className={clsx(css.inputForm, {
                   [css.inputFormError]: touched.password && errors.password,
                 })}
@@ -100,7 +102,7 @@ const SignInForm = () => {
               />
             </div>
             <button type="submit" className={css.submitBtn}>
-              Sign In
+              {t("SignIn")}
             </button>
           </Form>
         )}

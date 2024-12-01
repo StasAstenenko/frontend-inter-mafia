@@ -5,8 +5,10 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { apiRegister } from "../../redux/auth/operations";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const SignUpForm = () => {
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
@@ -59,12 +61,12 @@ const SignUpForm = () => {
           <Form className={css.form}>
             <div className={css.fieldWrap}>
               <label htmlFor="emailSignUp" className={css.label}>
-                Email
+                {t("Email")}
               </label>
               <Field
                 id="emailSignUp"
                 name="emailSignUp"
-                placeholder="Enter your email"
+                placeholder={t("EmailPlaceholder")}
                 type="email"
                 className={clsx(css.input, {
                   [css.inputError]: errors.emailSignUp && touched.emailSignUp,
@@ -79,12 +81,12 @@ const SignUpForm = () => {
             </div>
             <div className={css.fieldWrap}>
               <label htmlFor="passwordSignUp" className={css.label}>
-                Password
+                {t("Password")}
               </label>
               <Field
                 id="passwordSignUp"
                 name="passwordSignUp"
-                placeholder="Enter your password"
+                placeholder={t("PasswordPlaceholder")}
                 type={passwordVisibility.password ? "text" : "password"}
                 className={clsx(css.input, {
                   [css.inputError]:
@@ -116,12 +118,12 @@ const SignUpForm = () => {
 
             <div className={css.fieldWrap}>
               <label htmlFor="repeatPassword" className={css.label}>
-                Repeat password
+                {t("RepPassword")}
               </label>
               <Field
                 id="repeatPassword"
                 name="repeatPassword"
-                placeholder="Repeat password"
+                placeholder={t("RepPassword")}
                 type={passwordVisibility.repeatPassword ? "text" : "password"}
                 className={clsx(css.input, {
                   [css.inputError]:
@@ -150,9 +152,8 @@ const SignUpForm = () => {
                 )}
               </button>
             </div>
-
             <button type="submit" className={css.btn}>
-              Sign Up
+              {t("SignUp")}
             </button>
           </Form>
         )}
