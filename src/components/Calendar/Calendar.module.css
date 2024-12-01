@@ -4,9 +4,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 20px 18px;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  align-items: start;
   justify-items: center;
 }
 

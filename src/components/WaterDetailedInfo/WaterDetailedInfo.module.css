@@ -1,9 +1,12 @@
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-@media only screen and (max-width: 374px) {
+@media only screen and (max-width: 329px) {
   .container {
     padding-right: 10px;
     padding-left: 10px;

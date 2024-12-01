@@ -8,7 +8,7 @@ export const fetchWaterData = createAsyncThunk(
   async ({ type, date }, thunkAPI) => {
     try {
       const endpoint = type === "month" ? "/month" : "/day";
-      // console.log(endpoint);
+      console.log(endpoint);
 
       const response = await axios.get(endpoint, {
         params: { date },
