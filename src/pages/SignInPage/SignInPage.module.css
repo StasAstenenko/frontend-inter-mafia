@@ -1,11 +1,4 @@
 /*style*/
-.signInSection {
-  padding: 16px;
-  margin: 0 auto;
-  max-width: 343px;
-  background-color: #ffffff;
-}
-
 .title {
   font-size: 18px;
   line-height: 111%;
@@ -14,13 +7,9 @@
   margin-bottom: 172px;
 }
 
-.container {
+.signin {
   padding-top: 24px;
-  padding-right: 16px;
-  padding-left: 16px;
   padding-bottom: 216px;
-  border-radius: 30px;
-  background-color: #f0eff4;
 }
 
 .descContainer {
@@ -46,11 +35,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .signInSection {
-    padding: 32px;
-    max-width: 704px;
-  }
-
   .signInContainer {
     display: flex;
     flex-direction: column;
@@ -58,10 +42,8 @@
     align-items: center;
   }
 
-  .container {
+  .signin {
     padding-top: 32px;
-    padding-right: 32px;
-    padding-left: 32px;
     padding-bottom: 281px;
   }
 
@@ -78,14 +60,7 @@
 }
 
 @media only screen and (min-width: 1440px) {
-  .signInSection {
-    display: flex;
-    gap: 32px;
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-
-  .container {
+  .signin {
     min-width: 672px;
     padding-bottom: 169px;
   }
