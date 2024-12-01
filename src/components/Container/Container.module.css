@@ -1,0 +1,14 @@
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+
+  border-radius: 30px;
+  background-color: #f0eff4;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

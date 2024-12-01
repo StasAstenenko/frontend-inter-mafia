@@ -1,0 +1,22 @@
+.section {
+  padding: 16px;
+  margin: 0 auto;
+  max-width: 375px;
+  background-color: #ffffff;
+}
+
+@media only screen and (min-width: 768px) {
+  .section {
+    padding: 32px;
+    max-width: 768px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .section {
+    display: flex;
+    gap: 32px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}

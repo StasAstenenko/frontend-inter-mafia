@@ -1,38 +1,13 @@
 import css from "./AdvantagesSection.module.css";
-import girlM from "./../../img/advantages/girlM.webp";
-import girlM2x from "./../../img/advantages/girlM@2x.webp";
-import girlD2x from "./../../img/advantages/girlD@2x.webp";
-import girlD from "./../../img/advantages/girlD.webp";
-import girlT2x from "./../../img/advantages/girlT@2x.webp";
-import girlT from "./../../img/advantages/girlT.webp";
+
 import avatar1 from "./../../img/advantages/Avatar1.png";
 import avatar2 from "./../../img/advantages/Avatar2.png";
 import avatar3 from "./../../img/advantages/Avatar3.png";
 
-const AdvantagesSection = ({ className = "" }) => {
+const AdvantagesSection = () => {
   return (
-    <div className={`${css.advantagesSection} ${className}`}>
+    <div className={css.bgimage}>
       <div className={css.advantages_section}>
-        <picture>
-          <source
-            media="(min-width: 1440px)"
-            srcSet={`${girlD} 1x, ${girlD2x} 2x`}
-          />
-          <source
-            media="(min-width: 768px) and (max-width: 1439px)"
-            srcSet={`${girlT} 1x, ${girlT2x} 2x`}
-          />
-          <source
-            media="(max-width: 767px)"
-            srcSet={`${girlM} 1x, ${girlM2x} 2x`}
-          />
-          <img
-            className={css.girl}
-            src={girlM}
-            alt="Girl drink water"
-            loading="lazy"
-          />
-        </picture>
         <div className={css.customers}>
           <div>
             <ul className={css.customers_list}>

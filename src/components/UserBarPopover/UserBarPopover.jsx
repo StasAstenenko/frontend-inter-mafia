@@ -33,5 +33,5 @@ const UserBarPopover = forwardRef(
     );
   }
 );
-
+UserBarPopover.displayName = "UserBarPopover"
 export default UserBarPopover;
