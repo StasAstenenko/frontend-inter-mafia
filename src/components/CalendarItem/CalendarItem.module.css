@@ -38,6 +38,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+.drinkALot .dayNumber {
+  background-color: #fff;
+}
+
 .item:hover .dayNumber {
   background-color: #9be1a0;
 }

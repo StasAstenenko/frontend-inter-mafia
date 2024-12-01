@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import css from "./CalendarItem.module.css";
 import { fetchWaterData } from "../../redux/water/operations";
 import { setChosenDate } from "../../redux/water/slice";
@@ -16,15 +16,17 @@ const CalendarItem = ({ month, day, percent, isActive }) => {
     <button
       type="button"
       className={`${css.item} ${isActive ? css.active : ""} ${
-        percent === null ? css.empty : ""
-      }`}
+        !percent ? css.empty : ""
+      }${percent >= 100 ? css.drinkALot : ""}`}
       disabled={!day}
       onClick={handleClick}
     >
       {day && (
         <>
           <span className={css.dayNumber}>{day}</span>
-          {percent !== null && <span className={css.percent}>{percent}%</span>}
+          {percent != null && (
+            <span className={css.percent}>{percent ? `${percent}%` : ""}</span>
+          )}
         </>
       )}
     </button>
