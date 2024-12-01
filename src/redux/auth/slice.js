@@ -36,7 +36,7 @@ const authSlice = createSlice({
         // console.error("apiRegister rejected :", action);
         state.error = action.payload;
         state.isRegisteredSuccess = false;
-        state.isLoading.false;
+        state.isLoading = false;
       })
 
       .addCase(apiLogin.pending, (state) => {

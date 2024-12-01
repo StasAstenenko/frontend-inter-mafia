@@ -27,6 +27,7 @@ const SignUpPage = () => {
   return (
     <Section>
       <Container className={css.signUpWrapper}>
+        {isLoading && <p>LOADING .........</p>}
         <Logo className={css.logo} />
         <h1 className={css.title}>Sign Up</h1>
         <SignUpForm />
