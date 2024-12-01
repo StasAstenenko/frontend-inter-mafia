@@ -33,7 +33,7 @@
 
 @media only screen and (max-width: 374px) {
   .chosenMonth {
-    width: 110px;
+    min-width: 110px;
   }
 }
 
