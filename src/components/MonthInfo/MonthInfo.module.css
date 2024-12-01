@@ -1,13 +1,9 @@
 .sectionCalendar {
-  max-width: 303px;
   margin: 0 auto;
 }
 
-.box {
-  min-height: 300px;
-}
-
 .MonthInfo {
+  width: 100%;
   margin-bottom: 24px;
 }
 
@@ -37,7 +33,7 @@
 
 @media only screen and (min-width: 768px) {
   .sectionCalendar {
-    max-width: 640px;
+    width: 100%;
   }
 
   .title {
@@ -55,7 +51,8 @@
   }
 }
 
-/* @media only screen and (min-width: 1440px) {
-  .title {
+@media only screen and (max-width: 375px) {
+  .sectionCalendar {
+    max-width: 303px;
   }
-} */
+}
