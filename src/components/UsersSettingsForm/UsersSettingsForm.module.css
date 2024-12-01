@@ -1,3 +1,6 @@
+.settingAllForms {
+  margin-bottom: 40px;
+}
 .settingFormAvatar {
   display: flex;
   flex-direction: column;
@@ -33,6 +36,7 @@
 .settingAvatarIcon {
   stroke: #2f2f2f;
   fill: none;
+  stroke-width: 4px;
 }
 
 .avatarButtonText {
@@ -127,10 +131,10 @@
   justify-content: start;
 }
 
-.settingNameFormInput {
+.settingFormInput {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
-  padding: 14px 0 14px 16px;
+  padding: 14px 14px 14px 16px;
   width: 303px;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -140,7 +144,7 @@
   color: #2f2f2f;
 }
 
-.settingNameFormInput:focus {
+.settingFormInput:focus {
   outline: none;
   border-color: rgba(47, 47, 47, 0.4);
 }
@@ -209,4 +213,77 @@
 .settingDailyRemarkSpan {
   margin-right: 4px;
   color: #9be1a0;
+}
+
+.settingWeightTimeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: start;
+  justify-content: start;
+}
+
+.settingWeightContext {
+  margin-bottom: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.settingCalculateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: start;
+  justify-content: start;
+}
+
+.settingCalculateText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin-bottom: 5px;
+}
+
+.settingCalculateTextSpan {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #9be1a0;
+}
+
+.settingLabelText {
+  margin-bottom: 8px;
+  display: block;
+  text-align: start;
+}
+
+.settingFormButton {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  max-width: 116px;
+  background-color: #9be1a0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}
+
+.settingFormButton:hover {
+  background-color: #87d28d;
+}
+
+.settingFormButton:focus {
+  background-color: #e6e6e6;
 }

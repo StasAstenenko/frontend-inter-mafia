@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed(),
@@ -124,10 +125,10 @@ const UsersSettingsForm = () => {
               <span className={css.settingRadioCustom}></span>
               <span className={css.settingRadioText}>Man</span>
             </label>
-            {errors.gender && (
-              <p className={css.settingError}>{errors.gender.message}</p>
-            )}
           </div>
+          {errors.gender && (
+            <p className={css.settingError}>{errors.gender.message}</p>
+          )}
         </div>
         <div className={css.settingNameForm}>
           <div className={css.settingNameFormLabels}>
@@ -135,7 +136,7 @@ const UsersSettingsForm = () => {
             <input
               type="text"
               {...register("name")}
-              className={css.settingNameFormInput}
+              className={css.settingFormInput}
             />
             {errors.name && (
               <p className={css.settingError}>{errors.name.message}</p>
@@ -147,7 +148,7 @@ const UsersSettingsForm = () => {
             <input
               type="email"
               {...register("email")}
-              className={css.settingNameFormInput}
+              className={css.settingFormInput}
             />
             {errors.email && (
               <p className={css.settingError}>{errors.email.message}</p>
@@ -182,38 +183,52 @@ const UsersSettingsForm = () => {
         </div>
         <div className={css.settingWeightTimeForm}>
           <div>
-            <label>Your weight in kilograms:</label>
-            <input type="number" {...register("weight")} />
-            {errors.weight && (
-              <p className={css.settingError}>{errors.weight.message}</p>
-            )}
+            <label className={css.settingWeightContext}>
+              Your weight in kilograms:
+            </label>
+            <input
+              type="number"
+              {...register("weight")}
+              className={css.settingFormInput}
+            />
           </div>
           <div>
-            <label>The time of active participation in sports:</label>
-            <input type="number" {...register("activeTime")} />
-            {errors.activeTime && (
-              <p className={css.settingError}>{errors.activeTime.message}</p>
-            )}
+            <label className={css.settingWeightContext}>
+              The time of active participation in sports:
+            </label>
+            <input
+              type="number"
+              {...register("activeTime")}
+              className={css.settingFormInput}
+            />
           </div>
         </div>
         <div className={css.settingCalculateForm}>
           <div>
-            <p>The required amount of water in liters per day:</p>
-            <span>{calculateWaterNorm}</span>
+            <p className={css.settingCalculateText}>
+              The required amount of water in liters per day:
+            </p>
+            <p className={css.settingCalculateTextSpan}>
+              2 {calculateWaterNorm}
+            </p>
           </div>
           <div>
-            <label className={css.settingLabel}>
+            <label className={clsx(css.settingLabel, css.settingLabelText)}>
               Write down how much water you will drink:
             </label>
-            <input type="number" {...register("waterNorm")} disabled />
-            {errors.waterNorm && (
-              <p className={css.settingError}>{errors.waterNorm.message}</p>
-            )}
+
+            <input
+              type="number"
+              {...register("waterNorm")}
+              className={css.settingFormInput}
+            />
           </div>
         </div>
       </div>
 
-      <button type="submit">Save</button>
+      <button type="submit" className={css.settingFormButton}>
+        Save
+      </button>
     </form>
   );
 };
