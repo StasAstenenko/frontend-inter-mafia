@@ -100,32 +100,48 @@ const UsersSettingsForm = () => {
       </div>
       <div className={css.settingAllForms}>
         <div className={css.settingGenderForm}>
-          <label>Your gender identity</label>
-          <label>
-            <input type="radio" value="woman" {...register("gender")} />
-            Woman
-          </label>
-          <label>
-            <input type="radio" value="man" {...register("gender")} />
-            Man
-          </label>
-          {errors.gender && <p>{errors.gender.message}</p>}
+          <div>
+            <label className={css.settingLabel}>Your gender identity</label>
+          </div>
+          <div className={css.settingRadioButton}>
+            <label className={css.settingRadioLabel}>
+              <input
+                type="radio"
+                value="woman"
+                {...register("gender")}
+                className={css.settingRadioInput}
+              />
+              <span className={css.settingRadioCustom}></span>
+              <span className={css.settingRadioText}>Woman</span>
+            </label>
+            <label className={css.settingRadioLabel}>
+              <input
+                type="radio"
+                value="man"
+                {...register("gender")}
+                className={css.settingRadioInput}
+              />
+              <span className={css.settingRadioCustom}></span>
+              <span className={css.settingRadioText}>Man</span>
+            </label>
+            {errors.gender && <p>{errors.gender.message}</p>}
+          </div>
         </div>
         <div className={css.settingNameForm}>
           <div>
-            <label>Your name</label>
+            <label className={css.settingLabel}>Your name</label>
             <input type="text" {...register("name")} />
             {errors.name && <p>{errors.name.message}</p>}
           </div>
 
           <div>
-            <label>Email</label>
+            <label className={css.settingLabel}>Email</label>
             <input type="email" {...register("email")} />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
         </div>
         <div className={css.settingDailyForm}>
-          <label>My daily norma</label>
+          <label className={css.settingLabel}>My daily norma</label>
           <div>
             <p>
               For woman: <span>V=(M*0.03) + (T*0.4)</span>
@@ -166,7 +182,9 @@ const UsersSettingsForm = () => {
             <span>{calculateWaterNorm}</span>
           </div>
           <div>
-            <label>Write down how much water you will drink:</label>
+            <label className={css.settingLabel}>
+              Write down how much water you will drink:
+            </label>
             <input type="number" {...register("waterNorm")} disabled />
             {errors.waterNorm && <p>{errors.waterNorm.message}</p>}
           </div>
