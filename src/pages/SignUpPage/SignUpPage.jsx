@@ -4,12 +4,14 @@ import { NavLink } from "react-router-dom";
 import css from "./SignUpPage.module.css";
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import { useMediaQuery } from "react-responsive";
+import Section from "../../components/Section/Section";
+import Container from "../../components/Container/Container";
 
 const SignUpPage = () => {
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   return (
-    <section className={css.section}>
-      <div className={css.formWrapper}>
+    <Section>
+      <Container className={css.signUpWrapper}>
         <Logo className={css.logo} />
         <h1 className={css.title}>Sign Up</h1>
         <SignUpForm />
@@ -19,9 +21,9 @@ const SignUpPage = () => {
             Sign In
           </NavLink>
         </p>
-      </div>
+      </Container>
       {isDesktop && <AdvantagesSection className={css.advantagesSection} />}
-    </section>
+    </Section>
   );
 };
 
