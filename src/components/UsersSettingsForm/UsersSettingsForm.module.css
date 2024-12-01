@@ -7,6 +7,14 @@
   margin-bottom: 40px;
 }
 
+.settingError {
+  font-weight: 400;
+  font-size: 14px;
+  border-color: #ef5050;
+  color: #ef5050;
+  margin-top: 5px;
+}
+
 .settingAvatarImg {
   width: 75px;
   height: 75px;
@@ -103,4 +111,102 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+}
+
+.settingNameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settingNameFormLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: start;
+  justify-content: start;
+}
+
+.settingNameFormInput {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 0 14px 16px;
+  width: 303px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.settingNameFormInput:focus {
+  outline: none;
+  border-color: rgba(47, 47, 47, 0.4);
+}
+
+.settingDailyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: start;
+  align-items: start;
+}
+
+.settingDailyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settingDailyContext {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.settingDailyFormula {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #9be1a0;
+}
+
+.settingDailyDescription {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+  width: 303px;
+}
+
+.settingDailyDescrText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.settingDailyDescriptionSpan {
+  color: #9be1a0;
+}
+
+.settingDailyRemark {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.settingDailyRemarkSpan {
+  margin-right: 4px;
+  color: #9be1a0;
 }

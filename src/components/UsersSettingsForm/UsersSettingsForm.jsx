@@ -124,56 +124,76 @@ const UsersSettingsForm = () => {
               <span className={css.settingRadioCustom}></span>
               <span className={css.settingRadioText}>Man</span>
             </label>
-            {errors.gender && <p>{errors.gender.message}</p>}
+            {errors.gender && (
+              <p className={css.settingError}>{errors.gender.message}</p>
+            )}
           </div>
         </div>
         <div className={css.settingNameForm}>
-          <div>
+          <div className={css.settingNameFormLabels}>
             <label className={css.settingLabel}>Your name</label>
-            <input type="text" {...register("name")} />
-            {errors.name && <p>{errors.name.message}</p>}
+            <input
+              type="text"
+              {...register("name")}
+              className={css.settingNameFormInput}
+            />
+            {errors.name && (
+              <p className={css.settingError}>{errors.name.message}</p>
+            )}
           </div>
 
-          <div>
+          <div className={css.settingNameFormLabels}>
             <label className={css.settingLabel}>Email</label>
-            <input type="email" {...register("email")} />
-            {errors.email && <p>{errors.email.message}</p>}
+            <input
+              type="email"
+              {...register("email")}
+              className={css.settingNameFormInput}
+            />
+            {errors.email && (
+              <p className={css.settingError}>{errors.email.message}</p>
+            )}
           </div>
         </div>
         <div className={css.settingDailyForm}>
           <label className={css.settingLabel}>My daily norma</label>
-          <div>
-            <p>
-              For woman: <span>V=(M*0.03) + (T*0.4)</span>
+          <div className={css.settingDailyCard}>
+            <p className={css.settingDailyContext}>For woman:</p>
+            <p className={css.settingDailyFormula}>V=(M*0.03) + (T*0.4)</p>
+          </div>
+          <div className={css.settingDailyCard}>
+            <p className={css.settingDailyContext}>For man:</p>
+            <p className={css.settingDailyFormula}>V=(M*0.04) + (T*0.6)</p>
+          </div>
+          <div className={css.settingDailyDescription}>
+            <p className={css.settingDailyDescrText}>
+              <span className={css.settingDailyDescriptionSpan}>*</span> V is
+              the volume of the water norm in liters per day, M is your body
+              weight, T is the time of active sports, or another type of
+              activity commensurate in terms of loads (in the absence of these,
+              you must set 0)
             </p>
           </div>
           <div>
-            <p>
-              For man: <span>V=(M*0.04) + (T*0.6)</span>
+            <p className={css.settingDailyRemark}>
+              <span className={css.settingDailyRemarkSpan}>!</span> Active time
+              in honours
             </p>
-          </div>
-          <div>
-            <p>
-              <span>*</span> * V is the volume of the water norm in liters per
-              day, M is your body weight, T is the time of active sports, or
-              another type of activity commensurate in terms of loads (in the
-              absence of these, you must set 0)
-            </p>
-          </div>
-          <div>
-            <span>!</span> Active time in honours
           </div>
         </div>
         <div className={css.settingWeightTimeForm}>
           <div>
             <label>Your weight in kilograms:</label>
             <input type="number" {...register("weight")} />
-            {errors.weight && <p>{errors.weight.message}</p>}
+            {errors.weight && (
+              <p className={css.settingError}>{errors.weight.message}</p>
+            )}
           </div>
           <div>
             <label>The time of active participation in sports:</label>
             <input type="number" {...register("activeTime")} />
-            {errors.activeTime && <p>{errors.activeTime.message}</p>}
+            {errors.activeTime && (
+              <p className={css.settingError}>{errors.activeTime.message}</p>
+            )}
           </div>
         </div>
         <div className={css.settingCalculateForm}>
@@ -186,7 +206,9 @@ const UsersSettingsForm = () => {
               Write down how much water you will drink:
             </label>
             <input type="number" {...register("waterNorm")} disabled />
-            {errors.waterNorm && <p>{errors.waterNorm.message}</p>}
+            {errors.waterNorm && (
+              <p className={css.settingError}>{errors.waterNorm.message}</p>
+            )}
           </div>
         </div>
       </div>
