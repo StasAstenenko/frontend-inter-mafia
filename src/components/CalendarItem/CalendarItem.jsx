@@ -15,9 +15,9 @@ const CalendarItem = ({ month, day, percent, isActive }) => {
   return (
     <button
       type="button"
-      className={`${css.item} ${isActive ? css.active : ""} ${
-        !percent ? css.empty : ""
-      }${percent >= 100 ? css.drinkALot : ""}`}
+      className={`${css.item} ${!percent ? css.empty : ""}${
+        percent >= 100 ? css.drinkALot : ""
+      } ${isActive ? css.active : ""}`}
       disabled={!day}
       onClick={handleClick}
     >

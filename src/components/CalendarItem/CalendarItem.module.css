@@ -1,4 +1,7 @@
 .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   width: 28px;
   height: 44px;
   border: none;
@@ -9,11 +12,6 @@
 .item.empty {
   background-color: transparent;
   cursor: default;
-}
-
-.item.active .dayNumber {
-  background-color: #323f47;
-  color: #9be1a0;
 }
 
 .dayNumber {
@@ -40,6 +38,11 @@
 
 .drinkALot .dayNumber {
   background-color: #fff;
+}
+
+.item.active .dayNumber {
+  background-color: #323f47;
+  color: #9be1a0;
 }
 
 .item:hover .dayNumber {
