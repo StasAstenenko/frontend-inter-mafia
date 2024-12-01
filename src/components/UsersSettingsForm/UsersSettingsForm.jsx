@@ -99,6 +99,7 @@ const UsersSettingsForm = () => {
           />
         </div>
       </div>
+
       <div className={css.settingAllForms}>
         <div className={css.settingGenderForm}>
           <div>
@@ -130,98 +131,110 @@ const UsersSettingsForm = () => {
             <p className={css.settingError}>{errors.gender.message}</p>
           )}
         </div>
-        <div className={css.settingNameForm}>
-          <div className={css.settingNameFormLabels}>
-            <label className={css.settingLabel}>Your name</label>
-            <input
-              type="text"
-              {...register("name")}
-              className={css.settingFormInput}
-            />
-            {errors.name && (
-              <p className={css.settingError}>{errors.name.message}</p>
-            )}
-          </div>
+        <div className={css.settingAllFormsDesctop}>
+          <div>
+            <div className={css.settingNameForm}>
+              <div className={css.settingNameFormLabels}>
+                <label className={css.settingLabel}>Your name</label>
+                <input
+                  type="text"
+                  {...register("name")}
+                  className={css.settingFormInput}
+                />
+                {errors.name && (
+                  <p className={css.settingError}>{errors.name.message}</p>
+                )}
+              </div>
 
-          <div className={css.settingNameFormLabels}>
-            <label className={css.settingLabel}>Email</label>
-            <input
-              type="email"
-              {...register("email")}
-              className={css.settingFormInput}
-            />
-            {errors.email && (
-              <p className={css.settingError}>{errors.email.message}</p>
-            )}
+              <div className={css.settingNameFormLabels}>
+                <label className={css.settingLabel}>Email</label>
+                <input
+                  type="email"
+                  {...register("email")}
+                  className={css.settingFormInput}
+                />
+                {errors.email && (
+                  <p className={css.settingError}>{errors.email.message}</p>
+                )}
+              </div>
+            </div>
+            <div className={css.settingDailyForm}>
+              <label className={css.settingLabel}>My daily norma</label>
+              <div className={css.settingDailyAllCard}>
+                <div className={css.settingDailyCard}>
+                  <p className={css.settingDailyContext}>For woman:</p>
+                  <p className={css.settingDailyFormula}>
+                    V=(M*0.03) + (T*0.4)
+                  </p>
+                </div>
+                <div className={css.settingDailyCard}>
+                  <p className={css.settingDailyContext}>For man:</p>
+                  <p className={css.settingDailyFormula}>
+                    V=(M*0.04) + (T*0.6)
+                  </p>
+                </div>
+              </div>
+              <div className={css.settingDailyDescription}>
+                <p className={css.settingDailyDescrText}>
+                  <span className={css.settingDailyDescriptionSpan}>*</span> V
+                  is the volume of the water norm in liters per day, M is your
+                  body weight, T is the time of active sports, or another type
+                  of activity commensurate in terms of loads (in the absence of
+                  these, you must set 0)
+                </p>
+              </div>
+              <div>
+                <p className={css.settingDailyRemark}>
+                  <span className={css.settingDailyRemarkSpan}>!</span> Active
+                  time in honours
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className={css.settingDailyForm}>
-          <label className={css.settingLabel}>My daily norma</label>
-          <div className={css.settingDailyCard}>
-            <p className={css.settingDailyContext}>For woman:</p>
-            <p className={css.settingDailyFormula}>V=(M*0.03) + (T*0.4)</p>
-          </div>
-          <div className={css.settingDailyCard}>
-            <p className={css.settingDailyContext}>For man:</p>
-            <p className={css.settingDailyFormula}>V=(M*0.04) + (T*0.6)</p>
-          </div>
-          <div className={css.settingDailyDescription}>
-            <p className={css.settingDailyDescrText}>
-              <span className={css.settingDailyDescriptionSpan}>*</span> V is
-              the volume of the water norm in liters per day, M is your body
-              weight, T is the time of active sports, or another type of
-              activity commensurate in terms of loads (in the absence of these,
-              you must set 0)
-            </p>
-          </div>
-          <div>
-            <p className={css.settingDailyRemark}>
-              <span className={css.settingDailyRemarkSpan}>!</span> Active time
-              in honours
-            </p>
-          </div>
-        </div>
-        <div className={css.settingWeightTimeForm}>
-          <div>
-            <label className={css.settingWeightContext}>
-              Your weight in kilograms:
-            </label>
-            <input
-              type="number"
-              {...register("weight")}
-              className={css.settingFormInput}
-            />
-          </div>
-          <div>
-            <label className={css.settingWeightContext}>
-              The time of active participation in sports:
-            </label>
-            <input
-              type="number"
-              {...register("activeTime")}
-              className={css.settingFormInput}
-            />
-          </div>
-        </div>
-        <div className={css.settingCalculateForm}>
-          <div>
-            <p className={css.settingCalculateText}>
-              The required amount of water in liters per day:
-            </p>
-            <p className={css.settingCalculateTextSpan}>
-              2 {calculateWaterNorm}
-            </p>
-          </div>
-          <div>
-            <label className={clsx(css.settingLabel, css.settingLabelText)}>
-              Write down how much water you will drink:
-            </label>
+          <div className={css.settingAllFormsSecond}>
+            <div className={css.settingWeightTimeForm}>
+              <div className={css.settingWeightLabel}>
+                <label className={css.settingWeightContext}>
+                  Your weight in kilograms:
+                </label>
+                <input
+                  type="number"
+                  {...register("weight")}
+                  className={css.settingFormInput}
+                />
+              </div>
+              <div className={css.settingWeightLabel}>
+                <label className={css.settingWeightContext}>
+                  The time of active participation in sports:
+                </label>
+                <input
+                  type="number"
+                  {...register("activeTime")}
+                  className={css.settingFormInput}
+                />
+              </div>
+            </div>
+            <div className={css.settingCalculateForm}>
+              <div className={css.settingCalculate}>
+                <p className={css.settingCalculateText}>
+                  The required amount of water in liters per day:
+                </p>
+                <p className={css.settingCalculateTextSpan}>
+                  2 {calculateWaterNorm}
+                </p>
+              </div>
+              <div>
+                <label className={clsx(css.settingLabel, css.settingLabelText)}>
+                  Write down how much water you will drink:
+                </label>
 
-            <input
-              type="number"
-              {...register("waterNorm")}
-              className={css.settingFormInput}
-            />
+                <input
+                  type="number"
+                  {...register("waterNorm")}
+                  className={css.settingFormInput}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

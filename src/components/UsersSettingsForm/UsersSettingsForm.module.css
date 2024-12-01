@@ -1,6 +1,17 @@
-.settingAllForms {
-  margin-bottom: 40px;
+.settingAllForms,
+.settingAllFormsSecond {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
+
+@media (min-width: 1440px) {
+  .settingAllFormsDesctop {
+    display: flex;
+    gap: 40px;
+  }
+}
+
 .settingFormAvatar {
   display: flex;
   flex-direction: column;
@@ -22,6 +33,10 @@
   width: 75px;
   height: 75px;
   border-radius: 100%;
+  @media (min-width: 768px) {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .settingModalButton {
@@ -37,6 +52,10 @@
   stroke: #2f2f2f;
   fill: none;
   stroke-width: 4px;
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .avatarButtonText {
@@ -46,12 +65,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
-}
-
-.settingAllForms {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingLabel {
@@ -62,6 +78,10 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.5;
+  }
 }
 
 .settingGenderForm {
@@ -115,6 +135,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingNameForm {
@@ -142,6 +165,14 @@
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  @media (min-width: 768px) {
+    padding: 16px;
+    width: 568px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
 }
 
 .settingFormInput:focus {
@@ -155,6 +186,18 @@
   gap: 14px;
   justify-content: start;
   align-items: start;
+  margin-bottom: 24px;
+}
+
+.settingDailyAllCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+  }
 }
 
 .settingDailyCard {
@@ -170,6 +213,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingDailyFormula {
@@ -179,6 +225,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #9be1a0;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingDailyDescription {
@@ -186,6 +235,13 @@
   border-radius: 15px;
   padding: 16px;
   width: 303px;
+  @media (min-width: 768px) {
+    width: 568px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
 }
 
 .settingDailyDescrText {
@@ -195,6 +251,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingDailyDescriptionSpan {
@@ -208,11 +267,20 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingDailyRemarkSpan {
   margin-right: 4px;
   color: #9be1a0;
+}
+
+.settingWeightLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .settingWeightTimeForm {
@@ -231,6 +299,9 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingCalculateForm {
@@ -241,6 +312,14 @@
   justify-content: start;
 }
 
+@media (min-width: 768px) {
+  .settingCalculate {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+
 .settingCalculateText {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -249,6 +328,9 @@
   letter-spacing: -0.01em;
   color: #2f2f2f;
   margin-bottom: 5px;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingCalculateTextSpan {
@@ -257,6 +339,9 @@
   font-size: 14px;
   line-height: 1.29;
   color: #9be1a0;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingLabelText {
@@ -266,6 +351,7 @@
 }
 
 .settingFormButton {
+  margin-top: 40px;
   border: none;
   border-radius: 30px;
   padding: 14px 40px;
@@ -278,6 +364,9 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
 }
 
 .settingFormButton:hover {
