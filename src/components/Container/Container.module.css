@@ -1,23 +1,11 @@
 .container {
   padding: 0 16px;
-  margin: 0 auto;
-}
-
-@media only screen and (min-width: 375px) {
-  .container {
-    max-width: 375px;
-  }
+  border-radius: 30px;
+  background-color: #f0eff4;
 }
 
 @media only screen and (min-width: 768px) {
   .container {
     padding: 0 32px;
-    max-width: 768px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
   }
 }
