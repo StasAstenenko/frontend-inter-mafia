@@ -1,10 +1,20 @@
-.advantages_section {
-  width: 100%;
-  position: relative;
+.bgimage {
+  background-image: url("./../../img/advantages/girlM.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  min-height: 353px;
 }
 
-.girl {
-  width: 100%;
+@media only screen and (min-resolution: 192dpi) {
+  .bgimage {
+    background-image: url("./../../img/advantages/girlM@2x.webp");
+  }
+}
+
+.advantages_section {
+  position: relative;
 }
 
 .customers {
@@ -111,16 +121,18 @@
 @media (max-width: 374px) {
   .customers {
     left: 8px;
-    top: 172px;
   }
 
   .benefits {
-    top: 224px;
     left: 110px;
   }
 }
 
 @media (min-width: 768px) {
+  .bgimage {
+    min-height: 446px;
+    background-image: url("./../../img/advantages/girlT.webp");
+  }
   .customers {
     padding: 10px 20px;
     gap: 104px;
@@ -162,10 +174,18 @@
   }
 }
 
-@media only screen and (min-width: 1440px) {
-  .girl {
-    height: 736px;
+@media only screen and (min-width: 768px) and (min-resolution: 192dpi) {
+  .bgimage {
+    background-image: url("./../../img/advantages/girlT@2x.webp");
   }
+}
+
+@media only screen and (min-width: 1440px) {
+  .bgimage {
+    width: 100%;
+    background-image: url("./../../img/advantages/girlD.webp");
+  }
+
   .customers {
     left: 32px;
     top: 537px;
@@ -174,5 +194,11 @@
   .benefits {
     top: 594px;
     left: 398px;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
+  .bgimage {
+    background-image: url("./../../img/advantages/girlD@2x.webp");
   }
 }
