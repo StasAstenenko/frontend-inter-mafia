@@ -36,7 +36,7 @@ export const getWaterAmount = createAsyncThunk(
 
 export const postWaterData = async (entries) => {
   try {
-    const response = await axios.post(`${BASE_URL}`, entries);
+    const response = await axios.post("/", entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");
@@ -45,7 +45,7 @@ export const postWaterData = async (entries) => {
 
 export const editWaterData = async (entries) => {
   try {
-    const response = await axios.patch(`${BASE_URL}`, entries);
+    const response = await axios.patch(`/`, entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");

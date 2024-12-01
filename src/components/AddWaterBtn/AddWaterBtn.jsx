@@ -30,7 +30,13 @@ const AddWaterBtn = ({ variant = "default" }) => {
         </svg>
         Add water
       </button>
-      {isModalOpen && <WaterModal operationType={"add"} />}
+      {isModalOpen && (
+        <WaterModal
+          operationType={"add"}
+          isOpen={isModalOpen}
+          onClose={openModal}
+        />
+      )}
     </>
   );
 };
