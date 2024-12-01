@@ -9,8 +9,8 @@
   background-color: transparent;
   font-weight: 400;
   font-size: 22px;
-  line-height: 0.8;
   font-family: "Poppins", sans-serif;
+  line-height: 0.8;
 }
 
 .chosenMonth {
@@ -29,6 +29,12 @@
 .arrow:hover,
 .chosenMonth:hover {
   color: #9be1a0;
+}
+
+@media only screen and (max-width: 374px) {
+  .chosenMonth {
+    width: 110px;
+  }
 }
 
 @media only screen and (min-width: 768px) {

@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchWaterData, getWaterAmount } from "./operations";
 
-const today = new Date().toISOString();
-
+const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
+console.log(today);
 const INITIAL_STATE = {
   daysDrinking: [], // Дані про дні пиття води за місяць
   dayDetails: [], // Деталі пиття води за конкретний день
-  chosenDate: today.slice(0, 10), // Обрана дата (YYYY-MM-DD)
+  chosenDate: today,
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   waterAmount: [], // Кількість води
   loading: false, // Стан завантаження

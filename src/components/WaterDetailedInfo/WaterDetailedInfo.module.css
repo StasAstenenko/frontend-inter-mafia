@@ -1,22 +1,19 @@
 .container {
-  background-color: #f0eff4;
-  border-radius: 20px;
-  border: 1px solid #000;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 374px) {
+  .container {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
 @media (min-width: 768px) {
   .container {
-    padding: 32px;
-    border: none;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .container {
-    width: calc((100% - 32px) / 2);
+    min-height: 738px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 }
