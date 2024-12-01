@@ -1,1 +1,22 @@
-/*style*/
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media only screen and (max-width: 329px) {
+  .container {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    min-height: 738px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}

@@ -1,1 +1,378 @@
-/*style*/
+.settingAllForms,
+.settingAllFormsSecond {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 1440px) {
+  .settingAllFormsDesctop {
+    display: flex;
+    gap: 40px;
+  }
+}
+
+.settingFormAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.settingError {
+  font-weight: 400;
+  font-size: 14px;
+  border-color: #ef5050;
+  color: #ef5050;
+  margin-top: 5px;
+}
+
+.settingAvatarImg {
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  @media (min-width: 768px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.settingModalButton {
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.settingAvatarIcon {
+  stroke: #2f2f2f;
+  fill: none;
+  stroke-width: 4px;
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.avatarButtonText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingLabel {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
+.settingGenderForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settingRadioButton {
+  display: flex;
+  gap: 20px;
+}
+
+.settingRadioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.settingRadioInput {
+  display: none;
+}
+
+.settingRadioCustom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #9be1a0;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.settingRadioInput:checked + .settingRadioCustom::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: #9be1a0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.settingRadioText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingNameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settingNameFormLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: start;
+  justify-content: start;
+}
+
+.settingFormInput {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 14px 14px 16px;
+  width: 303px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    padding: 16px;
+    width: 568px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
+}
+
+.settingFormInput:focus {
+  outline: none;
+  border-color: rgba(47, 47, 47, 0.4);
+}
+
+.settingDailyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.settingDailyAllCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+  }
+}
+
+.settingDailyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settingDailyContext {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingDailyFormula {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #9be1a0;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingDailyDescription {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+  width: 303px;
+  @media (min-width: 768px) {
+    width: 568px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
+}
+
+.settingDailyDescrText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingDailyDescriptionSpan {
+  color: #9be1a0;
+}
+
+.settingDailyRemark {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingDailyRemarkSpan {
+  margin-right: 4px;
+  color: #9be1a0;
+}
+
+.settingWeightLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settingWeightTimeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: start;
+  justify-content: start;
+}
+
+.settingWeightContext {
+  margin-bottom: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingCalculateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: start;
+  justify-content: start;
+}
+
+@media (min-width: 768px) {
+  .settingCalculate {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+
+.settingCalculateText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin-bottom: 5px;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingCalculateTextSpan {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #9be1a0;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingLabelText {
+  margin-bottom: 8px;
+  display: block;
+  text-align: start;
+}
+
+.settingFormButton {
+  margin-top: 40px;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  max-width: 116px;
+  background-color: #9be1a0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  @media (min-width: 768px) {
+    line-height: 1.5;
+  }
+}
+
+.settingFormButton:hover {
+  background-color: #87d28d;
+}
+
+.settingFormButton:focus {
+  background-color: #e6e6e6;
+}

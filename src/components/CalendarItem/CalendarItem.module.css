@@ -1,1 +1,60 @@
-/*style*/
+.item {
+  width: 28px;
+  height: 44px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.item.empty {
+  background-color: transparent;
+  cursor: default;
+}
+
+.item.active .dayNumber {
+  background-color: #323f47;
+  color: #9be1a0;
+}
+
+.dayNumber {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  background-color: rgba(50, 63, 71, 0.2);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.percent {
+  color: rgba(47, 47, 47, 0.6);
+  font-weight: 400;
+  font-size: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.item:hover .dayNumber {
+  background-color: #9be1a0;
+}
+
+@media only screen and (min-width: 768px) {
+  .item {
+    width: 38px;
+    height: 65px;
+  }
+  .dayNumber {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+
+  .percent {
+    font-size: 12px;
+  }
+}

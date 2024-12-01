@@ -1,1 +1,33 @@
-/*style*/
+/* .userbarpopover {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1000;
+  width: auto;
+}
+
+.popoverbutton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-family, Arial, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: #323f47;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.popoverbutton:hover {
+  background-color: #f5f7f9;
+}
+
+.popoverbutton:focus {
+  outline: 2px solid #0073e6;
+} */
