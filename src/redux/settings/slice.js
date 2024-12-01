@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUserInfo } from "./operations.js";
 // import { } from "./operations";
 
 const INITIAL_STATE = {
   DaysNotAsInWeek: false,
+  user: {},
 };
 
 const settingsSlice = createSlice({
@@ -12,6 +14,22 @@ const settingsSlice = createSlice({
     setDaysNotAsInWeek(state, action) {
       state.DaysNotAsInWeek = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserInfo.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUserInfo.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        // console.log("User info payload:", payload);
+        state.user = payload;
+      })
+      .addCase(getUserInfo.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      });
   },
 });
 
