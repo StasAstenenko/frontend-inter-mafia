@@ -26,11 +26,7 @@ const MonthInfo = () => {
         </div>
       </div>
 
-      {isCalendarVisible ? (
-        <Calendar />
-      ) : (
-        <div className={css.box}>"Тут буде графік"</div>
-      )}
+      {isCalendarVisible ? <Calendar /> : <div className={css.box}></div>}
     </div>
   );
 };

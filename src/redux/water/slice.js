@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchDaysDrinking, fetchDayDetails } from "./operations";
+import { fetchWaterData, getWaterAmount } from "./operations";
 
-const today = new Date().toISOString();
-
+const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
+console.log(today);
 const INITIAL_STATE = {
-  daysDrinking: [],
-  dayDetails: [],
-  chosenDate: today.slice(0, 19),
-  chosenMonth: today.slice(0, 7),
-  loading: false,
-  error: null,
+  daysDrinking: [], // Дані про дні пиття води за місяць
+  dayDetails: [], // Деталі пиття води за конкретний день
+  chosenDate: today,
+  chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
+  waterAmount: [], // Кількість води
+  loading: false, // Стан завантаження
+  error: null, // Помилки
 };
 
 const waterSlice = createSlice({
@@ -21,34 +22,40 @@ const waterSlice = createSlice({
     },
     setChosenDate(state, action) {
       state.chosenDate = action.payload;
-      // console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchDaysDrinking.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchDaysDrinking.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.daysDrinking = action.payload;
-      })
-      .addCase(fetchDaysDrinking.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(fetchDayDetails.pending, (state) => {
+      .addCase(fetchWaterData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchDayDetails.fulfilled, (state, action) => {
+      .addCase(fetchWaterData.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayDetails = action.payload;
+        state.error = null;
+
+        // Розподіл даних за місяцем або днем
+        if (action.meta.arg.type === "month") {
+          state.daysDrinking = action.payload; // Дані за місяць
+        } else if (action.meta.arg.type === "day") {
+          state.dayDetails = action.payload; // Дані за день
+        }
       })
-      .addCase(fetchDayDetails.rejected, (state, action) => {
+      .addCase(fetchWaterData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(getWaterAmount.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.waterAmount = payload;
+      })
+      .addCase(getWaterAmount.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });

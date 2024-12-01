@@ -1,17 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarItem.module.css";
-import { fetchDayDetails } from "../../redux/water/operations";
+import { fetchWaterData } from "../../redux/water/operations";
 import { setChosenDate } from "../../redux/water/slice";
-import { selectChosenMonth } from "../../redux/water/selectors";
 
-const CalendarItem = ({ day, percent, isActive }) => {
+const CalendarItem = ({ month, day, percent, isActive }) => {
   const dispatch = useDispatch();
-  const monthFromState = useSelector(selectChosenMonth);
 
   const handleClick = () => {
-    const date = monthFromState + "-" + day.toString().padStart(2, 0);
+    const date = `${month}-${day.toString().padStart(2, "0")}`;
     dispatch(setChosenDate(date));
-    dispatch(fetchDayDetails(date));
+    dispatch(fetchWaterData({ type: "day", date }));
   };
 
   return (
@@ -21,7 +19,7 @@ const CalendarItem = ({ day, percent, isActive }) => {
         percent === null ? css.empty : ""
       }`}
       disabled={!day}
-      onClick={handleClick} // Обробник події
+      onClick={handleClick}
     >
       {day && (
         <>

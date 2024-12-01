@@ -1,5 +1,7 @@
 import Logo from "../../components/Logo/Logo";
 import SignInForm from "../../components/SignInForm/SignInForm";
+import Section from "../../components/Section/Section";
+import Container from "../../components/Container/Container";
 import { NavLink } from "react-router-dom";
 import css from "./SignInPage.module.css";
 import { useMediaQuery } from "react-responsive";
@@ -9,8 +11,8 @@ const SignInPage = () => {
   const isDesktop = useMediaQuery({ minWidth: 1440 });
 
   return (
-    <section className={css.signInSection}>
-      <div className={css.container}>
+    <Section>
+      <Container className={css.signin}>
         <Logo className={css.title} />
         <div className={css.signInContainer}>
           <SignInForm />
@@ -23,9 +25,9 @@ const SignInPage = () => {
             </NavLink>{" "}
           </p>
         </div>
-      </div>
+      </Container>
       {isDesktop && <AdvantagesSection className={css.advContainer} />}
-    </section>
+    </Section>
   );
 };
 
