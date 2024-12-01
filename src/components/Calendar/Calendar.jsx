@@ -30,7 +30,7 @@ const Calendar = () => {
   }, [dateToShow, dispatch]);
 
   const isActiveDay = (day) =>
-    today_day == day && today_month + 1 == month && today_year == year;
+    today_day == day && today_month == month && today_year == year;
 
   const calendarDays = useMemo(() => {
     const totalDaysInMonth = new Date(year, month, 0).getDate();
