@@ -7,9 +7,11 @@ const INITIAL_STATE = {
     email: "",
   },
   token: null,
+  isRegisteredSuccess: false,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
+  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -21,16 +23,20 @@ const authSlice = createSlice({
       .addCase(apiRegister.pending, (state) => {
         // console.log("apiRegister pending...");
         state.error = null;
+        state.isRegisteredSuccess = false;
+        state.isLoading = true;
       })
       .addCase(apiRegister.fulfilled, (state, action) => {
         // console.log("apiRegister fulfilled:", action.payload);
         state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        state.isRegisteredSuccess = true;
+        state.isLoading = false;
       })
       .addCase(apiRegister.rejected, (state, action) => {
-        // console.error("apiRegister rejected:", action.payload);
+        // console.error("apiRegister rejected :", action);
         state.error = action.payload;
+        state.isRegisteredSuccess = false;
+        state.isLoading = false;
       })
 
       .addCase(apiLogin.pending, (state) => {
