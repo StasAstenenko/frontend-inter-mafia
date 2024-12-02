@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
-
+  // const token = useSelector(selectAuthToken);
+  // console.log(token);
   useEffect(() => {
     dispatch(getUserInfo());
   }, [dispatch]);
+
   return (
     <>
       <div className={css.container}>

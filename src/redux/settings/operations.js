@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance } from "../auth/operations.js";
-// import { selectAuthToken } from "../auth/selectors.js";
+import { selectAuthToken } from "../auth/selectors.js";
+// import { instance } from "../auth/operations.js";
 
 // export const getUserInfo = createAsyncThunk(
 //   "users/getUserInfo",
@@ -8,14 +8,7 @@ import { instance } from "../auth/operations.js";
 //     try {
 //       const token = selectAuthToken(thunkApi.getState());
 //       console.log(token);
-//       // if (!token) {
-//       //   throw new Error("No token found");
-//       // }
-//       const { data } = await instance.get("/users", {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
+//       const { data } = await instance.get("/users");
 //       // console.log("Data received from API:", data);
 //       return data;
 //     } catch (error) {
@@ -24,11 +17,30 @@ import { instance } from "../auth/operations.js";
 //   }
 // );
 
+import axios from "axios";
+// import { useSelector } from "react-redux";
+
+export const instance = axios.create({
+  baseURL: "https://back-inter-mafia.onrender.com/api/users",
+});
+
+const setAuthHeaders = (token) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const getUserInfo = createAsyncThunk(
   "users/getUserInfo",
   async (_, thunkApi) => {
     try {
-      const { data } = await instance.get("/users");
+      // const token = selectAuthToken(thunkApi.getState());
+      // console.log(token);
+      // const token = useSelector(selectAuthToken);
+      // console.log(token);
+      // if (!token) {
+      //   throw new Error("No token found");
+      // }
+      const { data } = await instance.get("/");
+      setAuthHeaders(data.token);
       console.log("Data received from API:", data);
       return data;
     } catch (error) {

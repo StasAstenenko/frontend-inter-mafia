@@ -24,7 +24,7 @@ const settingsSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, { payload }) => {
         state.loading = false;
         // console.log("User info payload:", payload);
-        state.user = payload;
+        state.user = payload.data;
       })
       .addCase(getUserInfo.rejected, (state, { payload }) => {
         state.loading = false;
