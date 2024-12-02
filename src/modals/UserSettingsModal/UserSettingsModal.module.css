@@ -58,11 +58,16 @@
 .settingModalButton {
   border: none;
   background-color: transparent;
+  cursor: pointer;
   @media (max-width: 767px) {
     position: absolute;
     top: -20px;
     right: 0;
   }
+}
+
+.settingModalButton .settingModalIcon:hover {
+  stroke: var(--accent);
 }
 
 .settingModalScrollable {

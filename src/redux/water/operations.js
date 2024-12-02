@@ -33,3 +33,15 @@ export const getWaterAmount = createAsyncThunk(
     }
   }
 );
+
+export const apiDeleteWater = createAsyncThunk(
+    "water/apiDeleteWater",
+    async (waterId, thunkApi) => {
+        try {
+            const {data} = await axios.delete(`/water/${waterId}`)
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+)
