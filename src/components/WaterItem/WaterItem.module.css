@@ -1,1 +1,65 @@
 /*style*/
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 192px;
+  margin: 24px 0px;
+}
+
+.amount {
+  color: #323f47;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22.4px;
+}
+
+.time {
+  color: #2f2f2f99;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edit {
+  fill: #323f47;
+}
+
+.trash {
+  fill: #323f47;
+}
+
+/* @media (min-width: 765px) {
+}
+
+@media (min-width: 375px) {
+  .wrapper {
+    gap: 10px;
+    padding: 21px 14px;
+    width: 149px;
+    margin: 24px 0px;
+  }
+
+  .amount {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .time {
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .container {
+    gap: 8px;
+  }
+} */

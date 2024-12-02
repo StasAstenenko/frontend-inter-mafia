@@ -4,6 +4,7 @@ import { fetchWaterData } from "./operations";
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
 
 const INITIAL_STATE = {
+  items: [],
   daysDrinking: [], // Дані про дні пиття води за місяць
   dayDetails: [], // Деталі пиття води за конкретний день
   chosenDate: today,
@@ -45,6 +46,53 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+    // .addCase(fetchWaterItems.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // })
+    // .addCase(fetchWaterItems.fulfilled, (state, action) => {
+    //   (state.loading = false), (state.items = action.payload);
+    // })
+    // .addCase(fetchWaterItems.rejected, (state, action) => {
+    //   (state.loading = false), (state.error = action.payload);
+    // })
+    // .addCase(addWaterItem.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(addWaterItem.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    //   state.items.push(action.payload);
+    // })
+    // .addCase(addWaterItem.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // })
+    // .addCase(deleteWaterItem.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(deleteWaterItem.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    //   state.items = state.items.filter((item) => {
+    //     item._id !== action.payload._id;
+    //   });
+    // })
+    // .addCase(deleteWaterItem.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // })
+    // .addCase(editWaterItem.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(editWaterItem.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    // })
+    // .addCase(editWaterItem.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // });
   },
 });
 

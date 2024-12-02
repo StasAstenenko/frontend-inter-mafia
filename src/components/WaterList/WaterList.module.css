@@ -1,1 +1,17 @@
 /*style*/
+.wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+/* @media (min-width: 768px) {
+  .wrapper {
+    gap: 32px;
+  }
+}
+
+@media (min-width: 375px) {
+  .wrapper {
+    gap: 8px;
+  }
+} */
