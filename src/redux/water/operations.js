@@ -8,7 +8,7 @@ export const fetchWaterData = createAsyncThunk(
   async ({ type, date }, thunkAPI) => {
     try {
       const endpoint = type === "month" ? "/month" : "/day";
-      console.log(endpoint);
+      // console.log(endpoint);
 
       const response = await axios.get(endpoint, {
         params: { date },
@@ -22,11 +22,12 @@ export const fetchWaterData = createAsyncThunk(
   }
 );
 
-export const getWaterAmount = createAsyncThunk(
+export const getWaterAmountPerDay = createAsyncThunk(
   "water/waterAmount",
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get("/");
+      // console.log(data);
       return data.amount;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
