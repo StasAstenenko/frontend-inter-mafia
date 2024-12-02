@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editUser } from "./operations";
-import { getUserInfo } from "./operations.js";
+import { getUserInfo, editUser } from "./operations.js";
 
 const INITIAL_STATE = {
   user: {
