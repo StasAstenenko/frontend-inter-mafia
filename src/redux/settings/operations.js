@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { selectAuthToken } from "../auth/selectors.js";
+import { selectAuthToken } from "../auth/selectors.js";
 import axios from "axios";
 
 // axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/";
@@ -12,31 +12,31 @@ const setAuthHeaders = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const currentUser = createAsyncThunk(
-  "users/current",
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const state = getState();
-      setAuthHeaders(state.auth.accessToken);
-      const { data } = await instance.get("");
-      //   console.log(data);
+// export const currentUser = createAsyncThunk(
+//   "users/current",
+//   async (_, { getState, rejectWithValue }) => {
+//     try {
+//       const state = getState();
+//       setAuthHeaders(state.auth.accessToken);
+//       const { data } = await instance.get("");
+//       //   console.log(data);
 
-      return data;
-    } catch (error) {
-      //   console.log(error);
+//       return data;
+//     } catch (error) {
+//       //   console.log(error);
 
-      return rejectWithValue(error.message);
-    }
-  },
-  {
-    condition: (_, { getState }) => {
-      const token = getState().auth.accessToken;
+//       return rejectWithValue(error.message);
+//     }
+//   },
+//   {
+//     condition: (_, { getState }) => {
+//       const token = getState().auth.accessToken;
 
-      if (!token) return false;
-      return true;
-    },
-  }
-);
+//       if (!token) return false;
+//       return true;
+//     },
+//   }
+// );
 
 export const editUser = createAsyncThunk(
   "users/edit",
@@ -50,24 +50,24 @@ export const editUser = createAsyncThunk(
   }
 );
 
-// export const getUserInfo = createAsyncThunk(
-//   "users/getUserInfo",
-//   async (_, thunkApi) => {
-//     try {
-//       const token = selectAuthToken(thunkApi.getState());
-//       console.log(token);
-//       // const token = useSelector(selectAuthToken);
-//       // console.log(token);
-//       if (!token) {
-//         throw new Error("No token found");
-//       }
-//       setAuthHeaders(token);
-//       const { data } = await instance.get("/");
+export const getUserInfo = createAsyncThunk(
+  "users/getUserInfo",
+  async (_, thunkApi) => {
+    try {
+      const token = selectAuthToken(thunkApi.getState());
+      console.log(token);
+      // const token = useSelector(selectAuthToken);
+      // console.log(token);
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setAuthHeaders(token);
+      const { data } = await instance.get("/");
 
-//       console.log("Data received from API:", data);
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
+      console.log("Data received from API:", data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

@@ -11,7 +11,7 @@ import {
   selectName,
   selectUser,
 } from "../../redux/settings/selectors";
-import { currentUser, editUser } from "../../redux/settings/operations";
+import { getUserInfo, editUser } from "../../redux/settings/operations";
 // import { selectAuthUser } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
@@ -42,7 +42,7 @@ const UsersSettingsForm = () => {
   console.log(userEmail);
 
   useEffect(() => {
-    dispatch(currentUser());
+    dispatch(getUserInfo());
   }, [dispatch]);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
