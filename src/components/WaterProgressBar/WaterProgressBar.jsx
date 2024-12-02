@@ -6,7 +6,7 @@ import { formatVolume } from "../WaterDailyNorma/WaterDailyNorma.jsx";
 
 const WaterProgressBar = () => {
   const currentAmount = useSelector(selectWaterAmountForToday);
-  console.log(currentAmount);
+  // console.log(currentAmount);
   const dailyNorma = useSelector(selectDailyNorm);
 
   const waterPercentage = formatVolume(
@@ -17,10 +17,7 @@ const WaterProgressBar = () => {
     <>
       <div className={css.container}>
         <p className={css.today}>Today</p>
-        <span className={css.volumeInfo}>
-          {waterPercentage}
-        
-        </span>
+        <span className={css.volumeInfo}>{waterPercentage}</span>
         <div className={css.progressBarContainer}>
           <div
             className={css.progressBar}
