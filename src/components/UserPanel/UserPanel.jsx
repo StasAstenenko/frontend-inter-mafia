@@ -10,11 +10,11 @@ const UserPanel = ({ userName, avatarUrl }) => {
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
 
   const handleOpenSettings = () => {
-    console.log("Settings modal opened");
+    // console.log("Settings modal opened");
     setIsSettingsModalOpen(true);
   };
   const handleOpenLogOut = () => {
-    console.log("Log out modal opened");
+    // console.log("Log out modal opened");
     setIsLogOutModalOpen(true);
   };
   const handleCloseModals = () => {
@@ -34,7 +34,7 @@ const UserPanel = ({ userName, avatarUrl }) => {
         onLogOutClick={handleOpenLogOut}
       />
       {isSettingsModalOpen && <UserSettingsModal onClose={handleCloseModals} />}
-      {isLogOutModalOpen && <LogOutModal onClose={handleCloseModals} />}
+      <LogOutModal isOpen={isLogOutModalOpen} onClose={handleCloseModals} />
     </div>
   );
 };
