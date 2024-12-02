@@ -1,10 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserInfo } from "./operations.js";
-// import { } from "./operations";
+import { getUserInfo, editUser } from "./operations.js";
 
 const INITIAL_STATE = {
+  user: {
+    name: "",
+    email: "",
+    weight: null,
+    activeTime: null,
+    gender: "woman",
+    dailyNorm: 1500,
+    avatarUrl: "",
+  },
+  error: null,
+  accessToken: null,
   DaysNotAsInWeek: false,
-  user: {},
 };
 
 const settingsSlice = createSlice({
@@ -17,17 +26,24 @@ const settingsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(editUser.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(editUser.fulfilled, (state, { payload }) => {
+        state.user = payload;
+      })
+      .addCase(editUser.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+
       .addCase(getUserInfo.pending, (state) => {
-        state.loading = true;
         state.error = null;
       })
       .addCase(getUserInfo.fulfilled, (state, { payload }) => {
-        state.loading = false;
         // console.log("User info payload:", payload);
         state.user = payload.data;
       })
       .addCase(getUserInfo.rejected, (state, { payload }) => {
-        state.loading = false;
         state.error = payload;
       });
   },

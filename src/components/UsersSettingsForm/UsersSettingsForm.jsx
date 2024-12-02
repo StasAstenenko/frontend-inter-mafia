@@ -4,6 +4,15 @@ import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectEmail,
+  // selectEmail,
+  selectName,
+  selectUser,
+} from "../../redux/settings/selectors";
+import { getUserInfo, editUser } from "../../redux/settings/operations";
+// import { selectAuthUser } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed(),
@@ -25,8 +34,18 @@ const validationSettingSchema = Yup.object().shape({
 });
 
 const UsersSettingsForm = () => {
+  const dispatch = useDispatch();
+
+  const userName = useSelector(selectName);
+  const userEmail = useSelector(selectEmail);
+  const user = useSelector(selectUser);
+  console.log(userEmail);
+
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, [dispatch]);
+
   const [avatarPreview, setAvatarPreview] = useState(null);
-  const [calculateWaterNorm, setCalculateWaterNorm] = useState(null);
 
   const {
     register,
@@ -35,12 +54,33 @@ const UsersSettingsForm = () => {
     watch,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      weight: 0,
+      activeTime: 0,
+      gender: "woman",
+      dailyNorm: 1.5,
+    },
     resolver: yupResolver(validationSettingSchema),
   });
 
   const weight = watch("weight");
   const activeTime = watch("activeTime");
   const gender = watch("gender");
+
+  useEffect(() => {
+    if (user.avatarUrl) {
+      setAvatarPreview(user.avatarUrl);
+    } else if (userName) {
+      setAvatarPreview(userName.charAt(0).toUpperCase());
+    }
+  }, [user.avatarUrl, userName]);
+
+  useEffect(() => {
+    setValue("name", userName);
+    setValue("email", userEmail);
+  }, [userName, userEmail, setValue]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -50,8 +90,7 @@ const UsersSettingsForm = () => {
       } else if (gender === "man") {
         waterNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0);
       }
-      setValue("waterDrink", waterNorm.toFixed(1));
-      setCalculateWaterNorm(waterNorm.toFixed(1));
+      setValue("dailyNorm", waterNorm.toFixed(1));
     }
   }, [weight, activeTime, gender, setValue]);
 
@@ -59,24 +98,42 @@ const UsersSettingsForm = () => {
     const file = e.target.files[0];
     if (file) {
       setAvatarPreview(URL.createObjectURL(file));
-      setValue("avatarUrl", e.target.files);
+      setValue("avatarUrl", file);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) =>
+      formData.append(key, value instanceof FileList ? value[0] : value)
+    );
+
+    try {
+      await dispatch(editUser(formData));
+      alert("User updated successfully!");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to update user. Please try again.");
     }
   };
 
   return (
-    <form
-      className={css.settingForm}
-      onSubmit={handleSubmit((d) => console.log(d))}
-    >
+    <form className={css.settingForm} onSubmit={handleSubmit(onSubmit)}>
+      {/* Avatar */}
       <div className={css.settingFormAvatar}>
         {avatarPreview ? (
-          <img
-            className={css.settingAvatarImg}
-            src={avatarPreview}
-            alt="Avatar"
-          />
+          typeof avatarPreview === "string" &&
+          avatarPreview.startsWith("http") ? (
+            <img
+              className={css.settingAvatarImg}
+              src={avatarPreview}
+              alt="User Avatar"
+            />
+          ) : (
+            <div className={css.avatarPlaceholder}>{avatarPreview}</div>
+          )
         ) : (
-          <div className={css.avatarPlaceholder}>N</div>
+          <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>
         )}
         <div>
           <button
@@ -101,6 +158,7 @@ const UsersSettingsForm = () => {
       </div>
 
       <div className={css.settingAllForms}>
+        {/* Gender Form */}
         <div className={css.settingGenderForm}>
           <div>
             <label className={css.settingLabel}>Your gender identity</label>
@@ -133,6 +191,7 @@ const UsersSettingsForm = () => {
         </div>
         <div className={css.settingAllFormsDesctop}>
           <div>
+            {/* Name and Email */}
             <div className={css.settingNameForm}>
               <div className={css.settingNameFormLabels}>
                 <label className={css.settingLabel}>Your name</label>
@@ -158,6 +217,7 @@ const UsersSettingsForm = () => {
                 )}
               </div>
             </div>
+            {/* Daily Norm Context */}
             <div className={css.settingDailyForm}>
               <label className={css.settingLabel}>My daily norma</label>
               <div className={css.settingDailyAllCard}>
@@ -186,12 +246,13 @@ const UsersSettingsForm = () => {
               <div>
                 <p className={css.settingDailyRemark}>
                   <span className={css.settingDailyRemarkSpan}>!</span> Active
-                  time in honours
+                  time in hours
                 </p>
               </div>
             </div>
           </div>
           <div className={css.settingAllFormsSecond}>
+            {/* Weight and Time active */}
             <div className={css.settingWeightTimeForm}>
               <div className={css.settingWeightLabel}>
                 <label className={css.settingWeightContext}>
@@ -214,13 +275,15 @@ const UsersSettingsForm = () => {
                 />
               </div>
             </div>
+            {/* Calculate Form */}
             <div className={css.settingCalculateForm}>
               <div className={css.settingCalculate}>
                 <p className={css.settingCalculateText}>
-                  The required amount of water in liters per day:
+                  The required amount of water in liters per{" "}
+                  <br className={css.settingTransferText} /> day:
                 </p>
                 <p className={css.settingCalculateTextSpan}>
-                  2 {calculateWaterNorm}
+                  {watch("dailyNorm") || "1.5"}
                 </p>
               </div>
               <div>
