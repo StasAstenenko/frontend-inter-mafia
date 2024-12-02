@@ -18,9 +18,9 @@ const LogOutModal = ({ isOpen, onClose }) => {
   const handleLogOut = () => {
     dispatch(apiLogout());
     onClose();
-    // вставить оповещение с помощью Toast, типа:
-    // toast.success('toast.logOut')
     handleRedirect();
+    // вставить оповещение с помощью Toast, типа:
+    // toast.success('Successfully logged Out!')
   };
 
   return (
