@@ -22,19 +22,6 @@ export const fetchWaterData = createAsyncThunk(
   }
 );
 
-export const getWaterAmountPerDay = createAsyncThunk(
-  "water/waterAmount",
-  async (_, thunkApi) => {
-    try {
-      const { data } = await axios.get("/");
-      // console.log(data);
-      return data.amount;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const apiDeleteWater = createAsyncThunk(
   "water/apiDeleteWater",
   async (waterId, thunkApi) => {
