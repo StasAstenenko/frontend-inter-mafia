@@ -1,7 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { currentUser, editUser } from "./operations";
 // import { } from "./operations";
 
 const INITIAL_STATE = {
+  user: {
+    name: "",
+    email: "",
+    weight: null,
+    activeTime: null,
+    gender: "woman",
+    dailyNorm: 1500,
+    avatarUrl: "",
+  },
+  error: null,
+  accessToken: null,
   DaysNotAsInWeek: false,
 };
 
@@ -12,6 +24,29 @@ const settingsSlice = createSlice({
     setDaysNotAsInWeek(state, action) {
       state.DaysNotAsInWeek = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(currentUser.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(currentUser.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.user = action.payload.data;
+      })
+      .addCase(currentUser.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(editUser.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(editUser.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+      })
+      .addCase(editUser.rejected, (state, action) => {
+        state.error = action.payload;
+      });
   },
 });
 

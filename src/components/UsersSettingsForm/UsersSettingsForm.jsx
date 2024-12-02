@@ -195,7 +195,7 @@ const UsersSettingsForm = () => {
               <div>
                 <p className={css.settingDailyRemark}>
                   <span className={css.settingDailyRemarkSpan}>!</span> Active
-                  time in honours
+                  time in hours
                 </p>
               </div>
             </div>
