@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectAuthToken } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed(),
@@ -27,6 +29,9 @@ const validationSettingSchema = Yup.object().shape({
 const UsersSettingsForm = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [calculateWaterNorm, setCalculateWaterNorm] = useState(null);
+
+  const token = useSelector(selectAuthToken);
+  console.log(token);
 
   const {
     register,
@@ -68,6 +73,7 @@ const UsersSettingsForm = () => {
       className={css.settingForm}
       onSubmit={handleSubmit((d) => console.log(d))}
     >
+      {/* Avatar */}
       <div className={css.settingFormAvatar}>
         {avatarPreview ? (
           <img
@@ -101,6 +107,7 @@ const UsersSettingsForm = () => {
       </div>
 
       <div className={css.settingAllForms}>
+        {/* Gender Form */}
         <div className={css.settingGenderForm}>
           <div>
             <label className={css.settingLabel}>Your gender identity</label>
@@ -133,6 +140,7 @@ const UsersSettingsForm = () => {
         </div>
         <div className={css.settingAllFormsDesctop}>
           <div>
+            {/* Name and Email */}
             <div className={css.settingNameForm}>
               <div className={css.settingNameFormLabels}>
                 <label className={css.settingLabel}>Your name</label>
@@ -158,6 +166,7 @@ const UsersSettingsForm = () => {
                 )}
               </div>
             </div>
+            {/* Daily Norm Context */}
             <div className={css.settingDailyForm}>
               <label className={css.settingLabel}>My daily norma</label>
               <div className={css.settingDailyAllCard}>
@@ -192,6 +201,7 @@ const UsersSettingsForm = () => {
             </div>
           </div>
           <div className={css.settingAllFormsSecond}>
+            {/* Weight and Time active */}
             <div className={css.settingWeightTimeForm}>
               <div className={css.settingWeightLabel}>
                 <label className={css.settingWeightContext}>
@@ -214,10 +224,12 @@ const UsersSettingsForm = () => {
                 />
               </div>
             </div>
+            {/* Calculate Form */}
             <div className={css.settingCalculateForm}>
               <div className={css.settingCalculate}>
                 <p className={css.settingCalculateText}>
-                  The required amount of water in liters per day:
+                  The required amount of water in liters per{" "}
+                  <br className={css.settingTransferText} /> day:
                 </p>
                 <p className={css.settingCalculateTextSpan}>
                   2 {calculateWaterNorm}
