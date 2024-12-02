@@ -4,8 +4,15 @@ import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { selectAuthToken } from "../../redux/auth/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectEmail,
+  // selectEmail,
+  selectName,
+  selectUser,
+} from "../../redux/settings/selectors";
+import { currentUser, editUser } from "../../redux/settings/operations";
+// import { selectAuthUser } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed(),
@@ -27,11 +34,18 @@ const validationSettingSchema = Yup.object().shape({
 });
 
 const UsersSettingsForm = () => {
-  const [avatarPreview, setAvatarPreview] = useState(null);
-  const [calculateWaterNorm, setCalculateWaterNorm] = useState(null);
+  const dispatch = useDispatch();
 
-  const token = useSelector(selectAuthToken);
-  console.log(token);
+  const userName = useSelector(selectName);
+  const userEmail = useSelector(selectEmail);
+  const user = useSelector(selectUser);
+  console.log(userEmail);
+
+  useEffect(() => {
+    dispatch(currentUser());
+  }, [dispatch]);
+
+  const [avatarPreview, setAvatarPreview] = useState(null);
 
   const {
     register,
@@ -40,12 +54,33 @@ const UsersSettingsForm = () => {
     watch,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      weight: 0,
+      activeTime: 0,
+      gender: "woman",
+      dailyNorm: 1.5,
+    },
     resolver: yupResolver(validationSettingSchema),
   });
 
   const weight = watch("weight");
   const activeTime = watch("activeTime");
   const gender = watch("gender");
+
+  useEffect(() => {
+    if (user.avatarUrl) {
+      setAvatarPreview(user.avatarUrl);
+    } else if (userName) {
+      setAvatarPreview(userName.charAt(0).toUpperCase());
+    }
+  }, [user.avatarUrl, userName]);
+
+  useEffect(() => {
+    setValue("name", userName);
+    setValue("email", userEmail);
+  }, [userName, userEmail, setValue]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -55,8 +90,7 @@ const UsersSettingsForm = () => {
       } else if (gender === "man") {
         waterNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0);
       }
-      setValue("waterDrink", waterNorm.toFixed(1));
-      setCalculateWaterNorm(waterNorm.toFixed(1));
+      setValue("dailyNorm", waterNorm.toFixed(1));
     }
   }, [weight, activeTime, gender, setValue]);
 
@@ -64,25 +98,42 @@ const UsersSettingsForm = () => {
     const file = e.target.files[0];
     if (file) {
       setAvatarPreview(URL.createObjectURL(file));
-      setValue("avatarUrl", e.target.files);
+      setValue("avatarUrl", file);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) =>
+      formData.append(key, value instanceof FileList ? value[0] : value)
+    );
+
+    try {
+      await dispatch(editUser(formData));
+      alert("User updated successfully!");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to update user. Please try again.");
     }
   };
 
   return (
-    <form
-      className={css.settingForm}
-      onSubmit={handleSubmit((d) => console.log(d))}
-    >
+    <form className={css.settingForm} onSubmit={handleSubmit(onSubmit)}>
       {/* Avatar */}
       <div className={css.settingFormAvatar}>
         {avatarPreview ? (
-          <img
-            className={css.settingAvatarImg}
-            src={avatarPreview}
-            alt="Avatar"
-          />
+          typeof avatarPreview === "string" &&
+          avatarPreview.startsWith("http") ? (
+            <img
+              className={css.settingAvatarImg}
+              src={avatarPreview}
+              alt="User Avatar"
+            />
+          ) : (
+            <div className={css.avatarPlaceholder}>{avatarPreview}</div>
+          )
         ) : (
-          <div className={css.avatarPlaceholder}>N</div>
+          <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>
         )}
         <div>
           <button
@@ -232,7 +283,7 @@ const UsersSettingsForm = () => {
                   <br className={css.settingTransferText} /> day:
                 </p>
                 <p className={css.settingCalculateTextSpan}>
-                  2 {calculateWaterNorm}
+                  {watch("dailyNorm") || "1.5"}
                 </p>
               </div>
               <div>

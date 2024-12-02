@@ -19,8 +19,12 @@ export const currentUser = createAsyncThunk(
       const state = getState();
       setAuthHeaders(state.auth.accessToken);
       const { data } = await instance.get("");
+      //   console.log(data);
+
       return data;
     } catch (error) {
+      //   console.log(error);
+
       return rejectWithValue(error.message);
     }
   },

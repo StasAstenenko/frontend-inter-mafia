@@ -33,7 +33,7 @@ const settingsSlice = createSlice({
       })
       .addCase(currentUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.user = action.payload.data;
+        state.user = action.payload;
       })
       .addCase(currentUser.rejected, (state, action) => {
         state.error = action.payload;
@@ -42,7 +42,7 @@ const settingsSlice = createSlice({
         state.error = null;
       })
       .addCase(editUser.fulfilled, (state, action) => {
-        state.user = action.payload.data;
+        state.user = action.payload;
       })
       .addCase(editUser.rejected, (state, action) => {
         state.error = action.payload;
