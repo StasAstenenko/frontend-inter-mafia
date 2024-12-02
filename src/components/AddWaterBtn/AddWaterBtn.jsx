@@ -1,14 +1,13 @@
 import { useState } from "react";
 import css from "./AddWaterBtn.module.css";
 import clsx from "clsx";
+
 import WaterModal from "../../modals/WaterModal/WaterModal.jsx";
 
 const AddWaterBtn = ({ variant = "default" }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
+  const openLogOutModal = () => setLogOutModalisOpen(true);
+  const closeLogOutModal = () => setLogOutModalisOpen(false);
 
   return (
     <>
@@ -19,7 +18,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
           css.addBtn,
           variant === "alt" ? css.addBtnAlt : css.defaultBtn
         )}
-        onClick={openModal}
+        onClick={openLogOutModal}
       >
         <svg
           className={clsx(css.icon, variant === "alt" && css.iconAlt)}
@@ -30,7 +29,11 @@ const AddWaterBtn = ({ variant = "default" }) => {
         </svg>
         Add water
       </button>
-      {isModalOpen && <WaterModal type={"add"} />}
+      <WaterModal
+        isOpen={logOutModalisOpen}
+        onClose={closeLogOutModal}
+        operationType="add"
+      />
     </>
   );
 };
