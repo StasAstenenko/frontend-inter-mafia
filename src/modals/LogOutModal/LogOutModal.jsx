@@ -3,15 +3,16 @@ import Modal from "../Modal/Modal";
 
 import { useDispatch } from "react-redux";
 import { apiLogout } from "../../redux/auth/operations";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 // import toast from "react-hot-toast";
 
 const LogOutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigateTo = useNavigate();
   const handleRedirect = () => {
-    history.push("/"); // переадресация на главную страницу
+    navigateTo("/"); // переадресация на главную страницу
   };
 
   const handleLogOut = () => {
