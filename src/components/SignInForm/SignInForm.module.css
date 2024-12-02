@@ -34,16 +34,16 @@
 }
 
 .inputForm {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 16px;
+  padding: 16px;
   font-weight: 400;
   font-size: 14px;
-  line-height: 129%;
+  line-height: 1.28571;
   letter-spacing: -0.01em;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
   max-width: 311px;
+  outline: none;
+  background-color: transparent;
 }
 
 .inputFormError {
@@ -56,8 +56,15 @@
 }
 
 .inputForm:focus {
-  outline: none;
-  border-color: rgba(47, 47, 47, 0.4);
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+
+.inputForm::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
 }
 
 .passwordContainer {
@@ -81,7 +88,8 @@
   text-align: center;
   padding-top: 16px;
   padding-bottom: 16px;
-  background-color: #9be1a0;
+  color: var(--background-primary-dark);
+  background-color: var(--accent);
   border: none;
   border-radius: 30px;
   max-width: 311px;
@@ -92,7 +100,6 @@
 .submitBtn:focus {
   outline: none;
   cursor: pointer;
-  color: #323f47;
   background-color: #87d28d;
 }
 
@@ -126,6 +133,11 @@
     font-size: 16px;
     line-height: 150%;
     min-width: 436px;
+  }
+
+  .inputForm::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .emailContainer {

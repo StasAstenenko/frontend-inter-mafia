@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWaterData, getWaterAmount } from "./operations";
+import { fetchWaterData } from "./operations";
 
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
-console.log(today);
+
 const INITIAL_STATE = {
   daysDrinking: [], // Дані про дні пиття води за місяць
   dayDetails: [], // Деталі пиття води за конкретний день
@@ -36,27 +36,28 @@ const waterSlice = createSlice({
 
         // Розподіл даних за місяцем або днем
         if (action.meta.arg.type === "month") {
-          state.daysDrinking = action.payload; // Дані за місяць
+          state.daysDrinking = action.payload.data; // Дані за місяць
         } else if (action.meta.arg.type === "day") {
-          state.dayDetails = action.payload; // Дані за день
+          state.dayDetails = action.payload.data; // Дані за день
         }
+        console.log(action.payload.data);
       })
       .addCase(fetchWaterData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
-      .addCase(getWaterAmount.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.waterAmount = payload;
-      })
-      .addCase(getWaterAmount.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
       });
+    //  .addCase(getWaterAmountPerDay.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // })
+    // .addCase(getWaterAmountPerDay.fulfilled, (state, { payload }) => {
+    //   state.loading = false;
+    //   state.waterAmount = payload;
+    // })
+    // .addCase(getWaterAmountPerDay.rejected, (state, { payload }) => {
+    //   state.loading = false;
+    //   state.error = payload;
+    // })
   },
 });
 
