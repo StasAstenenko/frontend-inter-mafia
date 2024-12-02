@@ -1,12 +1,19 @@
 import css from "./DeleteWaterModal.module.css";
 import Modal from "../Modal/Modal";
+import { useDispatch } from "react-redux";
+import { apiDeleteWater } from "../../redux/water/operations";
 
 const DeleteWaterModal = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
     // логика удаления воды
-    onClose();
+    dispatch(apiDeleteWater());
     // оповещение с помощью Toast
+    onClose();
+    // актуализировать с помощью redux данные в WaterProgressBar, WaterList та Calendar
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={css.modal_content}>

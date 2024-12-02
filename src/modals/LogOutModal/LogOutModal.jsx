@@ -1,11 +1,27 @@
 import css from "./LogOutModal.module.css";
 import Modal from "../Modal/Modal";
 
-// import { useDispatch } from "react-redux";
-// import { logOut } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { apiLogout } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
+
+// import toast from "react-hot-toast";
 
 const LogOutModal = ({ isOpen, onClose }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  const navigateTo = useNavigate();
+  const handleRedirect = () => {
+    navigateTo("/"); // переадресация на главную страницу
+  };
+
+  const handleLogOut = () => {
+    dispatch(apiLogout());
+    onClose();
+    handleRedirect();
+    // вставить оповещение с помощью Toast, типа:
+    // toast.success('Successfully logged Out!')
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -19,11 +35,7 @@ const LogOutModal = ({ isOpen, onClose }) => {
             className={css.logoutBtn}
             type="button"
             aria-label="Logout button"
-            onClick={() => {
-              // dispatch(logOut()) - логика выхода юзера;
-              onClose();
-              // оповещение с помощью Toast
-            }}
+            onClick={handleLogOut}
           >
             Log Out
           </button>
