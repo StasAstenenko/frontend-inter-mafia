@@ -25,11 +25,16 @@
   align-items: center;
 }
 
+.volumeInfo {
+  font-size: 10px;
+  line-height: 180%;
+  color: #9be1a0;
+}
 .progressBarContainer {
   position: relative;
-  width: 100%;
+  max-width: 255px;
   height: 0.5rem;
-  background-color: #e5e7eb;
+  background-color: #f0eff4;
   border-radius: 9999px;
   margin-bottom: 8px;
 }
@@ -39,15 +44,15 @@
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #4ade80;
-  border-radius: 9999px;
+  background-color: #9be1a0;
+  border-radius: 9px;
   transition: width 0.3s ease-out;
 }
 
-.volumeInfo {
-  font-size: 10px;
-  line-height: 180%;
-  color: #9be1a0;
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 768px) {

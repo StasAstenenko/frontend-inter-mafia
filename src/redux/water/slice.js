@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   dayDetails: [], // Деталі пиття води за конкретний день
   chosenDate: today,
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
-  waterAmount: [], // Кількість води
   loading: false, // Стан завантаження
   error: null, // Помилки
 };
@@ -46,18 +45,6 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-    //  .addCase(getWaterAmountPerDay.pending, (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // })
-    // .addCase(getWaterAmountPerDay.fulfilled, (state, { payload }) => {
-    //   state.loading = false;
-    //   state.waterAmount = payload;
-    // })
-    // .addCase(getWaterAmountPerDay.rejected, (state, { payload }) => {
-    //   state.loading = false;
-    //   state.error = payload;
-    // })
   },
 });
 
