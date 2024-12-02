@@ -1,2 +1,2 @@
 export const selectDaysNotAsInWeek = (state) => state.settings.DaysNotAsInWeek; // Чи виставляти дні без врахування, як вони в тижні
-export const selectGetUserInfo = (state) => state.settings.user;
+export const selectDailyNorm = (state) => state.settings.user.dailyNorm;

@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
 import css from "./WaterDailyNorma.module.css";
-import { selectGetUserInfo } from "../../redux/settings/selectors.js";
+import { selectDailyNorm } from "../../redux/settings/selectors.js";
 
 export const formatVolume = (ml) => {
-  return `${(ml / 1000).toFixed(1)} L`;
+  return `${(ml / 1000).toFixed(1)}`;
 };
 
 const WaterDailyNorma = () => {
-  const userInfo = useSelector(selectGetUserInfo);
+  const dailyNorma = useSelector(selectDailyNorm);
   // console.log(userInfo);
-  const dailyNorma = userInfo.data?.dailyNorm;
+  // const dailyNorma = userInfo.data?.dailyNorm;
 
   return (
     <>
