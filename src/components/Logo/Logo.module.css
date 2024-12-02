@@ -4,6 +4,7 @@
   font-weight: 700;
   position: relative;
   text-transform: uppercase;
+  display: inline-block;
 }
 
 /* BREAKPOINTS (Mobile First) */

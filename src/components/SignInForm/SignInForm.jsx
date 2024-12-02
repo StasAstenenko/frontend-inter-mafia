@@ -48,13 +48,14 @@ const SignInForm = () => {
                 Email
               </label>
               <Field
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 placeholder="Enter your email"
                 className={clsx(css.inputForm, {
                   [css.inputFormError]: touched.email && errors.email,
                 })}
+                autoComplete="off"
               />
               <ErrorMessage
                 name="email"

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWaterData, getWaterAmount } from "./operations";
+import { fetchWaterData } from "./operations";
 
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
 
@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   dayDetails: [], // Деталі пиття води за конкретний день
   chosenDate: today,
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
-  waterAmount: [], // Кількість води
   loading: false, // Стан завантаження
   error: null, // Помилки
 };
@@ -45,18 +44,6 @@ const waterSlice = createSlice({
       .addCase(fetchWaterData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
-      .addCase(getWaterAmount.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getWaterAmount.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.waterAmount = payload;
-      })
-      .addCase(getWaterAmount.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
       });
   },
 });

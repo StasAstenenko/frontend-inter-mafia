@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { currentUser, editUser } from "./operations";
-// import { } from "./operations";
+import { getUserInfo } from "./operations.js";
 
 const INITIAL_STATE = {
   user: {
@@ -27,7 +27,6 @@ const settingsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       .addCase(currentUser.pending, (state) => {
         state.error = null;
       })
@@ -46,6 +45,18 @@ const settingsSlice = createSlice({
       })
       .addCase(editUser.rejected, (state, action) => {
         state.error = action.payload;
+      })
+
+      .addCase(getUserInfo.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(getUserInfo.fulfilled, (state, { payload }) => {
+        // console.log("User info payload:", payload);
+        state.user = payload.data;
+      })
+      .addCase(getUserInfo.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });
