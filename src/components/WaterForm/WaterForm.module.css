@@ -5,6 +5,7 @@ p {
 .wrapper {
   border-radius: 15px;
   padding: 40px 20px;
+  width: 313px;
   background-color: lightblue;
 }
 
@@ -59,7 +60,7 @@ p {
 
 .valueDisplay > span {
   display: block;
-  padding: 10px;
+  padding: 13px;
 }
 
 .ctrlBtn {
@@ -86,7 +87,7 @@ p {
 .field {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
-  width: 318px;
+  width: 272px;
   padding-left: 20px;
   height: 56px;
   margin-bottom: 24px;
@@ -109,7 +110,7 @@ p {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
   padding-left: 20px;
-  width: 318px;
+  width: 272px;
   height: 56px;
   font-size: 14px;
   line-height: 129%;
@@ -143,7 +144,7 @@ p {
   .wrapper {
     padding: 40px;
     width: 438px;
-    height: 475px;
+    height: 555px;
     background-color: lightblue;
   }
 
@@ -179,7 +180,7 @@ p {
   }
   .amountOfWaterField,
   .field {
-    width: 410px;
+    width: 360px;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: -0.01em;

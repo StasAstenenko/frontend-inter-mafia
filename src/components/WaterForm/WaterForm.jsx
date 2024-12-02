@@ -25,7 +25,6 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
     const entries = {
       amount: values.amountOfWater,
       date: formattedTime,
-      currentDailyNorm: 1.5,
     };
     postWaterData(entries);
     console.log("Values:", entries);
