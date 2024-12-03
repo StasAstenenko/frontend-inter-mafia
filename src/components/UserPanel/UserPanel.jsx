@@ -1,20 +1,24 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser  } from "../../redux/settings/selectors.js";
 import UserBar from "../../components/UserBar/UserBar.jsx";
 import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.jsx";
 import LogOutModal from "../../modals/LogOutModal/LogOutModal.jsx";
+
 import css from "./UserPanel.module.css";
 
-const UserPanel = ({ userName, avatarUrl }) => {
-  const defaultUserName = userName || "Nadia";
+const UserPanel = () => {
+
+  const user = useSelector(selectUser);
+  // console.log(user)
+  const defaultUserName = user.name || user.email.split('@')[0];
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
 
   const handleOpenSettings = () => {
-    // console.log("Settings modal opened");
     setIsSettingsModalOpen(true);
   };
   const handleOpenLogOut = () => {
-    // console.log("Log out modal opened");
     setIsLogOutModalOpen(true);
   };
   const handleCloseModals = () => {
@@ -28,8 +32,8 @@ const UserPanel = ({ userName, avatarUrl }) => {
         Hello, <span className={css.name}>{defaultUserName}!</span>
       </h2>
       <UserBar
-        userName={userName}
-        avatarUrl={avatarUrl}
+        userName={defaultUserName}
+        avatarUrl={user.avatarUrl}
         onSettingsClick={handleOpenSettings}
         onLogOutClick={handleOpenLogOut}
       />

@@ -91,11 +91,8 @@
     gap: 10px;
     height: 56px;
   }
+
   .popoverbutton {
-    line-height: 1.49;
-  }
-  .icon {
-    width: 20px;
-    height: 20px;
+    font-size: 15px;
   }
 }
