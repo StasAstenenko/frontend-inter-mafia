@@ -17,7 +17,7 @@ const Calendar = () => {
   const daysDrinking = useSelector(selectDaysDrinking);
   const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
   const isLoading = useSelector(selectIsLoading);
-  const mobileOrDesktop = window.matchMedia("(max-width: 767px)").matches;
+  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
 
   const [today_day, today_month, today_year_time] = new Date() // month починаються з нуля в Date
     .toLocaleString()
@@ -84,14 +84,18 @@ const Calendar = () => {
     return [...emptyDaysBefore, ...daysArray];
   }, [daysDrinking, daysAsInWeek, month, year]);
 
-  // console.dir(calendarDays);
-
   return (
     <div className={css.calendar}>
       {isLoading ? (
-        <Loader height={mobileOrDesktop ? "300px" : "305px"} />
+        <Loader height={mobileDevice ? "300px" : "305px"} />
       ) : (
-        <div className={`${daysAsInWeek ? css.grid : css.grid8}`}>
+        <div
+          className={`${
+            daysAsInWeek
+              ? `${css.grid} ${mobileDevice ? "" : "grid7desktop"}`
+              : css.grid8
+          }`}
+        >
           {calendarDays.map(({ day, percent }, index) => (
             <CalendarItem
               key={`${index}${percent}`}
