@@ -17,26 +17,6 @@ const WaterList = () => {
   // }, [dispatch]);
   return (
     <ul className={s.wrapper}>
-      <Swiper
-        modules={[Scrollbar]}
-        spaceBetween={8}
-        slidesPerView={1}
-        scrollbar={{ draggable: true }}
-        breakpoints={{
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 8,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 32,
-          },
-          1440: {
-            slidesPerView: 3,
-            spaceBetween: 16,
-          },
-        }}
-      >
               {/* <Swiper
         // install Swiper modules
         modules={[Scrollbar]}
@@ -49,22 +29,46 @@ const WaterList = () => {
         <SwiperSlide className={s.swiperSlide}>
           <WaterItem />
         </SwiperSlide> */}
-        <SwiperSlide>
-          <WaterItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WaterItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WaterItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WaterItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WaterItem />
-        </SwiperSlide>
-      </Swiper>
+<Swiper
+  modules={[Scrollbar]}
+  spaceBetween={8}
+  slidesPerView={1}
+  scrollbar={{
+    draggable: true,
+    el: `.${s.swiperScrollbar}`, // кастомний скроллбар
+  }}
+  breakpoints={{
+    375: {
+      slidesPerView: 2,
+      spaceBetween: 8,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 32,
+    },
+    1440: {
+      slidesPerView: 3,
+      spaceBetween: 16,
+    },
+  }}
+>
+  <SwiperSlide>
+    <WaterItem />
+  </SwiperSlide>
+  <SwiperSlide>
+    <WaterItem />
+  </SwiperSlide>
+  <SwiperSlide>
+    <WaterItem />
+  </SwiperSlide>
+  <SwiperSlide>
+    <WaterItem />
+  </SwiperSlide>
+  <SwiperSlide>
+    <WaterItem />
+  </SwiperSlide>
+  <div className={s.swiperScrollbar}></div> {/* Елемент скроллбара */}
+</Swiper>
       {/* <WaterItem />
       <WaterItem />
       <WaterItem /> */}
