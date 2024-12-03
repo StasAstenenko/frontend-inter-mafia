@@ -40,7 +40,6 @@ const settingsSlice = createSlice({
         state.error = null;
       })
       .addCase(getUserInfo.fulfilled, (state, { payload }) => {
-        // console.log("User info payload:", payload);
         state.user = payload.data;
       })
       .addCase(getUserInfo.rejected, (state, { payload }) => {
