@@ -6,7 +6,7 @@ const WaterItem = () => {
   return (
     <div>
       <div className={s.wrapper}>
-        <svg width="44" height="45" className={s.waterglass}>
+        <svg className={s.waterglass}>
           <use href="/icons/sprite.svg#water-glass"></use>
         </svg>
         <div>
@@ -14,10 +14,10 @@ const WaterItem = () => {
           <p className={s.time}>7:00 AM</p>
         </div>
         <div className={s.container}>
-          <svg width="16" height="16" className={s.edit}>
+          <svg className={s.edit}>
             <use href="/icons/sprite.svg#edit"></use>
           </svg>
-          <svg width="16" height="16" className={s.trash}>
+          <svg className={s.trash}>
             <use href="/icons/sprite.svg#trash"></use>
           </svg>
         </div>
