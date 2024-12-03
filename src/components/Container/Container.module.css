@@ -3,12 +3,19 @@
   padding-right: 16px;
 
   border-radius: 30px;
-  background-color: #f0eff4;
+  background-color: var(--background-secondary-light);
 }
 
 @media only screen and (min-width: 768px) {
   .container {
+    width: 704;
     padding-left: 32px;
     padding-right: 32px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    width: 672px;
   }
 }
