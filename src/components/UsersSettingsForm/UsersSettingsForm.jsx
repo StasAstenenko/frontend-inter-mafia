@@ -39,10 +39,6 @@ const UsersSettingsForm = () => {
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
 
-  // useEffect(() => {
-  //   dispatch(getUserInfo());
-  // }, [dispatch]);
-
   const [avatarPreview, setAvatarPreview] = useState(null);
 
   const {
@@ -67,15 +63,15 @@ const UsersSettingsForm = () => {
   const activeTime = watch("activeTime");
   const gender = watch("gender");
 
-  useEffect(() => {
-    if (user.avatarUrl) {
-      setAvatarPreview(user.avatarUrl);
-    } else if (userName) {
-      setAvatarPreview(userName.charAt(0).toUpperCase());
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setAvatarPreview(URL.createObjectURL(file));
+      setValue("avatarUrl", file);
+    } else {
+      alert("Please select a valid image file.");
     }
-  }, [user.avatarUrl, userName]);
-
-  // console.log(userEmail);
+  };
 
   useEffect(() => {
     if (userEmail) {
@@ -84,6 +80,14 @@ const UsersSettingsForm = () => {
     }
     setValue("email", userEmail);
   }, [userEmail, setValue]);
+
+  useEffect(() => {
+    if (user.avatarUrl) {
+      setAvatarPreview(user.avatarUrl);
+    } else if (userName) {
+      setAvatarPreview(userName.charAt(0).toUpperCase());
+    }
+  }, [user.avatarUrl, userName]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -96,14 +100,6 @@ const UsersSettingsForm = () => {
       setValue("dailyNorm", waterNorm.toFixed(1));
     }
   }, [weight, activeTime, gender, setValue]);
-
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file));
-      setValue("avatarUrl", file);
-    }
-  };
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -133,7 +129,11 @@ const UsersSettingsForm = () => {
               alt="User Avatar"
             />
           ) : (
-            <div className={css.avatarPlaceholder}>{avatarPreview}</div>
+            <img
+              className={css.settingAvatarImg}
+              src={avatarPreview}
+              alt="Preview Avatar"
+            />
           )
         ) : (
           <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>
