@@ -1,19 +1,25 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { selectAuthToken } from "../auth/selectors.js";
 
-axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/api/water";
+export const instance = axios.create({
+  baseURL: "https://back-inter-mafia.onrender.com/api/water",
+});
+const setAuthHeaders = (token) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
 export const fetchWaterData = createAsyncThunk(
   "water/fetchWaterData",
   async ({ type, date }, thunkAPI) => {
     try {
+      const token = selectAuthToken(thunkAPI.getState());
+      setAuthHeaders(token);
       const endpoint = type === "month" ? "/month" : "/day";
       // console.log(endpoint);
-
-      const response = await axios.get(endpoint, {
+      const response = await instance.get(endpoint, {
         params: { date },
       });
-
       // console.dir(response.data);
       return response.data;
     } catch (error) {

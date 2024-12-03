@@ -55,16 +55,13 @@ export const getUserInfo = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const token = selectAuthToken(thunkApi.getState());
-      console.log(token);
+      // console.log(token);
       // const token = useSelector(selectAuthToken);
       // console.log(token);
-      if (!token) {
-        throw new Error("No token found");
-      }
+
       setAuthHeaders(token);
       const { data } = await instance.get("/");
-
-      console.log("Data received from API:", data);
+      // console.log("Data received from API:", data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

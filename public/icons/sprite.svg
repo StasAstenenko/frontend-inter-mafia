@@ -57,8 +57,8 @@
         </symbol>
 
         <symbol id="circle" viewBox="0 0 32 32">
-            <path fill="#9be1a0" d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0s16 7.163 16 16z" style="fill:var(--color1, #9be1a0)"/>
-        </symbol>
+<path fill="#fff" style="fill: var(--color1, #fff); stroke: var(--color2, #9be1a0)" stroke="#9be1a0" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M30.667 16c0 8.1-6.567 14.667-14.667 14.667s-14.667-6.566-14.667-14.667c0-8.1 6.566-14.667 14.667-14.667s14.667 6.566 14.667 14.667z"></path>
+</symbol>
        
 </defs>
 </svg>

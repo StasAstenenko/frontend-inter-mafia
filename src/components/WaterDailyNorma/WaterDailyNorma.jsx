@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
 import css from "./WaterDailyNorma.module.css";
 
-export const formatVolume = (ml) => {
-  return `${(ml / 1000).toFixed(1)}`;
-};
-
 const WaterDailyNorma = () => {
   const dailyNorma = useSelector(selectDailyNorm);
+
+  const formatVolume = (ml) => {
+    return `${(ml / 1000).toFixed(1)}`;
+  };
 
   return (
     <>
