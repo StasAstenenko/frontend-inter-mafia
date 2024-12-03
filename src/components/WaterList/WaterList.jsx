@@ -18,6 +18,26 @@ const WaterList = () => {
   return (
     <ul className={s.wrapper}>
       <Swiper
+        modules={[Scrollbar]}
+        spaceBetween={8}
+        slidesPerView={1}
+        scrollbar={{ draggable: true }}
+        breakpoints={{
+          375: {
+            slidesPerView: 2,
+            spaceBetween: 8,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 32,
+          },
+          1440: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+          },
+        }}
+      >
+              {/* <Swiper
         // install Swiper modules
         modules={[Scrollbar]}
         spaceBetween={8}
@@ -27,6 +47,12 @@ const WaterList = () => {
         onSlideChange={() => console.log("slide change")}
       >
         <SwiperSlide className={s.swiperSlide}>
+          <WaterItem />
+        </SwiperSlide> */}
+        <SwiperSlide>
+          <WaterItem />
+        </SwiperSlide>
+        <SwiperSlide>
           <WaterItem />
         </SwiperSlide>
         <SwiperSlide>
