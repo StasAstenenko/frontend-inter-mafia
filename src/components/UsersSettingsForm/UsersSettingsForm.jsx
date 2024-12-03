@@ -7,11 +7,10 @@ import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectEmail,
-  // selectEmail,
   selectName,
   selectUser,
 } from "../../redux/settings/selectors";
-import { getUserInfo, editUser } from "../../redux/settings/operations";
+import { editUser } from "../../redux/settings/operations";
 // import { selectAuthUser } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
@@ -39,11 +38,10 @@ const UsersSettingsForm = () => {
   const userName = useSelector(selectName);
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
-  console.log(userEmail);
 
-  useEffect(() => {
-    dispatch(getUserInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUserInfo());
+  // }, [dispatch]);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
 
@@ -77,10 +75,15 @@ const UsersSettingsForm = () => {
     }
   }, [user.avatarUrl, userName]);
 
+  // console.log(userEmail);
+
   useEffect(() => {
-    setValue("name", userName);
+    if (userEmail) {
+      const emailNamePart = userEmail.split("@")[0];
+      setValue("name", emailNamePart);
+    }
     setValue("email", userEmail);
-  }, [userName, userEmail, setValue]);
+  }, [userEmail, setValue]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
