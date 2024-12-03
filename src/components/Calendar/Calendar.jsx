@@ -9,15 +9,16 @@ import {
 import { selectDaysNotAsInWeek } from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import { fetchWaterData } from "../../redux/water/operations";
+import Loader from "../Loader/Loader";
 
 const Calendar = () => {
   const dispatch = useDispatch();
   const dateToShow = useSelector(selectChosenMonth);
   const daysDrinking = useSelector(selectDaysDrinking);
-  const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
+  const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
   const isLoading = useSelector(selectIsLoading);
+  const mobileOrDesktop = window.matchMedia("(max-width: 767px)").matches;
 
-  // const today = ;
   const [today_day, today_month, today_year_time] = new Date() // month починаються з нуля в Date
     .toLocaleString()
     .split(".");
@@ -65,7 +66,7 @@ const Calendar = () => {
         );
     });
 
-    if (daysNotAsInWeek) return daysArray;
+    if (!daysAsInWeek) return daysArray;
 
     // Додаємо порожні дні перед початком місяця
     const firstDayOfMonth = new Date(
@@ -81,16 +82,16 @@ const Calendar = () => {
     }));
 
     return [...emptyDaysBefore, ...daysArray];
-  }, [daysDrinking, daysNotAsInWeek, month, year]);
+  }, [daysDrinking, daysAsInWeek, month, year]);
 
   // console.dir(calendarDays);
 
   return (
     <div className={css.calendar}>
       {isLoading ? (
-        <p>Creating your water-drinking calendar...</p>
+        <Loader height={mobileOrDesktop ? "300px" : "305px"} />
       ) : (
-        <div className={css.grid}>
+        <div className={`${daysAsInWeek ? css.grid : css.grid8}`}>
           {calendarDays.map(({ day, percent }, index) => (
             <CalendarItem
               key={`${index}${percent}`}
