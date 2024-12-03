@@ -11,23 +11,24 @@ import "izitoast/dist/css/iziToast.min.css";
 import { useSelector } from "react-redux";
 import {
   selectAuthError,
-  selectAuthIsLoading,
+  // selectAuthIsLoading,
   selectAuthIsRegisteredSuccess,
 } from "../../redux/auth/selectors";
+// import Loader from "../../components/Loader/Loader";
 
 const SignUpPage = () => {
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   const error = useSelector(selectAuthError);
   const isRegistered = useSelector(selectAuthIsRegisteredSuccess);
-  const isLoading = useSelector(selectAuthIsLoading);
-  console.log("register Page state error: ", error);
-  console.log("register Page state isRegistered: ", isRegistered);
-  console.log("register Page state isLoading: ", isLoading);
+  // const isLoading = useSelector(selectAuthIsLoading);
+  // console.log("register Page state error: ", error);
+  // console.log("register Page state isRegistered: ", isRegistered);
+  // console.log("register Page state isLoading: ", isLoading);
 
   return (
     <Section>
       <Container className={css.signUpWrapper}>
-        {isLoading && <p>LOADING .........</p>}
+        {/* {isLoading && <Loader />} */}
         <Logo className={css.logo} />
         <h1 className={css.title}>Sign Up</h1>
         <SignUpForm />
