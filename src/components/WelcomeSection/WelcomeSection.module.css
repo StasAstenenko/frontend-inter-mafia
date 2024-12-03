@@ -14,6 +14,9 @@
 /* Logo Component */
 .logo {
   margin-bottom: 74px;
+  width: 114px;
+  height: 20px;
+  letter-spacing: -0.01em;
 }
 
 /* Headers Styles */
@@ -27,6 +30,8 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 14px;
+  height: 18px;
+  letter-spacing: 0.06em; 
   line-height: 1em;
   margin-bottom: 16px;
   color: var(--text-primary-dark); 
@@ -39,6 +44,7 @@
   margin-bottom: 32px;
   line-height: 1em;
   color: var(--background-primary-dark); 
+  letter-spacing: -0.01em;
 }
 
 /* Buttons Styles */
@@ -47,29 +53,39 @@
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+  margin-bottom: 51px;
 }
 
 .btn {
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.01em;
   font-weight: 700;
   text-align: center;
+  align-items: center;
   border-radius: 30px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
 .btnPrimary {
-  color: var(--text-primary-dark);
+  color: var(--background-primary-dark);
   background-color: var(--accent);
   padding: 14px 19px;
+  width: 116px;
+  height: 46px;
 }
 
 .btnSecondary {
-  color: var(--text-primary-dark);
-  border: 1px solid var(--text-primary-dark);
+  color: var(--background-primary-dark);
+  border: 1px solid var(--background-primary-dark);
   padding: 14px 28px;
+  width: 104px;
+  height: 46px;
 }
 
 .btnPrimary:hover {
@@ -87,46 +103,73 @@
   .logo {
     font-size: 24px;
     margin-bottom: 50px;
+    width: 155px;
+    height: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .welcomeSection {
+    width: calc(704px - 64px);
   }
 
   .contentWrapper {
-    padding: 32px;
-    margin-bottom: 50px;
+    padding: 0px 32px;
   }
 
   .subtitle {
+    height: 24px;
     font-size: 16px;
+    letter-spacing: 0.06em; 
   }
 
   .title {
+    height: 210px;
     font-size: 64px;
-    line-height: 1em;
+    line-height: 70px;
     margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  .buttonsWrapper {
+    margin-bottom: 18px;
+    gap: 16px;
   }
 
   .btnPrimary {
     padding: 18px 40px;
+    height: 60px;
+    width: 169px;
   }
   
   .btnSecondary {
     padding: 18px 40px;
+    height: 60px;
+    width: 135px;
   }
 }
 
 /* lg */
 @media (min-width: 1440px) {
-  .contentWrapper {
-    padding: 32px;
-    margin-bottom: 188px;
-  }
-
   .logo {
-    font-size: 24px;
     margin-bottom: 132px;
   }
 
   .title {
+    height: 228px;
+    line-height: 76px;
     font-size: 80px;
+  }
+
+  .buttonsWrapper {
+    margin-bottom: 156px;
   }
 
   .btnPrimary {
