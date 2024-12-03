@@ -8,6 +8,9 @@
   background-color: transparent;
   cursor: pointer;
 }
+:global(.grid7desktop) .item {
+  flex-direction: row;
+}
 
 .item.empty {
   background-color: transparent;
@@ -16,6 +19,7 @@
 
 .dayNumber {
   display: inline-flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   width: 28px;
@@ -34,6 +38,7 @@
   font-weight: 400;
   font-size: 10px;
   font-family: "Poppins", sans-serif;
+  margin: 0 auto;
 }
 
 .drinkALot .dayNumber {
