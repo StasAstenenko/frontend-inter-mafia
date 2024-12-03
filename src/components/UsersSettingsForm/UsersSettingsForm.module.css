@@ -59,6 +59,11 @@
   }
 }
 
+.settingAvatarSecondIcon {
+  width: 75px;
+  height: 75px;
+}
+
 .avatarButtonText {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
