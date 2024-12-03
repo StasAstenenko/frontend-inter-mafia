@@ -8,6 +8,7 @@ export const formatVolume = (ml) => {
 
 const WaterDailyNorma = () => {
   const dailyNorma = useSelector(selectDailyNorm);
+  // console.log("daily norma", dailyNorma);
 
   return (
     <>
