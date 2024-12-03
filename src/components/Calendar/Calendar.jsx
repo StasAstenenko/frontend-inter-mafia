@@ -19,10 +19,11 @@ const Calendar = () => {
   const isLoading = useSelector(selectIsLoading);
   const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
 
-  const [today_day, today_month, today_year_time] = new Date() // month починаються з нуля в Date
-    .toLocaleString()
-    .split(".");
-  const today_year = today_year_time.slice(0, 4);
+  const today = new Date();
+  const today_day = today.getDate().toString().padStart(2, "0");
+  const today_month = (today.getMonth() + 1).toString().padStart(2, "0"); // Місяці починаються з 0
+  const today_year = today.getFullYear().toString();
+
   const [year, month] = dateToShow.split("-");
   const firstDayOfWeek = 0; // Перший день місяця (0 - понеділок, 1 - неділя)
 
