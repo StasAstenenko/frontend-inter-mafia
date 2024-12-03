@@ -63,6 +63,23 @@
   font-size: 12px;
   color: var(--background-primary-dark);
 }
+
+.count {
+  display: inline-block;
+  animation: countUp 2.5s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .span {
   color: var(--accent);
 }

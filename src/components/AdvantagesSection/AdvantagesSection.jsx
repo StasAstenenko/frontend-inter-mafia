@@ -6,15 +6,11 @@ import css from "./AdvantagesSection.module.css";
 import avatar1 from "./../../img/advantages/Avatar1.png";
 import avatar2 from "./../../img/advantages/Avatar2.png";
 import avatar3 from "./../../img/advantages/Avatar3.png";
-import {
-  selectAllUsers,
-  selectAuthIsLoading,
-} from "../../redux/auth/selectors.js";
+import { selectAllUsers } from "../../redux/auth/selectors.js";
 import { getAllUsers } from "../../redux/auth/operations.js";
 
 const AdvantagesSection = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectAuthIsLoading);
   const count = useSelector(selectAllUsers);
   console.log(count);
   console.log(typeof count);
@@ -42,8 +38,8 @@ const AdvantagesSection = () => {
           </div>
 
           <div>
-            <p className={css.customers_text}>
-              Our {!count || isLoading ? " " : `${count} `}
+            <p className={`${css.customers_text}`}>
+              Our {!count ? " " : <span className={css.count}>{count}</span>}{" "}
               <span className={css.span}>happy</span>
               <br />
               customers
