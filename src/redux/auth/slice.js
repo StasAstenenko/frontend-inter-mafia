@@ -71,15 +71,12 @@ const authSlice = createSlice({
       })
 
       .addCase(getAllUsers.pending, (state) => {
-        state.isLoading = true;
         state.error = null;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.count = action.payload;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
-        state.isLoading = false;
         state.error = action.payload;
       });
 
