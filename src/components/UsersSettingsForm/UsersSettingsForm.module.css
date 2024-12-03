@@ -397,7 +397,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-.avatarPlaceholder {
+.avatarSettingPlaceholder {
   width: 75px;
   height: 75px;
   display: flex;

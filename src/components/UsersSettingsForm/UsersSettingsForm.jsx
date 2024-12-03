@@ -136,7 +136,9 @@ const UsersSettingsForm = () => {
             />
           )
         ) : (
-          <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>
+          <div className={css.avatarSettingPlaceholder}>
+            {userName?.charAt(0)}
+          </div>
         )}
         <div>
           <button
