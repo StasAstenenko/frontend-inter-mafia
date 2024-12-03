@@ -1,26 +1,22 @@
+import { useSelector } from "react-redux";
+import { selectChosenDate } from "../../redux/water/selectors.js";
 import css from "./ChooseDate.module.css";
 
-const ChooseDate = ({ date }) => {
+const ChooseDate = () => {
+  const choseDate = useSelector(selectChosenDate);
+
   // Функція для перевірки, чи є дата сьогоднішньою
   const isToday = (date) => {
-    const today = new Date();
-    const inputDate = new Date(date);
-
-    // Порівнюємо лише рік, місяць і день
-    return (
-      today.getFullYear() === inputDate.getFullYear() &&
-      today.getMonth() === inputDate.getMonth() &&
-      today.getDate() === inputDate.getDate()
-    );
+    const today = new Date().toLocaleDateString("en-CA"); // Сьогоднішня дата у форматі "YYYY-MM-DD"
+    return today === date; // Порівнюємо дати як рядки
   };
-
   // Якщо дата сьогодні, відображаємо "Today", якщо ні — форматовану дату
-  const formattedDate = isToday(date)
+  const formattedDate = isToday(choseDate)
     ? "Today"
     : (() => {
-        const dateObj = new Date(date);
-        const day = dateObj.getDate();
-        const month = dateObj.toLocaleString("en-GB", { month: "long" });
+        const date = new Date(choseDate); // Створюємо Date-об'єкт з рядка
+        const day = date.getDate(); // Отримуємо день
+        const month = date.toLocaleString("en-CA", { month: "long" }); // Отримуємо назву місяця
         return `${day}, ${month}`;
       })();
 
