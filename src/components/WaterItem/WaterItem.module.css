@@ -29,6 +29,11 @@
   line-height: 12px;
 }
 
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
 .edit,
 .trash {
   fill: #fff;

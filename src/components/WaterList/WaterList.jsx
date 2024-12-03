@@ -4,8 +4,6 @@ import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import WaterItem from "../WaterItem/WaterItem";
@@ -28,7 +26,7 @@ const WaterList = () => {
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide>
+        <SwiperSlide className={s.swiperSlide}>
           <WaterItem />
         </SwiperSlide>
         <SwiperSlide>

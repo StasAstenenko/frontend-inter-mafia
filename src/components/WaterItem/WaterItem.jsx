@@ -1,7 +1,12 @@
 // import { useDispatch } from "react-redux";
 // import { deleteWaterItem } from "../../redux/water/operations";
+import { useState } from "react";
+import WaterModal from "../../modals/WaterModal/WaterModal";
 import s from "./WaterItem.module.css";
 const WaterItem = () => {
+  const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
+  const openLogOutModal = () => setLogOutModalisOpen(true);
+  const closeLogOutModal = () => setLogOutModalisOpen(false);
   // const dispatch = useDispatch();
   return (
     <div>
@@ -14,14 +19,23 @@ const WaterItem = () => {
           <p className={s.time}>7:00 AM</p>
         </div>
         <div className={s.container}>
-          <svg className={s.edit}>
-            <use href="/icons/sprite.svg#edit"></use>
-          </svg>
-          <svg className={s.trash}>
-            <use href="/icons/sprite.svg#trash"></use>
-          </svg>
+          <button onClick={openLogOutModal} className={s.btn}>
+            <svg className={s.edit}>
+              <use href="/icons/sprite.svg#edit"></use>
+            </svg>
+          </button>
+          <button className={s.btn}>
+            <svg className={s.trash}>
+              <use href="/icons/sprite.svg#trash"></use>
+            </svg>
+          </button>
         </div>
       </div>
+      <WaterModal
+        isOpen={logOutModalisOpen}
+        onClose={closeLogOutModal}
+        operationType="add"
+      />
       {/* icon
       <div>
         <p>{amount} ml</p>
