@@ -4,23 +4,27 @@ import Modal from "../Modal/Modal";
 import { useDispatch } from "react-redux";
 import { apiLogout } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
-
-// import toast from "react-hot-toast";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const LogOutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-
   const navigateTo = useNavigate();
   const handleRedirect = () => {
-    navigateTo("/"); // переадресация на главную страницу
+    navigateTo("/");
   };
 
   const handleLogOut = () => {
     dispatch(apiLogout());
     onClose();
     handleRedirect();
-    // вставить оповещение с помощью Toast, типа:
-    // toast.success('Successfully logged Out!')
+    iziToast.success({
+      title: "Done",
+      message: "Successfully Logged Out!",
+      displayMode: 1,
+      position: "topRight",
+      maxWidth: "300px",
+    });
   };
 
   return (

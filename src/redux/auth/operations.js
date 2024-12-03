@@ -79,3 +79,15 @@ export const apiLogout = createAsyncThunk(
     }
   }
 );
+
+export const getAllUsers = createAsyncThunk(
+  "users/getAllUsers",
+  async (_, thunkApi) => {
+    try {
+      const response = await instance.get("users/count-user");      
+      return response.data.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

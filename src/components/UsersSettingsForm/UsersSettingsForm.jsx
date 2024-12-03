@@ -7,11 +7,10 @@ import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectEmail,
-  // selectEmail,
   selectName,
   selectUser,
 } from "../../redux/settings/selectors";
-import { getUserInfo, editUser } from "../../redux/settings/operations";
+import { editUser } from "../../redux/settings/operations";
 // import { selectAuthUser } from "../../redux/auth/selectors";
 
 const validationSettingSchema = Yup.object().shape({
@@ -39,11 +38,6 @@ const UsersSettingsForm = () => {
   const userName = useSelector(selectName);
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
-  console.log(userEmail);
-
-  useEffect(() => {
-    dispatch(getUserInfo());
-  }, [dispatch]);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
 
@@ -69,6 +63,24 @@ const UsersSettingsForm = () => {
   const activeTime = watch("activeTime");
   const gender = watch("gender");
 
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setAvatarPreview(URL.createObjectURL(file));
+      setValue("avatarUrl", file);
+    } else {
+      alert("Please select a valid image file.");
+    }
+  };
+
+  useEffect(() => {
+    if (userEmail) {
+      const emailNamePart = userEmail.split("@")[0];
+      setValue("name", emailNamePart);
+    }
+    setValue("email", userEmail);
+  }, [userEmail, setValue]);
+
   useEffect(() => {
     if (user.avatarUrl) {
       setAvatarPreview(user.avatarUrl);
@@ -76,11 +88,6 @@ const UsersSettingsForm = () => {
       setAvatarPreview(userName.charAt(0).toUpperCase());
     }
   }, [user.avatarUrl, userName]);
-
-  useEffect(() => {
-    setValue("name", userName);
-    setValue("email", userEmail);
-  }, [userName, userEmail, setValue]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -93,14 +100,6 @@ const UsersSettingsForm = () => {
       setValue("dailyNorm", waterNorm.toFixed(1));
     }
   }, [weight, activeTime, gender, setValue]);
-
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file));
-      setValue("avatarUrl", file);
-    }
-  };
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -130,7 +129,11 @@ const UsersSettingsForm = () => {
               alt="User Avatar"
             />
           ) : (
-            <div className={css.avatarPlaceholder}>{avatarPreview}</div>
+            <img
+              className={css.settingAvatarImg}
+              src={avatarPreview}
+              alt="Preview Avatar"
+            />
           )
         ) : (
           <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>

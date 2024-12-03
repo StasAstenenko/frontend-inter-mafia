@@ -14,7 +14,11 @@ const MonthInfo = () => {
     <div className={css.sectionCalendar}>
       <div className={`${css.MonthInfo} ${css.toRow}`}>
         <h2 className={css.title}>
-          {isCalendarVisible ? "Month" : "Statistics"}
+          {isCalendarVisible ? (
+            "Month"
+          ) : (
+            <span className={css.statisticsTitle}>Statistics</span>
+          )}
         </h2>
         <div className={css.toRow}>
           <CalendarPagination />

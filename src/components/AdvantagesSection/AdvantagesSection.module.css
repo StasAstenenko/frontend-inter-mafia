@@ -34,6 +34,7 @@
   position: relative;
   display: flex;
 }
+
 .customers_item {
   position: absolute;
 }
@@ -44,6 +45,7 @@
   width: 26px;
   height: 28px;
 }
+
 .customers_item:nth-child(3) {
   z-index: 1;
   left: 36px;
@@ -62,8 +64,24 @@
   font-weight: 700;
   font-size: 12px;
   color: var(--background-primary-dark);
-  width: 67px;
 }
+
+.count {
+  display: inline-block;
+  animation: countUp 2.5s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .span {
   color: var(--accent);
 }
@@ -74,6 +92,7 @@
   left: 159px;
   width: 168px;
 }
+
 .benefits_list {
   display: flex;
   flex-wrap: wrap;
@@ -83,15 +102,18 @@
   border-radius: 30px;
   padding: 9px 12px;
 }
+
 .benefits_item:nth-child(1) {
   background: var(--background-primary-dark);
 }
+
 .benefits_item:nth-child(2) {
   background-color: var(--accent);
 }
 .benefits_item:nth-child(3) {
   background-color: var(--background-primary-light);
 }
+
 .flex {
   display: flex;
   align-items: center;
@@ -99,6 +121,7 @@
   flex-direction: row;
   gap: 4px;
 }
+
 .ellipse13 {
   width: 8px;
   height: 8px;
@@ -134,6 +157,7 @@
     min-height: 446px;
     background-image: url("./../../img/advantages/girlT.webp");
   }
+
   .customers {
     padding: 10px 20px;
     gap: 104px;
@@ -144,13 +168,13 @@
   .customers_text {
     font-size: 15px;
     line-height: 1.49333;
-    width: 90px;
   }
 
   .avatar {
     width: 43px;
     height: 43px;
   }
+
   .customers_item:nth-child(3) {
     left: 56px;
   }
@@ -164,12 +188,15 @@
     left: 430px;
     width: 242px;
   }
+
   .benefits_list {
     gap: 10px;
   }
+
   .benefits_item {
     padding: 11px 16px;
   }
+
   .text {
     font-size: 12px;
   }

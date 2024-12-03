@@ -4,6 +4,7 @@ import css from "./WaterDailyNorma.module.css";
 
 const WaterDailyNorma = () => {
   const dailyNorma = useSelector(selectDailyNorm);
+  // console.log("daily norma", dailyNorma);
 
   const formatVolume = (ml) => {
     return `${(ml / 1000).toFixed(1)}`;

@@ -396,3 +396,17 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
   }
 }
+
+.avatarPlaceholder {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: #9be1a0;
+}
