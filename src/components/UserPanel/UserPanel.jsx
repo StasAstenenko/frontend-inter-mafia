@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectUser  } from "../../redux/settings/selectors.js";
+import { selectUser } from "../../redux/settings/selectors.js";
 import UserBar from "../../components/UserBar/UserBar.jsx";
 import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.jsx";
 import LogOutModal from "../../modals/LogOutModal/LogOutModal.jsx";
@@ -8,10 +8,9 @@ import LogOutModal from "../../modals/LogOutModal/LogOutModal.jsx";
 import css from "./UserPanel.module.css";
 
 const UserPanel = () => {
-
   const user = useSelector(selectUser);
   // console.log(user)
-  const defaultUserName = user.name || user.email.split('@')[0];
+  const defaultUserName = user.name || user.email.split("@")[0];
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
 

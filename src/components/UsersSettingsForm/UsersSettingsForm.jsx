@@ -41,7 +41,8 @@ const UsersSettingsForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: userName,
+      // userName: userName,
+      name: "",
       email: "",
       weight: 0,
       activeTime: 0,
@@ -71,10 +72,10 @@ const UsersSettingsForm = () => {
   useEffect(() => {
     if (userEmail) {
       const emailNamePart = userEmail.split("@")[0];
-      setValue("name", emailNamePart);
+      setValue("name", userName || emailNamePart);
     }
     setValue("email", userEmail);
-  }, [userEmail, setValue]);
+  }, [userEmail, userName, setValue]);
 
   useEffect(() => {
     if (user.avatarUrl) {
@@ -86,7 +87,7 @@ const UsersSettingsForm = () => {
 
   useEffect(() => {
     if (weight && activeTime && gender) {
-      let calculatedNorm = 1.5; // По умолчанию
+      let calculatedNorm = 1.5;
       if (gender === "woman") {
         calculatedNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0).toFixed(
           1
@@ -102,7 +103,7 @@ const UsersSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    console.log("1", data);
+    // console.log("1", data);
 
     Object.entries(data).forEach(([key, value]) => {
       if (
@@ -114,7 +115,7 @@ const UsersSettingsForm = () => {
       formData.append(key, value instanceof FileList ? value[0] : value);
     });
 
-    console.log("2", formData);
+    // console.log("2", formData);
 
     try {
       dispatch(editUser(formData));
