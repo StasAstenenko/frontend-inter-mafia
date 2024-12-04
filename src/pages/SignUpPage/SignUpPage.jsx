@@ -1,17 +1,27 @@
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import Section from "../../components/Section/Section";
+import Container from "../../components/Container/Container";
 import Logo from "../../components/Logo/Logo";
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import { NavLink } from "react-router-dom";
 import css from "./SignUpPage.module.css";
-import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
 import { useMediaQuery } from "react-responsive";
 import { useLanguage } from "../../locales/langContext.jsx";
 
 const SignUpPage = () => {
   const { t } = useLanguage();
   const isDesktop = useMediaQuery({ minWidth: 1440 });
+  const error = useSelector(selectAuthError);
+  const isRegistered = useSelector(selectAuthIsRegisteredSuccess);
+  // const isLoading = useSelector(selectAuthIsLoading);
+  // console.log("register Page state error: ", error);
+  // console.log("register Page state isRegistered: ", isRegistered);
+  // console.log("register Page state isLoading: ", isLoading);
+
   return (
-    <section className={css.section}>
-      <div className={css.formWrapper}>
+    <Section>
+      <Container className={css.signUpWrapper}>
+        {/* {isLoading && <Loader />} */}
         <Logo className={css.logo} />
         <h1 className={css.title}>{t("SignUp")}</h1>
         <SignUpForm />
@@ -21,9 +31,27 @@ const SignUpPage = () => {
             {t("SignIn")}
           </NavLink>
         </p>
-      </div>
+      </Container>
       {isDesktop && <AdvantagesSection className={css.advantagesSection} />}
-    </section>
+      {error &&
+        iziToast.error({
+          title: "Error",
+          message: error,
+          titleColor: "#ef5050",
+          messageColor: "#ef5050",
+          displayMode: 1,
+          position: "topRight",
+          maxWidth: "300px",
+        })}
+      {isRegistered &&
+        iziToast.success({
+          title: "Success",
+          message: "Successfully register user",
+          displayMode: 1,
+          position: "topRight",
+          maxWidth: "300px",
+        })}
+    </Section>
   );
 };
 

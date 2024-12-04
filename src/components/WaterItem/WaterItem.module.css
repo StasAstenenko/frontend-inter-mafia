@@ -1,1 +1,88 @@
 /*style*/
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 15px;
+  /* gap: 10px; */
+  padding: 18px 14px;
+  /* width: 149px; */
+  margin: 24px 0px;
+}
+
+.waterglass {
+  width: 38px;
+  height: 38px;
+}
+
+.amount {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.time {
+  color: #2f2f2f99;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
+.edit,
+.trash {
+  fill: #fff;
+  stroke: var(--text-primary-dark);
+  width: 14px;
+  height: 14px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* @media screen and (min-width: 768px){
+
+} */
+
+@media screen and (min-width: 1440px) {
+  /* .wrapper {
+    gap: 20px;
+    padding: 20px;
+    width: 192px;
+    margin: 24px 0px;
+  } */
+
+  .waterglass {
+    width: 44px;
+    height: 45px;
+  }
+
+  .amount {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+
+  .time {
+    font-size: 12px;
+    line-height: 22.4px;
+  }
+
+  .container {
+    gap: 14px;
+  }
+
+  .edit,
+  .trash {
+    width: 16px;
+    height: 16px;
+  }
+}

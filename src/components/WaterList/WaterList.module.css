@@ -1,1 +1,36 @@
 /*style*/
+/* .wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.scrollbar {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  height: 8px;
+} */
+/* 
+@media screen and (min-width: 768px) {
+  .wrapper {
+    gap: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    gap: 16px;
+  }
+} */
+
+
+.swiperScrollbar {
+  height: 8px;
+  background-color: white;
+  border-radius: 9px;
+}
+
+.swiperScrollbar :global(.swiper-scrollbar-drag) {
+  height: 8px;
+  background-color: var(--background-primary-dark);
+  border-radius: 9px;
+}

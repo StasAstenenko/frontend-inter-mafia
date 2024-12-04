@@ -50,13 +50,14 @@ const SignInForm = () => {
                 {t("Email")}
               </label>
               <Field
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 placeholder={t("EmailPlaceholder")}
                 className={clsx(css.inputForm, {
                   [css.inputFormError]: touched.email && errors.email,
                 })}
+                autoComplete="off"
               />
               <ErrorMessage
                 name="email"

@@ -1,33 +1,34 @@
 import { useState, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
-import { AiOutlineSetting } from "react-icons/ai"; 
-import { IoLogOutOutline } from 'react-icons/io5';
-// import UserBarPopover from "../../components/UserBarPopover/UserBarPopover.jsx";
-import css from './UserBar.module.css';
+import UserBarPopover from "../../components/UserBarPopover/UserBarPopover.jsx";
+import css from "./UserBar.module.css";
 
 const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
-  const defaultUserName = userName || "Nadia";
-  const avatarPlaceholder = defaultUserName.charAt(0).toUpperCase();
+  
+  const avatarPlaceholder = userName.charAt(0).toUpperCase();
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
 
-  const { styles, attributes, update } = usePopper(buttonRef.current, popoverRef.current, {
-    placement: 'bottom-end',
-    modifiers: [
-      {
-        name: 'offset',
-        options: { offset: [0, 8] },
-      },
-      {
-        name: 'preventOverflow',
-        options: { boundary: 'viewport' },
-      },
-      
-    ],
-  });
+  const { styles, attributes, update } = usePopper(
+    buttonRef.current,
+    popoverRef.current,
+    {
+      placement: "bottom-end",
+      modifiers: [
+        {
+          name: "offset",
+          options: { offset: [0, 8] },
+        },
+        {
+          name: "preventOverflow",
+          options: { boundary: "viewport" },
+        },
+      ],
+    }
+  );
 
   const togglePopover = () => {
     setIsPopoverOpen((prev) => !prev);
@@ -36,7 +37,7 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
     }
   };
 
-  // const closePopover = () => setIsPopoverOpen(false);
+  const closePopover = () => setIsPopoverOpen(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,9 +46,9 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -61,27 +62,28 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
   return (
     <div className={css.container}>
       <button ref={buttonRef} onClick={togglePopover} className={css.userbar}>
-        <span className={css.name}>{defaultUserName}</span>
+        <span className={css.name}>{userName}</span>
         {avatarUrl ? (
           <img src={avatarUrl} alt="Avatar" className={css.avatar} />
         ) : (
           <div className={css.avatarPlaceholder}>{avatarPlaceholder}</div>
         )}
-        {isPopoverOpen ? <HiChevronUp className={css.icon}/> : <HiChevronDown className={css.icon} />}
+        {isPopoverOpen ? (
+          <HiChevronUp className={css.icon} />
+        ) : (
+          <HiChevronDown className={css.icon} />
+        )}
       </button>
 
-      <div
-        ref={popoverRef}
-        style={{
-          ...styles.popper,
-          display: isPopoverOpen ? 'flex' : 'none',
-        }}
-        {...attributes.popper}
-        className={css.userbarpopover}
-      >
-        <button onClick={onSettingsClick} className={css.popoverbutton}><AiOutlineSetting/>Settings</button>
-        <button onClick={onLogOutClick} className={css.popoverbutton}><IoLogOutOutline/>Log out</button>
-      </div>
+      <UserBarPopover
+  popoverRef={popoverRef}
+  styles={styles}
+  attributes={attributes}
+  isOpen={isPopoverOpen}
+  onSettingsClick={onSettingsClick}
+  onLogOutClick={onLogOutClick}
+  closePopover={closePopover}
+/>
     </div>
   );
 };

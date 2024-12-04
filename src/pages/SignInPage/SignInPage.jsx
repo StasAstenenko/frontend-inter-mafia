@@ -6,7 +6,10 @@ import { NavLink } from "react-router-dom";
 import css from "./SignInPage.module.css";
 import { useMediaQuery } from "react-responsive";
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection";
-import { selectAuthError } from "../../redux/auth/selectors";
+import {
+  selectAuthError,
+  selectAuthIsLoggedIn,
+} from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
@@ -16,6 +19,7 @@ const SignInPage = () => {
   const { t } = useLanguage();
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   const error = useSelector(selectAuthError);
+  const successLoggedIn = useSelector(selectAuthIsLoggedIn);
 
   return (
     <Section>
@@ -37,12 +41,20 @@ const SignInPage = () => {
       {error &&
         iziToast.error({
           title: "Error",
-          message: "Wrong password or email",
+          message: error,
           titleColor: "#ef5050",
           messageColor: "#ef5050",
           displayMode: 1,
           position: "topRight",
-          maxWidth: "300px",
+          maxWidth: "400px",
+        })}
+      {successLoggedIn &&
+        iziToast.success({
+          title: "Success",
+          message: "Successfully logged user",
+          displayMode: 1,
+          position: "topRight",
+          maxWidth: "400px",
         })}
     </Section>
   );

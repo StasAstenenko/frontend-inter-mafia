@@ -45,7 +45,7 @@ const SignUpForm = () => {
     const registerObj = { email, password };
     // console.log(registerObj);
     dispatch(apiRegister(registerObj));
-
+    console.log("Form submitted, dispatch work");
     actions.resetForm();
   };
 

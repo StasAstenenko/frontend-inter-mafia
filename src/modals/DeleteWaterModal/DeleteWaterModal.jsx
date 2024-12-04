@@ -1,12 +1,26 @@
 import css from "./DeleteWaterModal.module.css";
 import Modal from "../Modal/Modal";
+import { useDispatch } from "react-redux";
+import { apiDeleteWater } from "../../redux/water/operations";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const DeleteWaterModal = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
-    // логика удаления воды
+    dispatch(apiDeleteWater()); // логика удаления воды
     onClose();
-    // оповещение с помощью Toast
+    iziToast.success({
+      title: "Done",
+      message: "Successfully Logged Out!",
+      displayMode: 1,
+      position: "topRight",
+      maxWidth: "300px",
+    });
+    // актуализировать с помощью redux данные в WaterProgressBar, WaterList та Calendar
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={css.modal_content}>

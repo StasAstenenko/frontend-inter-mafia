@@ -55,6 +55,10 @@
         <symbol id="plus-add-water" viewBox="0 0 32 32">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.667" d="M16 6.667v18.667M6.667 16h18.667"/>
         </symbol>
+
+        <symbol id="circle" viewBox="0 0 32 32">
+<path fill="#fff" style="fill: var(--color1, #fff); stroke: var(--color2, #9be1a0)" stroke="#9be1a0" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M30.667 16c0 8.1-6.567 14.667-14.667 14.667s-14.667-6.566-14.667-14.667c0-8.1 6.566-14.667 14.667-14.667s14.667 6.566 14.667 14.667z"></path>
+</symbol>
        
 </defs>
 </svg>

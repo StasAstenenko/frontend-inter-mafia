@@ -46,6 +46,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .settingAvatarIcon {
@@ -56,6 +57,11 @@
     width: 20px;
     height: 20px;
   }
+}
+
+.settingAvatarSecondIcon {
+  width: 75px;
+  height: 75px;
 }
 
 .avatarButtonText {
@@ -180,6 +186,16 @@
   border-color: rgba(47, 47, 47, 0.4);
 }
 
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .settingDailyForm {
   display: flex;
   flex-direction: column;
@@ -187,6 +203,7 @@
   justify-content: start;
   align-items: start;
   margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .settingDailyAllCard {
@@ -253,6 +270,7 @@
   color: rgba(47, 47, 47, 0.6);
   @media (min-width: 768px) {
     line-height: 1.5;
+    font-size: 16px;
   }
 }
 
@@ -364,6 +382,7 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
+  cursor: pointer;
   @media (min-width: 768px) {
     line-height: 1.5;
   }
@@ -375,4 +394,24 @@
 
 .settingFormButton:focus {
   background-color: #e6e6e6;
+}
+
+@media (min-width: 768px) {
+  .settingTransferText {
+    display: none;
+  }
+}
+
+.avatarSettingPlaceholder {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: #9be1a0;
 }

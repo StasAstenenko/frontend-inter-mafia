@@ -2,6 +2,7 @@
   padding: 16px;
   margin: 0 auto;
   max-width: 375px;
+  min-width: 320px;
   background-color: #ffffff;
 }
 

@@ -18,9 +18,9 @@ export const apiLogin = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await instance.post("users/login", formData);
-      setAuthHeaders(data.token);
+      setAuthHeaders(data.data.accessToken);
       // console.log(data);
-      return data;
+      return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -32,12 +32,12 @@ export const apiRegister = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await instance.post("users/register", formData);
-      setAuthHeaders(data.token);
+      // setAuthHeaders(data.token);
       //   console.log("data:", data);
       return data;
     } catch (error) {
-      //   console.error("Error during registration:", error);
-      return thunkApi.rejectWithValue(error.message);
+      // console.error("Error during registration:", error);
+      return thunkApi.rejectWithValue(error.response.data.data.message);
     }
   }
 );
@@ -74,6 +74,18 @@ export const apiLogout = createAsyncThunk(
       await instance.post("users/logout");
       clearAuthHeader();
       return;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getAllUsers = createAsyncThunk(
+  "users/getAllUsers",
+  async (_, thunkApi) => {
+    try {
+      const response = await instance.get("users/count-user");
+      return response.data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

@@ -4,29 +4,34 @@ import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectEmail,
+  selectName,
+  selectUser,
+} from "../../redux/settings/selectors";
+import { editUser } from "../../redux/settings/operations";
+import { FcDecision } from "react-icons/fc";
 
 const validationSettingSchema = Yup.object().shape({
-  avatarUrl: Yup.mixed(),
-  gender: Yup.string().oneOf(["woman", "man"]).required("Gender is required"),
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  weight: Yup.number()
-    .positive("Weight must be a positive number")
-    .nullable()
-    .required("Weight is required"),
-  activeTime: Yup.number()
-    .min(0, "Active time cannot be negative")
-    .required("Active time is required")
-    .nullable(),
-  dailyNorm: Yup.number()
-    .positive("Water norm must be a positive number")
-    .nullable()
-    .required("Water norm is required"),
+  avatarUrl: Yup.mixed().default(""),
+  gender: Yup.string().oneOf(["woman", "man"]),
+  name: Yup.string(),
+  email: Yup.string().email("Invalid email"),
+  weight: Yup.number().positive("Weight must be a positive number"),
+  activeTime: Yup.number().min(0, "Active time cannot be negative"),
+  dailyNorm: Yup.number().positive("Water norm must be a positive number"),
 });
 
 const UsersSettingsForm = () => {
+  const dispatch = useDispatch();
+
+  const userName = useSelector(selectName);
+  const userEmail = useSelector(selectEmail);
+  const user = useSelector(selectUser);
+
   const [avatarPreview, setAvatarPreview] = useState(null);
-  const [calculateWaterNorm, setCalculateWaterNorm] = useState(null);
+  const [waterNorm, setWaterNorm] = useState("1.5");
 
   const {
     register,
@@ -35,6 +40,14 @@ const UsersSettingsForm = () => {
     watch,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      name: userName,
+      email: "",
+      weight: 0,
+      activeTime: 0,
+      gender: "woman",
+      dailyNorm: 1.5,
+    },
     resolver: yupResolver(validationSettingSchema),
   });
 
@@ -42,41 +55,90 @@ const UsersSettingsForm = () => {
   const activeTime = watch("activeTime");
   const gender = watch("gender");
 
-  useEffect(() => {
-    if (weight && activeTime && gender) {
-      let waterNorm = 0;
-      if (gender === "woman") {
-        waterNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0);
-      } else if (gender === "man") {
-        waterNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0);
-      }
-      setValue("waterDrink", waterNorm.toFixed(1));
-      setCalculateWaterNorm(waterNorm.toFixed(1));
-    }
-  }, [weight, activeTime, gender, setValue]);
-
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file && file.type.startsWith("image/")) {
       setAvatarPreview(URL.createObjectURL(file));
-      setValue("avatarUrl", e.target.files);
+      setValue("avatarUrl", file);
+    } else if (!file) {
+      setAvatarPreview(null);
+      setValue("avatarUrl", "");
+    } else {
+      alert("Please select a valid image file.");
+    }
+  };
+
+  useEffect(() => {
+    if (userEmail) {
+      const emailNamePart = userEmail.split("@")[0];
+      setValue("name", emailNamePart);
+    }
+    setValue("email", userEmail);
+  }, [userEmail, setValue]);
+
+  useEffect(() => {
+    if (user.avatarUrl) {
+      setAvatarPreview(user.avatarUrl);
+    } else if (userName) {
+      setAvatarPreview(userName.charAt(0).toUpperCase());
+    }
+  }, [user.avatarUrl, userName]);
+
+  useEffect(() => {
+    if (weight && activeTime && gender) {
+      let calculatedNorm = 1.5; // По умолчанию
+      if (gender === "woman") {
+        calculatedNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0).toFixed(
+          1
+        );
+      } else if (gender === "man") {
+        calculatedNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0).toFixed(
+          1
+        );
+      }
+      setWaterNorm(calculatedNorm);
+    }
+  }, [weight, activeTime, gender]);
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    console.log("1", data);
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (
+        key === "avatarUrl" &&
+        (!value || (value instanceof FileList && value.length === 0))
+      ) {
+        return;
+      }
+      formData.append(key, value instanceof FileList ? value[0] : value);
+    });
+
+    console.log("2", formData);
+
+    try {
+      dispatch(editUser(formData));
+      // alert("User updated successfully!");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      // alert("Failed to update user. Please try again.");
     }
   };
 
   return (
-    <form
-      className={css.settingForm}
-      onSubmit={handleSubmit((d) => console.log(d))}
-    >
+    <form className={css.settingForm} onSubmit={handleSubmit(onSubmit)}>
+      {/* Avatar */}
       <div className={css.settingFormAvatar}>
         {avatarPreview ? (
           <img
             className={css.settingAvatarImg}
             src={avatarPreview}
-            alt="Avatar"
+            alt="User Avatar"
           />
         ) : (
-          <div className={css.avatarPlaceholder}>N</div>
+          <div className={css.avatarPlaceholder}>
+            <FcDecision className={css.settingAvatarSecondIcon} />
+          </div>
         )}
         <div>
           <button
@@ -93,7 +155,7 @@ const UsersSettingsForm = () => {
           <input
             type="file"
             id="avatarInput"
-            {...register("avatar")}
+            {...register("avatarUrl")}
             onChange={handleAvatarChange}
             style={{ display: "none" }}
           />
@@ -101,6 +163,7 @@ const UsersSettingsForm = () => {
       </div>
 
       <div className={css.settingAllForms}>
+        {/* Gender Form */}
         <div className={css.settingGenderForm}>
           <div>
             <label className={css.settingLabel}>Your gender identity</label>
@@ -133,6 +196,7 @@ const UsersSettingsForm = () => {
         </div>
         <div className={css.settingAllFormsDesctop}>
           <div>
+            {/* Name and Email */}
             <div className={css.settingNameForm}>
               <div className={css.settingNameFormLabels}>
                 <label className={css.settingLabel}>Your name</label>
@@ -158,6 +222,7 @@ const UsersSettingsForm = () => {
                 )}
               </div>
             </div>
+            {/* Daily Norm Context */}
             <div className={css.settingDailyForm}>
               <label className={css.settingLabel}>My daily norma</label>
               <div className={css.settingDailyAllCard}>
@@ -186,12 +251,13 @@ const UsersSettingsForm = () => {
               <div>
                 <p className={css.settingDailyRemark}>
                   <span className={css.settingDailyRemarkSpan}>!</span> Active
-                  time in honours
+                  time in hours
                 </p>
               </div>
             </div>
           </div>
           <div className={css.settingAllFormsSecond}>
+            {/* Weight and Time active */}
             <div className={css.settingWeightTimeForm}>
               <div className={css.settingWeightLabel}>
                 <label className={css.settingWeightContext}>
@@ -214,14 +280,14 @@ const UsersSettingsForm = () => {
                 />
               </div>
             </div>
+            {/* Calculate Form */}
             <div className={css.settingCalculateForm}>
               <div className={css.settingCalculate}>
                 <p className={css.settingCalculateText}>
-                  The required amount of water in liters per day:
+                  The required amount of water in liters per
+                  <br className={css.settingTransferText} /> day:
                 </p>
-                <p className={css.settingCalculateTextSpan}>
-                  2 {calculateWaterNorm}
-                </p>
+                <p className={css.settingCalculateTextSpan}>{waterNorm}</p>
               </div>
               <div>
                 <label className={clsx(css.settingLabel, css.settingLabelText)}>
@@ -230,7 +296,7 @@ const UsersSettingsForm = () => {
 
                 <input
                   type="number"
-                  {...register("waterNorm")}
+                  {...register("dailyNorm")}
                   className={css.settingFormInput}
                 />
               </div>

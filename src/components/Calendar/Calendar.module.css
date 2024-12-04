@@ -3,40 +3,51 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 20px 18px;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  grid-auto-rows: minmax(10px, 1fr);
+  row-gap: 20px;
+  align-items: start;
   justify-items: center;
+  max-height: 300px;
+  column-gap: 18px;
 }
-
-@media only screen and (max-width: 374px) {
-  .grid {
-    row-gap: 20px;
-    column-gap: calc(0.33 * (100vw - 320px));
-  }
-}
-
 @media only screen and (min-width: 768px) {
   .grid {
     gap: 15px 62px;
+    max-height: 305px;
   }
 }
-
 @media only screen and (min-width: 1440px) {
   .grid {
     gap: 15px 57px;
   }
 }
 
-@media only screen and (min-width: 1440px) {
+/* ===== 8-days week view ===== */
+.grid8 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 20px;
+  align-items: start;
+  justify-items: center;
+  max-height: 300px;
+  column-gap: 18px;
+}
+@media only screen and (min-width: 768px) {
   .grid8 {
     grid-template-columns: repeat(8, 1fr);
     gap: 15px 48px;
+    max-height: 305px;
   }
 }
 @media only screen and (min-width: 1440px) {
   .grid8 {
     gap: 15px 43px;
+  }
+}
+/* ===== 8-days styles end ===== */
+
+@media only screen and (max-width: 374px) {
+  .grid {
+    column-gap: calc(0.33 * (100vw - 320px));
   }
 }
