@@ -1,98 +1,83 @@
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
-  Tooltip,
   CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
-  Area,
 } from "recharts";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { selectDaysDrinking } from "../../redux/water/selectors";
+import {
+  selectChosenDate,
+  selectDaysDrinking,
+} from "../../redux/water/selectors";
 
 const RechartsComponent = () => {
+  const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
 
-  const chartData = useMemo(() => {
-    const today = new Date();
-    const sevenDaysAgo = new Date(today);
-    sevenDaysAgo.setDate(today.getDate() - 6); // 7 днів від сьогодні
+  // Перетворюємо обрану дату в Date
+  const dayEndOfStatistic = useMemo(() => new Date(chosenDate), [chosenDate]);
 
+  // Створення масиву останніх 7 днів
+  const lastWeekDays = useMemo(() => {
     const daysArray = Array.from({ length: 7 }, (_, i) => {
-      const currentDate = new Date(sevenDaysAgo);
-      currentDate.setDate(sevenDaysAgo.getDate() + i);
-
+      const date = new Date(dayEndOfStatistic);
+      date.setDate(dayEndOfStatistic.getDate() - (6 - i));
       return {
-        date: currentDate.getDate(), // Число дня
+        day: date.getDate(),
+        month: date.getMonth() + 1,
+        year: date.getFullYear(),
         amount: 0,
       };
     });
 
-    // Заповнюємо обсяг води, якщо є дані
-    daysDrinking?.forEach(({ date, amount }) => {
-      const day = parseInt(date.slice(8, 10));
-      const dayData = daysArray.find((dayObj) => dayObj.date === day);
-      if (dayData) dayData.amount += amount;
+    daysDrinking.forEach(({ date, amount }) => {
+      const drinkingDate = new Date(date);
+      const index = daysArray.findIndex(
+        (day) =>
+          day.day === drinkingDate.getDate() &&
+          day.month === drinkingDate.getMonth() + 1 &&
+          day.year === drinkingDate.getFullYear()
+      );
+      if (index !== -1) {
+        daysArray[index].amount += amount;
+      }
     });
 
     return daysArray;
-  }, [daysDrinking]);
+  }, [daysDrinking, dayEndOfStatistic]);
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={chartData}>
-        {/* Дефініція градієнта */}
+      <AreaChart data={lastWeekDays}>
         <defs>
-          <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#9BE1A0" stopOpacity={0.6} />
-            <stop offset="100%" stopColor="#9BE1A0" stopOpacity={0} />
+          <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
           </linearGradient>
         </defs>
 
-        {/* Сітка */}
         <CartesianGrid strokeDasharray="3 3" />
-
-        {/* Вісь X */}
-        <XAxis
-          dataKey="date"
-          tick={{ fontSize: 12 }}
-          tickLine={false}
-          axisLine={false}
-        />
-
-        {/* Вісь Y */}
+        <XAxis dataKey="day" tick={{ fontSize: 12 }} />
         <YAxis
-          tick={{ fontSize: 12 }}
+          domain={[0, "dataMax"]}
           tickFormatter={(value) => `${value / 1000} L`}
-          width={40}
-          axisLine={false}
-          tickLine={false}
+          tick={{ fontSize: 12 }}
         />
-
-        {/* Підказки */}
         <Tooltip formatter={(value) => `${value} ml`} />
-
-        {/* Градієнт */}
         <Area
           type="monotone"
           dataKey="amount"
-          stroke="#9BE1A0"
-          fill="url(#gradient)"
-          fillOpacity={1}
-        />
-
-        {/* Лінія */}
-        <Line
-          type="monotone"
-          dataKey="amount"
-          stroke="#9BE1A0"
+          stroke="#82ca9d"
+          fill="url(#gradientFill)"
           strokeWidth={2}
           dot={{ r: 6 }}
           activeDot={{ r: 8 }}
         />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 };

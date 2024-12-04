@@ -5,8 +5,8 @@ const INITIAL_STATE = {
   user: {
     name: "",
     email: "",
-    weight: null,
-    activeTime: null,
+    weight: 0,
+    activeTime: 0,
     gender: "woman",
     dailyNorm: 1500,
     avatarUrl: "",

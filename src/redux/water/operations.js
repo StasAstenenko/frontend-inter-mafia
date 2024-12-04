@@ -15,7 +15,7 @@ export const fetchWaterData = createAsyncThunk(
     try {
       const token = selectAuthToken(thunkAPI.getState());
       setAuthHeaders(token);
-      const endpoint = type === "month" ? "/month" : "/day";
+      const endpoint = type === "month" ? "/month" : "/water-per-day";
       // console.log(endpoint);
       const response = await instance.get(endpoint, {
         params: { date },
@@ -65,7 +65,7 @@ export const fetchWaterItems = createAsyncThunk(
   "water/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/");
+      const response = await instance.get("/");
       console.log("fetch" + response.data);
       return response.data;
     } catch (error) {
@@ -110,13 +110,13 @@ export const deleteWaterItem = createAsyncThunk(
 //   }
 // );
 
-export const getWaterData = createAsyncThunk(
-  "water/getWaterData",
-  async (_, thunkAPI) => {
+export const getWaterPerDay = createAsyncThunk(
+  "water/getWaterPerDay",
+  async (date, thunkAPI) => {
     try {
       const token = selectAuthToken(thunkAPI.getState());
       setAuthHeaders(token);
-      const { data } = await instance.get("/");
+      const { data } = await instance.get(`/water-per-day?date=${date}`);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

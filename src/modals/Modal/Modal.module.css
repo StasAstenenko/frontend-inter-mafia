@@ -23,8 +23,6 @@
   position: relative;
   background: var(--background-primary-light);
   border-radius: 15px;
-  transform: translateY(-50px);
-  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal_closeBtn {
   position: absolute;
