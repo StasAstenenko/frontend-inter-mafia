@@ -1,4 +1,5 @@
 import WaterForm from "../../components/WaterForm/WaterForm.jsx";
+import { editWaterData, postWaterData } from "../../redux/water/operations.js";
 import Modal from "../Modal/Modal.jsx";
 
 const WaterModal = ({ operationType, data, isOpen, onClose }) => {
@@ -6,10 +7,12 @@ const WaterModal = ({ operationType, data, isOpen, onClose }) => {
     add: {
       title: "Add water",
       paragraph: "Choose a value",
+      dispatchFunction: postWaterData,
     },
     edit: {
       title: "Edit the entered amount of water",
       paragraph: "Correct entered data",
+      dispatchFunction: editWaterData,
     },
   };
 
@@ -17,11 +20,12 @@ const WaterModal = ({ operationType, data, isOpen, onClose }) => {
     operationType === "add"
       ? { amountOfWater: 50, recordingTime: new Date() }
       : {
-          ...data,
-          recordingTime: new Date(),
+          amountOfWater: data?.amount || 0,
+          recordingTime: new Date(data?.date || new Date()),
+          _id: data?._id,
         };
 
-  const { title, paragraph } = messages[operationType];
+  const { title, paragraph, dispatchFunction } = messages[operationType];
 
   return (
     <>
@@ -30,6 +34,7 @@ const WaterModal = ({ operationType, data, isOpen, onClose }) => {
           title={title}
           paragraph={paragraph}
           initialValues={initialValues}
+          dispatchFunction={dispatchFunction}
         />
       </Modal>
     </>

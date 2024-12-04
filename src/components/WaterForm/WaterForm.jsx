@@ -6,7 +6,7 @@ import css from "./WaterForm.module.css";
 import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
-import { getWaterPerDay, postWaterData } from "../../redux/water/operations.js";
+import { getWaterPerDay } from "../../redux/water/operations.js";
 import { useDispatch } from "react-redux";
 
 const entriesValidationSchema = Yup.object().shape({
@@ -17,10 +17,9 @@ const entriesValidationSchema = Yup.object().shape({
   recordingTime: Yup.date().required("Required"),
 });
 
-const WaterForm = ({ title, paragraph, initialValues }) => {
+const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
   const dispatch = useDispatch();
   const [amount, setAmount] = useState(initialValues.amountOfWater);
-
   const handleSubmit = (values) => {
     const formattedTime = values.recordingTime.toISOString().split(".")[0];
     const today = new Date().toISOString().split("T")[0];
@@ -29,10 +28,13 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
       amount: values.amountOfWater,
       date: formattedTime,
     };
-    dispatch(postWaterData(entries));
+    if (initialValues._id) {
+      dispatch(dispatchFunction({ waterId: initialValues._id, entries }));
+    } else {
+      dispatch(dispatchFunction({ entries }));
+    }
     dispatch(getWaterPerDay(today));
   };
-
   return (
     <div className={css.wrapper}>
       <Formik
