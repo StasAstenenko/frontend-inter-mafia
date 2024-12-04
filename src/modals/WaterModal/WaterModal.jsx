@@ -18,7 +18,7 @@ const WaterModal = ({ operationType, data, isOpen, onClose }) => {
       ? { amountOfWater: 50, recordingTime: new Date() }
       : {
           ...data,
-          recordingTime: new Date(`1970-01-01T${data.recordingTime}:00`),
+          recordingTime: new Date(),
         };
 
   const { title, paragraph } = messages[operationType];

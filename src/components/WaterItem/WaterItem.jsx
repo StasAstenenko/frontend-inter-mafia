@@ -8,6 +8,9 @@ const WaterItem = ({ _id, amount, createdAt }) => {
   const openLogOutModal = () => setLogOutModalisOpen(true);
   const closeLogOutModal = () => setLogOutModalisOpen(false);
   const dispatch = useDispatch();
+
+  const handleDelete = () => dispatch(deleteWaterItem(_id));
+
   return (
     <div>
       <div className={s.wrapper}>
@@ -24,10 +27,7 @@ const WaterItem = ({ _id, amount, createdAt }) => {
               <use href="/icons/sprite.svg#edit"></use>
             </svg>
           </button>
-          <button
-            className={s.btn}
-            onClick={() => dispatch(deleteWaterItem(_id))}
-          >
+          <button className={s.btn} onClick={handleDelete}>
             <svg className={s.trash}>
               <use href="/icons/sprite.svg#trash"></use>
             </svg>
@@ -39,19 +39,6 @@ const WaterItem = ({ _id, amount, createdAt }) => {
         onClose={closeLogOutModal}
         operationType="add"
       />
-      {/* icon
-      <div>
-        <p>{amount} ml</p>
-        <p>{createdAt}</p>
-      </div>
-      <div>
-        <button onClick={() => dispatch(deleteWaterItem(_id))} type="button">
-          icon
-        </button>
-        <button onClick={() => dispatch(deleteItem(_id))} type="button">
-          icon
-        </button>
-      </div> */}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   fetchWaterData,
   fetchWaterItems,
   getWaterData,
+  postWaterData,
 } from "./operations";
 
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
@@ -17,7 +18,6 @@ const INITIAL_STATE = {
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   loading: false, // Стан завантаження
   error: null, // Помилки
-  waterAmount: [],
 };
 
 const waterSlice = createSlice({
@@ -81,9 +81,7 @@ const waterSlice = createSlice({
       .addCase(deleteWaterItem.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = state.items.filter((item) => {
-          item._id !== action.payload._id;
-        });
+        state.items = state.items.filter((item) => item._id !== action.payload);
       })
       .addCase(deleteWaterItem.rejected, (state, action) => {
         state.loading = false;
@@ -104,15 +102,25 @@ const waterSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(getWaterData.fulfilled, (state, { payload }) => {
+      .addCase(getWaterData.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterAmount = payload.data;
-        // console.log(payload.data);
+        if (Array.isArray(action.payload)) {
+          state.items = action.payload;
+        } else {
+          console.error(action.payload);
+        }
       })
       .addCase(getWaterData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(postWaterData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(postWaterData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items.push(action.payload);
       });
   },
 });

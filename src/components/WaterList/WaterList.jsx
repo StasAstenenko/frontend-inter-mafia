@@ -8,36 +8,35 @@ import "swiper/css/scrollbar";
 
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectWaterItems } from "../../redux/water/selectors";
+import { useEffect } from "react";
+import { getWaterData } from "../../redux/water/operations.js";
 const WaterList = () => {
   const items = useSelector(selectWaterItems);
-  console.log(items);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getWaterData());
+  }, [dispatch]);
+
   return (
     <ul className={s.wrapper}>
       <Swiper
-        // install Swiper modules
         modules={[Scrollbar]}
         spaceBetween={8}
-        slidesPerView={2}
+        slidesPerView={3}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide>
-          {items.map((item) => {
-            return (
-              <li key={item._id}>
-                <WaterItem
-                  id={item._id}
-                  amount={item.amount}
-                  createdAt={item.createdAt}
-                />
-              </li>
-            );
-          })}
-        </SwiperSlide>
-        <div className={s.swiperScrollbar}></div> {/* Елемент скроллбара */}
+        {Array.isArray(items) &&
+          items.map((item, index) => (
+            <SwiperSlide key={item._id || index}>
+              <WaterItem
+                _id={item._id}
+                amount={item.amount}
+                createdAt={item.createdAt}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </ul>
   );
