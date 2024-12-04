@@ -1,30 +1,34 @@
 import { useSelector } from "react-redux";
 // import { selectWaterAmountForToday } from "../../redux/water/selectors.js";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
+import {
+  selectChosenDate,
+  selectDayDetails,
+} from "../../redux/water/selectors.js";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   // const currentAmount = useSelector(selectWaterAmountForToday);
   // console.log(currentAmount);
+
   const dailyNorma = useSelector(selectDailyNorm);
+  const currentAmount = useSelector(selectDayDetails);
+  // const chosenDate = useSelector(selectChosenDate);
 
-  // const dayDetails = useSelector(selectDayDetails); // Отримуємо дані за день
-  // const chosenDate = useSelector(selectChosenDate); // Отримуємо поточну дату, якщо потрібно
+  // const todayData = currentAmount.filter((entry) => entry.date === chosenDate);
 
-  // const todayData = dayDetails.filter((entry) => entry.date === chosenDate);
+  // Якщо структура даних dayDetails виглядає як масив, можна пройтись по ньому:
+  const totalWater = currentAmount.reduce((total, entry) => {
+    return total + (entry.amount || 0); // amount - це приклад назви поля з кількістю води
+  }, 0);
 
-  // // Якщо структура даних dayDetails виглядає як масив, можна пройтись по ньому:
-  // const totalWater = dayDetails.reduce((total, entry) => {
-  //   return total + (entry.amount || 0); // amount - це приклад назви поля з кількістю води
-  // }, 0);
-
-  const waterPercentage = Math.round((0 / dailyNorma) * 100);
+  const waterPercentage = Math.round((totalWater / dailyNorma) * 100);
 
   return (
     <>
       <div className={css.container}>
         <p className={css.today}>Today</p>
-        <span className={css.volumeInfo}>{waterPercentage}</span>
+        <span className={css.volumeInfo}>{waterPercentage}%</span>
         <div className={css.progressBarContainer}>
           <div
             className={css.progressBar}
