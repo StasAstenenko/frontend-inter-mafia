@@ -11,7 +11,7 @@ import {
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
 
 const INITIAL_STATE = {
-  items: [],
+  items: [{ _id: 0, amount: 0, date: 0 }],
   daysDrinking: [], // Дані про дні пиття води за місяць
   dayDetails: [], // Деталі пиття води за конкретний день
   chosenDate: today,

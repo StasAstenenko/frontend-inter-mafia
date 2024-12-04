@@ -3,7 +3,7 @@ import { deleteWaterItem } from "../../redux/water/operations";
 import { useState } from "react";
 import WaterModal from "../../modals/WaterModal/WaterModal";
 import s from "./WaterItem.module.css";
-const WaterItem = ({ _id, amount, createdAt }) => {
+const WaterItem = ({ _id, amount, date }) => {
   const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
   const openLogOutModal = () => setLogOutModalisOpen(true);
   const closeLogOutModal = () => setLogOutModalisOpen(false);
@@ -19,7 +19,7 @@ const WaterItem = ({ _id, amount, createdAt }) => {
         </svg>
         <div>
           <p className={s.amount}>{amount} ml</p>
-          <p className={s.time}>{createdAt}AM</p>
+          <p className={s.time}>{date}AM</p>
         </div>
         <div className={s.container}>
           <button onClick={openLogOutModal} className={s.btn}>

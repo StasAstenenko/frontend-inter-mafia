@@ -33,7 +33,7 @@ const WaterList = () => {
               <WaterItem
                 _id={item._id}
                 amount={item.amount}
-                createdAt={item.createdAt}
+                createdAt={item.date}
               />
             </SwiperSlide>
           ))}
