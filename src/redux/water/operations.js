@@ -32,7 +32,7 @@ export const apiDeleteWater = createAsyncThunk(
   "water/apiDeleteWater",
   async (waterId, thunkApi) => {
     try {
-      const { data } = await axios.delete(`/water/${waterId}`);
+      const { data } = await instance.delete(`/water/${waterId}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -42,7 +42,7 @@ export const apiDeleteWater = createAsyncThunk(
 
 export const postWaterData = async (entries) => {
   try {
-    const response = await axios.post("/", entries);
+    const response = await instance.post("/", entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");
@@ -51,7 +51,7 @@ export const postWaterData = async (entries) => {
 
 export const editWaterData = async (entries) => {
   try {
-    const response = await axios.patch(`/`, entries);
+    const response = await instance.patch(`/`, entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");
@@ -106,3 +106,17 @@ export const editWaterData = async (entries) => {
 //     }
 //   }
 // );
+
+export const getWaterData = createAsyncThunk(
+  "water/getWaterData",
+  async (_, thunkAPI) => {
+    try {
+      const token = selectAuthToken(thunkAPI.getState());
+      setAuthHeaders(token);
+      const { data } = await instance.get("/");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
