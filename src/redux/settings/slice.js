@@ -13,7 +13,10 @@ const INITIAL_STATE = {
   },
   error: null,
   accessToken: null,
-  DaysNotAsInWeek: false,
+
+  // додаткові опції
+  DaysNotAsInWeek: true,
+  SundayFirst: false,
 };
 
 const settingsSlice = createSlice({
@@ -22,6 +25,9 @@ const settingsSlice = createSlice({
   reducers: {
     setDaysNotAsInWeek(state, action) {
       state.DaysNotAsInWeek = action.payload;
+    },
+    setSundayFirst(state, action) {
+      state.SundayFirst = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -49,4 +55,4 @@ const settingsSlice = createSlice({
 });
 
 export const settingsReducer = settingsSlice.reducer;
-export const { setDaysNotAsInWeek } = settingsSlice.actions;
+export const { setDaysNotAsInWeek, setSundayFirst } = settingsSlice.actions;

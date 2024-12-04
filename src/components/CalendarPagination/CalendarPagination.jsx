@@ -7,6 +7,11 @@ const CalendarPagination = () => {
   const dispatch = useDispatch();
   const monthFromState = useSelector(selectChosenMonth);
 
+  const today = new Date().toLocaleString("en-CA").slice(0, 7);
+  const handleTodayJump = () => {
+    dispatch(setChosenMonth(today));
+  };
+
   const handleMonthChange = (shift) => {
     const [year, month] = monthFromState.split("-");
     const newMonth = parseInt(month) + shift;
@@ -36,7 +41,13 @@ const CalendarPagination = () => {
       >
         &lt;
       </button>
-      <span className={css.chosenMonth}>{formatDate(monthFromState)}</span>
+      <button
+        className={css.chosenMonth}
+        type="button"
+        onClick={() => handleTodayJump()}
+      >
+        {formatDate(monthFromState)}
+      </button>
       <button
         className={css.arrow}
         type="button"
