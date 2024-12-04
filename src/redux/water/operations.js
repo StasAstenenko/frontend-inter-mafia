@@ -106,3 +106,17 @@ export const editWaterData = async (entries) => {
 //     }
 //   }
 // );
+
+export const getWaterData = createAsyncThunk(
+  "water/getWaterData",
+  async (_, thunkAPI) => {
+    try {
+      const token = selectAuthToken(thunkAPI.getState());
+      setAuthHeaders(token);
+      const { data } = await instance.get("/");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
