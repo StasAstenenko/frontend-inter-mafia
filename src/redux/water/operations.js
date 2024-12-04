@@ -107,13 +107,14 @@ export const editWaterData = async (entries) => {
 //   }
 // );
 
-export const getWaterData = createAsyncThunk(
-  "water/getWaterData",
-  async (_, thunkAPI) => {
+export const getWaterPerDay = createAsyncThunk(
+  "water/getWaterPerDay",
+  async (date, thunkAPI) => {
     try {
       const token = selectAuthToken(thunkAPI.getState());
       setAuthHeaders(token);
-      const { data } = await instance.get("/");
+      const { data } = await instance.get(`/water-per-day?date=${date}`);
+      // console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

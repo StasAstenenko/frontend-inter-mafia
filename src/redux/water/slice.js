@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWaterData, getWaterData } from "./operations";
+import { fetchWaterData, getWaterPerDay } from "./operations";
 
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
 
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   loading: false, // Стан завантаження
   error: null, // Помилки
-  waterAmount: [],
+  waterAmountPerDay: [],
 };
 
 const waterSlice = createSlice({
@@ -94,17 +94,21 @@ const waterSlice = createSlice({
       //   state.loading = false;
       //   state.error = action.payload;
       // });
-      .addCase(getWaterData.pending, (state) => {
+
+      .addCase(getWaterPerDay.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getWaterData.fulfilled, (state, { payload }) => {
+      .addCase(getWaterPerDay.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
-        state.waterAmount = payload.data;
-        // console.log(payload.data);
+        const totalWaterAmount = payload.data.reduce((total, entry) => {
+          return total + entry.amount;
+        }, 0);
+        // console.log("total", totalWaterAmount);
+        state.waterAmountPerDay = totalWaterAmount;
       })
-      .addCase(getWaterData.rejected, (state, action) => {
+      .addCase(getWaterPerDay.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
