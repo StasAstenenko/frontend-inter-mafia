@@ -33,10 +33,17 @@
   margin-left: 6px;
   border: transparent;
   background-color: transparent;
+  cursor: pointer;
 }
 .toggleViewBtnImg {
   width: 20px;
   height: 20px;
+  fill: transparent;
+  stroke: #9be1a0;
+}
+.toggleViewBtn:hover .toggleViewBtnImg {
+  fill: #9be1a0;
+  stroke: #323f47;
 }
 
 @media only screen and (min-width: 768px) {

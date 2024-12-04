@@ -6,25 +6,29 @@ import {
   selectDaysDrinking,
   selectIsLoading,
 } from "../../redux/water/selectors";
-import { selectDaysNotAsInWeek } from "../../redux/settings/selectors";
+import {
+  selectDaysNotAsInWeek,
+  selectSundayFirst,
+} from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import { fetchWaterData } from "../../redux/water/operations";
 import Loader from "../Loader/Loader";
 
 const Calendar = () => {
+  const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
+  const firstDayOfWeek = useSelector(selectSundayFirst) ? 1 : 0; // Перший день місяця (0 - понеділок, 1 - неділя)
+  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
+  const isLoading = useSelector(selectIsLoading);
+
   const dispatch = useDispatch();
   const dateToShow = useSelector(selectChosenMonth);
   const daysDrinking = useSelector(selectDaysDrinking);
-  const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
-  const isLoading = useSelector(selectIsLoading);
-  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
 
   const [today_year, today_month, today_day] = new Date() // month починаються з нуля в Date
     .toLocaleDateString("en-CA")
     .split("-");
 
   const [year, month] = dateToShow.split("-");
-  const firstDayOfWeek = 0; // Перший день місяця (0 - понеділок, 1 - неділя)
 
   useEffect(() => {
     dispatch(fetchWaterData({ type: "month", date: dateToShow }));
@@ -98,9 +102,9 @@ const Calendar = () => {
         >
           {calendarDays.map(({ day, percent }, index) => (
             <CalendarItem
-              key={`${index}${percent}`}
+              key={`day-${year}-${month}-${day || "empty"}-${index}`}
               month={dateToShow}
-              day={day}
+              day={day !== null ? day : null} // Передаємо день лише якщо він не null
               percent={percent}
               isActive={isActiveDay(day)}
             />

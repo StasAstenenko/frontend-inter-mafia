@@ -9,13 +9,13 @@ import {
   postWaterData,
 } from "./operations";
 
-const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
+const today = new Date().toLocaleDateString("en-CA");
 
 const INITIAL_STATE = {
   items: [],
   daysDrinking: [], // Дані про дні пиття води за місяць
   dayDetails: [], // Деталі пиття води за конкретний день
-  chosenDate: today,
+  chosenDate: today.slice(0, 10), // дата локальна, (YYYY-MM-DD)
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   loading: false, // Стан завантаження
   error: null, // Помилки

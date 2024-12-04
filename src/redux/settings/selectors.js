@@ -1,4 +1,5 @@
 export const selectDaysNotAsInWeek = (state) => state.settings.DaysNotAsInWeek; // Чи виставляти дні без врахування, як вони в тижні
+export const selectSundayFirst = (state) => state.settings.SundayFirst; // Встановити Неділю першим днем тижня
 export const selectUser = (state) => state.settings.user;
 export const selectAvatarUrl = (state) => state.settings.user.avatarURL;
 export const selectName = (state) => state.settings.user.name;
