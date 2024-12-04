@@ -11,25 +11,16 @@ import {
   selectUser,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
-// import { selectAuthUser } from "../../redux/auth/selectors";
+import { FcDecision } from "react-icons/fc";
 
 const validationSettingSchema = Yup.object().shape({
-  avatarUrl: Yup.mixed(),
-  gender: Yup.string().oneOf(["woman", "man"]).required("Gender is required"),
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  weight: Yup.number()
-    .positive("Weight must be a positive number")
-    .nullable()
-    .required("Weight is required"),
-  activeTime: Yup.number()
-    .min(0, "Active time cannot be negative")
-    .required("Active time is required")
-    .nullable(),
-  dailyNorm: Yup.number()
-    .positive("Water norm must be a positive number")
-    .nullable()
-    .required("Water norm is required"),
+  avatarUrl: Yup.mixed().default(""),
+  gender: Yup.string().oneOf(["woman", "man"]),
+  name: Yup.string(),
+  email: Yup.string().email("Invalid email"),
+  weight: Yup.number().positive("Weight must be a positive number"),
+  activeTime: Yup.number().min(0, "Active time cannot be negative"),
+  dailyNorm: Yup.number().positive("Water norm must be a positive number"),
 });
 
 const UsersSettingsForm = () => {
@@ -40,6 +31,7 @@ const UsersSettingsForm = () => {
   const user = useSelector(selectUser);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
+  const [waterNorm, setWaterNorm] = useState("1.5");
 
   const {
     register,
@@ -49,7 +41,7 @@ const UsersSettingsForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      name: userName,
       email: "",
       weight: 0,
       activeTime: 0,
@@ -68,6 +60,9 @@ const UsersSettingsForm = () => {
     if (file && file.type.startsWith("image/")) {
       setAvatarPreview(URL.createObjectURL(file));
       setValue("avatarUrl", file);
+    } else if (!file) {
+      setAvatarPreview(null);
+      setValue("avatarUrl", "");
     } else {
       alert("Please select a valid image file.");
     }
@@ -91,28 +86,42 @@ const UsersSettingsForm = () => {
 
   useEffect(() => {
     if (weight && activeTime && gender) {
-      let waterNorm = 0;
+      let calculatedNorm = 1.5; // По умолчанию
       if (gender === "woman") {
-        waterNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0);
+        calculatedNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0).toFixed(
+          1
+        );
       } else if (gender === "man") {
-        waterNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0);
+        calculatedNorm = Math.max(weight * 0.04 + activeTime * 0.6, 0).toFixed(
+          1
+        );
       }
-      setValue("dailyNorm", waterNorm.toFixed(1));
+      setWaterNorm(calculatedNorm);
     }
-  }, [weight, activeTime, gender, setValue]);
+  }, [weight, activeTime, gender]);
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) =>
-      formData.append(key, value instanceof FileList ? value[0] : value)
-    );
+    console.log("1", data);
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (
+        key === "avatarUrl" &&
+        (!value || (value instanceof FileList && value.length === 0))
+      ) {
+        return;
+      }
+      formData.append(key, value instanceof FileList ? value[0] : value);
+    });
+
+    console.log("2", formData);
 
     try {
-      await dispatch(editUser(formData));
-      alert("User updated successfully!");
+      dispatch(editUser(formData));
+      // alert("User updated successfully!");
     } catch (error) {
       console.error("Error updating user:", error);
-      alert("Failed to update user. Please try again.");
+      // alert("Failed to update user. Please try again.");
     }
   };
 
@@ -121,22 +130,15 @@ const UsersSettingsForm = () => {
       {/* Avatar */}
       <div className={css.settingFormAvatar}>
         {avatarPreview ? (
-          typeof avatarPreview === "string" &&
-          avatarPreview.startsWith("http") ? (
-            <img
-              className={css.settingAvatarImg}
-              src={avatarPreview}
-              alt="User Avatar"
-            />
-          ) : (
-            <img
-              className={css.settingAvatarImg}
-              src={avatarPreview}
-              alt="Preview Avatar"
-            />
-          )
+          <img
+            className={css.settingAvatarImg}
+            src={avatarPreview}
+            alt="User Avatar"
+          />
         ) : (
-          <div className={css.avatarPlaceholder}>{userName?.charAt(0)}</div>
+          <div className={css.avatarPlaceholder}>
+            <FcDecision className={css.settingAvatarSecondIcon} />
+          </div>
         )}
         <div>
           <button
@@ -153,7 +155,7 @@ const UsersSettingsForm = () => {
           <input
             type="file"
             id="avatarInput"
-            {...register("avatar")}
+            {...register("avatarUrl")}
             onChange={handleAvatarChange}
             style={{ display: "none" }}
           />
@@ -282,12 +284,10 @@ const UsersSettingsForm = () => {
             <div className={css.settingCalculateForm}>
               <div className={css.settingCalculate}>
                 <p className={css.settingCalculateText}>
-                  The required amount of water in liters per{" "}
+                  The required amount of water in liters per
                   <br className={css.settingTransferText} /> day:
                 </p>
-                <p className={css.settingCalculateTextSpan}>
-                  {watch("dailyNorm") || "1.5"}
-                </p>
+                <p className={css.settingCalculateTextSpan}>{waterNorm}</p>
               </div>
               <div>
                 <label className={clsx(css.settingLabel, css.settingLabelText)}>
@@ -296,7 +296,7 @@ const UsersSettingsForm = () => {
 
                 <input
                   type="number"
-                  {...register("waterNorm")}
+                  {...register("dailyNorm")}
                   className={css.settingFormInput}
                 />
               </div>

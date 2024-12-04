@@ -59,6 +59,11 @@
   }
 }
 
+.settingAvatarSecondIcon {
+  width: 75px;
+  height: 75px;
+}
+
 .avatarButtonText {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -397,7 +402,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-.avatarPlaceholder {
+.avatarSettingPlaceholder {
   width: 75px;
   height: 75px;
   display: flex;

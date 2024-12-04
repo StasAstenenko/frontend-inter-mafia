@@ -2,11 +2,12 @@
 .wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #fff;
   border-radius: 15px;
-  gap: 10px;
+  /* gap: 10px; */
   padding: 18px 14px;
-  width: 149px;
+  /* width: 149px; */
   margin: 24px 0px;
 }
 
@@ -53,12 +54,12 @@
 } */
 
 @media screen and (min-width: 1440px) {
-  .wrapper {
+  /* .wrapper {
     gap: 20px;
     padding: 20px;
     width: 192px;
     margin: 24px 0px;
-  }
+  } */
 
   .waterglass {
     width: 44px;
