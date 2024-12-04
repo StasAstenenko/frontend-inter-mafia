@@ -6,7 +6,7 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import css from "./WaterMainInfo.module.css";
 import { getUserInfo } from "../../redux/settings/operations.js";
 import { useDispatch } from "react-redux";
-import { getWaterData } from "../../redux/water/operations.js";
+import { getWaterPerDay } from "../../redux/water/operations.js";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,8 @@ const WaterMainInfo = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getWaterData());
+    const today = new Date().toLocaleDateString("en-CA");
+    dispatch(getWaterPerDay(today));
   }, [dispatch]);
 
   return (

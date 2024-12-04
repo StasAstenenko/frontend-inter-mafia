@@ -5,7 +5,6 @@ import UserBarPopover from "../../components/UserBarPopover/UserBarPopover.jsx";
 import css from "./UserBar.module.css";
 
 const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
-  
   const avatarPlaceholder = userName.charAt(0).toUpperCase();
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -76,14 +75,14 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
       </button>
 
       <UserBarPopover
-  popoverRef={popoverRef}
-  styles={styles}
-  attributes={attributes}
-  isOpen={isPopoverOpen}
-  onSettingsClick={onSettingsClick}
-  onLogOutClick={onLogOutClick}
-  closePopover={closePopover}
-/>
+        popoverRef={popoverRef}
+        styles={styles}
+        attributes={attributes}
+        isOpen={isPopoverOpen}
+        onSettingsClick={onSettingsClick}
+        onLogOutClick={onLogOutClick}
+        closePopover={closePopover}
+      />
     </div>
   );
 };

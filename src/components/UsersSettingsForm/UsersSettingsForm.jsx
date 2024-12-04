@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectActiveTime,
   selectEmail,
   selectName,
   selectUser,
+  selectWeight,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { FcDecision } from "react-icons/fc";
@@ -19,7 +21,9 @@ const validationSettingSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Invalid email"),
   weight: Yup.number().positive("Weight must be a positive number"),
-  activeTime: Yup.number().min(0, "Active time cannot be negative"),
+  activeTime: Yup.number()
+    .min(0, "Active time cannot be negative")
+    .max(24, "Max active time"),
   dailyNorm: Yup.number().positive("Water norm must be a positive number"),
 });
 
@@ -29,6 +33,8 @@ const UsersSettingsForm = () => {
   const userName = useSelector(selectName);
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
+  const weightSelect = useSelector(selectWeight);
+  const activeTimeSelect = useSelector(selectActiveTime);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [waterNorm, setWaterNorm] = useState("1.5");
@@ -41,10 +47,11 @@ const UsersSettingsForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: userName,
+      // userName: userName,
+      name: "",
       email: "",
-      weight: 0,
-      activeTime: 0,
+      weight: weightSelect,
+      activeTime: activeTimeSelect,
       gender: "woman",
       dailyNorm: 1.5,
     },
@@ -71,10 +78,10 @@ const UsersSettingsForm = () => {
   useEffect(() => {
     if (userEmail) {
       const emailNamePart = userEmail.split("@")[0];
-      setValue("name", emailNamePart);
+      setValue("name", userName || emailNamePart);
     }
     setValue("email", userEmail);
-  }, [userEmail, setValue]);
+  }, [userEmail, userName, setValue]);
 
   useEffect(() => {
     if (user.avatarUrl) {
@@ -86,7 +93,7 @@ const UsersSettingsForm = () => {
 
   useEffect(() => {
     if (weight && activeTime && gender) {
-      let calculatedNorm = 1.5; // По умолчанию
+      let calculatedNorm = 1.5;
       if (gender === "woman") {
         calculatedNorm = Math.max(weight * 0.03 + activeTime * 0.4, 0).toFixed(
           1
@@ -102,7 +109,7 @@ const UsersSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    console.log("1", data);
+    // console.log("1", data);
 
     Object.entries(data).forEach(([key, value]) => {
       if (
@@ -114,7 +121,7 @@ const UsersSettingsForm = () => {
       formData.append(key, value instanceof FileList ? value[0] : value);
     });
 
-    console.log("2", formData);
+    // console.log("2", formData);
 
     try {
       dispatch(editUser(formData));

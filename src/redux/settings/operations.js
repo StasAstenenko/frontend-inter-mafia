@@ -16,7 +16,8 @@ export const editUser = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await instance.patch("/", formData);
-      return data;
+
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
-import { selectTotalWaterAmountToday } from "../../redux/water/selectors.js";
+import { selectWaterAmountPerDay } from "../../redux/water/selectors.js";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   const dailyNorma = useSelector(selectDailyNorm);
-  const waterAmount = useSelector(selectTotalWaterAmountToday);
-  // console.log(waterAmount);
+  const waterAmount = useSelector(selectWaterAmountPerDay);
+  console.log(waterAmount);
 
   const waterPercentage = Math.min(
     Math.round((waterAmount / dailyNorma) * 100),
