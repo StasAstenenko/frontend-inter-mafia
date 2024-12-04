@@ -2,6 +2,7 @@ import { useState } from "react";
 import css from "./MonthInfo.module.css";
 import CalendarPagination from "../CalendarPagination/CalendarPagination.jsx";
 import Calendar from "../Calendar/Calendar.jsx";
+import RechartsComponent from "../RechartsComponent/RechartsComponent.jsx";
 
 const MonthInfo = () => {
   const [isCalendarVisible, setIsCalendarVisible] = useState(true);
@@ -30,7 +31,7 @@ const MonthInfo = () => {
         </div>
       </div>
 
-      {isCalendarVisible ? <Calendar /> : <div className={css.box}></div>}
+      {isCalendarVisible ? <Calendar /> : <RechartsComponent />}
     </div>
   );
 };

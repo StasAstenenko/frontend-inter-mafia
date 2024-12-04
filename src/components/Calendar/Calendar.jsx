@@ -19,10 +19,9 @@ const Calendar = () => {
   const isLoading = useSelector(selectIsLoading);
   const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
 
-  const today = new Date();
-  const today_day = today.getDate().toString().padStart(2, "0");
-  const today_month = (today.getMonth() + 1).toString().padStart(2, "0"); // Місяці починаються з 0
-  const today_year = today.getFullYear().toString();
+  const [today_year, today_month, today_day] = new Date() // month починаються з нуля в Date
+    .toLocaleDateString("en-CA")
+    .split("-");
 
   const [year, month] = dateToShow.split("-");
   const firstDayOfWeek = 0; // Перший день місяця (0 - понеділок, 1 - неділя)

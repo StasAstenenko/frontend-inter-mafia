@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   token: null,
   isRegisteredSuccess: false,
   isLoggedIn: false,
-  isRefreshing: false,
+  // isRefreshing: false,
   error: null,
   isLoading: false,
   count: 0,
@@ -26,29 +26,38 @@ const authSlice = createSlice({
         state.error = null;
         state.isRegisteredSuccess = false;
         state.isLoading = true;
+        // state.isRefreshing = true;
       })
       .addCase(apiRegister.fulfilled, (state, action) => {
         // console.log("apiRegister fulfilled:", action.payload);
         state.user = action.payload.user;
         state.isRegisteredSuccess = true;
         state.isLoading = false;
+        // state.isRefreshing = false;
       })
       .addCase(apiRegister.rejected, (state, action) => {
         // console.error("apiRegister rejected :", action);
         state.error = action.payload;
         state.isRegisteredSuccess = false;
         state.isLoading = false;
+        // state.isRefreshing = false;
       })
 
       .addCase(apiLogin.pending, (state) => {
         state.error = null;
+        state.isLoading = true;
+        // state.isRefreshing = true;
       })
       .addCase(apiLogin.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.token = action.payload.accessToken;
+        // state.isRefreshing = false;
+        state.isLoading = false;
       })
       .addCase(apiLogin.rejected, (state, action) => {
         state.error = action.payload;
+        // state.isRefreshing = false;
+        state.isLoading = false;
       })
 
       .addCase(apiLogout.pending, (state) => {
@@ -62,15 +71,12 @@ const authSlice = createSlice({
       })
 
       .addCase(getAllUsers.pending, (state) => {
-        state.isLoading = true;
         state.error = null;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.count = action.payload;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
-        state.isLoading = false;
         state.error = action.payload;
       });
 

@@ -1,37 +1,50 @@
-import { forwardRef } from "react"
-import css from "./UserBarPopover.module.css"
+import css from "./UserBarPopover.module.css";
 
-
-const UserBarPopover = forwardRef(
-  ({ styles, attributes, onSettingsClick, onLogOutClick, closePopover }, ref) => {
-    return (
-      <div
-        ref={ref}
-        style={styles.popper}
-        {...attributes.popper}
-        className={css.userbarpopover}
+const UserBarPopover = ({
+  popoverRef,
+  styles,
+  attributes,
+  isOpen,
+  onSettingsClick,
+  onLogOutClick,
+  closePopover,
+}) => {
+  return (
+    <div
+      ref={popoverRef}
+      style={{
+        ...styles.popper,
+        display: isOpen ? "flex" : "none",
+      }}
+      {...attributes.popper}
+      className={css.userbarpopover}
+    >
+      <button
+        onClick={() => {
+          onSettingsClick();
+          closePopover();
+        }}
+        className={css.popoverbutton}
       >
-        <button
-          className={css.popoverbutton}
-          onClick={() => {
-            onSettingsClick();
-            closePopover();
-          }}
-        >
-          Settings
-        </button>
-        <button
-          className={css.popoverbutton}
-          onClick={() => {
-            onLogOutClick();
-            closePopover();
-          }}
-        >
-          Log out
-        </button>
-      </div>
-    );
-  }
-);
-UserBarPopover.displayName = "UserBarPopover"
+        <svg width="16" height="16">
+          <use href="/icons/sprite.svg#settings"></use>
+        </svg>
+        Settings
+      </button>
+      <button
+        onClick={() => {
+          onLogOutClick();
+          closePopover();
+        }}
+        className={css.popoverbutton}
+      >
+        <svg width="16" height="16">
+          <use href="/icons/sprite.svg#log-out"></use>
+        </svg>
+        Log out
+      </button>
+    </div>
+  );
+};
+
 export default UserBarPopover;

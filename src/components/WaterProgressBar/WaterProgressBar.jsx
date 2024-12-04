@@ -1,23 +1,23 @@
 import { useSelector } from "react-redux";
-import { selectWaterAmountForToday } from "../../redux/water/selectors.js";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
+import { selectTotalWaterAmountToday } from "../../redux/water/selectors.js";
 import css from "./WaterProgressBar.module.css";
-import { formatVolume } from "../WaterDailyNorma/WaterDailyNorma.jsx";
 
 const WaterProgressBar = () => {
-  const currentAmount = useSelector(selectWaterAmountForToday);
-  // console.log(currentAmount);
   const dailyNorma = useSelector(selectDailyNorm);
+  const waterAmount = useSelector(selectTotalWaterAmountToday);
+  // console.log(waterAmount);
 
-  const waterPercentage = formatVolume(
-    Math.round((currentAmount / dailyNorma) * 100)
+  const waterPercentage = Math.min(
+    Math.round((waterAmount / dailyNorma) * 100),
+    100
   );
 
   return (
     <>
       <div className={css.container}>
         <p className={css.today}>Today</p>
-        <span className={css.volumeInfo}>{waterPercentage}</span>
+        <span className={css.volumeInfo}>{waterPercentage}%</span>
         <div className={css.progressBarContainer}>
           <div
             className={css.progressBar}
@@ -25,14 +25,16 @@ const WaterProgressBar = () => {
           />
           <svg
             className={css.icon}
-            style={{ left: `calc(${waterPercentage}% - 12px)` }}
+            style={{
+              left:
+                waterPercentage === 0
+                  ? `0px`
+                  : `calc(${waterPercentage}% - 12px)`,
+            }}
             width="12"
             height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="6" cy="6" r="5.5" fill="white" stroke="#9BE1A0" />
+            <use href="/icons/sprite.svg#circle" />
           </svg>
         </div>
         <div className={css.percents}>

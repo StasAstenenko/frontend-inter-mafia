@@ -1,14 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
-import { AiOutlineSetting } from "react-icons/ai";
-import { IoLogOutOutline } from "react-icons/io5";
-// import UserBarPopover from "../../components/UserBarPopover/UserBarPopover.jsx";
+import UserBarPopover from "../../components/UserBarPopover/UserBarPopover.jsx";
 import css from "./UserBar.module.css";
 
 const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
-  const defaultUserName = userName || "Nadia";
-  const avatarPlaceholder = defaultUserName.charAt(0).toUpperCase();
+  
+  const avatarPlaceholder = userName.charAt(0).toUpperCase();
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const buttonRef = useRef(null);
@@ -64,7 +62,7 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
   return (
     <div className={css.container}>
       <button ref={buttonRef} onClick={togglePopover} className={css.userbar}>
-        <span className={css.name}>{defaultUserName}</span>
+        <span className={css.name}>{userName}</span>
         {avatarUrl ? (
           <img src={avatarUrl} alt="Avatar" className={css.avatar} />
         ) : (
@@ -77,36 +75,15 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
         )}
       </button>
 
-      <div
-        ref={popoverRef}
-        style={{
-          ...styles.popper,
-          display: isPopoverOpen ? "flex" : "none",
-        }}
-        {...attributes.popper}
-        className={css.userbarpopover}
-      >
-        <button
-          onClick={() => {
-            onSettingsClick();
-            closePopover();
-          }}
-          className={css.popoverbutton}
-        >
-          <AiOutlineSetting />
-          Settings
-        </button>
-        <button
-          onClick={() => {
-            onLogOutClick();
-            closePopover();
-          }}
-          className={css.popoverbutton}
-        >
-          <IoLogOutOutline />
-          Log out
-        </button>
-      </div>
+      <UserBarPopover
+  popoverRef={popoverRef}
+  styles={styles}
+  attributes={attributes}
+  isOpen={isPopoverOpen}
+  onSettingsClick={onSettingsClick}
+  onLogOutClick={onLogOutClick}
+  closePopover={closePopover}
+/>
     </div>
   );
 };
