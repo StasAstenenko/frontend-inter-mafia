@@ -13,10 +13,13 @@ import {
   selectChosenDate,
   selectDaysDrinking,
 } from "../../redux/water/selectors";
-const dayEndOfStatistic = new Date(useSelector(selectChosenDate));
 
 const RechartsComponent = () => {
+  const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
+
+  // Перетворюємо обрану дату в Date
+  const dayEndOfStatistic = useMemo(() => new Date(chosenDate), [chosenDate]);
 
   // Створення масиву останніх 7 днів
   const lastWeekDays = useMemo(() => {
