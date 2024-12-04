@@ -1,13 +1,13 @@
-// import { useDispatch } from "react-redux";
-// import { deleteWaterItem } from "../../redux/water/operations";
+import { useDispatch } from "react-redux";
+import { deleteWaterItem } from "../../redux/water/operations";
 import { useState } from "react";
 import WaterModal from "../../modals/WaterModal/WaterModal";
 import s from "./WaterItem.module.css";
-const WaterItem = () => {
+const WaterItem = ({ _id, amount, createdAt }) => {
   const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
   const openLogOutModal = () => setLogOutModalisOpen(true);
   const closeLogOutModal = () => setLogOutModalisOpen(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   return (
     <div>
       <div className={s.wrapper}>
@@ -15,8 +15,8 @@ const WaterItem = () => {
           <use href="/icons/sprite.svg#water-glass"></use>
         </svg>
         <div>
-          <p className={s.amount}>250 ml</p>
-          <p className={s.time}>7:00 AM</p>
+          <p className={s.amount}>{amount} ml</p>
+          <p className={s.time}>{createdAt}AM</p>
         </div>
         <div className={s.container}>
           <button onClick={openLogOutModal} className={s.btn}>
@@ -24,7 +24,10 @@ const WaterItem = () => {
               <use href="/icons/sprite.svg#edit"></use>
             </svg>
           </button>
-          <button className={s.btn}>
+          <button
+            className={s.btn}
+            onClick={() => dispatch(deleteWaterItem(_id))}
+          >
             <svg className={s.trash}>
               <use href="/icons/sprite.svg#trash"></use>
             </svg>
