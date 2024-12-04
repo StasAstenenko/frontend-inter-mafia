@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectActiveTime,
   selectEmail,
   selectName,
   selectUser,
+  selectWeight,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { FcDecision } from "react-icons/fc";
@@ -19,7 +21,9 @@ const validationSettingSchema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email("Invalid email"),
   weight: Yup.number().positive("Weight must be a positive number"),
-  activeTime: Yup.number().min(0, "Active time cannot be negative"),
+  activeTime: Yup.number()
+    .min(0, "Active time cannot be negative")
+    .max(24, "Max active time"),
   dailyNorm: Yup.number().positive("Water norm must be a positive number"),
 });
 
@@ -29,6 +33,8 @@ const UsersSettingsForm = () => {
   const userName = useSelector(selectName);
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
+  const weightSelect = useSelector(selectWeight);
+  const activeTimeSelect = useSelector(selectActiveTime);
 
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [waterNorm, setWaterNorm] = useState("1.5");
@@ -44,8 +50,8 @@ const UsersSettingsForm = () => {
       // userName: userName,
       name: "",
       email: "",
-      weight: 0,
-      activeTime: 0,
+      weight: weightSelect,
+      activeTime: activeTimeSelect,
       gender: "woman",
       dailyNorm: 1.5,
     },
