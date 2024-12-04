@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addWaterItem,
   deleteWaterItem,
+  editWaterData,
   fetchWaterData,
   fetchWaterItems,
   getWaterPerDay,
@@ -93,17 +94,23 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // .addCase(editWaterItem.pending, (state) => {
-      //   state.loading = true;
-      // })
-      // .addCase(editWaterItem.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.error = null;
-      // })
-      // .addCase(editWaterItem.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload;
-      // });
+      .addCase(editWaterData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editWaterData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const index = state.waterAmountPerDay.findIndex(
+          (item) => item._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.waterAmountPerDay[index] = action.payload;
+        }
+      })
+      .addCase(editWaterData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(getWaterPerDay.pending, (state) => {
         state.loading = true;
         state.error = null;

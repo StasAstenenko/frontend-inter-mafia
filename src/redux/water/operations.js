@@ -52,14 +52,18 @@ export const postWaterData = createAsyncThunk(
     }
   }
 );
-export const editWaterData = async (entries) => {
-  try {
-    const response = await instance.patch(`/`, entries);
-    return response.data;
-  } catch (e) {
-    throw new Error(e.response?.status || "Post water error");
+
+export const editWaterData = createAsyncThunk(
+  "water/editWaterData",
+  async ({ waterId, entries }, { rejectWithValue }) => {
+    try {
+      const response = await instance.patch(`/${waterId}`, entries);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e.response?.status || "Edit water error");
+    }
   }
-};
+);
 
 export const fetchWaterItems = createAsyncThunk(
   "water/fetchAll",
