@@ -96,7 +96,7 @@ const AdvantagesSection = () => {
               </div>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>{t("HabitDViewStatisticsrive")}</p>
+              <p className={css.text}>{t("ViewStatistics")}</p>
             </li>
             <li className={css.benefits_item}>
               <p className={css.text}>{t("PersonalSettings")}</p>
