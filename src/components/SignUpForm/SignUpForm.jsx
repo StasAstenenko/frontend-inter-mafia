@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import clsx from "clsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { apiRegister } from "../../redux/auth/operations";
 import { useLanguage } from "../../locales/langContext.jsx";
 
 const SignUpForm = () => {

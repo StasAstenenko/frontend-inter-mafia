@@ -12,6 +12,7 @@ import {
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { FcDecision } from "react-icons/fc";
+import { useLanguage } from "../../locales/LangContext.jsx";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed().default(""),
@@ -24,6 +25,8 @@ const validationSettingSchema = Yup.object().shape({
 });
 
 const UsersSettingsForm = () => {
+  const { t } = useLanguage();
+
   const dispatch = useDispatch();
 
   const userName = useSelector(selectName);
@@ -150,7 +153,7 @@ const UsersSettingsForm = () => {
               <use href="/icons/sprite.svg#upload"></use>
             </svg>
 
-            <span className={css.avatarButtonText}>Upload a photo</span>
+            <span className={css.avatarButtonText}>{t("UploadAPhoto")}</span>
           </button>
           <input
             type="file"
@@ -166,7 +169,7 @@ const UsersSettingsForm = () => {
         {/* Gender Form */}
         <div className={css.settingGenderForm}>
           <div>
-            <label className={css.settingLabel}>Your gender identity</label>
+            <label className={css.settingLabel}>{t("YourGender")}</label>
           </div>
           <div className={css.settingRadioButton}>
             <label className={css.settingRadioLabel}>
@@ -177,7 +180,7 @@ const UsersSettingsForm = () => {
                 className={css.settingRadioInput}
               />
               <span className={css.settingRadioCustom}></span>
-              <span className={css.settingRadioText}>Woman</span>
+              <span className={css.settingRadioText}>{t("Woman")}</span>
             </label>
             <label className={css.settingRadioLabel}>
               <input
@@ -187,7 +190,7 @@ const UsersSettingsForm = () => {
                 className={css.settingRadioInput}
               />
               <span className={css.settingRadioCustom}></span>
-              <span className={css.settingRadioText}>Man</span>
+              <span className={css.settingRadioText}>{t("Man")}</span>
             </label>
           </div>
           {errors.gender && (
@@ -199,7 +202,7 @@ const UsersSettingsForm = () => {
             {/* Name and Email */}
             <div className={css.settingNameForm}>
               <div className={css.settingNameFormLabels}>
-                <label className={css.settingLabel}>Your name</label>
+                <label className={css.settingLabel}>{t("YourName")}</label>
                 <input
                   type="text"
                   {...register("name")}
@@ -211,7 +214,7 @@ const UsersSettingsForm = () => {
               </div>
 
               <div className={css.settingNameFormLabels}>
-                <label className={css.settingLabel}>Email</label>
+                <label className={css.settingLabel}>{t("Email")}</label>
                 <input
                   type="email"
                   {...register("email")}
@@ -224,16 +227,16 @@ const UsersSettingsForm = () => {
             </div>
             {/* Daily Norm Context */}
             <div className={css.settingDailyForm}>
-              <label className={css.settingLabel}>My daily norma</label>
+              <label className={css.settingLabel}>{t("MyDailyNorma")}</label>
               <div className={css.settingDailyAllCard}>
                 <div className={css.settingDailyCard}>
-                  <p className={css.settingDailyContext}>For woman:</p>
+                  <p className={css.settingDailyContext}>{t("ForWoman")}:</p>
                   <p className={css.settingDailyFormula}>
                     V=(M*0.03) + (T*0.4)
                   </p>
                 </div>
                 <div className={css.settingDailyCard}>
-                  <p className={css.settingDailyContext}>For man:</p>
+                  <p className={css.settingDailyContext}>{t("ForMan")}:</p>
                   <p className={css.settingDailyFormula}>
                     V=(M*0.04) + (T*0.6)
                   </p>
@@ -241,17 +244,14 @@ const UsersSettingsForm = () => {
               </div>
               <div className={css.settingDailyDescription}>
                 <p className={css.settingDailyDescrText}>
-                  <span className={css.settingDailyDescriptionSpan}>*</span> V
-                  is the volume of the water norm in liters per day, M is your
-                  body weight, T is the time of active sports, or another type
-                  of activity commensurate in terms of loads (in the absence of
-                  these, you must set 0)
+                  <span className={css.settingDailyDescriptionSpan}>*</span>
+                  {t("Information")}
                 </p>
               </div>
               <div>
                 <p className={css.settingDailyRemark}>
-                  <span className={css.settingDailyRemarkSpan}>!</span> Active
-                  time in hours
+                  <span className={css.settingDailyRemarkSpan}>!</span>
+                  {t("ActiveTime")}
                 </p>
               </div>
             </div>
@@ -261,7 +261,7 @@ const UsersSettingsForm = () => {
             <div className={css.settingWeightTimeForm}>
               <div className={css.settingWeightLabel}>
                 <label className={css.settingWeightContext}>
-                  Your weight in kilograms:
+                  {t("YourWeight")}
                 </label>
                 <input
                   type="number"
@@ -271,7 +271,7 @@ const UsersSettingsForm = () => {
               </div>
               <div className={css.settingWeightLabel}>
                 <label className={css.settingWeightContext}>
-                  The time of active participation in sports:
+                  {t("TimeOfActive")}
                 </label>
                 <input
                   type="number"
@@ -284,14 +284,13 @@ const UsersSettingsForm = () => {
             <div className={css.settingCalculateForm}>
               <div className={css.settingCalculate}>
                 <p className={css.settingCalculateText}>
-                  The required amount of water in liters per
-                  <br className={css.settingTransferText} /> day:
+                  {t("RequiredAmount")}
                 </p>
                 <p className={css.settingCalculateTextSpan}>{waterNorm}</p>
               </div>
               <div>
                 <label className={clsx(css.settingLabel, css.settingLabelText)}>
-                  Write down how much water you will drink:
+                  {t("WriteDown")}
                 </label>
 
                 <input
@@ -306,7 +305,7 @@ const UsersSettingsForm = () => {
       </div>
 
       <button type="submit" className={css.settingFormButton}>
-        Save
+        {t("Save")}
       </button>
     </form>
   );

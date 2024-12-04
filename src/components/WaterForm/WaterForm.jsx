@@ -7,6 +7,7 @@ import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
 import { postWaterData } from "../../redux/water/operations.js";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const entriesValidationSchema = Yup.object().shape({
   amountOfWater: Yup.number()
@@ -17,6 +18,8 @@ const entriesValidationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({ title, paragraph, initialValues }) => {
+  const { t } = useLanguage();
+
   const [amount, setAmount] = useState(initialValues.amountOfWater);
 
   const handleSubmit = (values) => {
@@ -61,7 +64,7 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
               <p className={css.addWater}>{title}</p>
               <p className={css.chooseAValue}>{paragraph}:</p>
               <div className={css.customInput}>
-                <p className={css.amountParagraph}>Amount of water:</p>
+                <p className={css.amountParagraph}>{t("AmountOfWater")}</p>
                 <div className={css.inputWrapper}>
                   <button
                     type="button"
@@ -71,7 +74,9 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
                     <GoDash className={css.btnIcon} />
                   </button>
                   <div className={css.valueDisplay}>
-                    <span>{amount} ml</span>
+                    <span>
+                      {amount} {t("Ml")}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -83,7 +88,7 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
                 </div>
               </div>
               <label className={css.label}>
-                <p className={css.recordingTime}>Recording time:</p>
+                <p className={css.recordingTime}>{t("RecordingTime")}</p>
                 <DatePicker
                   selected={values.recordingTime}
                   onChange={(date) => setFieldValue("recordingTime", date)}
@@ -102,9 +107,7 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
                 component="span"
               />
               <label className={css.label}>
-                <p className={css.enterValue}>
-                  Enter the value of the water used:
-                </p>
+                <p className={css.enterValue}>{t("ValueOfWater")}</p>
                 <Field
                   className={css.amountOfWaterField}
                   type="text"
@@ -119,7 +122,7 @@ const WaterForm = ({ title, paragraph, initialValues }) => {
                 component="span"
               />
               <button type="submit" className={css.submitBtn}>
-                Save
+                {t("Save")}
               </button>
             </Form>
           );

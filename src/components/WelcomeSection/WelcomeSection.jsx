@@ -1,8 +1,7 @@
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router-dom";
 import styles from "./WelcomeSection.module.css";
-import { useLanguage } from "../../locales/langContext.jsx";
-import LangSwitch from "../LangSwitch/LangSwitch.jsx";
+import { useLanguage } from "../../locales/LangContext.jsx";
 
 const WelcomeSection = ({ className = "" }) => {
   const { t } = useLanguage();
@@ -27,7 +26,6 @@ const WelcomeSection = ({ className = "" }) => {
           >
             {t("SignIn")}
           </NavLink>
-          <LangSwitch />
         </div>
       </div>
     </div>

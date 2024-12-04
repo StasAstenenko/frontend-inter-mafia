@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
 import css from "./AdvantagesSection.module.css";
 
 import avatar1 from "./../../img/advantages/Avatar1.png";

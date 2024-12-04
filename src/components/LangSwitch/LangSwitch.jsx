@@ -4,20 +4,28 @@ import css from "./LangSwitch.module.css";
 const LangSwitch = () => {
   const { changeLanguage, language } = useLanguage();
 
-  const handleLanguageChange = (event) => {
-    changeLanguage(event.target.value);
+  const handleLanguageChange = (lang) => {
+    changeLanguage(lang);
   };
 
   return (
     <div className={css.languageSwitcher}>
-      <select
-        value={language}
-        onChange={handleLanguageChange}
-        className={css.languageSelect}
+      <button
+        className={`${css.languageButton} ${
+          language === "en" ? css.active : ""
+        }`}
+        onClick={() => handleLanguageChange("en")}
       >
-        <option value="ua">Українська</option>
-        <option value="en">English</option>
-      </select>
+        EN
+      </button>
+      <button
+        className={`${css.languageButton} ${
+          language === "ua" ? css.active : ""
+        }`}
+        onClick={() => handleLanguageChange("ua")}
+      >
+        UA
+      </button>
     </div>
   );
 };
