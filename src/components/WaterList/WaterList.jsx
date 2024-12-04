@@ -8,81 +8,87 @@ import "swiper/css/scrollbar";
 
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
-// import { useEffect } from "react";
-// import { fetchWaterItems } from "../../redux/water/operations";
+import { useDispatch, useSelector } from "react-redux";
+// import { selectWaterItems } from "../../redux/water/selectors";
+import { useEffect } from "react";
+import { getWaterPerDay } from "../../redux/water/operations";
+import { selectWaterAmountPerDay } from "../../redux/water/selectors";
+// import { getWaterData } from "../../redux/water/operations.js";
 const WaterList = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  };
+
+  useEffect(() => {
+    const date = getCurrentDate();
+    dispatch(getWaterPerDay(date));
+  }, [dispatch]);
+
+  const items = useSelector(selectWaterAmountPerDay);
+  console.log(items);
+
+  // const items = useSelector(selectWaterItems);
   // useEffect(() => {
-  //   dispatch(fetchWaterItems());
+  //   dispatch(getWaterData());
   // }, [dispatch]);
+  const formatTime = (isoDate) => {
+    const date = new Date(isoDate);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    // Форматування годин:хвилин
+    const formattedHours = hours % 12 || 12; // Перетворення 24-годинного формату на 12-годинний
+    const formattedMinutes = minutes.toString().padStart(2, "0"); // Додаємо 0 перед хвилинами, якщо потрібно
+    const period = hours >= "12" ? "PM" : "AM"; // Визначаємо AM або PM
+
+    return `${formattedHours}:${formattedMinutes} ${period}`;
+  };
+
   return (
     <ul className={s.wrapper}>
-              {/* <Swiper
-        // install Swiper modules
-        modules={[Scrollbar]}
-        spaceBetween={8}
-        slidesPerView={2}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-      >
-        <SwiperSlide className={s.swiperSlide}>
-          <WaterItem />
-        </SwiperSlide> */}
-<Swiper
-  modules={[Scrollbar]}
-  spaceBetween={8}
-  slidesPerView={1}
-  scrollbar={{
-    draggable: true,
-    el: `.${s.swiperScrollbar}`, // кастомний скроллбар
-  }}
-  breakpoints={{
-    375: {
-      slidesPerView: 2,
-      spaceBetween: 8,
-    },
-    768: {
-      slidesPerView: 3,
-      spaceBetween: 32,
-    },
-    1440: {
-      slidesPerView: 3,
-      spaceBetween: 16,
-    },
-  }}
->
-  <SwiperSlide>
-    <WaterItem />
-  </SwiperSlide>
-  <SwiperSlide>
-    <WaterItem />
-  </SwiperSlide>
-  <SwiperSlide>
-    <WaterItem />
-  </SwiperSlide>
-  <SwiperSlide>
-    <WaterItem />
-  </SwiperSlide>
-  <SwiperSlide>
-    <WaterItem />
-  </SwiperSlide>
-  <div className={s.swiperScrollbar}></div> {/* Елемент скроллбара */}
-</Swiper>
-      {/* <WaterItem />
-      <WaterItem />
-      <WaterItem /> */}
-      {/* {items.map((item) => {
-        return (
-          <li key={item._id}>
-            <WaterItem
-              id={item._id}
-              amount={item.amount}
-              createdAt={createdAt}
-            />
-          </li>
-        );
-      })} */}
+      {Array.isArray(items) && items.length === 1 ? (
+        // Якщо в масиві тільки один елемент
+        <li>
+          <WaterItem
+            _id={items[0]._id}
+            amount={items[0].amount}
+            date={formatTime(items.date)}
+          />
+        </li>
+      ) : (
+        <Swiper
+          modules={[Scrollbar]}
+          scrollbar={{ draggable: true }}
+          breakpoints={{
+            375: {
+              spaceBetween: 8,
+              slidesPerView: 2,
+            },
+            768: {
+              spaceBetween: 32,
+              slidesPerView: 3,
+            },
+            1440: {
+              spaceBetween: 16,
+              slidesPerView: 3,
+            },
+          }}
+        >
+          {Array.isArray(items) &&
+            items.map((item, index) => (
+              <SwiperSlide key={item._id || index}>
+                <WaterItem
+                  _id={item._id}
+                  amount={item.amount}
+                  date={formatTime(item.date)}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
     </ul>
   );
 };
