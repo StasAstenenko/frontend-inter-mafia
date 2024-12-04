@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
 // import { selectWaterAmountForToday } from "../../redux/water/selectors.js";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
-import {
-  selectChosenDate,
-  selectDayDetails,
-} from "../../redux/water/selectors.js";
+import { selectDayDetails } from "../../redux/water/selectors.js";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
