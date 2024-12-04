@@ -10,11 +10,13 @@ import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { selectWaterItems } from "../../redux/water/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getWaterPerDay } from "../../redux/water/operations";
 import { selectWaterAmountPerDay } from "../../redux/water/selectors";
+import WaterModal from "../../modals/WaterModal/WaterModal";
 // import { getWaterData } from "../../redux/water/operations.js";
 const WaterList = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
 
   const getCurrentDate = () => {
@@ -28,7 +30,7 @@ const WaterList = () => {
   }, [dispatch]);
 
   const items = useSelector(selectWaterAmountPerDay);
-  console.log(items);
+  // console.log(items);
 
   // const items = useSelector(selectWaterItems);
   // useEffect(() => {
@@ -47,6 +49,18 @@ const WaterList = () => {
     return `${formattedHours}:${formattedMinutes} ${period}`;
   };
 
+  // const closeLogOutModal = () => setLogOutModalisOpen(false);
+  const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
+  // const openLogOutModal = () => setLogOutModalisOpen(true);
+  const openLogOutModal = (item) => {
+    setSelectedItem(item);
+    setLogOutModalisOpen(true);
+  };
+  const closeLogOutModal = () => {
+    setLogOutModalisOpen(false);
+    setSelectedItem(null);
+  };
+
   return (
     <ul className={s.wrapper}>
       {Array.isArray(items) && items.length === 1 ? (
@@ -56,6 +70,7 @@ const WaterList = () => {
             _id={items[0]._id}
             amount={items[0].amount}
             date={formatTime(items.date)}
+            onEdit={() => openLogOutModal(items[0])}
           />
         </li>
       ) : (
@@ -84,11 +99,19 @@ const WaterList = () => {
                   _id={item._id}
                   amount={item.amount}
                   date={formatTime(item.date)}
+                  openLogOutModal={openLogOutModal}
+                  onEdit={() => openLogOutModal(item)}
                 />
               </SwiperSlide>
             ))}
         </Swiper>
       )}
+      <WaterModal
+        isOpen={logOutModalisOpen}
+        onClose={closeLogOutModal}
+        operationType="edit"
+        data={selectedItem}
+      />
     </ul>
   );
 };

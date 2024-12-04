@@ -1,13 +1,34 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import css from "./AdvantagesSection.module.css";
 
-import avatar1 from "./../../img/advantages/Avatar1.png";
-import avatar2 from "./../../img/advantages/Avatar2.png";
-import avatar3 from "./../../img/advantages/Avatar3.png";
+import avatar1M from "./../../img/advantages/avatar1M.webp";
+import avatar1M2x from "./../../img/advantages/avatar1M@2x.webp";
+import avatar1D from "./../../img/advantages/avatar1D.webp";
+import avatar1D2x from "./../../img/advantages/avatar1D@2x.webp";
+import avatar2M from "./../../img/advantages/avatar2M.webp";
+import avatar2M2x from "./../../img/advantages/avatar2M@2x.webp";
+import avatar2D from "./../../img/advantages/avatar2D.webp";
+import avatar2D2x from "./../../img/advantages/avatar2D@2x.webp";
+import avatar3M from "./../../img/advantages/avatar3M.webp";
+import avatar3M2x from "./../../img/advantages/avatar3M@2x.webp";
+import avatar3D from "./../../img/advantages/avatar3D.webp";
+import avatar3D2x from "./../../img/advantages/avatar3D@2x.webp";
 
-import { useLanguage } from "../../locales/LangContext";
+import { selectAllUsers } from "../../redux/auth/selectors.js";
+import { getAllUsers } from "../../redux/auth/operations.js";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const AdvantagesSection = () => {
   const { t } = useLanguage();
+  const dispatch = useDispatch();
+  const count = useSelector(selectAllUsers);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
   return (
     <div className={css.bgimage}>
       <div className={css.advantages_section}>
@@ -15,19 +36,54 @@ const AdvantagesSection = () => {
           <div>
             <ul className={css.customers_list}>
               <li className={css.customers_item}>
-                <img className={css.avatar} src={avatar1} alt="avatar1" />
+                <picture>
+                  <source
+                    srcSet={`${avatar1M2x} 2x, ${avatar1M} 1x`}
+                    media="(max-width: 767px)"
+                  />
+                  <source
+                    srcSet={`${avatar1D2x} 2x, ${avatar1D} 1x`}
+                    media="(min-width: 768px)"
+                  />
+                  <img src={avatar1D} alt="avatar1" />
+                </picture>
               </li>
               <li className={css.customers_item}>
-                <img className={css.avatar} src={avatar2} alt="avatar2" />
+                <picture>
+                  <source
+                    srcSet={`${avatar2M2x} 2x, ${avatar2M} 1x`}
+                    media="(max-width: 767px)"
+                  />
+                  <source
+                    srcSet={`${avatar2D2x} 2x, ${avatar2D} 1x`}
+                    media="(min-width: 768px)"
+                  />
+                  <img src={avatar2D} alt="avatar2" />
+                </picture>
               </li>
               <li className={css.customers_item}>
-                <img className={css.avatar} src={avatar3} alt="avatar3" />
+                <picture>
+                  <source
+                    srcSet={`${avatar3M2x} 2x, ${avatar3M} 1x`}
+                    media="(max-width: 767px)"
+                  />
+                  <source
+                    srcSet={`${avatar3D2x} 2x, ${avatar3D} 1x`}
+                    media="(min-width: 768px)"
+                  />
+                  <img src={avatar3D} alt="avatar3" />
+                </picture>
               </li>
             </ul>
           </div>
 
           <div>
-            <p className={css.customers_text}>{t("OurHappyCustomers")}</p>
+            <p className={`${css.customers_text}`}>
+              Our {!count ? " " : <span className={css.count}>{count}</span>}{" "}
+              <span className={css.span}>happy</span>
+              <br />
+              customers
+            </p>
           </div>
         </div>
 
@@ -40,7 +96,7 @@ const AdvantagesSection = () => {
               </div>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>{t("ViewStatistics")}</p>
+              <p className={css.text}>{t("HabitDViewStatisticsrive")}</p>
             </li>
             <li className={css.benefits_item}>
               <p className={css.text}>{t("PersonalSettings")}</p>
