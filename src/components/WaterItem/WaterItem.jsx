@@ -19,7 +19,7 @@ const WaterItem = ({ _id, amount, date }) => {
         </svg>
         <div>
           <p className={s.amount}>{amount} ml</p>
-          <p className={s.time}>{date}AM</p>
+          <p className={s.time}>{date}</p>
         </div>
         <div className={s.container}>
           <button onClick={openLogOutModal} className={s.btn}>
