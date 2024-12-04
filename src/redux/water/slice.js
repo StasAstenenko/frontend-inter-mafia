@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWaterData, getWaterPerDay } from "./operations";
+import {
+  addWaterItem,
+  deleteWaterItem,
+  fetchWaterData,
+  fetchWaterItems,
+  getWaterPerDay,
+  postWaterData,
+} from "./operations";
 
 const today = new Date().toLocaleDateString("en-CA"); // дата локальна, (YYYY-MM-DD)
 
@@ -11,6 +18,7 @@ const INITIAL_STATE = {
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   loading: false, // Стан завантаження
   error: null, // Помилки
+  itemsPerDay: [],
   waterAmountPerDay: [],
 };
 
@@ -49,42 +57,42 @@ const waterSlice = createSlice({
         //
         state.daysDrinking = demoSeven; // ДЕМОтиждень)
       })
-      // .addCase(fetchWaterItems.pending, (state) => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
-      // .addCase(fetchWaterItems.fulfilled, (state, action) => {
-      //   (state.loading = false), (state.items = action.payload);
-      // })
-      // .addCase(fetchWaterItems.rejected, (state, action) => {
-      //   (state.loading = false), (state.error = action.payload);
-      // })
-      // .addCase(addWaterItem.pending, (state) => {
-      //   state.loading = true;
-      // })
-      // .addCase(addWaterItem.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.error = null;
-      //   state.items.push(action.payload);
-      // })
-      // .addCase(addWaterItem.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload;
-      // })
-      // .addCase(deleteWaterItem.pending, (state) => {
-      //   state.loading = true;
-      // })
-      // .addCase(deleteWaterItem.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.error = null;
-      //   state.items = state.items.filter((item) => {
-      //     item._id !== action.payload._id;
-      //   });
-      // })
-      // .addCase(deleteWaterItem.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload;
-      // })
+      .addCase(fetchWaterItems.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchWaterItems.fulfilled, (state, action) => {
+        (state.loading = false), (state.itemsPerDay = action.payload);
+      })
+      .addCase(fetchWaterItems.rejected, (state, action) => {
+        (state.loading = false), (state.error = action.payload);
+      })
+      .addCase(addWaterItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addWaterItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.waterAmountPerDay.push(action.payload);
+      })
+      .addCase(addWaterItem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteWaterItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteWaterItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.waterAmountPerDay = state.waterAmountPerDay.filter(
+          (item) => item._id !== action.payload
+        );
+      })
+      .addCase(deleteWaterItem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       // .addCase(editWaterItem.pending, (state) => {
       //   state.loading = true;
       // })
@@ -96,23 +104,23 @@ const waterSlice = createSlice({
       //   state.loading = false;
       //   state.error = action.payload;
       // });
-
       .addCase(getWaterPerDay.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getWaterPerDay.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = null;
-        const totalWaterAmount = payload.data.reduce((total, entry) => {
-          return total + entry.amount;
-        }, 0);
-        // console.log("total", totalWaterAmount);
-        state.waterAmountPerDay = totalWaterAmount;
-      })
       .addCase(getWaterPerDay.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(getWaterPerDay.fulfilled, (state, action) => {
+        state.waterAmountPerDay = action.payload;
+      })
+      .addCase(postWaterData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(postWaterData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.waterAmountPerDay.push(action.payload);
       });
   },
 });

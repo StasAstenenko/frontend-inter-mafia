@@ -6,7 +6,8 @@ import css from "./WaterForm.module.css";
 import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
-import { postWaterData } from "../../redux/water/operations.js";
+import { getWaterPerDay, postWaterData } from "../../redux/water/operations.js";
+import { useDispatch } from "react-redux";
 
 const entriesValidationSchema = Yup.object().shape({
   amountOfWater: Yup.number()
@@ -17,17 +18,19 @@ const entriesValidationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({ title, paragraph, initialValues }) => {
+  const dispatch = useDispatch();
   const [amount, setAmount] = useState(initialValues.amountOfWater);
 
   const handleSubmit = (values) => {
     const formattedTime = values.recordingTime.toISOString().split(".")[0];
+    const today = new Date().toISOString().split("T")[0];
 
     const entries = {
       amount: values.amountOfWater,
       date: formattedTime,
     };
-    postWaterData(entries);
-    console.log("Values:", entries);
+    dispatch(postWaterData(entries));
+    dispatch(getWaterPerDay(today));
   };
 
   return (
