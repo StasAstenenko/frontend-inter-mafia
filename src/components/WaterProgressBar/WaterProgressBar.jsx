@@ -1,31 +1,33 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
-import { selectWaterAmountPerDay } from "../../redux/water/selectors.js";
+import {
+  selectIsLoading,
+  selectWaterAmountPerDay,
+} from "../../redux/water/selectors.js";
 import { fetchWaterData } from "../../redux/water/operations.js";
-import css from "./WaterProgressBar.module.css";
 import { useLanguage } from "../../locales/langContext.jsx";
+import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   const { t } = useLanguage();
 
   const dailyNorma = useSelector(selectDailyNorm);
   const waterAmount = useSelector(selectWaterAmountPerDay);
+  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!waterAmount) {
+    if (!waterAmount && !isLoading) {
       dispatch(
         fetchWaterData({
           type: "day",
           date: new Date().toLocaleString("en-CA"),
         })
       );
-
-      return;
     }
-  }, [waterAmount, dispatch]);
+  }, [waterAmount, isLoading, dispatch]);
 
   const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,
@@ -38,10 +40,12 @@ const WaterProgressBar = () => {
   );
 
   return (
-    <>
-      <div className={css.container}>
-        <p className={css.today}>{t("Today")}</p>
-        <div className={css.wrapper}>
+    <div className={css.container}>
+      <p className={css.today}>{t("Today")}</p>
+      <div className={css.wrapper}>
+        {isLoading || !waterAmount ? (
+          <p className={css.loading}>...loading</p>
+        ) : (
           <span
             className={css.volumeInfo}
             style={{
@@ -53,34 +57,34 @@ const WaterProgressBar = () => {
           >
             {waterPercentage}%
           </span>
-          <div className={css.progressBarContainer}>
-            <div
-              className={css.progressBar}
-              style={{ width: `${waterPercentage}%` }}
-            />
-            <svg
-              className={css.icon}
-              style={{
-                left:
-                  waterPercentage === 0
-                    ? `0px`
-                    : `calc(${waterPercentage}% - 12px)`,
-              }}
-              width="12"
-              height="12"
-            >
-              <use href="/icons/sprite.svg#circle" />
-            </svg>
-          </div>
-        </div>
-
-        <div className={css.percents}>
-          <span>0%</span>
-          <span>50%</span>
-          <span>100%</span>
+        )}
+        <div className={css.progressBarContainer}>
+          <div
+            className={css.progressBar}
+            style={{ width: `${waterPercentage}%` }}
+          />
+          <svg
+            className={css.icon}
+            style={{
+              left:
+                waterPercentage === 0
+                  ? `0px`
+                  : `calc(${waterPercentage}% - 12px)`,
+            }}
+            width="12"
+            height="12"
+          >
+            <use href="/icons/sprite.svg#circle" />
+          </svg>
         </div>
       </div>
-    </>
+
+      <div className={css.percents}>
+        <span>0%</span>
+        <span>50%</span>
+        <span>100%</span>
+      </div>
+    </div>
   );
 };
 

@@ -61,6 +61,13 @@
   transform: translateY(-50%);
 }
 
+.loading {
+  font-size: 6px;
+  font-style: italic;
+  position: absolute;
+  top: -100%;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     min-width: 295px;
