@@ -13,6 +13,8 @@ import {
   selectWeight,
   selectDaysNotAsInWeek,
   selectSundayFirst,
+  selectDailyNorm,
+  selectAvatarUrl,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { setDaysNotAsInWeek, setSundayFirst } from "../../redux/settings/slice";
@@ -23,7 +25,9 @@ const validationSettingSchema = Yup.object().shape({
   gender: Yup.string().oneOf(["woman", "man"]),
   name: Yup.string(),
   email: Yup.string().email("Invalid email"),
-  weight: Yup.number().positive("Weight must be a positive number"),
+  weight: Yup.number()
+    .min(10, "Your weight is very little")
+    .max(300, "Max weight. Sorry!"),
   activeTime: Yup.number()
     .min(0, "Active time cannot be negative")
     .max(24, "Max active time"),
@@ -37,11 +41,13 @@ const UsersSettingsForm = () => {
   const userEmail = useSelector(selectEmail);
   const user = useSelector(selectUser);
   const weightSelect = useSelector(selectWeight);
+  const dailyNormSelect = useSelector(selectDailyNorm);
   const activeTimeSelect = useSelector(selectActiveTime);
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek);
   const sundayFirst = useSelector(selectSundayFirst);
+  const avatarSelect = useSelector(selectAvatarUrl);
 
-  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(avatarSelect || null);
   const [waterNorm, setWaterNorm] = useState("1.5");
 
   const {
@@ -52,13 +58,13 @@ const UsersSettingsForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      // userName: userName,
       name: "",
       email: "",
       weight: weightSelect,
       activeTime: activeTimeSelect,
       gender: "woman",
-      dailyNorm: 1.5,
+      dailyNorm: dailyNormSelect,
+      avatarUrl: avatarSelect,
     },
     resolver: yupResolver(validationSettingSchema),
   });
@@ -70,13 +76,9 @@ const UsersSettingsForm = () => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
-      setAvatarPreview(URL.createObjectURL(file));
+      const fileURL = URL.createObjectURL(file);
+      setAvatarPreview(fileURL);
       setValue("avatarUrl", file);
-    } else if (!file) {
-      setAvatarPreview(null);
-      setValue("avatarUrl", "");
-    } else {
-      alert("Please select a valid image file.");
     }
   };
 
@@ -114,7 +116,6 @@ const UsersSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    // console.log("1", data);
 
     Object.entries(data).forEach(([key, value]) => {
       if (
@@ -126,14 +127,10 @@ const UsersSettingsForm = () => {
       formData.append(key, value instanceof FileList ? value[0] : value);
     });
 
-    // console.log("2", formData);
-
     try {
       dispatch(editUser(formData));
-      // alert("User updated successfully!");
     } catch (error) {
       console.error("Error updating user:", error);
-      // alert("Failed to update user. Please try again.");
     }
   };
 
@@ -143,11 +140,7 @@ const UsersSettingsForm = () => {
         {/* Avatar */}
         <div className={css.settingFormAvatar}>
           {avatarPreview ? (
-            <img
-              className={css.settingAvatarImg}
-              src={avatarPreview}
-              alt="User Avatar"
-            />
+            <img className={css.settingAvatarImg} src={avatarPreview} />
           ) : (
             <div className={css.avatarPlaceholder}>
               <FcDecision className={css.settingAvatarSecondIcon} />
@@ -281,6 +274,9 @@ const UsersSettingsForm = () => {
                     {...register("weight")}
                     className={css.settingFormInput}
                   />
+                  {errors.weight && (
+                    <p className={css.settingError}>{errors.weight.message}</p>
+                  )}
                 </div>
                 <div className={css.settingWeightLabel}>
                   <label className={css.settingWeightContext}>
@@ -291,6 +287,11 @@ const UsersSettingsForm = () => {
                     {...register("activeTime")}
                     className={css.settingFormInput}
                   />
+                  {errors.activeTime && (
+                    <p className={css.settingError}>
+                      {errors.activeTime.message}
+                    </p>
+                  )}
                 </div>
               </div>
               {/* Calculate Form */}
@@ -314,6 +315,11 @@ const UsersSettingsForm = () => {
                     {...register("dailyNorm")}
                     className={css.settingFormInput}
                   />
+                  {errors.dailyNorm && (
+                    <p className={css.settingError}>
+                      {errors.dailyNorm.message}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -324,9 +330,9 @@ const UsersSettingsForm = () => {
           Save
         </button>
       </form>
-      {/* Розділ з додатковими налаштуваннями */}
+      {/* Calendar options */}
       <div className={css.settingAdditionalOptions}>
-        <h2 className={css.settingSubheading}>Calendar options</h2>
+        <h3 className={css.settingSubheading}>Calendar options</h3>
 
         <div className={css.settingCheckboxGroup}>
           <label className={css.settingCheckboxLabel}>
@@ -336,7 +342,10 @@ const UsersSettingsForm = () => {
               onChange={() => dispatch(setDaysNotAsInWeek(!daysNotAsInWeek))}
               className={css.settingCheckboxInput}
             />
-            Show days not as in week
+            <span className={css.settingCheckboxCustom}></span>
+            <span className={css.settingCheckboxText}>
+              Show days not as in week
+            </span>
           </label>
           {!daysNotAsInWeek && (
             <label className={css.settingCheckboxLabel}>
@@ -346,7 +355,10 @@ const UsersSettingsForm = () => {
                 onChange={() => dispatch(setSundayFirst(!sundayFirst))}
                 className={css.settingCheckboxInput}
               />
-              Set Sunday as the first day of the week
+              <span className={css.settingCheckboxCustom}></span>
+              <span className={css.settingCheckboxText}>
+                Set Sunday as the first day of the week
+              </span>
             </label>
           )}
         </div>

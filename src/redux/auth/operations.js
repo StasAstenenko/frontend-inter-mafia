@@ -42,30 +42,27 @@ export const apiRegister = createAsyncThunk(
   }
 );
 
-// export const apiRefresh = createAsyncThunk(
-//   "users/refresh",
-//   async (_, thunkApi) => {
-//     try {
-//       const { data } = await instance.post("users/refresh");
-//       // const state = thunkApi.getState();
-//       // const token = state.auth.token;
-//       setAuthHeaders(data);
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   },
-//   {
-//     condition: (_, thunkApi) => {
-//       const state = thunkApi.getState();
-//       const token = state.auth.token;
+export const apiRefresh = createAsyncThunk(
+  "users/refresh",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await instance.post("users/refresh");
+      const state = thunkApi.getState();
+      const token = state.auth.token;
+      setAuthHeaders(data.accessToken);
+      return data.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  },
+  {
+    condition: (_, thunkApi) => {
+      const state = thunkApi.getState();
 
-//       if (token) return true;
-
-//       return false;
-//     },
-//   }
-// );
+      return state.auth.token !== null;
+    },
+  }
+);
 
 export const apiLogout = createAsyncThunk(
   "users/logout",
@@ -73,7 +70,7 @@ export const apiLogout = createAsyncThunk(
     try {
       await instance.post("users/logout");
       clearAuthHeader();
-      return;
+      // return;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
