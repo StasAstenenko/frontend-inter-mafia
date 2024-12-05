@@ -17,7 +17,7 @@ const WaterItem = ({ _id, amount, date, onEdit }) => {
         <svg className={s.waterglass}>
           <use href="/icons/sprite.svg#water-glass"></use>
         </svg>
-        <div>
+        <div className={s.timewrapper}>
           <p className={s.amount}>{amount} ml</p>
           <p className={s.time}>{date}</p>
         </div>

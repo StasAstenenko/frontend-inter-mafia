@@ -5,14 +5,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/scrollbar";
-
+import "./Swaper.css";
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { selectWaterItems } from "../../redux/water/selectors";
 import { useEffect, useState } from "react";
 import { getWaterPerDay } from "../../redux/water/operations";
-import { selectWaterAmountPerDay } from "../../redux/water/selectors";
+import { selectDayDetails } from "../../redux/water/selectors";
 import WaterModal from "../../modals/WaterModal/WaterModal";
 // import { getWaterData } from "../../redux/water/operations.js";
 const WaterList = () => {
@@ -29,13 +29,8 @@ const WaterList = () => {
     dispatch(getWaterPerDay(date));
   }, [dispatch]);
 
-  const items = useSelector(selectWaterAmountPerDay);
-  // console.log(items);
+  const items = useSelector(selectDayDetails);
 
-  // const items = useSelector(selectWaterItems);
-  // useEffect(() => {
-  //   dispatch(getWaterData());
-  // }, [dispatch]);
   const formatTime = (isoDate) => {
     const date = new Date(isoDate);
     const hours = date.getHours();
@@ -49,9 +44,7 @@ const WaterList = () => {
     return `${formattedHours}:${formattedMinutes} ${period}`;
   };
 
-  // const closeLogOutModal = () => setLogOutModalisOpen(false);
   const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
-  // const openLogOutModal = () => setLogOutModalisOpen(true);
   const openLogOutModal = (item) => {
     setSelectedItem(item);
     setLogOutModalisOpen(true);
