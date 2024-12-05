@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./WaterForm.module.css";
-import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
 import { getWaterPerDay } from "../../redux/water/operations.js";
@@ -19,21 +18,29 @@ const entriesValidationSchema = Yup.object().shape({
 
 const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState(initialValues.amountOfWater);
-  const handleSubmit = (values) => {
-    const formattedTime = values.recordingTime.toISOString().split(".")[0];
+  const handleSubmit = async (values) => {
+    const formattedTime = values.recordingTime
+      ? values.recordingTime.toISOString().split(".")[0]
+      : new Date().toISOString().split(".")[0];
+    console.log(formattedTime);
     const today = new Date().toISOString().split("T")[0];
 
+    await dispatch(getWaterPerDay(today));
     const entries = {
       amount: values.amountOfWater,
       date: formattedTime,
     };
     if (initialValues._id) {
-      dispatch(dispatchFunction({ waterId: initialValues._id, entries }));
+      await dispatch(
+        dispatchFunction({
+          waterId: initialValues._id,
+          entries,
+        })
+      );
     } else {
-      dispatch(dispatchFunction({ entries }));
+      await dispatch(dispatchFunction(entries));
     }
-    dispatch(getWaterPerDay(today));
+    await dispatch(getWaterPerDay(today));
   };
   return (
     <div className={css.wrapper}>
@@ -41,23 +48,21 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={entriesValidationSchema}
+        enableReinitialize={true}
       >
         {({ setFieldValue, values }) => {
           const handleIncrease = () => {
-            const newAmount = Math.min(amount + 50, 5000);
-            setAmount(newAmount);
+            const newAmount = Math.min((values.amountOfWater || 50) + 50, 5000);
             setFieldValue("amountOfWater", newAmount);
           };
           const handleDecrease = () => {
-            const newAmount = Math.max(amount - 50, 50);
-            setAmount(newAmount);
+            const newAmount = Math.max((values.amountOfWater || 50) - 50, 50);
             setFieldValue("amountOfWater", newAmount);
           };
           const handleInputChange = (e) => {
-            const inputValue = Number(e.target.value);
-            if (!isNaN(inputValue)) {
-              setAmount(inputValue);
-              setFieldValue("amountOfWater", inputValue);
+            const inputValue = e.target.value.trim();
+            if (inputValue && !isNaN(inputValue)) {
+              setFieldValue("amountOfWater", Number(inputValue));
             }
           };
 
@@ -76,7 +81,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                     <GoDash className={css.btnIcon} />
                   </button>
                   <div className={css.valueDisplay}>
-                    <span>{amount} ml</span>
+                    <span>{values.amountOfWater} ml</span>
                   </div>
                   <button
                     type="button"
@@ -114,7 +119,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                   className={css.amountOfWaterField}
                   type="text"
                   name="amountOfWater"
-                  value={amount}
+                  value={values.amountOfWater}
                   onChange={handleInputChange}
                 />
               </label>
