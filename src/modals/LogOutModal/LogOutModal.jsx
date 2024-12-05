@@ -6,8 +6,11 @@ import { apiLogout } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const LogOutModal = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
+
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const handleRedirect = () => {
@@ -31,8 +34,8 @@ const LogOutModal = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={css.modal_content}>
         <div className={css.wrapperText}>
-          <h2 className={css.title}>Log Out</h2>
-          <p className={css.text}>Do you really want to leave?</p>
+          <h2 className={css.title}>{t("LogOut")}</h2>
+          <p className={css.text}>{t("WannaLeave")}</p>
         </div>
         <div className={css.buttonContainer}>
           <button
@@ -41,7 +44,7 @@ const LogOutModal = ({ isOpen, onClose }) => {
             aria-label="Logout button"
             onClick={handleLogOut}
           >
-            Log Out
+            {t("LogOut")}
           </button>
           <button
             className={css.cancelBtn}
@@ -49,7 +52,7 @@ const LogOutModal = ({ isOpen, onClose }) => {
             aria-label="Cancel button"
             onClick={onClose}
           >
-            Cancel
+            {t("Cancel")}
           </button>
         </div>
       </div>

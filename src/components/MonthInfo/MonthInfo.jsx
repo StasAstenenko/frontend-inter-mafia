@@ -5,8 +5,11 @@ import Calendar from "../Calendar/Calendar.jsx";
 import RechartsComponent from "../RechartsComponent/RechartsComponent.jsx";
 import { selectStatistics } from "../../redux/water/selectors.js";
 import { setStatistics } from "../../redux/water/slice.js";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const MonthInfo = () => {
+  const { t } = useLanguage();
+
   const dispatch = useDispatch();
   const isStatisticsVisible = useSelector(selectStatistics);
 
@@ -19,9 +22,9 @@ const MonthInfo = () => {
       <div className={`${css.MonthInfo} ${css.toRow}`}>
         <h2 className={css.title}>
           {isStatisticsVisible ? (
-            <span className={css.statisticsTitle}>Statistics</span>
+            <span className={css.statisticsTitle}>{t("Statistics")}</span>
           ) : (
-            "Month"
+            t("Month")
           )}
         </h2>
         <div className={css.toRow}>

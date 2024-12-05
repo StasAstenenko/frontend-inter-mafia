@@ -18,8 +18,10 @@ import avatar3D2x from "./../../img/advantages/avatar3D@2x.webp";
 
 import { selectAllUsers } from "../../redux/auth/selectors.js";
 import { getAllUsers } from "../../redux/auth/operations.js";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const AdvantagesSection = () => {
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const count = useSelector(selectAllUsers);
 
@@ -77,10 +79,11 @@ const AdvantagesSection = () => {
 
           <div>
             <p className={`${css.customers_text}`}>
-              Our {!count ? " " : <span className={css.count}>{count}</span>}{" "}
-              <span className={css.span}>happy</span>
+              {t("Our")}{" "}
+              {!count ? " " : <span className={css.count}>{count}</span>}{" "}
+              <span className={css.span}>{t("Happy")}</span>
               <br />
-              customers
+              {t("Customers")}
             </p>
           </div>
         </div>
@@ -90,14 +93,14 @@ const AdvantagesSection = () => {
             <li className={css.benefits_item}>
               <div className={css.flex}>
                 <div className={css.ellipse13}></div>
-                <p className={css.text}>Habit drive</p>
+                <p className={css.text}>{t("HabitDrive")}</p>
               </div>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>View statistics</p>
+              <p className={css.text}>{t("ViewStatistics")}</p>
             </li>
             <li className={css.benefits_item}>
-              <p className={css.text}>Personal rate setting</p>
+              <p className={css.text}>{t("PersonalSettings")}</p>
             </li>
           </ul>
         </div>
