@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   statistics: false,
   error: null, // Помилки
   itemsPerDay: [],
-  waterAmountPerDay: [],
+  waterAmountPerDay: null,
 };
 
 const waterSlice = createSlice({
@@ -36,6 +36,10 @@ const waterSlice = createSlice({
     },
     setStatistics(state, action) {
       state.statistics = action.payload;
+    },
+    setWaterAmountPerDay(state, action) {
+      state.waterAmountPerDay = action.payload;
+      console.log("setWaterAmountPerDay ", action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -122,6 +126,7 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterPerDay.fulfilled, (state, action) => {
         state.dayDetails = action.payload;
+        state.waterAmountPerDay = action.payload;
       })
       .addCase(postWaterData.pending, (state) => {
         state.loading = true;
@@ -133,6 +138,10 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setChosenMonth, setChosenDate, setStatistics } =
-  waterSlice.actions;
+export const {
+  setChosenMonth,
+  setChosenDate,
+  setStatistics,
+  setWaterAmountPerDay,
+} = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;

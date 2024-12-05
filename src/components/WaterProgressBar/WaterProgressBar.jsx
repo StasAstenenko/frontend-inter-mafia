@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
 import { selectWaterAmountPerDay } from "../../redux/water/selectors.js";
+import { fetchWaterData } from "../../redux/water/operations.js";
 import css from "./WaterProgressBar.module.css";
 import { useLanguage } from "../../locales/langContext.jsx";
 
@@ -10,7 +12,24 @@ const WaterProgressBar = () => {
   const dailyNorma = useSelector(selectDailyNorm);
   const waterAmount = useSelector(selectWaterAmountPerDay);
 
-  const totalAmount = waterAmount.reduce(
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!waterAmount) {
+      dispatch(
+        fetchWaterData({
+          type: "day",
+          date: new Date().toLocaleString("en-CA"),
+        })
+      );
+      console.log("day fetch");
+      return;
+    }
+  }, [waterAmount, dispatch]);
+
+  console.log("progressbar");
+
+  const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,
     0
   );
