@@ -6,8 +6,11 @@ import UserSettingsModal from "../../modals/UserSettingsModal/UserSettingsModal.
 import LogOutModal from "../../modals/LogOutModal/LogOutModal.jsx";
 
 import css from "./UserPanel.module.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const UserPanel = () => {
+  const { t } = useLanguage();
+
   const user = useSelector(selectUser);
   // console.log(user)
   const defaultUserName = user.name || user.email.split("@")[0];
@@ -28,7 +31,7 @@ const UserPanel = () => {
   return (
     <div className={css.userpanel}>
       <h2 className={css.greeting}>
-        Hello, <span className={css.name}>{defaultUserName}!</span>
+        {t("HelloGuest")} <span className={css.name}>{defaultUserName}!</span>
       </h2>
       <UserBar
         userName={defaultUserName}

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import css from "./AddWaterBtn.module.css";
 import clsx from "clsx";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 import WaterModal from "../../modals/WaterModal/WaterModal.jsx";
 
 const AddWaterBtn = ({ variant = "default" }) => {
+  const { t } = useLanguage();
+
   const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
   const openLogOutModal = () => setLogOutModalisOpen(true);
   const closeLogOutModal = () => setLogOutModalisOpen(false);
@@ -27,7 +30,7 @@ const AddWaterBtn = ({ variant = "default" }) => {
         >
           <use href="/icons/sprite.svg#plus-add-water" />
         </svg>
-        Add water
+        {t("AddWater")}
       </button>
       <WaterModal
         isOpen={logOutModalisOpen}

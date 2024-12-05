@@ -3,22 +3,24 @@ import { deleteWaterItem } from "../../redux/water/operations";
 // import { useState } from "react";
 // import WaterModal from "../../modals/WaterModal/WaterModal";
 import s from "./WaterItem.module.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 const WaterItem = ({ _id, amount, date, onEdit }) => {
   // const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
   // const openLogOutModal = () => setLogOutModalisOpen(true);
   // const closeLogOutModal = () => setLogOutModalisOpen(false);
   const dispatch = useDispatch();
+  const { t } = useLanguage();
 
   const handleDelete = () => dispatch(deleteWaterItem(_id));
 
   return (
-    <div>
+    <div className={s.mainwrapper}>
       <div className={s.wrapper}>
         <svg className={s.waterglass}>
           <use href="/icons/sprite.svg#water-glass"></use>
         </svg>
-        <div>
-          <p className={s.amount}>{amount} ml</p>
+        <div className={s.timewrapper}>
+          <p className={s.amount}>{amount} {t("Ml")}</p>
           <p className={s.time}>{date}</p>
         </div>
         <div className={s.container}>

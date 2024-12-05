@@ -1,3 +1,4 @@
+import { useLanguage } from "../../locales/langContext.jsx";
 import css from "./UserBarPopover.module.css";
 
 const UserBarPopover = ({
@@ -9,6 +10,7 @@ const UserBarPopover = ({
   onLogOutClick,
   closePopover,
 }) => {
+  const { t } = useLanguage();
   return (
     <div
       ref={popoverRef}
@@ -29,7 +31,7 @@ const UserBarPopover = ({
         <svg width="16" height="16">
           <use href="/icons/sprite.svg#settings"></use>
         </svg>
-        Settings
+        {t("Settings")}
       </button>
       <button
         onClick={() => {
@@ -41,7 +43,7 @@ const UserBarPopover = ({
         <svg width="16" height="16">
           <use href="/icons/sprite.svg#log-out"></use>
         </svg>
-        Log out
+        {t("LogOut")}
       </button>
     </div>
   );

@@ -1,12 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./WaterForm.module.css";
-import { useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
 import { getWaterPerDay } from "../../redux/water/operations.js";
+import { useLanguage } from "../../locales/langContext.jsx";
 import { useDispatch } from "react-redux";
 
 const entriesValidationSchema = Yup.object().shape({
@@ -18,22 +17,32 @@ const entriesValidationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
+  const { t } = useLanguage();
+
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState(initialValues.amountOfWater);
-  const handleSubmit = (values) => {
-    const formattedTime = values.recordingTime.toISOString().split(".")[0];
+  const handleSubmit = async (values) => {
+    const formattedTime = values.recordingTime
+      ? values.recordingTime.toISOString().split(".")[0]
+      : new Date().toISOString().split(".")[0];
+    console.log(formattedTime);
     const today = new Date().toISOString().split("T")[0];
 
+    await dispatch(getWaterPerDay(today));
     const entries = {
       amount: values.amountOfWater,
       date: formattedTime,
     };
     if (initialValues._id) {
-      dispatch(dispatchFunction({ waterId: initialValues._id, entries }));
+      await dispatch(
+        dispatchFunction({
+          waterId: initialValues._id,
+          entries,
+        })
+      );
     } else {
-      dispatch(dispatchFunction({ entries }));
+      await dispatch(dispatchFunction(entries));
     }
-    dispatch(getWaterPerDay(today));
+    await dispatch(getWaterPerDay(today));
   };
   return (
     <div className={css.wrapper}>
@@ -41,23 +50,21 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={entriesValidationSchema}
+        enableReinitialize={true}
       >
         {({ setFieldValue, values }) => {
           const handleIncrease = () => {
-            const newAmount = Math.min(amount + 50, 5000);
-            setAmount(newAmount);
+            const newAmount = Math.min((values.amountOfWater || 50) + 50, 5000);
             setFieldValue("amountOfWater", newAmount);
           };
           const handleDecrease = () => {
-            const newAmount = Math.max(amount - 50, 50);
-            setAmount(newAmount);
+            const newAmount = Math.max((values.amountOfWater || 50) - 50, 50);
             setFieldValue("amountOfWater", newAmount);
           };
           const handleInputChange = (e) => {
-            const inputValue = Number(e.target.value);
-            if (!isNaN(inputValue)) {
-              setAmount(inputValue);
-              setFieldValue("amountOfWater", inputValue);
+            const inputValue = e.target.value.trim();
+            if (inputValue && !isNaN(inputValue)) {
+              setFieldValue("amountOfWater", Number(inputValue));
             }
           };
 
@@ -66,7 +73,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
               <p className={css.addWater}>{title}</p>
               <p className={css.chooseAValue}>{paragraph}:</p>
               <div className={css.customInput}>
-                <p className={css.amountParagraph}>Amount of water:</p>
+                <p className={css.amountParagraph}>{t("AmountOfWater")}</p>
                 <div className={css.inputWrapper}>
                   <button
                     type="button"
@@ -76,7 +83,9 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                     <GoDash className={css.btnIcon} />
                   </button>
                   <div className={css.valueDisplay}>
-                    <span>{amount} ml</span>
+                    <span>
+                      {values.amountOfWater} {t("Ml")}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -88,17 +97,33 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                 </div>
               </div>
               <label className={css.label}>
-                <p className={css.recordingTime}>Recording time:</p>
-                <DatePicker
-                  selected={values.recordingTime}
-                  onChange={(date) => setFieldValue("recordingTime", date)}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={1}
-                  timeCaption="Time"
-                  dateFormat="HH:mm"
-                  timeFormat="HH:mm"
-                  className={`${css.field} custom-datepicker-input`}
+                <p className={css.recordingTime}>{t("RecordingTime")}</p>
+                <Field
+                  name="recordingTime"
+                  render={({ field, form }) => (
+                    <input
+                      type="time"
+                      {...field}
+                      value={
+                        field.value
+                          ? field.value.toTimeString().slice(0, 5)
+                          : ""
+                      }
+                      onChange={(e) => {
+                        const timeString = e.target.value;
+                        if (timeString) {
+                          const date = new Date();
+                          const [hours, minutes] = timeString.split(":");
+                          date.setHours(parseInt(hours, 10));
+                          date.setMinutes(parseInt(minutes, 10));
+                          date.setSeconds(0);
+                          date.setMilliseconds(0);
+                          form.setFieldValue("recordingTime", date);
+                        }
+                      }}
+                      className={`${css.field} custom-datepicker-input`}
+                    />
+                  )}
                 />
               </label>
               <ErrorMessage
@@ -107,14 +132,12 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                 component="span"
               />
               <label className={css.label}>
-                <p className={css.enterValue}>
-                  Enter the value of the water used:
-                </p>
+                <p className={css.enterValue}>{t("ValueOfWater")}</p>
                 <Field
                   className={css.amountOfWaterField}
                   type="text"
                   name="amountOfWater"
-                  value={amount}
+                  value={values.amountOfWater}
                   onChange={handleInputChange}
                 />
               </label>
@@ -124,7 +147,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                 component="span"
               />
               <button type="submit" className={css.submitBtn}>
-                Save
+                {t("Save")}
               </button>
             </Form>
           );

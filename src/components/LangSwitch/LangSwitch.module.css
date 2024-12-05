@@ -1,0 +1,34 @@
+.languageSwitcher {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  display: flex;
+  gap: 10px;
+}
+
+.languageButton {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2.5px 5px;
+  color: #333;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+@media screen and (min-width: 768px) {
+  .languageButton {
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+}
+
+.languageButton:hover {
+  border-color: #ccc;
+}
+
+.languageButton.active {
+  border-color: #000;
+  font-weight: bold;
+}

@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import { selectChosenDate } from "../../redux/water/selectors.js";
 import css from "./ChooseDate.module.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const ChooseDate = () => {
+  const { t } = useLanguage();
+
   const choseDate = useSelector(selectChosenDate);
 
   // Функція для перевірки, чи є дата сьогоднішньою
@@ -12,7 +15,7 @@ const ChooseDate = () => {
   };
   // Якщо дата сьогодні, відображаємо "Today", якщо ні — форматовану дату
   const formattedDate = isToday(choseDate)
-    ? "Today"
+    ? t("Today")
     : (() => {
         const date = new Date(choseDate); // Створюємо Date-об'єкт з рядка
         const day = date.getDate(); // Отримуємо день

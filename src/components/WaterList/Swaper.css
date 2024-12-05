@@ -1,0 +1,39 @@
+/*style*/
+/* .scrollbar {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  height: 8px;
+} */
+
+.swiper-wrapper {
+  width: 638px;
+}
+
+.swiper-scrollbar {
+  background-color: #fff;
+  border-radius: 9px;
+}
+
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  height: 8px;
+}
+
+.swiper-scrollbar-drag {
+  background-color: #323f47;
+  border-radius: 9px;
+  height: 8px;
+  width: 150px;
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-scrollbar-drag {
+    max-width: 235px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    gap: 16px;
+  }
+}

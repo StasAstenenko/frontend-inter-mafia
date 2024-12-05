@@ -6,17 +6,10 @@ import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSect
 import { NavLink } from "react-router-dom";
 import css from "./SignUpPage.module.css";
 import { useMediaQuery } from "react-responsive";
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
-import { useSelector } from "react-redux";
-import {
-  selectAuthError,
-  // selectAuthIsLoading,
-  selectAuthIsRegisteredSuccess,
-} from "../../redux/auth/selectors";
-// import Loader from "../../components/Loader/Loader";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const SignUpPage = () => {
+  const { t } = useLanguage();
   const isDesktop = useMediaQuery({ minWidth: 1440 });
   const error = useSelector(selectAuthError);
   const isRegistered = useSelector(selectAuthIsRegisteredSuccess);
@@ -30,12 +23,12 @@ const SignUpPage = () => {
       <Container className={css.signUpWrapper}>
         {/* {isLoading && <Loader />} */}
         <Logo className={css.logo} />
-        <h1 className={css.title}>Sign Up</h1>
+        <h1 className={css.title}>{t("SignUp")}</h1>
         <SignUpForm />
         <p className={css.text}>
-          Already have account?{" "}
+          {t("AlreadyHave")}{" "}
           <NavLink to="/signin" className={css.link}>
-            Sign In
+            {t("SignIn")}
           </NavLink>
         </p>
       </Container>
