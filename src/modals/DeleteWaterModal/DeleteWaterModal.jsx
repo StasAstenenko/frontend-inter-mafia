@@ -5,7 +5,7 @@ import { deleteWaterItem } from "../../redux/water/operations";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-const DeleteWaterModal = ({ isOpen, onClose }) => {
+const DeleteWaterModal = ({ isOpen, onClose, data }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (_id) => {
@@ -33,7 +33,7 @@ const DeleteWaterModal = ({ isOpen, onClose }) => {
             className={css.deleteBtn}
             type="button"
             aria-label="Delete button"
-            onClick={handleDelete}
+            onClick={() => handleDelete(data._id)}
           >
             Delete
           </button>
