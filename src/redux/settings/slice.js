@@ -12,7 +12,6 @@ const INITIAL_STATE = {
     avatarUrl: "",
   },
   error: null,
-  accessToken: null,
 
   // додаткові опції
   DaysNotAsInWeek: true,

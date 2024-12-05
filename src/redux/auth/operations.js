@@ -16,11 +16,12 @@ const clearAuthHeader = () => {
 export const apiLogin = createAsyncThunk(
   "users/login",
   async (formData, thunkApi) => {
+    console.log(formData);
     try {
-      const { data } = await instance.post("users/login", formData);
-      setAuthHeaders(data.data.accessToken);
-      // console.log(data);
-      return data.data;
+      const response = await instance.post("users/login", formData);
+      console.log(response);
+      setAuthHeaders(response.data.data.accessToken);
+      return response.data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -32,40 +33,29 @@ export const apiRegister = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await instance.post("users/register", formData);
-      // setAuthHeaders(data.token);
-      //   console.log("data:", data);
       return data;
     } catch (error) {
-      // console.error("Error during registration:", error);
       return thunkApi.rejectWithValue(error.response.data.data.message);
     }
   }
 );
 
-// export const apiRefresh = createAsyncThunk(
-//   "users/refresh",
-//   async (_, thunkApi) => {
-//     try {
-//       const { data } = await instance.post("users/refresh");
-//       // const state = thunkApi.getState();
-//       // const token = state.auth.token;
-//       setAuthHeaders(data);
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   },
-//   {
-//     condition: (_, thunkApi) => {
-//       const state = thunkApi.getState();
-//       const token = state.auth.token;
+export const apiRefresh = createAsyncThunk(
+  "users/refresh",
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
 
-//       if (token) return true;
-
-//       return false;
-//     },
-//   }
-// );
+    setAuthHeaders(state.auth.accessToken);
+    const response = await axios.post("users/refresh");
+    return response.data;
+  },
+  {
+    condition(_, thunkApi) {
+      const state = thunkApi.getState();
+      return state.auth.accessToken !== null;
+    },
+  }
+);
 
 export const apiLogout = createAsyncThunk(
   "users/logout",

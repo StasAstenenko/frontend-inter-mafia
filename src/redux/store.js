@@ -17,7 +17,7 @@ import { waterReducer } from "./water/slice";
 const authConfig = {
   key: "auth",
   storage,
-  whitelist: ["token"],
+  whitelist: ["accessToken"],
 };
 
 const settingsConfig = {

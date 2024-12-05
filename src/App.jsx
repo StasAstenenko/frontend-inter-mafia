@@ -1,11 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Route, Routes } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 // import { selectAuthIsRefreshing } from "./redux/auth/selectors";
-// import { apiRefresh } from "./redux/auth/operations";
+import { apiRefresh } from "./redux/auth/operations";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
@@ -13,12 +13,12 @@ const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const refresh = useSelector(selectAuthIsRefreshing);
 
-  // useEffect(() => {
-  //   dispatch(apiRefresh());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(apiRefresh());
+  }, [dispatch]);
 
   return (
     <main>
