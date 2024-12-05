@@ -18,6 +18,7 @@ const INITIAL_STATE = {
   chosenDate: today.slice(0, 10), // дата локальна, (YYYY-MM-DD)
   chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
   loading: false, // Стан завантаження
+  statistics: false,
   error: null, // Помилки
   itemsPerDay: [],
   waterAmountPerDay: [],
@@ -33,8 +34,8 @@ const waterSlice = createSlice({
     setChosenDate(state, action) {
       state.chosenDate = action.payload;
     },
-    setDaysDrinking(state, action) {
-      state.daysDrinking = action.payload;
+    setStatistics(state, action) {
+      state.statistics = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -132,6 +133,6 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setChosenMonth, setChosenDate, setDaysDrinking } =
+export const { setChosenMonth, setChosenDate, setStatistics } =
   waterSlice.actions;
 export const waterReducer = waterSlice.reducer;

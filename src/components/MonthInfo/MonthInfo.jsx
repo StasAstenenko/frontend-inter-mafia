@@ -1,24 +1,27 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./MonthInfo.module.css";
 import CalendarPagination from "../CalendarPagination/CalendarPagination.jsx";
 import Calendar from "../Calendar/Calendar.jsx";
 import RechartsComponent from "../RechartsComponent/RechartsComponent.jsx";
+import { selectStatistics } from "../../redux/water/selectors.js";
+import { setStatistics } from "../../redux/water/slice.js";
 
 const MonthInfo = () => {
-  const [isCalendarVisible, setIsCalendarVisible] = useState(true);
+  const dispatch = useDispatch();
+  const isStatisticsVisible = useSelector(selectStatistics);
 
   const toggleView = () => {
-    setIsCalendarVisible((prevState) => !prevState);
+    dispatch(setStatistics(!isStatisticsVisible));
   };
 
   return (
     <div className={css.sectionCalendar}>
       <div className={`${css.MonthInfo} ${css.toRow}`}>
         <h2 className={css.title}>
-          {isCalendarVisible ? (
-            "Month"
-          ) : (
+          {isStatisticsVisible ? (
             <span className={css.statisticsTitle}>Statistics</span>
+          ) : (
+            "Month"
           )}
         </h2>
         <div className={css.toRow}>
@@ -31,7 +34,7 @@ const MonthInfo = () => {
         </div>
       </div>
 
-      {isCalendarVisible ? <Calendar /> : <RechartsComponent />}
+      {isStatisticsVisible ? <RechartsComponent /> : <Calendar />}
     </div>
   );
 };
