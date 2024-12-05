@@ -1,20 +1,22 @@
-// import { useDispatch, useSelector } from "react-redux";
-
 import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "./Swaper.css";
+
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-// import { selectWaterItems } from "../../redux/water/selectors";
 import { useEffect, useState } from "react";
 import { getWaterPerDay } from "../../redux/water/operations";
 import { selectDayDetails } from "../../redux/water/selectors";
-import WaterModal from "../../modals/WaterModal/WaterModal";
+
+// import { selectWaterItems } from "../../redux/water/selectors";
 // import { getWaterData } from "../../redux/water/operations.js";
+
+import WaterModal from "../../modals/WaterModal/WaterModal";
+import DeleteWaterModal from "../../modals/DeleteWaterModal/DeleteWaterModal.jsx";
+
 const WaterList = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
@@ -44,15 +46,19 @@ const WaterList = () => {
     return `${formattedHours}:${formattedMinutes} ${period}`;
   };
 
-  const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
-  const openLogOutModal = (item) => {
+  const [waterModalisOpen, setWaterModalisOpen] = useState(false);
+  const openWaterModal = (item) => {
     setSelectedItem(item);
-    setLogOutModalisOpen(true);
+    setWaterModalisOpen(true);
   };
-  const closeLogOutModal = () => {
-    setLogOutModalisOpen(false);
+  const closeWaterModal = () => {
+    setWaterModalisOpen(false);
     setSelectedItem(null);
   };
+
+  const [isDeleteWaterModalOpen, setisDeleteWaterModalOpen] = useState(false);
+  const openDeleteWaterModal = () => setisDeleteWaterModalOpen(true);
+  const closeDeleteWaterModal = () => setisDeleteWaterModalOpen(false);
 
   return (
     <ul className={s.wrapper}>
@@ -63,7 +69,8 @@ const WaterList = () => {
             _id={items[0]._id}
             amount={items[0].amount}
             date={formatTime(items.date)}
-            onEdit={() => openLogOutModal(items[0])}
+            onEdit={() => openWaterModal(items[0])}
+            openDeleteWaterModal={openDeleteWaterModal}
           />
         </li>
       ) : (
@@ -92,17 +99,23 @@ const WaterList = () => {
                   _id={item._id}
                   amount={item.amount}
                   date={formatTime(item.date)}
-                  openLogOutModal={openLogOutModal}
-                  onEdit={() => openLogOutModal(item)}
+                  openWaterModal={openWaterModal}
+                  onEdit={() => openWaterModal(item)}
+                  openDeleteWaterModal={openDeleteWaterModal}
                 />
               </SwiperSlide>
             ))}
         </Swiper>
       )}
       <WaterModal
-        isOpen={logOutModalisOpen}
-        onClose={closeLogOutModal}
+        isOpen={waterModalisOpen}
+        onClose={closeWaterModal}
         operationType="edit"
+        data={selectedItem}
+      />
+      <DeleteWaterModal
+        isOpen={isDeleteWaterModalOpen}
+        onClose={closeDeleteWaterModal}
         data={selectedItem}
       />
     </ul>
