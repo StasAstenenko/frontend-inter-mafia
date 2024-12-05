@@ -3,7 +3,6 @@ import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 import WaterDailyNorma from "../WaterDailyNorma/WaterDailyNorma.jsx";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import LangSwitch from "../LangSwitch/LangSwitch.jsx";
-import { getWaterPerDay } from "../../redux/water/operations.js";
 import { getUserInfo } from "../../redux/settings/operations.js";
 import { useDispatch } from "react-redux";
 import css from "./WaterMainInfo.module.css";
@@ -13,11 +12,6 @@ const WaterMainInfo = () => {
 
   useEffect(() => {
     dispatch(getUserInfo());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const today = new Date().toLocaleDateString("en-CA");
-    dispatch(getWaterPerDay(today));
   }, [dispatch]);
 
   return (

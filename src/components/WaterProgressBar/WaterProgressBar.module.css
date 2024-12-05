@@ -38,7 +38,6 @@
 }
 
 .progressBarContainer {
-  /* position: relative; */
   max-width: 255px;
   height: 0.5rem;
   background-color: #f0eff4;
@@ -77,14 +76,4 @@
     font-size: 12px;
     line-height: 187%;
   }
-
-  /* .volumeInfo {
-    left: 6px;
-    
-  } */
 }
-/* 
-@media only screen and (min-width: 1440px) {
-  .container {
-  }
-} */
