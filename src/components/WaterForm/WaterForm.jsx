@@ -5,8 +5,10 @@ import css from "./WaterForm.module.css";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
 import { getWaterPerDay } from "../../redux/water/operations.js";
+// import { selectDayDetails } from "../../redux/water/operations.js";
 import { useLanguage } from "../../locales/langContext.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectChosenDate } from "../../redux/water/selectors";
 
 const entriesValidationSchema = Yup.object().shape({
   amountOfWater: Yup.number()
@@ -18,20 +20,41 @@ const entriesValidationSchema = Yup.object().shape({
 
 const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
   const { t } = useLanguage();
-
   const dispatch = useDispatch();
+
+  // Отримуємо вибрану дату зі стейту
+  const dateWeOn = useSelector(selectChosenDate);
+
   const handleSubmit = async (values) => {
+    // Форматуємо дату, використовуючи вибрану дату зі стейту
+    const chosenDate = dateWeOn ? new Date(dateWeOn) : new Date();
     const formattedTime = values.recordingTime
       ? values.recordingTime.toISOString().split(".")[0]
       : new Date().toISOString().split(".")[0];
-    console.log(formattedTime);
-    const today = new Date().toISOString().split("T")[0];
 
-    await dispatch(getWaterPerDay(today));
+    // Форматуємо дату для запису
+    chosenDate.setHours(
+      values.recordingTime
+        ? values.recordingTime.getHours()
+        : new Date().getHours()
+    );
+    chosenDate.setMinutes(
+      values.recordingTime
+        ? values.recordingTime.getMinutes()
+        : new Date().getMinutes()
+    );
+    chosenDate.setSeconds(0);
+    chosenDate.setMilliseconds(0);
+
+    // const today = new Date().toISOString().split("T")[0];
+
+    // await dispatch(getWaterPerDay(today));
+
     const entries = {
       amount: values.amountOfWater,
-      date: formattedTime,
+      date: chosenDate.toISOString().split(".")[0], // Зберігаємо в форматі ISO
     };
+
     if (initialValues._id) {
       await dispatch(
         dispatchFunction({
@@ -42,8 +65,9 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
     } else {
       await dispatch(dispatchFunction(entries));
     }
-    await dispatch(getWaterPerDay(today));
+    // dispatch(getWaterPerDay(chosenDate));
   };
+
   return (
     <div className={css.wrapper}>
       <Formik
@@ -98,9 +122,8 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
               </div>
               <label className={css.label}>
                 <p className={css.recordingTime}>{t("RecordingTime")}</p>
-                <Field
-                  name="recordingTime"
-                  render={({ field, form }) => (
+                <Field name="recordingTime">
+                  {({ field, form }) => (
                     <input
                       type="time"
                       {...field}
@@ -124,7 +147,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                       className={`${css.field} custom-datepicker-input`}
                     />
                   )}
-                />
+                </Field>
               </label>
               <ErrorMessage
                 className={css.err}
