@@ -8,9 +8,6 @@
   background-color: transparent;
   cursor: pointer;
 }
-:global(.grid7desktop) .item {
-  flex-direction: row;
-}
 
 .item.empty {
   background-color: transparent;
@@ -59,6 +56,10 @@ button:disabled {
 }
 
 @media only screen and (min-width: 768px) {
+  :global(.grid7desktop) .item {
+    flex-direction: row;
+  }
+
   .item {
     width: 38px;
     height: 65px;

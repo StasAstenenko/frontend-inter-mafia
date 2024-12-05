@@ -85,11 +85,7 @@ const Calendar = () => {
         <Loader height={mobileDevice ? "300px" : "305px"} />
       ) : (
         <div
-          className={`${
-            daysAsInWeek
-              ? `${css.grid} ${mobileDevice ? "" : css.grid7desktop}`
-              : css.grid8
-          }`}
+          className={`${daysAsInWeek ? `${css.grid} grid7desktop` : css.grid8}`}
         >
           {calendarDays?.map(({ day, percent }, index) => (
             <CalendarItem
