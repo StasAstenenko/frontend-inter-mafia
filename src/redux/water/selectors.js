@@ -8,9 +8,3 @@ export const selectDayDetails = (state) => state.water.dayDetails;
 
 export const selectWaterAmountPerDay = (state) => state.water.waterAmountPerDay;
 
-// {
-//   const today = new Date().toLocaleDateString("en-CA");
-//   return state.water.waterAmount
-//     .filter((item) => item.date.split("T")[0] === today)
-//     .reduce((sum, item) => sum + item.amount, 0);
-// };
