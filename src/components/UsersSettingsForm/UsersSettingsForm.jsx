@@ -345,6 +345,7 @@ const UsersSettingsForm = () => {
               onChange={() => dispatch(setDaysNotAsInWeek(!daysNotAsInWeek))}
               className={css.settingCheckboxInput}
             />
+            <span className={css.settingCheckboxCustom}></span>
             {t("ShowDays")}
           </label>
           {!daysNotAsInWeek && (
@@ -355,6 +356,7 @@ const UsersSettingsForm = () => {
                 onChange={() => dispatch(setSundayFirst(!sundayFirst))}
                 className={css.settingCheckboxInput}
               />
+              <span className={css.settingCheckboxCustom}></span>
               {t("SetSunday")}
             </label>
           )}
