@@ -416,14 +416,17 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .settingAdditionalOptions {
-  margin-top: 20px;
-  padding: 15px;
-  border-top: 1px solid #ddd;
+  margin-top: 30px;
+  padding: 15px 15px 15px 0;
+  border-top: 1px solid rgba(47, 47, 47, 0.15);
 }
 
 .settingSubheading {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #323f47;
 }
 
 .settingCheckboxGroup {
@@ -439,7 +442,55 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 1rem;
 }
 
+.settingCheckboxLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
 .settingCheckboxInput {
-  width: 20px;
-  height: 20px;
+  display: none;
+}
+
+.settingCheckboxCustom {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #9be1a0;
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.settingCheckboxInput:checked + .settingCheckboxCustom {
+  background-color: #9be1a0;
+  border-color: #9be1a0;
+}
+
+.settingCheckboxInput:checked + .settingCheckboxCustom::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.settingCheckboxText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.29;
+  color: #2f2f2f;
+}
+
+@media (min-width: 768px) {
+  .settingCheckboxText {
+    line-height: 1.5;
+  }
 }

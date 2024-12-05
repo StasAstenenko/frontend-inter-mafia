@@ -1,19 +1,19 @@
 import css from "./DeleteWaterModal.module.css";
 import Modal from "../Modal/Modal";
 import { useDispatch } from "react-redux";
-import { apiDeleteWater } from "../../redux/water/operations";
+import { deleteWaterItem } from "../../redux/water/operations";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 const DeleteWaterModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    dispatch(apiDeleteWater()); // логика удаления воды
+  const handleDelete = (_id) => {
+    dispatch(deleteWaterItem(_id));
     onClose();
     iziToast.success({
       title: "Done",
-      message: "Successfully Logged Out!",
+      message: "Entry deleted successfully!",
       displayMode: 1,
       position: "topRight",
       maxWidth: "300px",
