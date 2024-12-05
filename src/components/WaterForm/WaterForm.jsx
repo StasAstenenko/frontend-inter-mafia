@@ -26,35 +26,26 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
   const dateWeOn = useSelector(selectChosenDate);
 
   const handleSubmit = async (values) => {
-    // Форматуємо дату, використовуючи вибрану дату зі стейту
-    const chosenDate = dateWeOn ? new Date(dateWeOn) : new Date();
+    // Перетворюємо вибрану дату на рядок у форматі YYYY-MM-DD
+    const chosenDate = dateWeOn
+      ? dateWeOn.split("T")[0]
+      : new Date().toISOString().split("T")[0];
+
+    // Отримуємо час у вигляді рядка HH:mm:ss
     const formattedTime = values.recordingTime
-      ? values.recordingTime.toISOString().split(".")[0]
-      : new Date().toISOString().split(".")[0];
+      ? values.recordingTime.toTimeString().split(" ")[0] // Тільки HH:mm:ss
+      : "00:00:00"; // За замовчуванням час 00:00:00
 
-    // Форматуємо дату для запису
-    chosenDate.setHours(
-      values.recordingTime
-        ? values.recordingTime.getHours()
-        : new Date().getHours()
-    );
-    chosenDate.setMinutes(
-      values.recordingTime
-        ? values.recordingTime.getMinutes()
-        : new Date().getMinutes()
-    );
-    chosenDate.setSeconds(0);
-    chosenDate.setMilliseconds(0);
+    // Формуємо повну дату у форматі YYYY-MM-DDTHH:mm:ss
+    const fullDate = `${chosenDate}T${formattedTime}`;
 
-    // const today = new Date().toISOString().split("T")[0];
-
-    // await dispatch(getWaterPerDay(today));
-
+    // Формуємо об'єкт для запису
     const entries = {
       amount: values.amountOfWater,
-      date: chosenDate.toISOString().split(".")[0], // Зберігаємо в форматі ISO
+      date: fullDate, // Передаємо дату без змін (локальний час)
     };
 
+    // Відправляємо запит
     if (initialValues._id) {
       await dispatch(
         dispatchFunction({
@@ -65,7 +56,6 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
     } else {
       await dispatch(dispatchFunction(entries));
     }
-    // dispatch(getWaterPerDay(chosenDate));
   };
 
   return (
@@ -129,7 +119,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                       {...field}
                       value={
                         field.value
-                          ? field.value.toTimeString().slice(0, 5)
+                          ? field.value.toTimeString().slice(0, 5) // Відображаємо лише час у форматі HH:mm
                           : ""
                       }
                       onChange={(e) => {
@@ -141,7 +131,7 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                           date.setMinutes(parseInt(minutes, 10));
                           date.setSeconds(0);
                           date.setMilliseconds(0);
-                          form.setFieldValue("recordingTime", date);
+                          form.setFieldValue("recordingTime", date); // Зберігаємо час в локальному вигляді
                         }
                       }}
                       className={`${css.field} custom-datepicker-input`}
