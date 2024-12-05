@@ -121,15 +121,22 @@ const UsersSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
+    const initialValues = {
+      name: userName,
+      email: userEmail,
+      weight: weightSelect,
+      activeTime: activeTimeSelect,
+      gender: genderSelect,
+      dailyNorm: dailyNormSelect,
+      avatarUrl: avatarSelect,
+    };
 
     Object.entries(data).forEach(([key, value]) => {
-      if (
-        key === "avatarUrl" &&
-        (!value || (value instanceof FileList && value.length === 0))
-      ) {
-        return;
+      const isAvatarFile =
+        key === "avatarUrl" && value instanceof FileList && value.length > 0;
+      if (isAvatarFile || value !== initialValues[key]) {
+        formData.append(key, isAvatarFile ? value[0] : value);
       }
-      formData.append(key, value instanceof FileList ? value[0] : value);
     });
 
     try {
@@ -345,6 +352,7 @@ const UsersSettingsForm = () => {
               onChange={() => dispatch(setDaysNotAsInWeek(!daysNotAsInWeek))}
               className={css.settingCheckboxInput}
             />
+            <span className={css.settingCheckboxCustom}></span>
             {t("ShowDays")}
           </label>
           {!daysNotAsInWeek && (
@@ -355,6 +363,7 @@ const UsersSettingsForm = () => {
                 onChange={() => dispatch(setSundayFirst(!sundayFirst))}
                 className={css.settingCheckboxInput}
               />
+              <span className={css.settingCheckboxCustom}></span>
               {t("SetSunday")}
             </label>
           )}
