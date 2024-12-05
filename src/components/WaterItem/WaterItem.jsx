@@ -12,7 +12,7 @@ const WaterItem = ({ _id, amount, date, onEdit }) => {
   const handleDelete = () => dispatch(deleteWaterItem(_id));
 
   return (
-    <div>
+    <div className={s.mainwrapper}>
       <div className={s.wrapper}>
         <svg className={s.waterglass}>
           <use href="/icons/sprite.svg#water-glass"></use>

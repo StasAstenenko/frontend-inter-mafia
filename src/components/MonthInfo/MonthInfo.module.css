@@ -14,6 +14,7 @@
 }
 
 .title {
+  height: 24px;
   display: flex;
   align-items: center;
   color: #323f47;
@@ -33,16 +34,23 @@
   margin-left: 6px;
   border: transparent;
   background-color: transparent;
+  cursor: pointer;
 }
 .toggleViewBtnImg {
   width: 20px;
   height: 20px;
+  fill: transparent;
+  stroke: #9be1a0;
+}
+.toggleViewBtn:hover .toggleViewBtnImg {
+  fill: #9be1a0;
+  stroke: #323f47;
 }
 
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 28px;
-    line-height: 1.14;
+    height: 32px;
   }
 
   .toggleViewBtn {

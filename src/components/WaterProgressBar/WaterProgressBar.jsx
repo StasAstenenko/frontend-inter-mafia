@@ -6,10 +6,14 @@ import css from "./WaterProgressBar.module.css";
 const WaterProgressBar = () => {
   const dailyNorma = useSelector(selectDailyNorm);
   const waterAmount = useSelector(selectWaterAmountPerDay);
-  console.log(waterAmount);
 
+  const totalAmount = waterAmount.reduce(
+    (total, item) => total + item.amount,
+    0
+  );
+  // console.log(totalAmount);
   const waterPercentage = Math.min(
-    Math.round((waterAmount / dailyNorma) * 100),
+    Math.round((totalAmount / dailyNorma) * 100),
     100
   );
 

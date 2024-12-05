@@ -47,7 +47,8 @@
 /* ===== 8-days styles end ===== */
 
 @media only screen and (max-width: 374px) {
-  .grid {
+  .grid,
+  .grid8 {
     column-gap: calc(0.33 * (100vw - 320px));
   }
 }

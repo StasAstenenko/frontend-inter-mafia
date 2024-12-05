@@ -14,7 +14,6 @@
 
 .item.empty {
   background-color: transparent;
-  cursor: default;
 }
 
 .dayNumber {
@@ -34,11 +33,11 @@
 }
 
 .percent {
+  margin: 0 auto;
   color: rgba(47, 47, 47, 0.6);
   font-weight: 400;
   font-size: 10px;
   font-family: "Poppins", sans-serif;
-  margin: 0 auto;
 }
 
 .drinkALot .dayNumber {
@@ -52,6 +51,11 @@
 
 .item:hover .dayNumber {
   background-color: #9be1a0;
+  color: black;
+}
+
+button:disabled {
+  cursor: default;
 }
 
 @media only screen and (min-width: 768px) {

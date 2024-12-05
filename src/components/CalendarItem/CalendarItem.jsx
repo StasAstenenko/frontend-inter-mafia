@@ -1,15 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarItem.module.css";
 import { fetchWaterData } from "../../redux/water/operations";
-import { setChosenDate } from "../../redux/water/slice";
+import { setChosenDate, setStatistics } from "../../redux/water/slice";
+import { selectStatistics } from "../../redux/water/selectors.js";
 
 const CalendarItem = ({ month, day, percent, isActive }) => {
   const dispatch = useDispatch();
+  const isStatisticsVisible = useSelector(selectStatistics);
 
   const handleClick = () => {
     const date = `${month}-${day.toString().padStart(2, "0")}`;
     dispatch(setChosenDate(date));
     dispatch(fetchWaterData({ type: "day", date }));
+    dispatch(setStatistics(!isStatisticsVisible));
   };
 
   return (
