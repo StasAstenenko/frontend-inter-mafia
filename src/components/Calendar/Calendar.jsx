@@ -9,12 +9,14 @@ import {
 import {
   selectDaysNotAsInWeek,
   selectSundayFirst,
+  selectDailyNorm,
 } from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import { fetchWaterData } from "../../redux/water/operations";
 import Loader from "../Loader/Loader";
 
 const Calendar = () => {
+  const currentDailyNorm = useSelector(selectDailyNorm);
   const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
   const firstDayOfWeek = useSelector(selectSundayFirst) ? 1 : 0; // Перший день місяця (0 - понеділок, 1 - неділя)
   const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
@@ -43,31 +45,15 @@ const Calendar = () => {
       day: i + 1,
       percent: 0,
       totalAmount: 0,
-      currentDailyNorm: 0,
     }));
 
-    // Перший прохід: групуємо дані за днями
     daysDrinking?.forEach((dayData) => {
-      // тимчасова перевірка, поки сервер присилає більше ніж треба
-      if (dayData.date.slice(5, 7) != month || dayData.date.slice(0, 4) != year)
-        return;
-
       const currentDay = daysArray[parseInt(dayData.date.slice(8, 10)) - 1];
       currentDay.totalAmount += dayData.amount;
-
-      // Взяти найсвіжішу currentDailyNorm
-      if (!currentDay.updatedAt || dayData.updatedAt > currentDay.updatedAt) {
-        currentDay.updatedAt = dayData.updatedAt;
-        currentDay.currentDailyNorm = dayData.currentDailyNorm;
-      }
     });
 
-    // Другий прохід: обчислюємо відсотки
     daysArray.forEach((day) => {
-      if (day.currentDailyNorm)
-        day.percent = Math.round(
-          (day.totalAmount / day.currentDailyNorm) * 100
-        );
+      day.percent = Math.round((day.totalAmount / currentDailyNorm) * 100);
     });
 
     if (!daysAsInWeek) return daysArray;
@@ -82,11 +68,10 @@ const Calendar = () => {
       day: null,
       percent: null,
       totalAmount: null,
-      currentDailyNorm: null,
     }));
 
     return [...emptyDaysBefore, ...daysArray];
-  }, [daysDrinking, daysAsInWeek, month, year]);
+  }, [daysDrinking, daysAsInWeek, month, year, firstDayOfWeek]);
 
   return (
     <div className={css.calendar}>

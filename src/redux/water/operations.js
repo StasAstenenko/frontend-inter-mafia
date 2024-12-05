@@ -15,13 +15,13 @@ export const fetchWaterData = createAsyncThunk(
     try {
       const token = selectAuthToken(thunkAPI.getState());
       setAuthHeaders(token);
-      const endpoint = type === "month" ? "/month" : "/water-per-day";
-      // console.log(endpoint);
+      const endpoint = type === "month" ? "/water-per-month" : "/water-per-day";
+      console.log(endpoint);
       const response = await instance.get(endpoint, {
         params: { date },
       });
-      // console.dir(response.data);
-      return response.data;
+      console.dir(response.data);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
