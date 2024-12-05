@@ -56,6 +56,15 @@
   height: 14px;
 }
 
+.edit:hover,
+.trash:hover {
+  cursor: pointer;
+  stroke: var(--accent);
+  scale: 1.4;
+  transition: stroke 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    scale 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .container {
   display: flex;
   flex-direction: column;

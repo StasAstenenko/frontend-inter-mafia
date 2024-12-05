@@ -1,17 +1,16 @@
-import { useDispatch } from "react-redux";
-import { deleteWaterItem } from "../../redux/water/operations";
-// import { useState } from "react";
-// import WaterModal from "../../modals/WaterModal/WaterModal";
 import s from "./WaterItem.module.css";
 import { useLanguage } from "../../locales/langContext.jsx";
-const WaterItem = ({ _id, amount, date, onEdit }) => {
-  // const [logOutModalisOpen, setLogOutModalisOpen] = useState(false);
-  // const openLogOutModal = () => setLogOutModalisOpen(true);
-  // const closeLogOutModal = () => setLogOutModalisOpen(false);
-  const dispatch = useDispatch();
+
+// import WaterModal from "../../modals/WaterModal/WaterModal";
+// import { deleteWaterItem } from "../../redux/water/operations";
+// import { useDispatch } from "react-redux";
+// import { useState } from "react";
+
+const WaterItem = ({ amount, date, onEdit, openDeleteWaterModal }) => {
   const { t } = useLanguage();
 
-  const handleDelete = () => dispatch(deleteWaterItem(_id));
+  // const dispatch = useDispatch();
+  // const handleDelete = () => dispatch(deleteWaterItem(_id));
 
   return (
     <div className={s.mainwrapper}>
@@ -20,7 +19,9 @@ const WaterItem = ({ _id, amount, date, onEdit }) => {
           <use href="/icons/sprite.svg#water-glass"></use>
         </svg>
         <div className={s.timewrapper}>
-          <p className={s.amount}>{amount} {t("Ml")}</p>
+          <p className={s.amount}>
+            {amount} {t("Ml")}
+          </p>
           <p className={s.time}>{date}</p>
         </div>
         <div className={s.container}>
@@ -29,18 +30,13 @@ const WaterItem = ({ _id, amount, date, onEdit }) => {
               <use href="/icons/sprite.svg#edit"></use>
             </svg>
           </button>
-          <button className={s.btn} onClick={handleDelete}>
+          <button className={s.btn} onClick={openDeleteWaterModal}>
             <svg className={s.trash}>
               <use href="/icons/sprite.svg#trash"></use>
             </svg>
           </button>
         </div>
       </div>
-      {/* <WaterModal
-        isOpen={logOutModalisOpen}
-        onClose={closeLogOutModal}
-        operationType="add"
-      /> */}
     </div>
   );
 };
