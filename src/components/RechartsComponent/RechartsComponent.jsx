@@ -3,7 +3,6 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
@@ -14,14 +13,53 @@ import {
   selectDaysDrinking,
 } from "../../redux/water/selectors";
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          backgroundColor: "#ffffff",
+          borderRadius: "10px",
+          padding: "10px 17px",
+          position: "relative",
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: "14px",
+            fontWeight: "bold",
+            color: "#000",
+          }}
+        >
+          {`${payload[0].value} ml`}
+        </p>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "0",
+            height: "0",
+            borderLeft: "8px solid transparent",
+            borderRight: "8px solid transparent",
+            borderTop: "8px solid #fff",
+          }}
+        />
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const RechartsComponent = () => {
   const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
 
-  // Перетворюємо обрану дату в Date
   const dayEndOfStatistic = useMemo(() => new Date(chosenDate), [chosenDate]);
 
-  // Створення масиву останніх 7 днів
   const lastWeekDays = useMemo(() => {
     const daysArray = Array.from({ length: 7 }, (_, i) => {
       const date = new Date(dayEndOfStatistic);
@@ -60,22 +98,44 @@ const RechartsComponent = () => {
           </linearGradient>
         </defs>
 
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="day" tick={{ fontSize: 12 }} />
+        <XAxis
+          dataKey="day"
+          tick={{ fontSize: 12 }}
+          axisLine={false}
+          tickLine={false}
+        />
+
         <YAxis
-          domain={[0, "dataMax"]}
+          domain={[0, 2500]}
           tickFormatter={(value) => `${value / 1000} L`}
           tick={{ fontSize: 12 }}
+          axisLine={false}
+          tickLine={false}
         />
-        <Tooltip formatter={(value) => `${value} ml`} />
+
+        <Tooltip
+          content={<CustomTooltip />}
+          cursor={{ stroke: "#82ca9d", strokeWidth: 1 }}
+        />
+
         <Area
           type="monotone"
           dataKey="amount"
           stroke="#82ca9d"
           fill="url(#gradientFill)"
           strokeWidth={2}
-          dot={{ r: 6 }}
-          activeDot={{ r: 8 }}
+          dot={{
+            r: 6,
+            fill: "#FFFFFF",
+            stroke: "#82ca9d",
+            strokeWidth: 2,
+          }}
+          activeDot={{
+            r: 8,
+            fill: "#FFFFFF",
+            stroke: "#82ca9d",
+            strokeWidth: 2,
+          }}
         />
       </AreaChart>
     </ResponsiveContainer>
