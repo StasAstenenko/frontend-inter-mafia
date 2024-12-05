@@ -6,7 +6,6 @@ import { useLanguage } from "../../locales/langContext.jsx";
 const WaterDailyNorma = () => {
   const { t } = useLanguage();
   const dailyNorma = useSelector(selectDailyNorm);
-  // console.log("daily norma", dailyNorma);
 
   const formatVolume = (ml) => {
     return `${(ml / 1000).toFixed(1)}`;

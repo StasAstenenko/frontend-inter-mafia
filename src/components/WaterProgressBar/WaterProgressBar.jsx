@@ -22,12 +22,10 @@ const WaterProgressBar = () => {
           date: new Date().toLocaleString("en-CA"),
         })
       );
-      console.log("day fetch");
+
       return;
     }
   }, [waterAmount, dispatch]);
-
-  console.log("progressbar");
 
   const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,
@@ -43,26 +41,39 @@ const WaterProgressBar = () => {
     <>
       <div className={css.container}>
         <p className={css.today}>{t("Today")}</p>
-        <span className={css.volumeInfo}>{waterPercentage}%</span>
-        <div className={css.progressBarContainer}>
-          <div
-            className={css.progressBar}
-            style={{ width: `${waterPercentage}%` }}
-          />
-          <svg
-            className={css.icon}
+        <div className={css.wrapper}>
+          <span
+            className={css.volumeInfo}
             style={{
               left:
                 waterPercentage === 0
                   ? `0px`
-                  : `calc(${waterPercentage}% - 12px)`,
+                  : `calc(${waterPercentage}% - 16px)`,
             }}
-            width="12"
-            height="12"
           >
-            <use href="/icons/sprite.svg#circle" />
-          </svg>
+            {waterPercentage}%
+          </span>
+          <div className={css.progressBarContainer}>
+            <div
+              className={css.progressBar}
+              style={{ width: `${waterPercentage}%` }}
+            />
+            <svg
+              className={css.icon}
+              style={{
+                left:
+                  waterPercentage === 0
+                    ? `0px`
+                    : `calc(${waterPercentage}% - 12px)`,
+              }}
+              width="12"
+              height="12"
+            >
+              <use href="/icons/sprite.svg#circle" />
+            </svg>
+          </div>
         </div>
+
         <div className={css.percents}>
           <span>0%</span>
           <span>50%</span>
