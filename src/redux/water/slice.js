@@ -75,7 +75,7 @@ const waterSlice = createSlice({
       .addCase(addWaterItem.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterAmountPerDay.push(action.payload);
+        state.dayDetails.push(action.payload);
       })
       .addCase(addWaterItem.rejected, (state, action) => {
         state.loading = false;
@@ -87,7 +87,7 @@ const waterSlice = createSlice({
       .addCase(deleteWaterItem.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterAmountPerDay = state.waterAmountPerDay.filter(
+        state.dayDetails = state.dayDetails.filter(
           (item) => item._id !== action.payload
         );
       })
@@ -101,11 +101,11 @@ const waterSlice = createSlice({
       .addCase(editWaterData.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const index = state.waterAmountPerDay.findIndex(
+        const index = state.dayDetails.findIndex(
           (item) => item._id === action.payload._id
         );
         if (index !== -1) {
-          state.waterAmountPerDay[index] = action.payload;
+          state.dayDetails[index] = action.payload;
         }
       })
       .addCase(editWaterData.rejected, (state, action) => {
@@ -121,14 +121,14 @@ const waterSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(getWaterPerDay.fulfilled, (state, action) => {
-        state.waterAmountPerDay = action.payload;
+        state.dayDetails = action.payload;
       })
       .addCase(postWaterData.pending, (state) => {
         state.loading = true;
       })
       .addCase(postWaterData.fulfilled, (state, action) => {
         state.loading = false;
-        state.waterAmountPerDay.push(action.payload);
+        state.dayDetails.push(action.payload);
       });
   },
 });
