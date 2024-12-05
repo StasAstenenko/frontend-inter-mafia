@@ -27,23 +27,23 @@
 }
 
 .subtitle {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 14px;
   height: 18px;
-  letter-spacing: 0.06em; 
+  letter-spacing: 0.06em;
   line-height: 1em;
   margin-bottom: 16px;
-  color: var(--text-primary-dark); 
+  color: var(--text-primary-dark);
 }
 
 .title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 38px;
   margin-bottom: 32px;
   line-height: 1em;
-  color: var(--background-primary-dark); 
+  color: var(--background-primary-dark);
   letter-spacing: -0.01em;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .btn {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.01em;
@@ -119,7 +119,7 @@
   .subtitle {
     height: 24px;
     font-size: 16px;
-    letter-spacing: 0.06em; 
+    letter-spacing: 0.06em;
   }
 
   .title {
@@ -131,7 +131,7 @@
   }
 
   .btn {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.01em;
@@ -148,11 +148,11 @@
     height: 60px;
     width: 169px;
   }
-  
+
   .btnSecondary {
     padding: 18px 40px;
     height: 60px;
-    width: 135px;
+    width: 145px;
   }
 }
 
@@ -175,8 +175,8 @@
   .btnPrimary {
     padding: 18px 40px;
   }
-  
+
   .btnSecondary {
-    padding: 18px 40px;
+    padding: 20px 40px;
   }
 }

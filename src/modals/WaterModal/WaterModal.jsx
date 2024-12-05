@@ -1,17 +1,19 @@
 import WaterForm from "../../components/WaterForm/WaterForm.jsx";
 import { editWaterData, postWaterData } from "../../redux/water/operations.js";
 import Modal from "../Modal/Modal.jsx";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const WaterModal = ({ operationType, data, isOpen, onClose }) => {
+  const { t } = useLanguage();
   const messages = {
     add: {
-      title: "Add water",
-      paragraph: "Choose a value",
+      title: t("AddWater"),
+      paragraph: t("ChooseAWater"),
       dispatchFunction: postWaterData,
     },
     edit: {
-      title: "Edit the entered amount of water",
-      paragraph: "Correct entered data",
+      title: t("EditAmount"),
+      paragraph: t("CorrectData"),
       dispatchFunction: editWaterData,
     },
   };

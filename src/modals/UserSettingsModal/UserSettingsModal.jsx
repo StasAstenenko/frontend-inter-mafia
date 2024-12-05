@@ -1,9 +1,12 @@
 import ReactDOM from "react-dom";
 import UsersSettingsForm from "../../components/UsersSettingsForm/UsersSettingsForm";
 import css from "./UserSettingsModal.module.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 import { useEffect } from "react";
 
 const UserSettingsModal = ({ onClose }) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -36,7 +39,7 @@ const UserSettingsModal = ({ onClose }) => {
     <div className={css.settingModalOverlay} onClick={handleOverlayClick}>
       <div className={css.settingModal} onClick={(e) => e.stopPropagation()}>
         <div className={css.settingModalHeader}>
-          <h2 className={css.settingModalTitle}>Setting</h2>
+          <h2 className={css.settingModalTitle}>{t("Settings")}</h2>
           <button className={css.settingModalButton} onClick={onClose}>
             <svg width="24" height="24" className={css.settingModalIcon}>
               <use href="/icons/sprite.svg#close"></use>
