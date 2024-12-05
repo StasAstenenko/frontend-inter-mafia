@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarPagination.module.css";
 import { selectChosenMonth } from "../../redux/water/selectors";
-import { setChosenMonth } from "../../redux/water/slice";
+import { setChosenMonth, setStatistics } from "../../redux/water/slice";
 
 const CalendarPagination = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ const CalendarPagination = () => {
 
   const handleTodayJump = () => {
     dispatch(setChosenMonth(today));
+    dispatch(setStatistics(false));
   };
 
   const handleMonthChange = (shift) => {
@@ -27,6 +28,7 @@ const CalendarPagination = () => {
     }
 
     dispatch(setChosenMonth(newDate));
+    dispatch(setStatistics(false));
   };
 
   const formatDate = (date) =>

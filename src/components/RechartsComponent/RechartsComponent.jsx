@@ -57,6 +57,9 @@ const CustomTooltip = ({ active, payload }) => {
 const RechartsComponent = () => {
   const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
+  const mobileDeviceHeight = window.matchMedia("(max-width: 767px)").matches
+    ? 300
+    : 305;
 
   const dayEndOfStatistic = useMemo(() => new Date(chosenDate), [chosenDate]);
 
@@ -89,8 +92,11 @@ const RechartsComponent = () => {
   }, [daysDrinking, dayEndOfStatistic]);
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <AreaChart data={lastWeekDays}>
+    <ResponsiveContainer width="100%" height={mobileDeviceHeight}>
+      <AreaChart
+        data={lastWeekDays}
+        margin={{ top: 10, right: 10, bottom: 0, left: 0 }}
+      >
         <defs>
           <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
@@ -107,9 +113,10 @@ const RechartsComponent = () => {
 
         <YAxis
           domain={[0, 2500]}
-          tickFormatter={(value) => `${value / 1000} L`}
+          tickFormatter={(value) => `${Math.round((value / 1000) * 2) / 2} L`}
           tick={{ fontSize: 12 }}
           axisLine={false}
+          width={45}
           tickLine={false}
         />
 
