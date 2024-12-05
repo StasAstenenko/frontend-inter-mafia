@@ -1,7 +1,7 @@
 import { useState } from "react";
 import css from "./AddWaterBtn.module.css";
 import clsx from "clsx";
-import { useLanguage } from "../../locales/LangContext.jsx";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 import WaterModal from "../../modals/WaterModal/WaterModal.jsx";
 

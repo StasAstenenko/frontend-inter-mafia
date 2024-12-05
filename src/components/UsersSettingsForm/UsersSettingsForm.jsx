@@ -17,7 +17,7 @@ import {
 import { editUser } from "../../redux/settings/operations";
 import { setDaysNotAsInWeek, setSundayFirst } from "../../redux/settings/slice";
 import { FcDecision } from "react-icons/fc";
-import { useLanguage } from "../../locales/LangContext.jsx";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed().default(""),

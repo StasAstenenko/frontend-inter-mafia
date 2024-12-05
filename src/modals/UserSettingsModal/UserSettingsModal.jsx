@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import UsersSettingsForm from "../../components/UsersSettingsForm/UsersSettingsForm";
 import css from "./UserSettingsModal.module.css";
-import { useLanguage } from "../../locales/LangContext.jsx";
+import { useLanguage } from "../../locales/langContext.jsx";
 import { useEffect } from "react";
 
 const UserSettingsModal = ({ onClose }) => {
