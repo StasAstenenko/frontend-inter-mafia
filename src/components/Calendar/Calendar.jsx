@@ -16,30 +16,32 @@ import { fetchWaterData } from "../../redux/water/operations";
 import Loader from "../Loader/Loader";
 
 const Calendar = () => {
-  const currentDailyNorm = useSelector(selectDailyNorm);
-  const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
-  const firstDayOfWeek = useSelector(selectSundayFirst) ? 1 : 0; // Перший день місяця (0 - понеділок, 1 - неділя)
-  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
-  const isLoading = useSelector(selectIsLoading);
-
   const dispatch = useDispatch();
   const dateToShow = useSelector(selectChosenMonth);
   const daysDrinking = useSelector(selectDaysDrinking);
+  const isLoading = useSelector(selectIsLoading);
 
-  const [today_year, today_month, today_day] = new Date() // month починаються з нуля в Date
+  const currentDailyNorm = useSelector(selectDailyNorm);
+  const daysAsInWeek = !useSelector(selectDaysNotAsInWeek);
+  const firstDayOfWeek = useSelector(selectSundayFirst) ? 1 : 0; // 1: неділя, 0: понеділок
+  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
+
+  const [year, month] = dateToShow.split("-");
+  const [today_year, today_month, today_day] = new Date()
     .toLocaleDateString("en-CA")
     .split("-");
 
-  const [year, month] = dateToShow.split("-");
-
   useEffect(() => {
     dispatch(fetchWaterData({ type: "month", date: dateToShow }));
-  }, [dateToShow, dispatch]);
+  }, [dispatch, dateToShow]);
 
   const isActiveDay = (day) =>
     today_day == day && today_month == month && today_year == year;
 
-  const calendarDays = useMemo(() => {
+  // Створення днів і рахування води в них
+  const monthDays = useMemo(() => {
+    if (!daysDrinking) return [];
+
     const totalDaysInMonth = new Date(year, month, 0).getDate();
     const daysArray = Array.from({ length: totalDaysInMonth }, (_, i) => ({
       day: i + 1,
@@ -47,18 +49,22 @@ const Calendar = () => {
       totalAmount: 0,
     }));
 
-    daysDrinking?.forEach((dayData) => {
-      const currentDay = daysArray[parseInt(dayData.date.slice(8, 10)) - 1];
-      currentDay.totalAmount += dayData.amount;
+    daysDrinking.forEach((day) => {
+      const index = day.date.slice(8, 10) - 1;
+      daysArray[index].totalAmount += day.amount;
     });
 
     daysArray.forEach((day) => {
       day.percent = Math.round((day.totalAmount / currentDailyNorm) * 100);
     });
 
-    if (!daysAsInWeek) return daysArray;
+    return daysArray;
+  }, [daysDrinking, currentDailyNorm, year, month]);
 
-    // Додаємо порожні дні перед початком місяця
+  // Додавання порожніх днів перед початком місяця
+  const calendarDays = useMemo(() => {
+    if (!daysAsInWeek) return monthDays;
+
     const firstDayOfMonth = new Date(
       year,
       parseInt(month) - 1,
@@ -70,8 +76,8 @@ const Calendar = () => {
       totalAmount: null,
     }));
 
-    return [...emptyDaysBefore, ...daysArray];
-  }, [daysDrinking, daysAsInWeek, month, year, firstDayOfWeek]);
+    return [...emptyDaysBefore, ...monthDays];
+  }, [monthDays, daysAsInWeek, firstDayOfWeek, year, month]);
 
   return (
     <div className={css.calendar}>
@@ -81,15 +87,15 @@ const Calendar = () => {
         <div
           className={`${
             daysAsInWeek
-              ? `${css.grid} ${mobileDevice ? "" : "grid7desktop"}`
+              ? `${css.grid} ${mobileDevice ? "" : css.grid7desktop}`
               : css.grid8
           }`}
         >
-          {calendarDays.map(({ day, percent }, index) => (
+          {calendarDays?.map(({ day, percent }, index) => (
             <CalendarItem
-              key={`day-${year}-${month}-${day || "empty"}-${index}`}
+              key={`day-${dateToShow}-${day || "empty"}-${index}`}
               month={dateToShow}
-              day={day !== null ? day : null} // Передаємо день лише якщо він не null
+              day={day !== null ? day : null}
               percent={percent}
               isActive={isActiveDay(day)}
             />
