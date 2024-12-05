@@ -79,10 +79,11 @@ const AdvantagesSection = () => {
 
           <div>
             <p className={`${css.customers_text}`}>
-              Our {!count ? " " : <span className={css.count}>{count}</span>}{" "}
-              <span className={css.span}>happy</span>
+              {t("Our")}{" "}
+              {!count ? " " : <span className={css.count}>{count}</span>}{" "}
+              <span className={css.span}>{t("Happy")}</span>
               <br />
-              customers
+              {t("Customers")}
             </p>
           </div>
         </div>

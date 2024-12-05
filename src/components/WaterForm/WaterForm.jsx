@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./WaterForm.module.css";
 import { GoPlus } from "react-icons/go";
@@ -84,7 +83,9 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
                     <GoDash className={css.btnIcon} />
                   </button>
                   <div className={css.valueDisplay}>
-                    <span>{values.amountOfWater} ml</span>
+                    <span>
+                      {values.amountOfWater} {t("Ml")}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -97,16 +98,32 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
               </div>
               <label className={css.label}>
                 <p className={css.recordingTime}>{t("RecordingTime")}</p>
-                <DatePicker
-                  selected={values.recordingTime}
-                  onChange={(date) => setFieldValue("recordingTime", date)}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={1}
-                  timeCaption="Time"
-                  dateFormat="HH:mm"
-                  timeFormat="HH:mm"
-                  className={`${css.field} custom-datepicker-input`}
+                <Field
+                  name="recordingTime"
+                  render={({ field, form }) => (
+                    <input
+                      type="time"
+                      {...field}
+                      value={
+                        field.value
+                          ? field.value.toTimeString().slice(0, 5)
+                          : ""
+                      }
+                      onChange={(e) => {
+                        const timeString = e.target.value;
+                        if (timeString) {
+                          const date = new Date();
+                          const [hours, minutes] = timeString.split(":");
+                          date.setHours(parseInt(hours, 10));
+                          date.setMinutes(parseInt(minutes, 10));
+                          date.setSeconds(0);
+                          date.setMilliseconds(0);
+                          form.setFieldValue("recordingTime", date);
+                        }
+                      }}
+                      className={`${css.field} custom-datepicker-input`}
+                    />
+                  )}
                 />
               </label>
               <ErrorMessage

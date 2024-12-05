@@ -4,6 +4,7 @@
   "TryTracker": "Try tracker",
   "SignIn": "Sign In",
   "OurHappyCustomers": "Our happy customers",
+  "Customers": "customers",
   "HabitDrive": "Habit drive",
   "ViewStatistics": "View statistics",
   "PersonalSettings": "Personal rate setting",
@@ -16,6 +17,8 @@
   "DontHaveAcc": "Do not have an account?",
   "SignUp": "Sign Up",
   "MyDailyNorma": "My daily norma",
+  "L": "L",
+  "Our": "Our",
   "AddWater": "Add water",
   "HelloGuest": "Hello, ",
   "Month": "Month",
@@ -29,6 +32,7 @@
   "YourName": "Your name",
   "ForWoman": "For woman",
   "ForMan": "For man",
+  "Happy": "happy",
   "Information": "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
   "ActiveTime": "Active time in hours",
   "YourWeight": "Your weight in kilograms",
@@ -47,5 +51,8 @@
   "YouSure": "Are you sure you want to delete the entry?",
   "Delete": "Delete",
   "Cancel": "Cancel",
-  "WannaLeave": "Do you really want to leave?"
+  "WannaLeave": "Do you really want to leave?",
+  "CalendarOptions": "Calendar options",
+  "ShowDays": "Show days not as in week",
+  "SetSunday": "Set Sunday as the first day of the week"
 }

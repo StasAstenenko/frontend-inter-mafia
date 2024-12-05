@@ -2,8 +2,11 @@ import { useSelector } from "react-redux";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
 import { selectWaterAmountPerDay } from "../../redux/water/selectors.js";
 import css from "./WaterProgressBar.module.css";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const WaterProgressBar = () => {
+  const { t } = useLanguage();
+
   const dailyNorma = useSelector(selectDailyNorm);
   const waterAmount = useSelector(selectWaterAmountPerDay);
 
@@ -20,7 +23,7 @@ const WaterProgressBar = () => {
   return (
     <>
       <div className={css.container}>
-        <p className={css.today}>Today</p>
+        <p className={css.today}>{t("Today")}</p>
         <span className={css.volumeInfo}>{waterPercentage}%</span>
         <div className={css.progressBarContainer}>
           <div
