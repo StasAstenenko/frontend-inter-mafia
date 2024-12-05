@@ -15,6 +15,7 @@ import {
   selectSundayFirst,
   selectDailyNorm,
   selectAvatarUrl,
+  selectGender,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { setDaysNotAsInWeek, setSundayFirst } from "../../redux/settings/slice";
@@ -49,6 +50,7 @@ const UsersSettingsForm = () => {
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek);
   const sundayFirst = useSelector(selectSundayFirst);
   const avatarSelect = useSelector(selectAvatarUrl);
+  const genderSelect = useSelector(selectGender);
 
   const [avatarPreview, setAvatarPreview] = useState(avatarSelect || null);
   const [waterNorm, setWaterNorm] = useState("1.5");
@@ -65,7 +67,7 @@ const UsersSettingsForm = () => {
       email: "",
       weight: weightSelect,
       activeTime: activeTimeSelect,
-      gender: "woman",
+      gender: genderSelect,
       dailyNorm: dailyNormSelect,
       avatarUrl: avatarSelect,
     },
@@ -96,10 +98,10 @@ const UsersSettingsForm = () => {
   useEffect(() => {
     if (user.avatarUrl) {
       setAvatarPreview(user.avatarUrl);
-    } else if (userName) {
-      setAvatarPreview(userName.charAt(0).toUpperCase());
+    } else {
+      setAvatarPreview(avatarPreview);
     }
-  }, [user.avatarUrl, userName]);
+  }, [user.avatarUrl, avatarPreview]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -119,15 +121,22 @@ const UsersSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
+    const initialValues = {
+      name: userName,
+      email: userEmail,
+      weight: weightSelect,
+      activeTime: activeTimeSelect,
+      gender: genderSelect,
+      dailyNorm: dailyNormSelect,
+      avatarUrl: avatarSelect,
+    };
 
     Object.entries(data).forEach(([key, value]) => {
-      if (
-        key === "avatarUrl" &&
-        (!value || (value instanceof FileList && value.length === 0))
-      ) {
-        return;
+      const isAvatarFile =
+        key === "avatarUrl" && value instanceof FileList && value.length > 0;
+      if (isAvatarFile || value !== initialValues[key]) {
+        formData.append(key, isAvatarFile ? value[0] : value);
       }
-      formData.append(key, value instanceof FileList ? value[0] : value);
     });
 
     try {
@@ -311,6 +320,8 @@ const UsersSettingsForm = () => {
 
                   <input
                     type="number"
+                    step="0.1"
+                    min="0"
                     {...register("dailyNorm")}
                     className={css.settingFormInput}
                   />
@@ -341,6 +352,7 @@ const UsersSettingsForm = () => {
               onChange={() => dispatch(setDaysNotAsInWeek(!daysNotAsInWeek))}
               className={css.settingCheckboxInput}
             />
+            <span className={css.settingCheckboxCustom}></span>
             {t("ShowDays")}
           </label>
           {!daysNotAsInWeek && (
@@ -351,6 +363,7 @@ const UsersSettingsForm = () => {
                 onChange={() => dispatch(setSundayFirst(!sundayFirst))}
                 className={css.settingCheckboxInput}
               />
+              <span className={css.settingCheckboxCustom}></span>
               {t("SetSunday")}
             </label>
           )}

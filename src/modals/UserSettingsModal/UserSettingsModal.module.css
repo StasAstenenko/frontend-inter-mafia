@@ -24,16 +24,16 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 735px;
+  max-height: 795px;
   @media (min-width: 768px) {
     padding: 40px;
     width: 648px;
-    max-height: 880px;
+    max-height: 1000px;
   }
 
   @media (min-width: 1440px) {
     width: 920px;
-    max-height: 685px;
+    max-height: 780px;
   }
 }
 

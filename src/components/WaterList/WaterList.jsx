@@ -6,71 +6,78 @@ import "./Swaper.css";
 
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getWaterPerDay } from "../../redux/water/operations";
-import { selectDayDetails } from "../../redux/water/selectors";
-
-// import { selectWaterItems } from "../../redux/water/selectors";
-// import { getWaterData } from "../../redux/water/operations.js";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import {
+  selectDayDetails,
+  selectChosenDate,
+} from "../../redux/water/selectors";
 
 import WaterModal from "../../modals/WaterModal/WaterModal";
 import DeleteWaterModal from "../../modals/DeleteWaterModal/DeleteWaterModal.jsx";
 
 const WaterList = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const dispatch = useDispatch();
+  // Отримуємо вибрану дату зі стейту
+  const currentDate = useSelector(selectChosenDate);
 
-  const getCurrentDate = () => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  };
-
-  useEffect(() => {
-    const date = getCurrentDate();
-    dispatch(getWaterPerDay(date));
-  }, [dispatch]);
-
+  // Отримуємо деталі води для вибраного дня
   const items = useSelector(selectDayDetails);
 
-  const formatTime = (isoDate) => {
-    const date = new Date(isoDate);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
-    // Форматування годин:хвилин
-    const formattedHours = hours % 12 || 12; // Перетворення 24-годинного формату на 12-годинний
-    const formattedMinutes = minutes.toString().padStart(2, "0"); // Додаємо 0 перед хвилинами, якщо потрібно
-    const period = hours >= "12" ? "PM" : "AM"; // Визначаємо AM або PM
-
-    return `${formattedHours}:${formattedMinutes} ${period}`;
-  };
-
   const [waterModalisOpen, setWaterModalisOpen] = useState(false);
-  const openWaterModal = (item) => {
-    setSelectedItem(item);
+  const [isDeleteWaterModalOpen, setisDeleteWaterModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null); // Зберігаємо тільки ID
+
+  const openWaterModal = (id) => {
+    setSelectedId(id);
     setWaterModalisOpen(true);
   };
   const closeWaterModal = () => {
     setWaterModalisOpen(false);
-    setSelectedItem(null);
+    setSelectedId(null);
   };
 
-  const [isDeleteWaterModalOpen, setisDeleteWaterModalOpen] = useState(false);
-  const openDeleteWaterModal = () => setisDeleteWaterModalOpen(true);
-  const closeDeleteWaterModal = () => setisDeleteWaterModalOpen(false);
+  const openDeleteWaterModal = (id) => {
+    setSelectedId(id);
+    setisDeleteWaterModalOpen(true);
+  };
+  const closeDeleteWaterModal = () => {
+    setisDeleteWaterModalOpen(false);
+    setSelectedId(null);
+  };
+
+  useEffect(() => {
+    if (currentDate) {
+      // Переконайтесь, що дані завантажуються для вибраної дати
+      // Можливо, потрібно викликати dispatch для отримання даних для цього дня, якщо вони ще не завантажені
+    }
+  }, [currentDate]); // Перезапускається при зміні currentDate
+
+  if (!items) return;
+
+  const formatTime = (inDate) => {
+    const date = new Date(inDate);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    const period = hours >= 12 ? "PM" : "AM";
+
+    return `${formattedHours}:${formattedMinutes} ${period}`;
+  };
+
+  const selectedItem = items.find((item) => item._id === selectedId);
 
   return (
     <ul className={s.wrapper}>
       {Array.isArray(items) && items.length === 1 ? (
-        // Якщо в масиві тільки один елемент
         <li>
           <WaterItem
             _id={items[0]._id}
             amount={items[0].amount}
-            date={formatTime(items.date)}
-            onEdit={() => openWaterModal(items[0])}
-            openDeleteWaterModal={openDeleteWaterModal}
+            date={formatTime(items[0].date)}
+            onEdit={() => openWaterModal(items[0]._id)}
+            openDeleteWaterModal={() => openDeleteWaterModal(items[0]._id)}
           />
         </li>
       ) : (
@@ -93,15 +100,15 @@ const WaterList = () => {
           }}
         >
           {Array.isArray(items) &&
-            items.map((item, index) => (
-              <SwiperSlide key={item._id || index}>
+            items.map((item) => (
+              <SwiperSlide key={item._id}>
                 <WaterItem
                   _id={item._id}
                   amount={item.amount}
                   date={formatTime(item.date)}
-                  openWaterModal={openWaterModal}
-                  onEdit={() => openWaterModal(item)}
-                  openDeleteWaterModal={openDeleteWaterModal}
+                  openWaterModal={() => openWaterModal(item._id)}
+                  onEdit={() => openWaterModal(item._id)}
+                  openDeleteWaterModal={() => openDeleteWaterModal(item._id)}
                 />
               </SwiperSlide>
             ))}
