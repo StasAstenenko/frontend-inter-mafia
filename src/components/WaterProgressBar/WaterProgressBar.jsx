@@ -2,10 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { selectDailyNorm } from "../../redux/settings/selectors.js";
 import {
+  selectDayDetails,
   selectIsLoading,
-  selectWaterAmountPerDay,
 } from "../../redux/water/selectors.js";
-import { fetchWaterData } from "../../redux/water/operations.js";
+import { getWaterPerDay } from "../../redux/water/operations.js";
 import { useLanguage } from "../../locales/langContext.jsx";
 import css from "./WaterProgressBar.module.css";
 
@@ -13,27 +13,23 @@ const WaterProgressBar = () => {
   const { t } = useLanguage();
 
   const dailyNorma = useSelector(selectDailyNorm);
-  const waterAmount = useSelector(selectWaterAmountPerDay);
+  const waterAmount = useSelector(selectDayDetails);
+  // console.log("water", waterAmount);
   const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!waterAmount && !isLoading) {
-      dispatch(
-        fetchWaterData({
-          type: "day",
-          date: new Date().toLocaleString("en-CA"),
-        })
-      );
-    }
-  }, [waterAmount, isLoading, dispatch]);
+    const today = new Date().toLocaleDateString("en-CA");
+    dispatch(getWaterPerDay(today));
+  }, [dispatch]);
 
   const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,
     0
   );
   // console.log(totalAmount);
+
   const waterPercentage = Math.min(
     Math.round((totalAmount / dailyNorma) * 100),
     100
