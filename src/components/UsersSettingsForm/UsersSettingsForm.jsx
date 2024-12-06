@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import css from "./UsersSettingsForm.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -45,13 +45,13 @@ const UsersSettingsForm = ({ onClose }) => {
 
   const userName = useSelector(selectName);
   const userEmail = useSelector(selectEmail);
-  const user = useSelector(selectUser);
   const weightSelect = useSelector(selectWeight);
   const dailyNormSelect = useSelector(selectDailyNorm);
   const activeTimeSelect = useSelector(selectActiveTime);
   const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek);
   const sundayFirst = useSelector(selectSundayFirst);
   const avatarSelect = useSelector(selectAvatarUrl);
+
   const genderSelect = useSelector(selectGender);
   const errorSettings = useSelector(selectErrorSettings);
 
@@ -84,8 +84,18 @@ const UsersSettingsForm = ({ onClose }) => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
-      const fileURL = URL.createObjectURL(file);
-      setAvatarPreview(fileURL);
+      const reader = new FileReader();
+
+      reader.addEventListener(
+        "load",
+        () => {
+          const fileURL = reader.result;
+          setAvatarPreview(fileURL);
+        },
+        false
+      );
+
+      reader.readAsDataURL(file);
       setValue("avatarUrl", file);
     }
   };
@@ -99,12 +109,10 @@ const UsersSettingsForm = ({ onClose }) => {
   }, [userEmail, userName, setValue]);
 
   useEffect(() => {
-    if (user.avatarUrl) {
-      setAvatarPreview(user.avatarUrl);
-    } else {
-      setAvatarPreview(avatarPreview);
+    if (avatarSelect) {
+      setAvatarPreview(avatarSelect);
     }
-  }, [user.avatarUrl, avatarPreview]);
+  }, [avatarSelect]);
 
   useEffect(() => {
     if (weight && activeTime && gender) {
@@ -151,8 +159,11 @@ const UsersSettingsForm = ({ onClose }) => {
       <form className={css.settingForm} onSubmit={handleSubmit(onSubmit)}>
         {/* Avatar */}
         <div className={css.settingFormAvatar}>
-          {avatarPreview ? (
-            <img className={css.settingAvatarImg} src={avatarPreview} />
+          {avatarPreview || avatarSelect ? (
+            <img
+              className={css.settingAvatarImg}
+              src={avatarPreview || avatarSelect}
+            />
           ) : (
             <div className={css.avatarPlaceholder}>
               <FcDecision className={css.settingAvatarSecondIcon} />
