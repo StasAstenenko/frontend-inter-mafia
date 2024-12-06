@@ -13,13 +13,13 @@ const today = new Date().toLocaleDateString("en-CA");
 
 const INITIAL_STATE = {
   items: [],
-  daysDrinking: null, // Дані про дні пиття води за місяць
-  dayDetails: [], // Деталі пиття води за конкретний день
-  chosenDate: today.slice(0, 10), // дата локальна, (YYYY-MM-DD)
-  chosenMonth: today.slice(0, 7), // Обраний місяць (YYYY-MM)
-  loading: false, // Стан завантаження
+  daysDrinking: null,
+  dayDetails: [],
+  chosenDate: today.slice(0, 10),
+  chosenMonth: today.slice(0, 7),
+  loading: false,
   statistics: false,
-  error: null, // Помилки
+  error: null,
   itemsPerDay: [],
   waterAmountPerDay: null,
 };
@@ -39,7 +39,6 @@ const waterSlice = createSlice({
     },
     setWaterAmountPerDay(state, action) {
       state.waterAmountPerDay = action.payload;
-      console.log("setWaterAmountPerDay ", action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -49,11 +48,10 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchWaterData.fulfilled, (state, action) => {
-        // Розподіл даних за місяцем або днем
         if (action.meta.arg.type === "month") {
-          state.daysDrinking = action.payload; // Дані за місяць
+          state.daysDrinking = action.payload;
         } else if (action.meta.arg.type === "day") {
-          state.dayDetails = action.payload; // Дані за день
+          state.dayDetails = action.payload;
         }
         console.log("slice ", action.payload);
         state.loading = false;
