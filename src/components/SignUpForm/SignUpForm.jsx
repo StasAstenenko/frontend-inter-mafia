@@ -43,15 +43,12 @@ const SignUpForm = () => {
     const email = values.emailSignUp;
     const password = values.passwordSignUp;
     const registerObj = { email, password };
-    // console.log(registerObj);
     dispatch(apiRegister(registerObj));
-    console.log("Form submitted, dispatch work");
     actions.resetForm();
   };
 
   return (
     <>
-      {/* <h1 className={css.title}>SignUp</h1> */}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}

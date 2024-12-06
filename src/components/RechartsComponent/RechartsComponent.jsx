@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   AreaChart,
   Area,
@@ -56,7 +56,6 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const RechartsComponent = () => {
-  const dispatch = useDispatch();
   const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
   const mobileDeviceHeight = window.matchMedia("(max-width: 767px)").matches

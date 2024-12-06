@@ -1,16 +1,8 @@
 import s from "./WaterItem.module.css";
 import { useLanguage } from "../../locales/langContext.jsx";
 
-// import WaterModal from "../../modals/WaterModal/WaterModal";
-// import { deleteWaterItem } from "../../redux/water/operations";
-// import { useDispatch } from "react-redux";
-// import { useState } from "react";
-
 const WaterItem = ({ amount, date, onEdit, openDeleteWaterModal }) => {
   const { t } = useLanguage();
-
-  // const dispatch = useDispatch();
-  // const handleDelete = () => dispatch(deleteWaterItem(_id));
 
   return (
     <div className={s.mainwrapper}>

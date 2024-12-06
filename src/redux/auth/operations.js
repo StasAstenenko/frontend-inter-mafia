@@ -5,7 +5,7 @@ export const instance = axios.create({
   baseURL: "https://back-inter-mafia.onrender.com/api/",
 });
 
-const setAuthHeaders = (token) => {
+export const setAuthHeaders = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -19,7 +19,6 @@ export const apiLogin = createAsyncThunk(
     try {
       const { data } = await instance.post("users/login", formData);
       setAuthHeaders(data.data.accessToken);
-      // console.log(data);
       return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -47,8 +46,8 @@ export const apiRefresh = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const { data } = await instance.post("users/refresh");
-      const state = thunkApi.getState();
-      const token = state.auth.token;
+      // const state = thunkApi.getState();
+      // const token = state.auth.token;
       setAuthHeaders(data.accessToken);
       return data.data;
     } catch (error) {
@@ -70,7 +69,6 @@ export const apiLogout = createAsyncThunk(
     try {
       await instance.post("users/logout");
       clearAuthHeader();
-      // return;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

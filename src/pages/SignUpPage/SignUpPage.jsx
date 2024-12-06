@@ -22,9 +22,6 @@ const SignUpPage = () => {
   const error = useSelector(selectAuthError);
   const isRegistered = useSelector(selectAuthIsRegisteredSuccess);
   const isLoading = useSelector(selectAuthIsLoading);
-  // console.log("register Page state error: ", error);
-  // console.log("register Page state isRegistered: ", isRegistered);
-  // console.log("register Page state isLoading: ", isLoading);
 
   return (
     <Section>

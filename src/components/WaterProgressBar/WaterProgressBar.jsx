@@ -14,7 +14,6 @@ const WaterProgressBar = () => {
 
   const dailyNorma = useSelector(selectDailyNorm);
   const waterAmount = useSelector(selectDayDetails);
-  // console.log("water", waterAmount);
   const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
@@ -28,7 +27,6 @@ const WaterProgressBar = () => {
     (total, item) => total + item.amount,
     0
   );
-  // console.log(totalAmount);
 
   const waterPercentage = Math.min(
     Math.round((totalAmount / dailyNorma) * 100),
