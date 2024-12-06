@@ -12,7 +12,7 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .percents {
@@ -25,13 +25,19 @@
   align-items: center;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .volumeInfo {
+  position: absolute;
+  bottom: 100%;
   font-size: 10px;
   line-height: 180%;
   color: #9be1a0;
 }
+
 .progressBarContainer {
-  position: relative;
   max-width: 255px;
   height: 0.5rem;
   background-color: #f0eff4;
@@ -55,6 +61,13 @@
   transform: translateY(-50%);
 }
 
+.loading {
+  font-size: 6px;
+  font-style: italic;
+  position: absolute;
+  top: -100%;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     min-width: 295px;
@@ -71,8 +84,3 @@
     line-height: 187%;
   }
 }
-/* 
-@media only screen and (min-width: 1440px) {
-  .container {
-  }
-} */

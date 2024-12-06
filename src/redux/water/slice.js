@@ -53,7 +53,6 @@ const waterSlice = createSlice({
         } else if (action.meta.arg.type === "day") {
           state.dayDetails = action.payload;
         }
-        console.log("slice ", action.payload);
         state.loading = false;
         state.error = null;
       })
