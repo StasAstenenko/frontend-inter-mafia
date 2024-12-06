@@ -5,7 +5,9 @@ p {
 .wrapper {
   border-radius: 15px;
   padding: 40px 20px;
-  width: 313px;
+  width: 343px;
+  height: 514px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .form {
@@ -93,9 +95,9 @@ p {
 .field {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
-  width: 272px;
+  width: 303px;
   padding-left: 20px;
-  height: 56px;
+  height: 46px;
   margin-bottom: 24px;
   font-size: 14px;
   line-height: 129%;
@@ -116,12 +118,13 @@ p {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
   padding-left: 20px;
-  width: 272px;
-  height: 56px;
+  width: 303px;
+  height: 46px;
   font-size: 14px;
   line-height: 129%;
   letter-spacing: -0.01em;
   color: #2f2f2f;
+  margin-bottom: 24px;
 }
 
 .submitBtn {
@@ -135,8 +138,7 @@ p {
   color: #323f47;
   border-radius: 30px;
   width: 141px;
-  height: 60px;
-  margin-top: 24px;
+  height: 46px;
   background: #9be1a0;
   transition: all 700ms cubic-bezier(0.42, 0, 0.61, 0.97) 0s;
 }
@@ -148,8 +150,9 @@ p {
 @media screen and (min-width: 768px) {
   .wrapper {
     padding: 40px;
-    width: 438px;
-    height: 555px;
+    width: 518px;
+    height: 587px;
+    max-width: 518px;
   }
 
   .addWater {
@@ -184,10 +187,16 @@ p {
   }
   .amountOfWaterField,
   .field {
-    width: 360px;
+    width: 438px;
+    height: 56px;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: -0.01em;
     color: #2f2f2f;
+    margin-bottom: 24px;
+  }
+
+  .submitBtn {
+    height: 60px;
   }
 }

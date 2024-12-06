@@ -7,6 +7,8 @@ import { GoDash } from "react-icons/go";
 import { useLanguage } from "../../locales/langContext.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChosenDate } from "../../redux/water/selectors";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const entriesValidationSchema = Yup.object().shape({
   amountOfWater: Yup.number()
@@ -16,7 +18,13 @@ const entriesValidationSchema = Yup.object().shape({
   recordingTime: Yup.date().required("Required"),
 });
 
-const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
+const WaterForm = ({
+  title,
+  paragraph,
+  initialValues,
+  dispatchFunction,
+  onClose,
+}) => {
   const { t } = useLanguage();
   const dispatch = useDispatch();
 
@@ -51,8 +59,25 @@ const WaterForm = ({ title, paragraph, initialValues, dispatchFunction }) => {
           entries,
         })
       );
+
+      onClose();
+      iziToast.success({
+        title: "Success",
+        message: "Water successfully updated!",
+        displayMode: 1,
+        position: "topRight",
+        maxWidth: "300px",
+      });
     } else {
       await dispatch(dispatchFunction(entries));
+      onClose();
+      iziToast.success({
+        title: "Success",
+        message: "Water successfully added!",
+        displayMode: 1,
+        position: "topRight",
+        maxWidth: "300px",
+      });
     }
   };
 

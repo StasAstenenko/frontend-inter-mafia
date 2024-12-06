@@ -41,7 +41,7 @@ const UserBar = ({ userName, avatarUrl, onSettingsClick, onLogOutClick }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
-        setIsPopoverOpen(false);
+        closePopover();
       }
     };
 
