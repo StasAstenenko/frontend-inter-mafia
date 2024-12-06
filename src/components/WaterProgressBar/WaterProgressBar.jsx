@@ -22,12 +22,9 @@ const WaterProgressBar = () => {
           date: new Date().toLocaleString("en-CA"),
         })
       );
-      console.log("day fetch");
       return;
     }
   }, [waterAmount, dispatch]);
-
-  console.log("progressbar");
 
   const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,
