@@ -92,7 +92,7 @@
 }
 @media screen and (min-width: 1440px) {
   .wrapper {
-    width: 194px;
+    min-width: 194px;
   }
 
   .waterglass {
