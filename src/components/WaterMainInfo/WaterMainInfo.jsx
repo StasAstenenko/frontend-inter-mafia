@@ -6,6 +6,7 @@ import LangSwitch from "../LangSwitch/LangSwitch.jsx";
 import { getUserInfo } from "../../redux/settings/operations.js";
 import { useDispatch } from "react-redux";
 import css from "./WaterMainInfo.module.css";
+import { NavLink } from "react-router-dom";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,9 @@ const WaterMainInfo = () => {
   return (
     <>
       <div className={css.container}>
-        <h2 className={css.title}>aquatrack</h2>
+        <NavLink to="/">
+          <h2 className={css.title}>aquatrack</h2>
+        </NavLink>
         <LangSwitch />
         <WaterDailyNorma />
         <WaterProgressBar />
