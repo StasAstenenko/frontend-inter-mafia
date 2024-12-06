@@ -20,9 +20,16 @@ const WaterProgressBar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const today = new Date().toLocaleDateString("en-CA");
-    dispatch(getWaterPerDay(today));
-  }, [dispatch]);
+    if (!waterAmount) {
+      dispatch(
+        fetchWaterData({
+          type: "day",
+          date: new Date().toLocaleString("en-CA"),
+        })
+      );
+      return;
+    }
+  }, [waterAmount, dispatch]);
 
   const totalAmount = waterAmount?.reduce(
     (total, item) => total + item.amount,

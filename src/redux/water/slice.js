@@ -55,7 +55,6 @@ const waterSlice = createSlice({
         } else if (action.meta.arg.type === "day") {
           state.dayDetails = action.payload; // Дані за день
         }
-        console.log("slice ", action.payload);
         state.loading = false;
         state.error = null;
       })
