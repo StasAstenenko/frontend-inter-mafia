@@ -2,10 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./CalendarPagination.module.css";
 import { selectChosenMonth } from "../../redux/water/selectors";
 import { setChosenMonth, setStatistics } from "../../redux/water/slice";
+import { useLanguage } from "../../locales/langContext.jsx";
 
 const CalendarPagination = () => {
   const dispatch = useDispatch();
   const monthFromState = useSelector(selectChosenMonth);
+  const { language } = useLanguage();
 
   const today = new Date().toLocaleString("en-CA").slice(0, 7);
 
@@ -32,7 +34,7 @@ const CalendarPagination = () => {
   };
 
   const formatDate = (date) =>
-    `${new Date(date).toLocaleString("default", {
+    `${new Date(date).toLocaleString(language, {
       month: "long",
     })}, ${date.slice(0, 4)}`;
 

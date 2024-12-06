@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AreaChart,
   Area,
@@ -6,8 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
 import {
   selectChosenDate,
   selectDaysDrinking,
@@ -55,13 +56,43 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const RechartsComponent = () => {
+  const dispatch = useDispatch();
   const chosenDate = useSelector(selectChosenDate);
   const daysDrinking = useSelector(selectDaysDrinking);
   const mobileDeviceHeight = window.matchMedia("(max-width: 767px)").matches
     ? 300
     : 305;
 
+  const [previousMonthData, setPreviousMonthData] = useState([]);
+
   const dayEndOfStatistic = useMemo(() => new Date(chosenDate), [chosenDate]);
+
+  useEffect(() => {
+    const currentDate = new Date(chosenDate);
+    const isDateInFirstWeek = currentDate.getDate() <= 7;
+
+    if (isDateInFirstWeek) {
+      const firstDayPreviousMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 1,
+        1
+      );
+      const firstDayPreviousMonthFormatted = firstDayPreviousMonth
+        .toISOString()
+        .split("T")[0];
+
+      axios
+        .get("/water-per-month", {
+          params: { date: firstDayPreviousMonthFormatted },
+        })
+        .then((response) => {
+          setPreviousMonthData(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching previous month's data:", error);
+        });
+    }
+  }, [chosenDate]);
 
   const lastWeekDays = useMemo(() => {
     const daysArray = Array.from({ length: 7 }, (_, i) => {
@@ -88,8 +119,23 @@ const RechartsComponent = () => {
       }
     });
 
+    if (new Date(chosenDate).getDate() <= 7 && previousMonthData?.length > 0) {
+      previousMonthData.forEach(({ date, amount }) => {
+        const drinkingDate = new Date(date);
+        const index = daysArray.findIndex(
+          (day) =>
+            day.day === drinkingDate.getDate() &&
+            day.month === drinkingDate.getMonth() + 1 &&
+            day.year === drinkingDate.getFullYear()
+        );
+        if (index !== -1) {
+          daysArray[index].amount += amount;
+        }
+      });
+    }
+
     return daysArray;
-  }, [daysDrinking, dayEndOfStatistic]);
+  }, [daysDrinking, chosenDate, previousMonthData]);
 
   return (
     <ResponsiveContainer width="100%" height={mobileDeviceHeight}>

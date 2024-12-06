@@ -17,9 +17,11 @@ export const fetchWaterData = createAsyncThunk(
       setAuthHeaders(token);
       const endpoint = type === "month" ? "/water-per-month" : "/water-per-day";
 
+
       const response = await instance.get(endpoint, {
         params: { date },
       });
+
 
       return response.data.data;
     } catch (error) {
