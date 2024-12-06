@@ -37,6 +37,7 @@ const WaterModal = ({ operationType, data, isOpen, onClose }) => {
           paragraph={paragraph}
           initialValues={initialValues}
           dispatchFunction={dispatchFunction}
+          onClose={onClose}
         />
       </Modal>
     </>

@@ -25,8 +25,8 @@ const AddWaterBtn = ({ variant = "default" }) => {
       >
         <svg
           className={clsx(css.icon, variant === "alt" && css.iconAlt)}
-          width="24"
-          height="24"
+          width="30"
+          height="30"
         >
           <use href="/icons/sprite.svg#plus-add-water" />
         </svg>
