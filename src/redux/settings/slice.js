@@ -34,7 +34,7 @@ const settingsSlice = createSlice({
         state.error = null;
       })
       .addCase(editUser.fulfilled, (state, { payload }) => {
-        state.user = payload;
+        state.user = { ...state.user, ...payload };
       })
       .addCase(editUser.rejected, (state, { payload }) => {
         state.error = payload;
