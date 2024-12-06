@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLanguage } from "../../locales/langContext.jsx";
+import { apiRegister } from "../../redux/auth/operations.js";
 
 const SignUpForm = () => {
   const { t } = useLanguage();

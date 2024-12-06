@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserInfo, editUser } from "./operations.js";
-import { loadLanguages } from "i18next";
 
 const INITIAL_STATE = {
   user: {
@@ -35,9 +34,6 @@ const settingsSlice = createSlice({
         state.error = null;
       })
       .addCase(editUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        console.log(state);
-
         state.user = payload;
       })
       .addCase(editUser.rejected, (state, { payload }) => {

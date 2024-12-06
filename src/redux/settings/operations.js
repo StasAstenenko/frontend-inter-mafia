@@ -29,7 +29,6 @@ export const getUserInfo = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const token = selectAuthToken(thunkApi.getState());
-      // console.log(token);
       setAuthHeaders(token);
       const { data } = await instance.get("/");
       return data;

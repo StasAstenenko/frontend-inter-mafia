@@ -18,7 +18,7 @@ const UserPanel = () => {
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
 
   const handleOpenSettings = () => {
-    setIsSettingsModalOpen(true);
+    setIsSettingsModalOpen(!isSettingsModalOpen);
   };
   const handleOpenLogOut = () => {
     setIsLogOutModalOpen(true);
