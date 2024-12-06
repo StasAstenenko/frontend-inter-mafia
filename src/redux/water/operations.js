@@ -5,6 +5,7 @@ import { selectAuthToken } from "../auth/selectors.js";
 export const instance = axios.create({
   baseURL: "https://back-inter-mafia.onrender.com/api/water",
 });
+
 const setAuthHeaders = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -17,11 +18,9 @@ export const fetchWaterData = createAsyncThunk(
       setAuthHeaders(token);
       const endpoint = type === "month" ? "/water-per-month" : "/water-per-day";
 
-
       const response = await instance.get(endpoint, {
         params: { date },
       });
-
 
       return response.data.data;
     } catch (error) {

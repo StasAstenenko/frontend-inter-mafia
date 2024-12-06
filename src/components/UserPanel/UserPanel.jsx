@@ -12,7 +12,6 @@ const UserPanel = () => {
   const { t } = useLanguage();
 
   const user = useSelector(selectUser);
-  // console.log(user)
   const defaultUserName = user.name || user.email.split("@")[0];
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);

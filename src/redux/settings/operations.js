@@ -1,21 +1,12 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { selectAuthToken } from "../auth/selectors.js";
-
-// axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/";
-
-export const instance = axios.create({
-  baseURL: "https://back-inter-mafia.onrender.com/api/users",
-});
-const setAuthHeaders = (token) => {
-  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+import { instance, setAuthHeaders } from "../auth/operations.js";
 
 export const editUser = createAsyncThunk(
   "users/edit",
   async (formData, thunkAPI) => {
     try {
-      const { data } = await instance.patch("/", formData);
+      const { data } = await instance.patch("users/", formData);
 
       return data.data;
     } catch (error) {
@@ -30,7 +21,7 @@ export const getUserInfo = createAsyncThunk(
     try {
       const token = selectAuthToken(thunkApi.getState());
       setAuthHeaders(token);
-      const { data } = await instance.get("/");
+      const { data } = await instance.get("users/");
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

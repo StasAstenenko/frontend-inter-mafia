@@ -4,8 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import css from "./WaterForm.module.css";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
-import { getWaterPerDay } from "../../redux/water/operations.js";
-// import { selectDayDetails } from "../../redux/water/operations.js";
 import { useLanguage } from "../../locales/langContext.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChosenDate } from "../../redux/water/selectors";

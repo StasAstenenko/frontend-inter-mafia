@@ -7,7 +7,6 @@ import { selectIsLoading } from "../../redux/water/selectors.js";
 const WaterDailyNorma = () => {
   const { t } = useLanguage();
   const dailyNorma = useSelector(selectDailyNorm);
-  // console.log(dailyNorma);
   const isLoading = useSelector(selectIsLoading);
 
   const formatVolume = (ml) => {

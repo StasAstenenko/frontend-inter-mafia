@@ -13,7 +13,6 @@ const RestrictedRoute = ({ component }) => {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   const isRegistered = useSelector(selectAuthIsRegisteredSuccess);
   const isLoading = useSelector(selectAuthIsLoading);
-  console.log(isLoading);
   const location = useLocation();
 
   if (isLoading) {
@@ -27,26 +26,6 @@ const RestrictedRoute = ({ component }) => {
   }
 
   return component;
-
-  // return isLoading ? (
-  //   <Loader />
-  // ) : isLoggedIn ? (
-  //   <Navigate to={redirectTo} replace />
-  // ) : (
-  //   component
-  // );
 };
 
 export default RestrictedRoute;
-
-// old version
-// import { useSelector } from "react-redux";
-// import { selectAuthIsLoggedIn } from "../../redux/auth/selectors";
-// import { Navigate } from "react-router-dom";
-
-// const RestrictedRoute = ({ component, redirectTo = "/tracker" }) => {
-//   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-//   return isLoggedIn ? <Navigate to={redirectTo} replace /> : component;
-// };
-
-// export default RestrictedRoute;
