@@ -24,7 +24,7 @@ const WelcomeSection = ({ className = "" }) => {
             to="/signin"
             className={`${styles.btn} ${styles.btnSecondary}`}
           >
-            {t("SignIn")}
+            {t("Sign")}{'\u00A0'}{t("In")}
           </NavLink>
         </div>
       </div>
