@@ -8,3 +8,4 @@ export const selectDailyNorm = (state) => state.settings.user.dailyNorm;
 export const selectActiveTime = (state) => state.settings.user.activeTime;
 export const selectWeight = (state) => state.settings.user.weight;
 export const selectGender = (state) => state.settings.user.gender;
+export const selectErrorSettings = (state) => state.settings.error;

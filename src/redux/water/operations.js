@@ -16,10 +16,13 @@ export const fetchWaterData = createAsyncThunk(
       const token = selectAuthToken(thunkAPI.getState());
       setAuthHeaders(token);
       const endpoint = type === "month" ? "/water-per-month" : "/water-per-day";
-      // console.log(endpoint);
+
+
       const response = await instance.get(endpoint, {
         params: { date },
       });
+
+
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -44,7 +47,7 @@ export const postWaterData = createAsyncThunk(
   async (entries, { rejectWithValue }) => {
     try {
       const response = await instance.post("/", entries);
-      console.log(response.data);
+
       return response.data;
     } catch (e) {
       return rejectWithValue(e.response?.status || "Post water error");
@@ -69,7 +72,7 @@ export const fetchWaterItems = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await instance.get("/");
-      console.log("fetch" + response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

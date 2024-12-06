@@ -16,11 +16,13 @@ import {
   selectDailyNorm,
   selectAvatarUrl,
   selectGender,
+  selectErrorSettings,
 } from "../../redux/settings/selectors";
 import { editUser } from "../../redux/settings/operations";
 import { setDaysNotAsInWeek, setSundayFirst } from "../../redux/settings/slice";
 import { FcDecision } from "react-icons/fc";
 import { useLanguage } from "../../locales/langContext.jsx";
+import iziToast from "izitoast";
 
 const validationSettingSchema = Yup.object().shape({
   avatarUrl: Yup.mixed().default(""),
@@ -36,7 +38,7 @@ const validationSettingSchema = Yup.object().shape({
   dailyNorm: Yup.number().positive("Water norm must be a positive number"),
 });
 
-const UsersSettingsForm = () => {
+const UsersSettingsForm = ({ onClose }) => {
   const { t } = useLanguage();
 
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const UsersSettingsForm = () => {
   const sundayFirst = useSelector(selectSundayFirst);
   const avatarSelect = useSelector(selectAvatarUrl);
   const genderSelect = useSelector(selectGender);
+  const errorSettings = useSelector(selectErrorSettings);
 
   const [avatarPreview, setAvatarPreview] = useState(avatarSelect || null);
   const [waterNorm, setWaterNorm] = useState("1.5");
@@ -139,11 +142,8 @@ const UsersSettingsForm = () => {
       }
     });
 
-    try {
-      dispatch(editUser(formData));
-    } catch (error) {
-      console.error("Error updating user:", error);
-    }
+    dispatch(editUser(formData));
+    onClose();
   };
 
   return (
@@ -309,7 +309,7 @@ const UsersSettingsForm = () => {
                   <p className={css.settingCalculateText}>
                     {t("RequiredAmount")}
                   </p>
-                  <p className={css.settingCalculateTextSpan}>{waterNorm}</p>
+                  <p className={css.settingCalculateTextSpan}>{waterNorm} L</p>
                 </div>
                 <div>
                   <label
@@ -320,7 +320,6 @@ const UsersSettingsForm = () => {
 
                   <input
                     type="number"
-                    step="0.1"
                     min="0"
                     {...register("dailyNorm")}
                     className={css.settingFormInput}
@@ -368,6 +367,16 @@ const UsersSettingsForm = () => {
             </label>
           )}
         </div>
+        {errorSettings &&
+          iziToast.error({
+            title: "Error",
+            message: errorSettings,
+            titleColor: "#ef5050",
+            messageColor: "#ef5050",
+            displayMode: 1,
+            position: "topRight",
+            maxWidth: "300px",
+          })}
       </div>
     </>
   );
