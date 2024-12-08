@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   token: null,
   isRegisteredSuccess: false,
   isLoggedIn: false,
+  isRefreshing:false,
   error: null,
   isLoading: false,
   count: 0,
@@ -53,7 +54,7 @@ const authSlice = createSlice({
       .addCase(apiLogin.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.token = action.payload.accessToken;
-        state.user = action.payload.user;
+        // state.user = action.payload.user;
         state.isRefreshing = false;
         state.isLoading = false;
       })
@@ -88,7 +89,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(apiRefresh.fulfilled, (state, action) => {
-        state.user = action.payload;
+        // state.user = action.payload;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;

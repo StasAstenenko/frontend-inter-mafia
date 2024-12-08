@@ -1,8 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
+
+// export const instance = axios.create({
+//   baseURL: 'http://localhost:8080/api/', 
+//   withCredentials: true,
+// });
 export const instance = axios.create({
   baseURL: "https://back-inter-mafia.onrender.com/api/",
+  withCredentials: true,
 });
 
 export const setAuthHeaders = (token) => {
@@ -41,25 +48,42 @@ export const apiRegister = createAsyncThunk(
   }
 );
 
+// export const apiRefresh = createAsyncThunk(
+//   "users/refresh",
+//   async (_, thunkApi) => {
+//     try {
+//       const { data } = await instance.post("users/refresh");
+//       // const state = thunkApi.getState();
+//       // const token = state.auth.token;
+//       setAuthHeaders(data.accessToken);
+//       return data.data;
+//     } catch (error) {
+//       return thunkApi.rejectWithValue(error.message);
+//     }
+//   },
+//   {
+//     condition: (_, thunkApi) => {
+//       const state = thunkApi.getState();
+
+//       return state.auth.token !== null;
+//     },
+//   }
+// );
 export const apiRefresh = createAsyncThunk(
   "users/refresh",
   async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    if (!state.auth.token) {
+      return thunkApi.rejectWithValue("No token available");
+    }
+
     try {
       const { data } = await instance.post("users/refresh");
-      // const state = thunkApi.getState();
-      // const token = state.auth.token;
       setAuthHeaders(data.accessToken);
       return data.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.response?.data?.message || error.message);
     }
-  },
-  {
-    condition: (_, thunkApi) => {
-      const state = thunkApi.getState();
-
-      return state.auth.token !== null;
-    },
   }
 );
 
