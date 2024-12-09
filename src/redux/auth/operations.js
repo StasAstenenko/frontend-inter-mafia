@@ -1,10 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
 // export const instance = axios.create({
-//   baseURL: 'http://localhost:8080/api/', 
+//   baseURL: "http://localhost:8080/api/",
 //   withCredentials: true,
 // });
 export const instance = axios.create({
@@ -74,7 +72,7 @@ export const apiRefresh = createAsyncThunk(
   async (_, thunkApi) => {
     const state = thunkApi.getState();
     if (!state.auth.token) {
-      return thunkApi.rejectWithValue("No token available");
+      return thunkApi.rejectWithValue();
     }
 
     try {
@@ -82,7 +80,9 @@ export const apiRefresh = createAsyncThunk(
       setAuthHeaders(data.accessToken);
       return data.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.response?.data?.message || error.message);
+      return thunkApi.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );
