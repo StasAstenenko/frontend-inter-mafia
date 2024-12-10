@@ -76,8 +76,9 @@ export const apiRefresh = createAsyncThunk(
     }
 
     try {
+      setAuthHeaders(state.auth.token);
       const { data } = await instance.post("users/refresh");
-      setAuthHeaders(data.accessToken);
+      setAuthHeaders(data.data.accessToken);
       return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(
